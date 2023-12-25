@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>1. Системы контроля версий &#8212; My sample book</title>
+    <title>1. Система контроля версий &#8212; My sample book</title>
   
   
   
@@ -65,7 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'src/cvs';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="2. Подготовка к работе с Git" href="config.html" />
+    <link rel="next" title="2. Подготовка к работе" href="config.html" />
     <link rel="prev" title="Введение" href="../intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -169,12 +169,12 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Системы контроля версий</a></li>
-<li class="toctree-l1"><a class="reference internal" href="config.html">2. Подготовка к работе с Git</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Система контроля версий</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">2. Подготовка к работе</a></li>
 <li class="toctree-l1"><a class="reference internal" href="get.html">3. Получение хранилища</a></li>
 <li class="toctree-l1"><a class="reference internal" href="edit.html">4. Изменение рабочей копии</a></li>
 <li class="toctree-l1"><a class="reference internal" href="commit.html">5. Фиксация изменений</a></li>
-<li class="toctree-l1"><a class="reference internal" href="history.html">6. Изучение истории изменений</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">6. История изменений</a></li>
 <li class="toctree-l1"><a class="reference internal" href="branch.html">7. Работа с ветками</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sync.html">8. Синхронизация с удаленными хранилищами</a></li>
 <li class="toctree-l1"><a class="reference internal" href="workflow.html">9. Порядок работы с Git</a></li>
@@ -363,7 +363,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Системы контроля версий</h1>
+    <h1>Система контроля версий</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -373,7 +373,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.1. Контрольные вопросы</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Введение</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Совместная работа над документом</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Общая концепция СКВ</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">История развития СКВ</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#git">Сценарий работы с Git</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Контрольные вопросы</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Упражнения</a></li>
 </ul>
             </nav>
         </div>
@@ -386,7 +392,12 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">1. </span>Системы контроля версий<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">1. </span>Система контроля версий<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<section id="id2">
+<h2>Введение<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="id3">
+<h2>Совместная работа над документом<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
 <!-- Работа с постоянно изменяющимися электронным документом -->
 <p>Классический пример совместной работы над документом – это подготовка отчета, диплома, статьи, учебного пособия.
 Начальную версию документа автор пишет самостоятельно или компонует из частей, написанных им и соавторами.
@@ -406,7 +417,7 @@ document.write(`
 <p>В объемном документе сложно, если вообще можно увидеть чужие правки.
 Их следует найти, сравнивая в двух документах предложение за предложением.
 Это очень утомительно.
-Для решения этой проблемы, редактор текстовых документов <code class="docutils literal notranslate"><span class="pre">Microsoft</span> <span class="pre">Word</span></code> предлагает режим правок, при включении которого последующие редактирование текста выделяются визуально, сохраняя исходное значение.
+Для решения этой проблемы, редактор текстовых документов “Microsoft Word” предлагает режим правок, при включении которого последующие редактирование текста выделяются визуально, сохраняя исходное значение.
 Уже автор работает с правками, применяя или отказываясь от них.</p>
 <p>Часто бывает, что рецензенты не редактируют присланный им документ, а делают замечания, привязывая их к номеру страницы и абзаца.
 Таким образом, автор сам вносит изменения по полученным замечаниям.</p>
@@ -430,7 +441,10 @@ document.write(`
 Чтобы обойти это, над документом работают последовательно.
 Каждый следующий участник работает над документом после предыдущего.
 Это растягивает время работы и слабо загружает участников.
-Это одна из причин, почему работа над научной статьей затягивается на год и более.</p>
+Это одна из причин, почему оформление научной статьи занимает год и более.</p>
+</section>
+<section id="id4">
+<h2>Общая концепция СКВ<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
 <!-- Что такое СКВ -->
 <p>Недостатки совместной работы над файлом, не являются критичными применительно к офисным документам, но они неприемлемы при разработке программного обеспечения.</p>
 <!-- Разработка ПО как постоянное внесение изменений в исходные коды -->
@@ -459,6 +473,9 @@ document.write(`
 Коммит – это зафиксированный набор изменений.
 Действие по фиксации еще называют <em>сделать коммит</em>, <em>закоммитить</em>, <em>зафиксировать изменения</em> или <em>внести изменения</em>.
 Получившаяся после коммита версия проекта называется <em>ревизией</em>.</p>
+</section>
+<section id="id5">
+<h2>История развития СКВ<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
 <!-- Локальная СКВ -->
 <p>Самая первая СКВ <a class="reference external" href="https://www.gnu.org/software/rcs/rcs.html">RCS</a> появилась в 1982 году.
 Она доступна до сих пор и поддерживается в рамках проекта GNU.</p>
@@ -503,15 +520,24 @@ Mercurial еще используется в некоторых коллекти
 <!--
 История изменений, история коммитов.
 -->
-<section id="id2">
-<h2><span class="section-number">1.1. </span>Контрольные вопросы<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="git">
+<h2>Сценарий работы с Git<a class="headerlink" href="#git" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="id6">
+<h2>Контрольные вопросы<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>Для каких целей изменяют программу?</p></li>
 <li><p>Почему не получается воспользоваться СКВ применительно к офисным документам?</p></li>
 <li><p>Что такое коммит?</p></li>
 <li><p>В чем отличие ревизии от коммита?</p></li>
 </ol>
-<p>{% include <a class="reference external" href="http://links.md">links.md</a> %}</p>
+</section>
+<section id="id7">
+<h2>Упражнения<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li></li>
+</ol>
 </section>
 </section>
 
@@ -559,7 +585,7 @@ Mercurial еще используется в некоторых коллекти
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">2. </span>Подготовка к работе с Git</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>Подготовка к работе</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -578,7 +604,13 @@ Mercurial еще используется в некоторых коллекти
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.1. Контрольные вопросы</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Введение</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Совместная работа над документом</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Общая концепция СКВ</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">История развития СКВ</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#git">Сценарий работы с Git</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Контрольные вопросы</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Упражнения</a></li>
 </ul>
   </nav></div>
 

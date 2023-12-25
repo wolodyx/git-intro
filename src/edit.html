@@ -169,12 +169,12 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="cvs.html">1. Системы контроля версий</a></li>
-<li class="toctree-l1"><a class="reference internal" href="config.html">2. Подготовка к работе с Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cvs.html">1. Система контроля версий</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">2. Подготовка к работе</a></li>
 <li class="toctree-l1"><a class="reference internal" href="get.html">3. Получение хранилища</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">4. Изменение рабочей копии</a></li>
 <li class="toctree-l1"><a class="reference internal" href="commit.html">5. Фиксация изменений</a></li>
-<li class="toctree-l1"><a class="reference internal" href="history.html">6. Изучение истории изменений</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">6. История изменений</a></li>
 <li class="toctree-l1"><a class="reference internal" href="branch.html">7. Работа с ветками</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sync.html">8. Синхронизация с удаленными хранилищами</a></li>
 <li class="toctree-l1"><a class="reference internal" href="workflow.html">9. Порядок работы с Git</a></li>
@@ -373,10 +373,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">4.1. Изменение файловой системы</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">4.2. Изменение содержимого файла</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">4.3. Патч</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#git-diff">4.4. Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Введение</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Изменение файловой системы</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Изменение содержимого файла</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Патч</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Просмотр изменений</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Контрольные вопросы</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Упражнения</a></li>
 </ul>
             </nav>
         </div>
@@ -390,6 +393,8 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1><span class="section-number">4. </span>Изменение рабочей копии<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<section id="id2">
+<h2>Введение<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
 <p>Проект исходного кода (или рабочая копия программы) состоит из сгруппированных по каталогам файлов.
 В файлах размещены исходные коды программы, инструкции по сборке, документация, настройки, тестовые данные и другая информация.
 Программа непрерывно улучшается за счет изменения исходных кодов.
@@ -404,8 +409,9 @@ document.write(`
 <p>С точки зрения файлов разработка программы выглядит как редактирование файлов и состояния файловой системы.
 Также полезно увидеть, что именно изменилось в сравнении с исходным состоянием файлов.
 Эти вопросы будут рассмотрены ниже.</p>
-<section id="id2">
-<h2><span class="section-number">4.1. </span>Изменение файловой системы<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="id3">
+<h2>Изменение файловой системы<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
 <p>Состояние файловой системы в рабочем каталоге претерпевает следующие изменения:</p>
 <ul class="simple">
 <li><p>добавление файла;</p></li>
@@ -428,8 +434,8 @@ document.write(`
 Перемещение и переименование файла сводятся к изменению имени файла, которое в свою очередь сводится к удалению и добавлению файла с тем же содержимым, но с другим именем.
 Операции добавления, удаления, переименования и перемещения каталога сводятся к переименованиям файлов, которые, как отметили выше, сводятся к удалению и добавлению файлов.</p>
 </section>
-<section id="id3">
-<h2><span class="section-number">4.2. </span>Изменение содержимого файла<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<section id="id4">
+<h2>Изменение содержимого файла<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
 <!-- Короткие строки -->
 <p>Файлы проекта программы автоматически обрабатываются утилитами командной строки для получения исполняемых файлов.
 Поэтому содержимое файла обладают определенной синтаксической структурой, на которую указывает расширение файла.
@@ -456,8 +462,8 @@ document.write(`
 Структура двоичного файла не предполагает существования “двоичных строк” и общепризнанных символов-разделителей.
 Поэтому изменение в двоичном файле (изображении, аудио- или видеофайлах) сводится к замещению всего содержимого новым.</p>
 </section>
-<section id="id4">
-<h2><span class="section-number">4.3. </span>Патч<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<section id="id5">
+<h2>Патч<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
 <!-- Что такое патч -->
 <p>Различия между двумя версиями текстовых файлов представлены перечислением добавленных и удаленных строк.
 Представление различий в файлах в формате, удобном для автоматической обработки компьютером, называется <em>патчем</em>.
@@ -480,7 +486,7 @@ document.write(`
 <!-- Формирование и применение патчей -->
 <p>В системе UNIX для работы с патчами используют утилиты <code class="docutils literal notranslate"><span class="pre">patch</span></code> и <code class="docutils literal notranslate"><span class="pre">diff</span></code>.
 Утилита <code class="docutils literal notranslate"><span class="pre">diff</span></code> формирует патч на основе двух версий файлов, а <code class="docutils literal notranslate"><span class="pre">patch</span></code> применяет его к файлам.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>diff<span class="w"> </span>-u<span class="w"> </span>oldfile<span class="w"> </span>newfile<span class="w"> </span>&gt;<span class="w"> </span>delta.diff
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>diff<span class="w"> </span>-u<span class="w"> </span>oldfile<span class="w"> </span>newfile<span class="w"> </span>&gt;<span class="w"> </span>delta.diff
 patch<span class="w"> </span>&lt;<span class="w"> </span>delta.diff
 patch<span class="w"> </span>-r<span class="w"> </span>&lt;<span class="w"> </span>delta.diff
 </pre></div>
@@ -513,62 +519,74 @@ patch<span class="w"> </span>-r<span class="w"> </span>&lt;<span class="w"> </sp
 Контекстные строки улучшают читаемость патча, а также позволяют применять патч к модифицированному оригинальному файлу, если фрагмент был сдвинут, а контекст при этом сохранился.</p>
 <p>Ниже представлен пример патча, полученного командой <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code>.
 Он незначительно отличается от вывода утилиты <code class="docutils literal notranslate"><span class="pre">diff</span></code> UNIX, но сохраняет основную структуру.</p>
-<div class="highlight-patch notranslate"><div class="highlight"><pre><span></span>diff --git a/Commands.cpp b/Commands.cpp
-index d1b70b0..69313a5 100644
---- a/Commands.cpp
-+++ b/Commands.cpp
-@@ -11,19 +11,33 @@ CmdType Command::GetType() const
- }
- 
- 
--Command Cmd_Hello()
-+Command Command::Hello()
- {
-   return Command(CmdType_Hello);
- }
- 
- 
--Command Cmd_On()
-+Command Command::On()
- {
-   return Command(CmdType_On);
- }
- 
- 
--bool SendCommand(int sd, const Command&amp; cmd)
-+Command Command::Off()
-+{
-+  return Command(CmdType_Off);
-+}
-+
-+
-+Command Command::Color(ColorType clr)
-+{
-+  std::vector&lt;char&gt; value(1);
-+  value[0] = static_cast&lt;char&gt;(clr);
-+  return Command(CmdType_Color, value);
-+}
-+
-+
-+bool Command::Send(int sd, const Command&amp; cmd)
- {
-   std::vector&lt;char&gt; buf(3+cmd.value.size());
-   buf[0] = static_cast&lt;char&gt;(cmd.type);
-@@ -35,7 +49,13 @@ bool SendCommand(int sd, const Command&amp; cmd)
- }
- 
- 
--Command RecieveCommand(int sd)
-+bool Command::operator!() const
-+{
-+  return type == CmdType_Empty;
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="gh">diff --git a/Commands.cpp b/Commands.cpp</span>
+<span class="gh">index d1b70b0..69313a5 100644</span>
+<span class="gd">--- a/Commands.cpp</span>
+<span class="gi">+++ b/Commands.cpp</span>
+<span class="gu">@@ -11,19 +11,33 @@ CmdType Command::GetType() const</span>
+<span class="w"> </span>}
+<span class="w"> </span>
+<span class="w"> </span>
+<span class="gd">-Command Cmd_Hello()</span>
+<span class="gi">+Command Command::Hello()</span>
+<span class="w"> </span>{
+<span class="w"> </span>  return Command(CmdType_Hello);
+<span class="w"> </span>}
+<span class="w"> </span>
+<span class="w"> </span>
+<span class="gd">-Command Cmd_On()</span>
+<span class="gi">+Command Command::On()</span>
+<span class="w"> </span>{
+<span class="w"> </span>  return Command(CmdType_On);
+<span class="w"> </span>}
+<span class="w"> </span>
+<span class="w"> </span>
+<span class="gd">-bool SendCommand(int sd, const Command&amp; cmd)</span>
+<span class="gi">+Command Command::Off()</span>
+<span class="gi">+{</span>
+<span class="gi">+  return Command(CmdType_Off);</span>
+<span class="gi">+}</span>
+<span class="gi">+</span>
+<span class="gi">+</span>
+<span class="gi">+Command Command::Color(ColorType clr)</span>
+<span class="gi">+{</span>
+<span class="gi">+  std::vector&lt;char&gt; value(1);</span>
+<span class="gi">+  value[0] = static_cast&lt;char&gt;(clr);</span>
+<span class="gi">+  return Command(CmdType_Color, value);</span>
+<span class="gi">+}</span>
+<span class="gi">+</span>
+<span class="gi">+</span>
+<span class="gi">+bool Command::Send(int sd, const Command&amp; cmd)</span>
+<span class="w"> </span>{
+<span class="w"> </span>  std::vector&lt;char&gt; buf(3+cmd.value.size());
+<span class="w"> </span>  buf[0] = static_cast&lt;char&gt;(cmd.type);
+<span class="gu">@@ -35,7 +49,13 @@ bool SendCommand(int sd, const Command&amp; cmd)</span>
+<span class="w"> </span>}
+<span class="w"> </span>
+<span class="w"> </span>
+<span class="gd">-Command RecieveCommand(int sd)</span>
+<span class="gi">+bool Command::operator!() const</span>
+<span class="gi">+{</span>
+<span class="gi">+  return type == CmdType_Empty;</span>
 </pre></div>
 </div>
 <p>В одном выводе или файле могут следовать последовательно несколько патчей, представляя таким образом изменения в более чем в одном файле.</p>
 </section>
-<section id="git-diff">
-<h2><span class="section-number">4.4. </span>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code><a class="headerlink" href="#git-diff" title="Permalink to this heading">#</a></h2>
+<section id="id6">
+<h2>Просмотр изменений<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
 <p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code> (без аргументов) сравнивает измененные файлы в рабочей копии с зафиксированными и отображает патч на экране терминала.</p>
+</section>
+<section id="id7">
+<h2>Контрольные вопросы<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li></li>
+</ol>
+</section>
+<section id="id8">
+<h2>Упражнения<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li></li>
+</ol>
 </section>
 </section>
 
@@ -635,10 +653,13 @@ index d1b70b0..69313a5 100644
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">4.1. Изменение файловой системы</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">4.2. Изменение содержимого файла</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">4.3. Патч</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#git-diff">4.4. Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Введение</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Изменение файловой системы</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Изменение содержимого файла</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Патч</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Просмотр изменений</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Контрольные вопросы</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Упражнения</a></li>
 </ul>
   </nav></div>
 

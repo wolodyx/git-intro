@@ -65,7 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="1. Системы контроля версий" href="src/cvs.html" />
+    <link rel="next" title="1. Система контроля версий" href="src/cvs.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -168,12 +168,12 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="src/cvs.html">1. Системы контроля версий</a></li>
-<li class="toctree-l1"><a class="reference internal" href="src/config.html">2. Подготовка к работе с Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src/cvs.html">1. Система контроля версий</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src/config.html">2. Подготовка к работе</a></li>
 <li class="toctree-l1"><a class="reference internal" href="src/get.html">3. Получение хранилища</a></li>
 <li class="toctree-l1"><a class="reference internal" href="src/edit.html">4. Изменение рабочей копии</a></li>
 <li class="toctree-l1"><a class="reference internal" href="src/commit.html">5. Фиксация изменений</a></li>
-<li class="toctree-l1"><a class="reference internal" href="src/history.html">6. Изучение истории изменений</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src/history.html">6. История изменений</a></li>
 <li class="toctree-l1"><a class="reference internal" href="src/branch.html">7. Работа с ветками</a></li>
 <li class="toctree-l1"><a class="reference internal" href="src/sync.html">8. Синхронизация с удаленными хранилищами</a></li>
 <li class="toctree-l1"><a class="reference internal" href="src/workflow.html">9. Порядок работы с Git</a></li>
@@ -349,9 +349,7 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</label>
+
 </div></div>
       
     </div>
@@ -367,15 +365,6 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Предварительные условия</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Подготовка</a></li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -387,75 +376,58 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>Введение<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<!-- Для кого материал? -->
 <!-- Чему посвящен материал -->
-<p>Данный урок посвящен системам контроля версий и их использованию на практике на примере популярной <code class="docutils literal notranslate"><span class="pre">Git</span></code>.
-Познакомимся с терминологией, используемой при работе с <code class="docutils literal notranslate"><span class="pre">Git</span></code>: патч, ревизия, набор и история изменений, рабочая копия, хранилище, ветка, слияние изменений, конфликты слияний.
+<p>Данный урок посвящен системам контроля версий и их использованию на практике на примере популярной Git.
+Познакомимся с терминологией, используемой при работе с Git: патч, ревизия, набор и история изменений, рабочая копия, хранилище, ветка, слияние изменений, конфликты слияний.
 Настраивать систему и проекты, создавать и клонировать хранилища, фиксировать изменения.</p>
 <!-- Актуальность системы контроля версий -->
-<p>Первый инструмент, который вам понадобится на рабочем месте в роли разработчика в первый же день и будет сопровождать всю вашу профессиональную карьеру, будет система контроля версий <code class="docutils literal notranslate"><span class="pre">Git</span></code> (менее вероятно “Mercurial”).
+<p>Git повсеместно используют разработчики для организации коллективной работы.
+Первый инструмент, который вам понадобится на рабочем месте в роли разработчика в первый же день и будет сопровождать всю вашу профессиональную карьеру, будет система контроля версий Git.
 От любого разработчика ожидают знание этой системы хотя бы на начальном уровне.
-Исходные коды программы хранится не в архивах, каталогах, на съемных носителях или сетевом диске, а располагается на специальном сервере, откуда они клонируются утилитой <code class="docutils literal notranslate"><span class="pre">git</span></code> из командной строки.
+Исходные коды программы хранится не в архивах, каталогах, на съемных носителях или сетевом диске, а располагается на специальном сервере, откуда они клонируются утилитой Git из командной строки.
 Этой же утилитой разработчик узнает о том, что сделали его коллеги, отдает результаты своей работы.
-Инструмент для командной работы.
+Инструмент для командной работы.</p>
+<!-- Важность Git при работе в одиночку -->
+<p>Не только разработчики, но и писатели, ученые и преподаватели используют Git и GitHub для работы над своими материалами.
 Даже если вы работаете один, вы по достоинству оцените этот инструмент.
 При работе с любыми текстовыми документами – написании диплома, отчета.
 Он следит за каждым изменением текстовых файлов, показывая кто, когда и почему их менял.
 Позволяет получить состояние файлов на любую дату.</p>
-<!-- `Git` vs `Mercurial`-->
-<p>Аналогичная система <code class="docutils literal notranslate"><span class="pre">Mercurial</span></code> проще в освоении и имеет удобный графический интерфейс в среде Windows (TortoiseHg).
-Предпочтение отдано системе <code class="docutils literal notranslate"><span class="pre">Git</span></code> взамен <code class="docutils literal notranslate"><span class="pre">Mercurial</span></code>.
-Не смотря на эти преимущества, <code class="docutils literal notranslate"><span class="pre">Mercurial</span></code> не смогла потеснить <code class="docutils literal notranslate"><span class="pre">Git</span></code>.
-Популярность <code class="docutils literal notranslate"><span class="pre">Git</span></code> связана с хостингом открытого ПО <a class="reference external" href="https://github.com"><code class="docutils literal notranslate"><span class="pre">GitHub</span></code></a>.</p>
-<!-- Информация о `Git` -->
-<p>На <a class="reference external" href="https://git-scm.com">официальном сайте <code class="docutils literal notranslate"><span class="pre">Git</span></code></a> доступна вся информация для начала работы с <code class="docutils literal notranslate"><span class="pre">Git</span></code>.
-На сайте <code class="docutils literal notranslate"><span class="pre">Git</span></code> свободно доступна электронная версия книги <code class="docutils literal notranslate"><span class="pre">Pro</span> <span class="pre">Git</span></code> и ее русский перевод.
-В ней от простого к сложному, от общего к частному дается информация о работе с системой <code class="docutils literal notranslate"><span class="pre">Git</span></code>.
-Первые три главы (“Введение”, “Основы Git” и “Ветвление”) достаточны для ежедневного использования <code class="docutils literal notranslate"><span class="pre">Git</span></code>.</p>
-<!--
-СКВ, в частности `Git` и реже `Mercurial`, повсеместно используют программисты для организации коллективной разработки приложений.
-И не только они, ни и писатели, ученые и преподаватели используют Git и GitHub для работы над своими материалами.
--->
-<!-- Чем отличается предоставленный материал? -->
-<section id="id2">
-<h2>Предварительные условия<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
-<p>Знание основ командной строки и интерпретатора <code class="docutils literal notranslate"><span class="pre">bash</span></code>.</p>
-</section>
-<section id="id3">
-<h2>Подготовка<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
-<!-- Проверка и установка Git -->
-<p>Для прохождения лекций нам понадобится рабочая машина с установленной системой <code class="docutils literal notranslate"><span class="pre">Git</span></code>.
-Точкой входа в утилиту служит утилита командной строки <code class="docutils literal notranslate"><span class="pre">git</span></code>.
-Проверим ее присутствие в ОС.
-Запустите текстовый терминал (<code class="docutils literal notranslate"><span class="pre">bash</span></code> в Linux или <code class="docutils literal notranslate"><span class="pre">cmd</span></code> в Windows) и выполните в нем команду</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>--version
-</pre></div>
-</div>
-<p>Если программа доступна в системе, то на экране терминала отобразится сообщение о версии, иначе об отсутствии команды.
-Для прохождения лекции необходима <code class="docutils literal notranslate"><span class="pre">Git</span></code> версии не ниже <code class="docutils literal notranslate"><span class="pre">2.23</span></code>, начиная с которой доступна команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">restore</span></code>.
-На февраль 2023 года на <a class="reference external" href="https://git-scm.org">официальном сайте</a> доступна версия <code class="docutils literal notranslate"><span class="pre">2.39.2</span></code>.</p>
-<!-- Установка Git в Ubuntu и Windows -->
-<p>В Ubuntu программы установим через менеджер пакетов <code class="docutils literal notranslate"><span class="pre">APT</span></code>.
-Дополнительно к утилитам командной строки, также установим <code class="docutils literal notranslate"><span class="pre">gitk</span></code> – простой графический интерфейс к <code class="docutils literal notranslate"><span class="pre">Git</span></code>.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>--assume-yes<span class="w"> </span>install<span class="w"> </span>git<span class="w"> </span>gitk
-</pre></div>
-</div>
-<p>Для Windows доступна специальная сборка <a class="reference external" href="https://gitforwindows.org/">gitforwindows</a>.
-Она содержит в себе портированную в Windows интерпретатор <code class="docutils literal notranslate"><span class="pre">bash</span></code>, интеграцию с рабочим столом и простой графический интерфейс.</p>
+<!-- Git vs `Mercurial`-->
+<p>Аналогичная система Mercurial проще в освоении и имеет удобный графический интерфейс в среде Windows (TortoiseHg).
+Предпочтение отдано системе Git взамен Mercurial.
+Не смотря на эти преимущества, Mercurial не смогла потеснить Git.
+Популярность Git связана с хостингом открытого ПО <a class="reference external" href="https://github.com">GitHub</a>.</p>
+<!-- Информация о Git -->
+<p>На <a class="reference external" href="https://git-scm.com">официальном сайте Git</a> доступна вся информация для начала работы с Git.
+На сайте Git свободно доступна электронная версия книги <code class="docutils literal notranslate"><span class="pre">Pro</span> <span class="pre">Git</span></code> и ее русский перевод.
+В ней от простого к сложному, от общего к частному дается информация о работе с системой Git.
+Первые три главы (“Введение”, “Основы Git” и “Ветвление”) достаточны для ежедневного использования Git.</p>
+<!-- Структура материала -->
+<p>Весь материал состоит 9 тем, оформленных в в виде отдельных разделов.
+Каждый раздел состоит из описания темы, контрольных вопросов и упражнений.
+Контрольные вопросы проверяют усвоение знаний, а упражнения – практические навыки.</p>
+<!-- Предварительные условия -->
+<ul class="simple">
+<li><p>настроенное рабочее окружение Ubuntu;</p></li>
+<li><p>навыки работы с текстовым терминалом и командной строкой;</p></li>
+<li><p>знание технического английского;</p></li>
+</ul>
 <!-- Исходные данные для упражнений -->
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="src/cvs.html">1. Системы контроля версий</a></li>
-<li class="toctree-l1"><a class="reference internal" href="src/config.html">2. Подготовка к работе с Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src/cvs.html">1. Система контроля версий</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src/config.html">2. Подготовка к работе</a></li>
 <li class="toctree-l1"><a class="reference internal" href="src/get.html">3. Получение хранилища</a></li>
 <li class="toctree-l1"><a class="reference internal" href="src/edit.html">4. Изменение рабочей копии</a></li>
 <li class="toctree-l1"><a class="reference internal" href="src/commit.html">5. Фиксация изменений</a></li>
-<li class="toctree-l1"><a class="reference internal" href="src/history.html">6. Изучение истории изменений</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src/history.html">6. История изменений</a></li>
 <li class="toctree-l1"><a class="reference internal" href="src/branch.html">7. Работа с ветками</a></li>
 <li class="toctree-l1"><a class="reference internal" href="src/sync.html">8. Синхронизация с удаленными хранилищами</a></li>
 <li class="toctree-l1"><a class="reference internal" href="src/workflow.html">9. Порядок работы с Git</a></li>
 </ul>
 </div>
-</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -493,7 +465,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">1. </span>Системы контроля версий</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Система контроля версий</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -503,21 +475,6 @@ document.write(`
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Предварительные условия</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Подготовка</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>

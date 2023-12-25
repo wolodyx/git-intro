@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>2. Подготовка к работе с Git &#8212; My sample book</title>
+    <title>2. Подготовка к работе &#8212; My sample book</title>
   
   
   
@@ -66,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="3. Получение хранилища" href="get.html" />
-    <link rel="prev" title="1. Системы контроля версий" href="cvs.html" />
+    <link rel="prev" title="1. Система контроля версий" href="cvs.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -169,12 +169,12 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="cvs.html">1. Системы контроля версий</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Подготовка к работе с Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cvs.html">1. Система контроля версий</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Подготовка к работе</a></li>
 <li class="toctree-l1"><a class="reference internal" href="get.html">3. Получение хранилища</a></li>
 <li class="toctree-l1"><a class="reference internal" href="edit.html">4. Изменение рабочей копии</a></li>
 <li class="toctree-l1"><a class="reference internal" href="commit.html">5. Фиксация изменений</a></li>
-<li class="toctree-l1"><a class="reference internal" href="history.html">6. Изучение истории изменений</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">6. История изменений</a></li>
 <li class="toctree-l1"><a class="reference internal" href="branch.html">7. Работа с ветками</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sync.html">8. Синхронизация с удаленными хранилищами</a></li>
 <li class="toctree-l1"><a class="reference internal" href="workflow.html">9. Порядок работы с Git</a></li>
@@ -363,7 +363,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Подготовка к работе с Git</h1>
+    <h1>Подготовка к работе</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -373,9 +373,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">2.1. Справочная информация</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2.2. Настройка Git</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">2.3. Контрольные вопросы</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#git">Установка Git</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Вызов команд</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Справочная информация</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Изменение настроек</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Контрольные вопросы</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Упражнения</a></li>
 </ul>
             </nav>
         </div>
@@ -387,8 +390,33 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="git">
-<h1><span class="section-number">2. </span>Подготовка к работе с Git<a class="headerlink" href="#git" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1><span class="section-number">2. </span>Подготовка к работе<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<section id="git">
+<h2>Установка Git<a class="headerlink" href="#git" title="Permalink to this heading">#</a></h2>
+<!-- Проверка и установка Git -->
+<p>Для прохождения лекций нам понадобится рабочая машина с установленной системой <code class="docutils literal notranslate"><span class="pre">Git</span></code>.
+Точкой входа в утилиту служит утилита командной строки <code class="docutils literal notranslate"><span class="pre">git</span></code>.
+Проверим ее присутствие в ОС.
+Запустите текстовый терминал (<code class="docutils literal notranslate"><span class="pre">bash</span></code> в Linux или <code class="docutils literal notranslate"><span class="pre">cmd</span></code> в Windows) и выполните в нем команду</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>--version
+</pre></div>
+</div>
+<p>Если программа доступна в системе, то на экране терминала отобразится сообщение о версии, иначе об отсутствии команды.
+Для прохождения лекции необходима <code class="docutils literal notranslate"><span class="pre">Git</span></code> версии не ниже <code class="docutils literal notranslate"><span class="pre">2.23</span></code>, начиная с которой доступна команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">restore</span></code>.
+На февраль 2023 года на <a class="reference external" href="https://git-scm.org">официальном сайте</a> доступна версия <code class="docutils literal notranslate"><span class="pre">2.39.2</span></code>.</p>
+<!-- Установка Git в Ubuntu и Windows -->
+<p>В Ubuntu программы установим через менеджер пакетов <code class="docutils literal notranslate"><span class="pre">APT</span></code>.
+Дополнительно к утилитам командной строки, также установим <code class="docutils literal notranslate"><span class="pre">gitk</span></code> – простой графический интерфейс к <code class="docutils literal notranslate"><span class="pre">Git</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>--assume-yes<span class="w"> </span>install<span class="w"> </span>git<span class="w"> </span>gitk
+</pre></div>
+</div>
+<p>Для Windows доступна специальная сборка <a class="reference external" href="https://gitforwindows.org/">gitforwindows</a>.
+Она содержит в себе портированную в Windows интерпретатор <code class="docutils literal notranslate"><span class="pre">bash</span></code>, интеграцию с рабочим столом и простой графический интерфейс.</p>
+<!-- https://github.com/jesseduffield/lazygit -->
+</section>
+<section id="id2">
+<h2>Вызов команд<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
 <p>Точкой входа в систему Git является утилита командной строки <code class="docutils literal notranslate"><span class="pre">git</span></code>.
 Система состоит из команд, вызываемых в формате</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>&lt;команда&gt;<span class="w"> </span><span class="o">[</span>&lt;аргументы&gt;<span class="w"> </span>...<span class="o">]</span>
@@ -400,14 +428,15 @@ document.write(`
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>fatal: не найден git репозиторий (или один из родительских каталогов): .git
 </pre></div>
 </div>
-<section id="id1">
-<h2><span class="section-number">2.1. </span>Справочная информация<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="id3">
+<h2>Справочная информация<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
 <p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">help</span> <span class="pre">&lt;команда&gt;</span></code> отображает на экране подробную справочную информацию о команде, переданной в качестве аргумента.
 Так как текст не помещается полностью на экране, он будет перенаправлен в пейджер <code class="docutils literal notranslate"><span class="pre">less</span></code>.
 Чтобы вернуть доступ к командной строке, следует закрыть пейджер командой <code class="docutils literal notranslate"><span class="pre">q</span></code>.</p>
 </section>
-<section id="id2">
-<h2><span class="section-number">2.2. </span>Настройка Git<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<section id="id4">
+<h2>Изменение настроек<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
 <p>Перед использованием Git ее следует настроить, т.е. проинформировать систему о пользователе – его имени и адреса электронной почты.
 За настройку отвечает команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span></code>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.name<span class="w"> </span><span class="s2">&quot;Иванов Иван&quot;</span>
@@ -430,10 +459,16 @@ git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"
 Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--list</span></code> покажет те из них, значения которых не совпадают с умолчательными.
 Чтобы увидеть конкретную переменную, например, <code class="docutils literal notranslate"><span class="pre">user.name</span></code>, передайте ее в аргумент команды: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">user.name</span></code>.</p>
 </section>
-<section id="id3">
-<h2><span class="section-number">2.3. </span>Контрольные вопросы<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<section id="id5">
+<h2>Контрольные вопросы<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>Какие уровни настроек Git вам известны?</p></li>
+</ol>
+</section>
+<section id="id6">
+<h2>Упражнения<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Узнайте версию установленной программы Git.</p></li>
 </ol>
 </section>
 </section>
@@ -474,7 +509,7 @@ git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">1. </span>Системы контроля версий</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Система контроля версий</p>
       </div>
     </a>
     <a class="right-next"
@@ -501,9 +536,12 @@ git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">2.1. Справочная информация</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2.2. Настройка Git</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">2.3. Контрольные вопросы</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#git">Установка Git</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Вызов команд</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Справочная информация</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Изменение настроек</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Контрольные вопросы</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Упражнения</a></li>
 </ul>
   </nav></div>
 

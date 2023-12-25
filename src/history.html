@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>6. Изучение истории изменений &#8212; My sample book</title>
+    <title>6. История изменений &#8212; My sample book</title>
   
   
   
@@ -169,12 +169,12 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="cvs.html">1. Системы контроля версий</a></li>
-<li class="toctree-l1"><a class="reference internal" href="config.html">2. Подготовка к работе с Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cvs.html">1. Система контроля версий</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">2. Подготовка к работе</a></li>
 <li class="toctree-l1"><a class="reference internal" href="get.html">3. Получение хранилища</a></li>
 <li class="toctree-l1"><a class="reference internal" href="edit.html">4. Изменение рабочей копии</a></li>
 <li class="toctree-l1"><a class="reference internal" href="commit.html">5. Фиксация изменений</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">6. Изучение истории изменений</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">6. История изменений</a></li>
 <li class="toctree-l1"><a class="reference internal" href="branch.html">7. Работа с ветками</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sync.html">8. Синхронизация с удаленными хранилищами</a></li>
 <li class="toctree-l1"><a class="reference internal" href="workflow.html">9. Порядок работы с Git</a></li>
@@ -363,7 +363,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Изучение истории изменений</h1>
+    <h1>История изменений</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -373,10 +373,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">6.1. Формат вывода команды</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">6.2. Фильтрация коммитов</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">6.3. Комбинация опций</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">6.4. Контрольные вопросы</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Введение</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Формат вывода команды</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Фильтрация коммитов</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Комбинация опций</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Контрольные вопросы</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Упражнения</a></li>
 </ul>
             </nav>
         </div>
@@ -389,7 +391,9 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">6. </span>Изучение истории изменений<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">6. </span>История изменений<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<section id="id2">
+<h2>Введение<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
 <!-- Количество коммитов в истории -->
 <p>В хранилищах малых проектов в среднем около нескольких сотен и тысяч коммитов, средних проектов – десятки тысяч, а крупных – сотни тысяч и миллионы.
 Эти числа получаются из 4 коммита в день на разработчика и 250 рабочих дней в году.</p>
@@ -468,8 +472,9 @@ Date:   Sat Mar 4 08:18:44 2023 +0300
     Initial commit
 </pre></div>
 </div>
-<section id="id2">
-<h2><span class="section-number">6.1. </span>Формат вывода команды<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="id3">
+<h2>Формат вывода команды<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
 <!-- Формат вывода по умолчанию -->
 <p>Изучим вывод команды.
 С каждым коммитом связано 40-разрядное шестнадцатеричное число, называемое <em>хеш-суммой</em> или кратко <em>хешем</em>.
@@ -624,8 +629,8 @@ Niels<span class="w"> </span><span class="nv">Lohmann</span><span class="w"> </s
 </pre></div>
 </div>
 </section>
-<section id="id3">
-<h2><span class="section-number">6.2. </span>Фильтрация коммитов<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<section id="id4">
+<h2>Фильтрация коммитов<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
 <p>Коммит содержит следующие поля, на которые можно наложить условия для фильтрации:</p>
 <ul class="simple">
 <li><p>информация об авторе (имя и электронная почта);</p></li>
@@ -654,8 +659,8 @@ Niels<span class="w"> </span><span class="nv">Lohmann</span><span class="w"> </s
 <p>Поиск в выбранном файле:
 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">--</span> <span class="pre">путь/к/файлу</span></code></p>
 </section>
-<section id="id4">
-<h2><span class="section-number">6.3. </span>Комбинация опций<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<section id="id5">
+<h2>Комбинация опций<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
 <p>Фильтрация коммитов и отображение форматом вывода команды <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> часто применяют совместно.
 Если мы ищем коммиты по автору, нас не интересует вывод поля о нем.</p>
 <!-- Ссылка на коммит -->
@@ -669,11 +674,17 @@ Niels<span class="w"> </span><span class="nv">Lohmann</span><span class="w"> </s
 Каждый коммит, кроме самого первого, основывается на предыдущем, и их связи образуют историю изменений.
 -->
 </section>
-<section id="id5">
-<h2><span class="section-number">6.4. </span>Контрольные вопросы<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<section id="id6">
+<h2>Контрольные вопросы<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>Повторите вывод <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">--oneline</span></code>, опцией <code class="docutils literal notranslate"><span class="pre">--pretty</span></code> с собственным форматом.
 Опции для управления цветом символов описаны в справочной странице к <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> в разделе <code class="docutils literal notranslate"><span class="pre">PRETTY</span> <span class="pre">FORMATS</span></code>.</p></li>
+</ol>
+</section>
+<section id="id7">
+<h2>Упражнения<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li></li>
 </ol>
 </section>
 </section>
@@ -741,10 +752,12 @@ Niels<span class="w"> </span><span class="nv">Lohmann</span><span class="w"> </s
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">6.1. Формат вывода команды</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">6.2. Фильтрация коммитов</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">6.3. Комбинация опций</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">6.4. Контрольные вопросы</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Введение</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Формат вывода команды</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Фильтрация коммитов</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Комбинация опций</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Контрольные вопросы</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Упражнения</a></li>
 </ul>
   </nav></div>
 
