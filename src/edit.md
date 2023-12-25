@@ -135,7 +135,7 @@ patch -r < delta.diff
 Ниже представлен пример патча, полученного командой `git diff`.
 Он незначительно отличается от вывода утилиты `diff` UNIX, но сохраняет основную структуру.
 
-``` patch
+``` diff
 diff --git a/Commands.cpp b/Commands.cpp
 index d1b70b0..69313a5 100644
 --- a/Commands.cpp
