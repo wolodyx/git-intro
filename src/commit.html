@@ -374,9 +374,10 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Введение</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Просмотр изменений</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Контрольные вопросы</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Упражнения</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Алгоритм фиксации изменений</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Просмотр изменений</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Контрольные вопросы</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Упражнения</a></li>
 </ul>
             </nav>
         </div>
@@ -392,6 +393,10 @@ document.write(`
 <h1><span class="section-number">5. </span>Фиксация изменений<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <section id="id2">
 <h2>Введение<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>В этом разделе мы познакомимся с командами <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code>.</p>
+</section>
+<section id="id3">
+<h2>Алгоритм фиксации изменений<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
 <p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code> фиксирует изменения в хранилище, добавляя во внутреннюю базу данных запись, называемую <em>коммитом</em>.
 С коммитом связан следующий набор данных:</p>
 <ul class="simple">
@@ -401,7 +406,7 @@ document.write(`
 <li><p>имя и электронная почта автора изменений.</p></li>
 </ul>
 <p>Дата и время фиксации берутся из системного времени в момент выполнения команды.
-Локальное системное время должно быть синхронизировано с мировым, чтобы не возникло противоречий уже при синхронизации хранилищ.</p>
+Локальное системное время должно быть синхронизировано с мировым, чтобы не возникло противоречий в данных при обмене изменениями с другим хранилищем.</p>
 <p>Имя и электронная почта автора берутся из системы.
 Там они были заданы при <a class="reference internal" href="config.html"><span class="doc std std-doc">настройке Git</span></a>.
 Если настройка не была проведена, то выполнить фиксацию не получится.</p>
@@ -415,7 +420,7 @@ document.write(`
 После извлечения рабочей копии всей файлы относятся к неизменным.
 Если отслеживаемый файл был отредактирован, то он рассматривается измененным.
 Перед фиксацией измененный файл должен быть выбран – помещен в <em>область индексирования</em> или, коротко, <em>индекс</em>.
-Индекс является третье областью, где храняться файлы, дополнительно к рабочей копии и хранилищу.</p>
+Индекс является третьей областью, где хранятся файлы, дополнительно к рабочей копии и хранилищу.</p>
 <!-- Работа с индексом -->
 <p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code> помещает фиксируемые файлы в индекс, еще говорят – индексирует файлы.
 Эта же команда применима и к неотслеживаемым файлам, чтобы превратить их в историю.</p>
@@ -473,17 +478,17 @@ M<span class="w">  </span>LampServer.cpp
 </pre></div>
 </div>
 </section>
-<section id="id3">
-<h2>Просмотр изменений<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
-</section>
 <section id="id4">
-<h2>Контрольные вопросы<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<h2>Просмотр изменений<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="id5">
+<h2>Контрольные вопросы<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
 <li></li>
 </ol>
 </section>
-<section id="id5">
-<h2>Упражнения<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<section id="id6">
+<h2>Упражнения<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
 <li></li>
 </ol>
@@ -554,9 +559,10 @@ M<span class="w">  </span>LampServer.cpp
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Введение</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Просмотр изменений</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Контрольные вопросы</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Упражнения</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Алгоритм фиксации изменений</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Просмотр изменений</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Контрольные вопросы</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Упражнения</a></li>
 </ul>
   </nav></div>
 
