@@ -373,12 +373,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Введение</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#git">Установка Git</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Вызов команд</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Справочная информация</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Изменение настроек</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Контрольные вопросы</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Упражнения</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Вызов команд</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Справочная информация</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Работа с настройками</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Контрольные вопросы</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Упражнения</a></li>
 </ul>
             </nav>
         </div>
@@ -392,31 +393,44 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1><span class="section-number">2. </span>Подготовка к работе<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<section id="id2">
+<h2>Введение<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>Прежде чем начать работу с Git, необходимо настроить рабочее окружение.
+Сюда входят установка самой Git и начальная настройка.</p>
+<p>Какие команды изучим?
+<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">help</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span></code>.</p>
+<p>Доступ к командам системы Git предоставляют <em>клиенты</em>.
+Основной из них – это оригинальный клиент с интерфейсом командной строки, вызываемый командой <code class="docutils literal notranslate"><span class="pre">git</span></code>.</p>
+<!-- Встраивание Git в текстовые редакторы, интегрированные среды разработки -->
+</section>
 <section id="git">
 <h2>Установка Git<a class="headerlink" href="#git" title="Permalink to this heading">#</a></h2>
 <!-- Проверка и установка Git -->
-<p>Для прохождения лекций нам понадобится рабочая машина с установленной системой <code class="docutils literal notranslate"><span class="pre">Git</span></code>.
-Точкой входа в утилиту служит утилита командной строки <code class="docutils literal notranslate"><span class="pre">git</span></code>.
-Проверим ее присутствие в ОС.
-Запустите текстовый терминал (<code class="docutils literal notranslate"><span class="pre">bash</span></code> в Linux или <code class="docutils literal notranslate"><span class="pre">cmd</span></code> в Windows) и выполните в нем команду</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>--version
+<p>Для прохождения учебного модуля понадобится рабочая машина с установленной Git.
+Проверим ее присутствие на машине.
+Выполните команду <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">--version</span></code> в терминале.
+Если программа доступна в системе, то на экране терминала отобразится сообщение о версии, иначе об отсутствии команды.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">bob@pc:~$ </span>git<span class="w"> </span>--version
+<span class="go">git version 2.34.1</span>
 </pre></div>
 </div>
-<p>Если программа доступна в системе, то на экране терминала отобразится сообщение о версии, иначе об отсутствии команды.
-Для прохождения лекции необходима <code class="docutils literal notranslate"><span class="pre">Git</span></code> версии не ниже <code class="docutils literal notranslate"><span class="pre">2.23</span></code>, начиная с которой доступна команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">restore</span></code>.
-На февраль 2023 года на <a class="reference external" href="https://git-scm.org">официальном сайте</a> доступна версия <code class="docutils literal notranslate"><span class="pre">2.39.2</span></code>.</p>
+<p>Для прохождения лекции необходима Git версии не ниже <code class="docutils literal notranslate"><span class="pre">2.23</span></code>, начиная с которой доступна команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">restore</span></code>.
+На декабрь 2024 года на <a class="reference external" href="https://git-scm.org">официальном сайте</a> доступна версия 2.43.0.</p>
 <!-- Установка Git в Ubuntu и Windows -->
-<p>В Ubuntu программы установим через менеджер пакетов <code class="docutils literal notranslate"><span class="pre">APT</span></code>.
-Дополнительно к утилитам командной строки, также установим <code class="docutils literal notranslate"><span class="pre">gitk</span></code> – простой графический интерфейс к <code class="docutils literal notranslate"><span class="pre">Git</span></code>.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>--assume-yes<span class="w"> </span>install<span class="w"> </span>git<span class="w"> </span>gitk
+<p>В Ubuntu программу установим из менеджера пакетов <code class="docutils literal notranslate"><span class="pre">APT</span></code>.
+Дополнительно к утилитам командной строки, также установим <code class="docutils literal notranslate"><span class="pre">gitk</span></code> – простой графический интерфейс к Git.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span>git<span class="w"> </span>gitk
 </pre></div>
 </div>
 <p>Для Windows доступна специальная сборка <a class="reference external" href="https://gitforwindows.org/">gitforwindows</a>.
 Она содержит в себе портированную в Windows интерпретатор <code class="docutils literal notranslate"><span class="pre">bash</span></code>, интеграцию с рабочим столом и простой графический интерфейс.</p>
-<!-- https://github.com/jesseduffield/lazygit -->
+<!-- lazygit -->
+<p>Также установим клиент lazygit, реализующий псевдографический интерфейс.
+Проект с программой доступна по <a class="reference external" href="https://github.com/jesseduffield/lazygit">ссылке</a>.
+Там же содержатся инструкции по ее установке на различные ОС.</p>
 </section>
-<section id="id2">
-<h2>Вызов команд<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<section id="id3">
+<h2>Вызов команд<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
 <p>Точкой входа в систему Git является утилита командной строки <code class="docutils literal notranslate"><span class="pre">git</span></code>.
 Система состоит из команд, вызываемых в формате</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>&lt;команда&gt;<span class="w"> </span><span class="o">[</span>&lt;аргументы&gt;<span class="w"> </span>...<span class="o">]</span>
@@ -429,49 +443,109 @@ document.write(`
 </pre></div>
 </div>
 </section>
-<section id="id3">
-<h2>Справочная информация<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<section id="id4">
+<h2>Справочная информация<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
 <p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">help</span> <span class="pre">&lt;команда&gt;</span></code> отображает на экране подробную справочную информацию о команде, переданной в качестве аргумента.
 Так как текст не помещается полностью на экране, он будет перенаправлен в пейджер <code class="docutils literal notranslate"><span class="pre">less</span></code>.
 Чтобы вернуть доступ к командной строке, следует закрыть пейджер командой <code class="docutils literal notranslate"><span class="pre">q</span></code>.</p>
 </section>
-<section id="id4">
-<h2>Изменение настроек<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
-<p>Перед использованием Git ее следует настроить, т.е. проинформировать систему о пользователе – его имени и адреса электронной почты.
-За настройку отвечает команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span></code>:</p>
+<section id="id5">
+<h2>Работа с настройками<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<!-- Знакомим себя с Git -->
+<p>Перед первым использованием Git на любой машине вам необходимо представить ей себя.
+Для этого ей необходимо передать ваше имя и адрес электронной почты, выполнив следующие две команды, предварительно вписав туда свои персональные данные:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.name<span class="w"> </span><span class="s2">&quot;Иванов Иван&quot;</span>
 git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.email<span class="w"> </span><span class="s2">&quot;mail@example.com&quot;</span>
 </pre></div>
 </div>
-<p>Дополнительно, для удобства, задают текстовый редактор для ввода многострочных сообщений, например для команды <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code>.
-В Windows популярностью пользуется Notepad++, а в Ubuntu стоит выбор между <code class="docutils literal notranslate"><span class="pre">nano</span></code>, <code class="docutils literal notranslate"><span class="pre">vim</span></code> и <code class="docutils literal notranslate"><span class="pre">emacs</span></code>.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>core.editor<span class="w"> </span><span class="s2">&quot;&#39;C:/Program Files/Notepad++/notepad++.exe&#39; -multiInst -notabbar -nosession -noPlugin&quot;</span>
-</pre></div>
-</div>
+<!-- Про команду `git config` -->
+<p>Настройки представляют набор имен переменных с заданным значением, сохраненных в конфигурационных файлах.
+Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span></code> отвечает за работу с настройками: задает переменным значение или выводит их на экран.
+В командах выше переменным с именами <code class="docutils literal notranslate"><span class="pre">user.name</span></code> и <code class="docutils literal notranslate"><span class="pre">user.email</span></code> заданы значения <code class="docutils literal notranslate"><span class="pre">Иванов</span> <span class="pre">Иван</span></code> и <code class="docutils literal notranslate"><span class="pre">mail&#64;example.com</span></code> соответственно.</p>
 <!-- Уровни настроек -->
-<p>Заданные выше настройки – это данные пользователя и его предпочитаемый редактор.
-Поэтому команда использует опцию <code class="docutils literal notranslate"><span class="pre">--global</span></code>, которая указывает, что настройки глобальны, т.е. применяются ко всем хранилищам пользователя.
-В противоположность к глобальным настройкам существуют локальные (<code class="docutils literal notranslate"><span class="pre">--local</span></code>, по умолчанию) – применимые к конкретному хранилищу и системные (<code class="docutils literal notranslate"><span class="pre">--system</span></code>) – влияющие на всех пользователей машины.</p>
+<p>Опция <code class="docutils literal notranslate"><span class="pre">--global</span></code> указывает, что настройки глобальные и оказывают влияние на все хранилища конкретного пользователя.
+В противоположность к глобальным существуют локальные (опция <code class="docutils literal notranslate"><span class="pre">--local</span></code>) и системные (опция <code class="docutils literal notranslate"><span class="pre">--system</span></code>) настройки.
+Локальные настройки действуют только на конкретное хранилище, а системные – на всех пользователей в многопользовательской машине.</p>
 <figure class="align-default">
 <img alt="../_images/ConfigLevels.png" src="../_images/ConfigLevels.png" />
 </figure>
+<!-- Переопределение настроек -->
 <p>Одна и та же опция может быть задана на нескольких уровнях.
-Поэтому глобальные настройки переопределяют системные, а локальные – глобальные и системные.</p>
+В этом случае глобальные настройки переопределяют системные, а локальные переопределяют все остальные.</p>
+<!-- Где хранятся настройки? -->
+<p>Настройки сохраняются в конфигурационных файлах.
+В зависимости от уровня, файлы различаются.
+Так, системные настройки хранятся в файле <code class="docutils literal notranslate"><span class="pre">/etc/gitconfig</span></code>, глобальные в <code class="docutils literal notranslate"><span class="pre">~/.gitconfig</span></code> или <code class="docutils literal notranslate"><span class="pre">~/.config/git/config</span></code>, а локальные в <code class="docutils literal notranslate"><span class="pre">.git/config</span></code> в каталоге хранилища.</p>
+<!-- Установка настройки core.editor в vim на системном уровне -->
+<p>Давайте зададим настройку <code class="docutils literal notranslate"><span class="pre">core.editor</span></code> в значение <code class="docutils literal notranslate"><span class="pre">vim</span></code> на системном уровне.
+Таким нехитрым образом мы навяжем всем пользователям машины редактор Vim для написания многострочных сообщений для команды <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code>.
+На примере ниже можно увидеть, что системную настройку можно изменить только воспользовавшись правами суперпользователя.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">bob@pc:~$ </span>git<span class="w"> </span>config<span class="w"> </span>--system<span class="w"> </span>core.editor<span class="w"> </span>vim
+<span class="go">error: could not lock config file /etc/gitconfig: Отказано в доступе</span>
+<span class="gp">bob@pc:~$ </span>sudo<span class="w"> </span>git<span class="w"> </span>config<span class="w"> </span>--system<span class="w"> </span>core.editor<span class="w"> </span>vim
+<span class="go">[sudo] пароль для bob:</span>
+<span class="gp">bob@pc:~$</span>
+</pre></div>
+</div>
+<!-- Установка настройки на локальном уровне -->
+<p>Давайте установим настройку <code class="docutils literal notranslate"><span class="pre">advice.addIgnoredFile</span></code> в значение <code class="docutils literal notranslate"><span class="pre">false</span></code> на локальном уровне.
+Эта логическая переменная по умолчанию установлена в истину (<code class="docutils literal notranslate"><span class="pre">true</span></code>).
+Из-за нее каждый раз при добавлении всех измененных файлов (командой <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">*</span></code>) в индекс на экране выводится сообщение о том, что при действии игнорируются пути, перечисленные в файле <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code>.
+И там же предлагает отключить эту подсказку, воспользовавшись командой <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">advice.addIgnoredFile</span> <span class="pre">false</span></code>.
+Заметим, что если уровень настройки не задан явно в команде, то подразумевается что она локальная.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">bob@pc:~/projects/git-intro$ </span>git<span class="w"> </span>add<span class="w"> </span>*
+<span class="go">Следующие пути игнорируются одним из ваших файлов .gitignore:</span>
+<span class="go">_build</span>
+<span class="go">подсказка: Use -f if you really want to add them.</span>
+<span class="go">подсказка: Turn this message off by running</span>
+<span class="go">подсказка: &quot;git config advice.addIgnoredFile false&quot;</span>
+</pre></div>
+</div>
 <!-- Просмотр настроек -->
-<p>Доступные для настроек переменные перечислены в секции <code class="docutils literal notranslate"><span class="pre">Variables</span></code> справочной страницы <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span></code>.
-Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--list</span></code> покажет те из них, значения которых не совпадают с умолчательными.
-Чтобы увидеть конкретную переменную, например, <code class="docutils literal notranslate"><span class="pre">user.name</span></code>, передайте ее в аргумент команды: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">user.name</span></code>.</p>
+<p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--list</span></code> выводит на экран список явно установленных пользователем переменных.
+Если указать опцию <code class="docutils literal notranslate"><span class="pre">--show-origin</span></code>, то перед каждой переменную будет указано название конфигурационного файла, в котором оно присутствует.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">bob@pc:~/projects/git-intro$ </span>git<span class="w"> </span>config<span class="w"> </span>--list
+<span class="go">core.editor=vim</span>
+<span class="go">user.email=mail@example.com</span>
+<span class="go">user.name=Иван Иванов</span>
+<span class="go">credential.helper=store</span>
+<span class="go">core.repositoryformatversion=0</span>
+<span class="go">core.filemode=true</span>
+<span class="go">core.bare=false</span>
+<span class="go">core.logallrefupdates=true</span>
+<span class="go">advice.addignoredfile=false</span>
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">bob@pc:~/projects/git-intro$ </span>git<span class="w"> </span>config<span class="w"> </span>--list<span class="w"> </span>--show-origin
+<span class="go">file:/etc/gitconfig     core.editor=vim</span>
+<span class="go">file:/home/bob/.gitconfig       user.email=mail@example.com</span>
+<span class="go">file:/home/bob/.gitconfig       user.name=Иван Иванов</span>
+<span class="go">file:/home/bob/.gitconfig       credential.helper=store</span>
+<span class="go">file:.git/config        core.repositoryformatversion=0</span>
+<span class="go">file:.git/config        core.filemode=true</span>
+<span class="go">file:.git/config        core.bare=false</span>
+<span class="go">file:.git/config        core.logallrefupdates=true</span>
+<span class="go">file:.git/config        advice.addignoredfile=false</span>
+</pre></div>
+</div>
+<p>Если нужно посмотреть определенную переменную, то ее имя указывают в командной строке:
+Чтобы увидеть значение <code class="docutils literal notranslate"><span class="pre">user.name</span></code> выполните команду <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">user.name</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Полный список переменных, поддерживаемых Git, можно вывести на экран командой <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">help</span> <span class="pre">--config</span></code>.
+Тот же самый список с подробным описанием доступен в справочной странице <code class="docutils literal notranslate"><span class="pre">git-config(1)</span></code> в подразделе “Variables” раздела “CONFIGURATION FILE”.</p>
+</div>
 </section>
-<section id="id5">
-<h2>Контрольные вопросы<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<section id="id6">
+<h2>Контрольные вопросы<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>Какие уровни настроек Git вам известны?</p></li>
 </ol>
 </section>
-<section id="id6">
-<h2>Упражнения<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<section id="id7">
+<h2>Упражнения<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p>Узнайте версию установленной программы Git.</p></li>
+<li><p>Выясните версию установленной Git.</p></li>
 </ol>
 </section>
 </section>
@@ -539,12 +613,13 @@ git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Введение</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#git">Установка Git</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Вызов команд</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Справочная информация</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Изменение настроек</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Контрольные вопросы</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Упражнения</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Вызов команд</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Справочная информация</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Работа с настройками</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Контрольные вопросы</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Упражнения</a></li>
 </ul>
   </nav></div>
 
