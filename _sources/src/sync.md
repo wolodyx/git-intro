@@ -19,3 +19,7 @@
 
 1. 
 
+
+<!--
+Сохранить имя пользователя и пароль: `git config --global credentials.helper store`.
+-->
