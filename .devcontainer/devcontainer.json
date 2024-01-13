@@ -1,0 +1,8 @@
+{
+    "name": "git-intro",
+  
+    "build": {
+        "dockerfile": "./Dockerfile"
+    }
+}
+
