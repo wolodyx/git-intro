@@ -65,7 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'src/commit';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="6. История изменений" href="history.html" />
+    <link rel="next" title="6. Изучение истории" href="history.html" />
     <link rel="prev" title="4. Изменение рабочей копии" href="edit.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -174,7 +174,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="get.html">3. Получение хранилища</a></li>
 <li class="toctree-l1"><a class="reference internal" href="edit.html">4. Изменение рабочей копии</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">5. Фиксация изменений</a></li>
-<li class="toctree-l1"><a class="reference internal" href="history.html">6. История изменений</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">6. Изучение истории</a></li>
 <li class="toctree-l1"><a class="reference internal" href="branch.html">7. Работа с ветками</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sync.html">8. Синхронизация с удаленными хранилищами</a></li>
 <li class="toctree-l1"><a class="reference internal" href="workflow.html">9. Порядок работы с Git</a></li>
@@ -374,10 +374,12 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Введение</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Алгоритм фиксации изменений</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Просмотр изменений</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Контрольные вопросы</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Упражнения</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Отслеживаемые файлы</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Состояние файлов</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Работа с индексом</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Фиксация изменений</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Контрольные вопросы</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Упражнения</a></li>
 </ul>
             </nav>
         </div>
@@ -394,9 +396,6 @@ document.write(`
 <section id="id2">
 <h2>Введение<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
 <p>В этом разделе мы познакомимся с командами <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code>.</p>
-</section>
-<section id="id3">
-<h2>Алгоритм фиксации изменений<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
 <p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code> фиксирует изменения в хранилище, добавляя во внутреннюю базу данных запись, называемую <em>коммитом</em>.
 С коммитом связан следующий набор данных:</p>
 <ul class="simple">
@@ -412,12 +411,54 @@ document.write(`
 Если настройка не была проведена, то выполнить фиксацию не получится.</p>
 <p>Прежде чем начать фиксировать изменения в файлах, необходимо познакомиться с состояниями файлов, наблюдения и управления ими.
 Это осуществляется командами <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> и <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code>.</p>
-<!-- Отслеживаемые и неотслеживаемые файлы -->
-<p>Для Git все файлы можно поделить на две части: те, что представляют ей интерес и те, что не пре
-Git следит только за теми файлами, о которых ей известно по ревизии, из которой извлечена рабочая копия.
-Эти файлы называются отслеживаемыми (tracked), тогда как остальные – неотслеживаемые (untracked).
-На практике в рабочей копии обычно содержатся файлы, полученные в результате сборки – объектные, исполняемые, временные файлы, которые генерируются автоматически и не представляют интереса для контроля версий.
-Обычная практика – хранить артефакты сборки в рабочем каталоге в отдельном каталоге, например, <code class="docutils literal notranslate"><span class="pre">build</span></code>.</p>
+</section>
+<section id="id3">
+<h2>Отслеживаемые файлы<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<p>Для Git все файлы можно поделить на две части: те, что представляют интерес и те, что не представляют.
+Первые файлы называют <em>отслеживаемыми</em> (tracked), а вторые – <em>неотслеживаемыми</em> (untracked).
+Отслеживаемые файлы считаются те, которые до этого присутствовали в ревизии, из которой извлечена рабочая копия.
+Если файл еще неизвестен Git, то она будет указывать на это, предлагая добавить его хранилище.</p>
+<!-- Неотслеживаемые файлы -->
+<p>В процессе работы в рабочем каталоге появляются новые файлы, например, сгенерированные системой сборки, компилятором, тестовой системой, архиватором.
+Сюда входят объектные, исполняемые, временные и архивные файлы.
+Эти файлы производны от исходных кодов, сценариев сборки и не представляют интерес.
+Их еще называют <em>артефактами сборки</em>.
+Даже если их удалить из файловой системы, они будут повторно получены пересборкой программы.
+Хорошей практикой является держать артефакты сборки в отдельном каталоге сборки, как например в <code class="docutils literal notranslate"><span class="pre">CMake</span></code>.
+Но система сборки <code class="docutils literal notranslate"><span class="pre">Make</span></code> создает артефакты сборки рядом с файлами исходным кодом, что засоряет рабочий каталог.</p>
+<!-- Файл `.gitignore` -->
+<p>Таким образом, все неотслеживаемые файлы можно поделить на две части:</p>
+<ul class="simple">
+<li><p>те, что никогда не попадут в хранилище;</p></li>
+<li><p>и те, что попадут через время.</p></li>
+</ul>
+<p>Файл <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> перечисляет неотслеживаемые файлы и каталоги в формате регулярных выражений.</p>
+</section>
+<section id="id4">
+<h2>Состояние файлов<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<!-- `git status` или информация о состоянии файлов -->
+<p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> показывает состояния отслеживаемых и список неотслеживаемых файлов.
+В примере ниже она показывает, что файл <code class="docutils literal notranslate"><span class="pre">LampServer.cpp</span></code> изменен и неотслеживаются файлы из каталога <code class="docutils literal notranslate"><span class="pre">build/</span></code>.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">skt@home:~/MyProjects/RemoteLamps$ </span>git<span class="w"> </span>status
+<span class="go">На ветке main</span>
+<span class="go">Ваша ветка обновлена в соответствии с «origin/main».</span>
+
+<span class="go">Изменения, которые не в индексе для коммита:</span>
+<span class="go">  (используйте «git add &lt;файл&gt;…», чтобы добавить файл в индекс)</span>
+<span class="go">  (используйте «git restore &lt;файл&gt;…», чтобы отменить изменения в рабочем каталоге)</span>
+<span class="go">	изменено:      LampServer.cpp</span>
+
+<span class="go">Неотслеживаемые файлы:</span>
+<span class="go">  (используйте «git add &lt;файл&gt;…», чтобы добавить в то, что будет включено в коммит)</span>
+<span class="go">	build/</span>
+
+<span class="go">нет изменений добавленных для коммита</span>
+<span class="gp gp-VirtualEnv">(используйте «git add» и/или «git commit -a»)</span>
+</pre></div>
+</div>
+</section>
+<section id="id5">
+<h2>Работа с индексом<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
 <!-- Измененный, индексированный и зафиксированный файлы -->
 <p>Отслеживаемые файлы могут быть в трех состояниях: <em>неизменными</em>, <em>измененными</em> и <em>подготовленными к фиксации</em>.
 После извлечения рабочей копии всей файлы относятся к неизменным.
@@ -430,68 +471,48 @@ Git следит только за теми файлами, о которых е
 <!-- `git add` и шаблоны в аргументах -->
 <p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">*.c</span></code>.
 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">test*.cpp</span></code></p>
-<!-- `git status` или информация о состоянии файлов -->
-<p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> показывает состояния отслеживаемых и список неотслеживаемых файлов.
-В примере ниже она показывает, что файл <code class="docutils literal notranslate"><span class="pre">LampServer.cpp</span></code> изменен и неотслеживаются файлы из каталога <code class="docutils literal notranslate"><span class="pre">build/</span></code>.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>skt@home:~/MyProjects/RemoteLamps$<span class="w"> </span>git<span class="w"> </span>status
-На<span class="w"> </span>ветке<span class="w"> </span>main
-Ваша<span class="w"> </span>ветка<span class="w"> </span>обновлена<span class="w"> </span>в<span class="w"> </span>соответствии<span class="w"> </span>с<span class="w"> </span>«origin/main».
-
-Изменения,<span class="w"> </span>которые<span class="w"> </span>не<span class="w"> </span>в<span class="w"> </span>индексе<span class="w"> </span>для<span class="w"> </span>коммита:
-<span class="w">  </span><span class="o">(</span>используйте<span class="w"> </span>«git<span class="w"> </span>add<span class="w"> </span>&lt;файл&gt;…»,<span class="w"> </span>чтобы<span class="w"> </span>добавить<span class="w"> </span>файл<span class="w"> </span>в<span class="w"> </span>индекс<span class="o">)</span>
-<span class="w">  </span><span class="o">(</span>используйте<span class="w"> </span>«git<span class="w"> </span>restore<span class="w"> </span>&lt;файл&gt;…»,<span class="w"> </span>чтобы<span class="w"> </span>отменить<span class="w"> </span>изменения<span class="w"> </span>в<span class="w"> </span>рабочем<span class="w"> </span>каталоге<span class="o">)</span>
-<span class="w">	</span>изменено:<span class="w">      </span>LampServer.cpp
-
-Неотслеживаемые<span class="w"> </span>файлы:
-<span class="w">  </span><span class="o">(</span>используйте<span class="w"> </span>«git<span class="w"> </span>add<span class="w"> </span>&lt;файл&gt;…»,<span class="w"> </span>чтобы<span class="w"> </span>добавить<span class="w"> </span>в<span class="w"> </span>то,<span class="w"> </span>что<span class="w"> </span>будет<span class="w"> </span>включено<span class="w"> </span>в<span class="w"> </span>коммит<span class="o">)</span>
-<span class="w">	</span>build/
-
-нет<span class="w"> </span>изменений<span class="w"> </span>добавленных<span class="w"> </span>для<span class="w"> </span>коммита
-<span class="o">(</span>используйте<span class="w"> </span>«git<span class="w"> </span>add»<span class="w"> </span>и/или<span class="w"> </span>«git<span class="w"> </span>commit<span class="w"> </span>-a»<span class="o">)</span>
-</pre></div>
-</div>
 <p>Проиндексируем измененный файл командой <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">LampServer.cpp</span></code> и еще раз посмотрим на вывод команды <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>skt@home:~/MyProjects/RemoteLamps$<span class="w"> </span>git<span class="w"> </span>status
-На<span class="w"> </span>ветке<span class="w"> </span>main
-Ваша<span class="w"> </span>ветка<span class="w"> </span>обновлена<span class="w"> </span>в<span class="w"> </span>соответствии<span class="w"> </span>с<span class="w"> </span>«origin/main».
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">skt@home:~/MyProjects/RemoteLamps$ </span>git<span class="w"> </span>status
+<span class="go">На ветке main</span>
+<span class="go">Ваша ветка обновлена в соответствии с «origin/main».</span>
 
-Изменения,<span class="w"> </span>которые<span class="w"> </span>будут<span class="w"> </span>включены<span class="w"> </span>в<span class="w"> </span>коммит:
-<span class="w">  </span><span class="o">(</span>используйте<span class="w"> </span>«git<span class="w"> </span>restore<span class="w"> </span>--staged<span class="w"> </span>&lt;файл&gt;…»,<span class="w"> </span>чтобы<span class="w"> </span>убрать<span class="w"> </span>из<span class="w"> </span>индекса<span class="o">)</span>
-<span class="w">	</span>изменено:<span class="w">      </span>LampServer.cpp
+<span class="go">Изменения, которые будут включены в коммит:</span>
+<span class="go">  (используйте «git restore --staged &lt;файл&gt;…», чтобы убрать из индекса)</span>
+<span class="go">	изменено:      LampServer.cpp</span>
 
-Неотслеживаемые<span class="w"> </span>файлы:
-<span class="w">  </span><span class="o">(</span>используйте<span class="w"> </span>«git<span class="w"> </span>add<span class="w"> </span>&lt;файл&gt;…»,<span class="w"> </span>чтобы<span class="w"> </span>добавить<span class="w"> </span>в<span class="w"> </span>то,<span class="w"> </span>что<span class="w"> </span>будет<span class="w"> </span>включено<span class="w"> </span>в<span class="w"> </span>коммит<span class="o">)</span>
-<span class="w">	</span>build/
+<span class="go">Неотслеживаемые файлы:</span>
+<span class="go">  (используйте «git add &lt;файл&gt;…», чтобы добавить в то, что будет включено в коммит)</span>
+<span class="go">	build/</span>
 </pre></div>
 </div>
 <p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> имеет подробный вывод и полезна в начале.
 Но с опытом эта многословность начинает мешать.
 Опция <code class="docutils literal notranslate"><span class="pre">-s</span></code> делает вывод более компактным:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>skt@home:~/MyProjects/RemoteLamps$<span class="w"> </span>git<span class="w"> </span>status<span class="w"> </span>-s
-M<span class="w">  </span>LampServer.cpp
-??<span class="w"> </span>build/
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">skt@home:~/MyProjects/RemoteLamps$ </span>git<span class="w"> </span>status<span class="w"> </span>-s
+<span class="go">M  LampServer.cpp</span>
+<span class="go">?? build/</span>
 </pre></div>
 </div>
-<!-- Фиксация изменений в Git -->
+<!-- Просмотр изменений -->
+</section>
+<section id="id6">
+<h2>Фиксация изменений<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
 <p>Подготовив индекс, мы можем зафиксировать изменения командой <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code>.
 Команда откроет текстовый файл.</p>
 <p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-v</span></code></p>
 <p>Если описание коммита однострочное, то его можно передать команде через аргумент опции <code class="docutils literal notranslate"><span class="pre">-m</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Описание изменений&quot;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;Описание изменений&quot;</span>
 </pre></div>
 </div>
 </section>
-<section id="id4">
-<h2>Просмотр изменений<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
-</section>
-<section id="id5">
-<h2>Контрольные вопросы<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<section id="id7">
+<h2>Контрольные вопросы<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
 <li></li>
 </ol>
 </section>
-<section id="id6">
-<h2>Упражнения<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<section id="id8">
+<h2>Упражнения<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
 <li></li>
 </ol>
@@ -542,7 +563,7 @@ M<span class="w">  </span>LampServer.cpp
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">6. </span>История изменений</p>
+        <p class="prev-next-title"><span class="section-number">6. </span>Изучение истории</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -562,10 +583,12 @@ M<span class="w">  </span>LampServer.cpp
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Введение</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Алгоритм фиксации изменений</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Просмотр изменений</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Контрольные вопросы</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Упражнения</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Отслеживаемые файлы</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Состояние файлов</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Работа с индексом</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Фиксация изменений</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Контрольные вопросы</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Упражнения</a></li>
 </ul>
   </nav></div>
 

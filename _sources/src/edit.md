@@ -153,7 +153,6 @@ index d1b70b0..69313a5 100644
    return Command(CmdType_Hello);
  }
  
- 
 -Command Cmd_On()
 +Command Command::On()
  {
