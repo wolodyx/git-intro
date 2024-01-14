@@ -375,10 +375,9 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Введение</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Клонирование хранилища</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Об удаленных хранилищах</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Создание нового хранилища</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Контрольные вопросы</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Упражнения</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Создание нового хранилища</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Контрольные вопросы</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Упражнения</a></li>
 </ul>
             </nav>
         </div>
@@ -394,29 +393,94 @@ document.write(`
 <h1><span class="section-number">3. </span>Получение хранилища<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <section id="id2">
 <h2>Введение<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
-<p>Существуют два способа заполучить хранилище на рабочем компьютере:</p>
+<p>Работа разработчика над программой начинается с получения последней версии ее исходных кодов.
+Исходные коды входят в состав проекта, который можно представить как каталог с файлами и подкаталогами.
+Каждый участник команды разработки должен иметь доступ к этому проекту.
+В терминах Git, проект оформляется в виде хранилища, а хранилище выкладывается на сервер.
+У хранилища есть адрес, по которому к нему обращаются.
+Процесс получения копии хранилища называют <em>клонированием</em>.
+Клонируемое хранилище называют <em>удаленным</em>, а получившуюся копию – <em>локальным</em>.</p>
+<!-- Дополнительно, она извлекает рабочую копию последних версий файлов. -->
+<figure class="align-default">
+<img alt="../_images/local-remote-repo.png" src="../_images/local-remote-repo.png" />
+</figure>
+<!-- Каталог хранилища -->
+<p>Обратим внимание, что в распределенной СКВ, к которой относится Git, нет различий между хранилищами одного проекта.
+Локальное хранилище есть полная копия удаленного, но отличаются они функциями.
+Удаленное хранилище используют для обмена результатами работы, а локальное хранилище – для измененений проекта.
+Фактически, хранилище – это служебный каталог, находящийся под управлением Git.
+В нем содержится история изменений файлов, настройки, указатели на ревизии типа ветки и теги, промежуточные состояния некоторых команд.
+Команды Git, что применяются к проекту, обращаются туда за информацией.
+Локальное хранилище располагается в каталоге с проектом и имеет название <code class="docutils literal notranslate"><span class="pre">.git</span></code>, а удаленное называют по имени проекта и добавляют расширение <code class="docutils literal notranslate"><span class="pre">.git</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Точка в начале имени файла (каталога) показывает, что в системе UNIX он скрытый и не будет показан стандартными средствами.</p>
+</div>
+<!-- Рабочая копия -->
+<p>Состояние проекта во времени сохранено в хранилище.
+Можно из него извлечь любую ревизию проекта.
+В большинстве случаев интерес представляет последняя версия проекта.
+Извлеченное состояние файлов проекта называют <em>рабочей копией</em>.</p>
+<!-- Рабочий каталог -->
+<p>Локальное хранилище дополняется рабочей копией и размещаются внутри <em>рабочего каталога</em>.
+Удаленному хранилищу не нужна рабочая копия, поэтому оно состоит только из каталога с хранилищем.
+Хранилище, не требующее извлечения рабочей копии, называют также <em>чистым</em> (bare).
+Удаленные хранилища являются чистыми.</p>
+<!-- О GitHub -->
+<p>Совместная работа над созданием программы требует, чтобы проект был доступен всем членам команды.
+Удаленное хранилище располагают на специальном сервере, называемом <em>Git-сервером</em>.
+Такой сервер требует обслуживания.
+Небольшие компании не могут позволить себе тратить ресурсы на собственные физические сервера.
+Сервис GitHub предлагает бесплатно услугу по размещению хранилищ Git.
+Дополнительно, вокруг этого она создает набор сервисов, которые необходимы при разработке ПО:</p>
+<ul class="simple">
+<li><p>отслеживание ошибок;</p></li>
+<li><p>создание сайта проекта (GitHub Pages);</p></li>
+<li><p>автоматическая сборка программы (GitHub Actions);</p></li>
+<li><p>документирование проекта (GitHub Wiki).</p></li>
+</ul>
+<p>Все эти сервисы GitHub предоставляет бесплатно.
+За небольшую плату можно получить расширенные возможности сервисов.
+Большинство проектов программ с открытым исходным кодом размещаются на серверах <a class="reference external" href="https://github.com">GitHub</a>.
+Проекты, размещенные на GitHub:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/google/googletest">GoogleTest - Google Testing and Mocking Framework</a></p></li>
+<li><p><a class="reference external" href="https://github.com/pmodels/mpich">Official MPICH Repository</a></p></li>
+<li><p><a class="reference external" href="https://github.com/git/git">Git Source Code Mirror</a></p></li>
+</ul>
+<p>GitHub является компанией, предоставляющей облачный сервис для разработки программ.
+Эти сервисы работают только на серверах самой компании.
+Публичные хранилища вместе с историей изменений, доступны на чтение всем пользователям сети Интернет.
+Автор хранилища может закрыть доступ к нему, т.е. сделать его приватным.
+Не все компании могут позволить себе перенести свои исходные коды на неконтролируемые ими сервера.
+Для таких случаев существует проект <a class="reference external" href="https://gitlab.com">GitLab</a> в рамках которого создается ПО для обслуживания процессов разработки программ.
+GitLab является альтернативой GitHub.
+Ее программу можно запустить на собственном сервере, получая полный контроль над ним.
+Дополнительно этому GitLab предоставляет те же самые услуги, что и GitHub, используя свое ПО.
+Проекты, размещенные на сервисе GitLab:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://gitlab.com/libeigen/eigen.git">Eigen</a></p></li>
+</ul>
+<p>Проекты, размещенные на серверах разработчиков под управлением GitLab:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://gitlab.kitware.com/cmake/cmake.git">CMake</a></p></li>
+<li><p><a class="reference external" href="https://gitlab.kitware.com/vtk/vtk.git">VTK</a></p></li>
+<li><p><a class="reference external" href="https://gitlab.gnome.org/GNOME/gtk.git">GNOME/gtk</a></p></li>
+</ul>
+<!-- Как заполучить хранилище? -->
+<p>Существуют два типа хранилища и два способа заполучить их:</p>
 <ol class="arabic simple">
-<li><p>склонировать существующее;</p></li>
-<li><p>создать новое.</p></li>
+<li><p>локальное, склонировав удаленное;</p></li>
+<li><p>удаленное, создав из начальной версии проекта.</p></li>
 </ol>
-<p>Рассмотрим каждый из них подробнее.</p>
 </section>
 <section id="id3">
 <h2>Клонирование хранилища<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
 <!-- О команде `git clone` -->
-<p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code> клонирует существующее хранилище, адрес которого передано в качестве аргумента команды.
-Клонируемое хранилище называют <em>удаленным</em>, даже если оно расположено в локальной файловой системе.
-Клонирование создает копию удаленного хранилища, называемого <em>локальным</em>.
-Дополнительно, она извлекает рабочую копию последних версий файлов.</p>
+<p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code> клонирует хранилище, адрес которого передано в качестве аргумента команды.
+Вторым, необязательным, аргументом выступает имя рабочего каталога.</p>
 <!-- Пример клонирования удаленного репозитория -->
-<p>Для пример воспользуемся удаленным хранилищем проекта MPICH, расположенного по адресу <code class="docutils literal notranslate"><span class="pre">https://github.com/pmodels/mpich.git</span></code>.
-Покажем три примера работы команды <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code> с клонированием в</p>
-<ul class="simple">
-<li><p>каталог, название которого команда выберет сама;</p></li>
-<li><p>каталог, имя которого выбрал пользователь;</p></li>
-<li><p>текущий пустой каталог.</p></li>
-</ul>
-<p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/pmodels/mpich.git</span></code> создает в текущем каталоге каталог <code class="docutils literal notranslate"><span class="pre">mpich</span></code>, название которого совпадает с названием удаленного хранилища в аргументе-адресе.</p>
+<p>Склонируем хранилище проекта MPICH, расположенного по адресу <code class="docutils literal notranslate"><span class="pre">https://github.com/pmodels/mpich.git</span></code>.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">bob@pc:~/projects$ </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/pmodels/mpich.git
 <span class="go">Клонирование в «mpich»...</span>
 <span class="go">remote: Enumerating objects: 250143, done.</span>
@@ -425,19 +489,20 @@ document.write(`
 <span class="go">remote: Total 250143 (delta 2145), reused 2749 (delta 1933), pack-reused 246929</span>
 <span class="go">Получение объектов: 100% (250143/250143), 86.52 МиБ | 5.65 МиБ/с, готово.</span>
 <span class="go">Определение изменений: 100% (194822/194822), готово.</span>
-<span class="gp">bob@pc:~/projects$ </span><span class="nb">cd</span><span class="w"> </span>mpich/
-<span class="gp">bob@pc:~/projects/mpich$ </span>ls
+<span class="gp">bob@pc:~/projects$ </span>ls<span class="w"> </span>mpich/
 <span class="go">autogen.sh  confdb        contrib       COPYRIGHT  examples  Makefile.am  mpich-doxygen.in  RELEASE_NOTES  test</span>
 <span class="go">CHANGES     configure.ac  CONTRIBUTING  doc        maint     modules      README.vin        src</span>
 </pre></div>
 </div>
-<p>Если перед клонированием такой каталог существовал, тогда команда завершилась бы с ошибкой.
-Чтобы склонировать хранилище в другой рабочий каталог, его имя передается в команду следующим аргументом после адреса:</p>
+<p>Команда создала в текущем каталоге каталог <code class="docutils literal notranslate"><span class="pre">mpich</span></code>, название которого совпало с названием удаленного хранилища в аргументе-адресе (после исключения расширения <code class="docutils literal notranslate"><span class="pre">.git</span></code>).
+Если перед клонированием такой <strong>непустой</strong> каталог существовал, то команда завершилась бы с ошибкой.
+Чтобы склонировать хранилище в другой рабочий каталог, его имя передается в команду аргументом после адреса:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/pmodels/mpich.git<span class="w"> </span>mpich2
 </pre></div>
 </div>
-<p>На практике сначала создают новый каталог, переходят туда и клонируют.
-При клонировании вместо имени каталога передают аргумент <code class="docutils literal notranslate"><span class="pre">.</span></code>, обозначающий текущий каталог:</p>
+<p>Если каталога с таким именем не существует, то он будет создан.
+Если он существует, то он должен быть пустым.
+Чтобы склонировать хранилище в текущий пустой каталог, передают аргумент <code class="docutils literal notranslate"><span class="pre">.</span></code>, обозначающий текущий каталог:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>mpich
 <span class="nb">cd</span><span class="w"> </span>mpich
 git<span class="w"> </span>clone<span class="w"> </span>https://github.com/pmodels/mpich.git<span class="w"> </span>.
@@ -456,68 +521,64 @@ git<span class="w"> </span>clone<span class="w"> </span>https://github.com/pmode
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="o">--</span><span class="n">depth</span><span class="o">=</span><span class="mi">1</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">pmodels</span><span class="o">/</span><span class="n">mpich</span><span class="o">.</span><span class="n">git</span>
 </pre></div>
 </div>
+<p>При клонировании, сервер не потребовал у нас логина и пароля.
+Это произошло потому, что мы обращались к <em>публичному хранилищу</em>.
+Проекты с открытым исходным кодом размещают в публичных хранилищах.
+В противоположность им, <em>приватные хранилища</em> разрешают доступ к своим содержимым только авторизированным пользователям.</p>
+<!-- Адрес удаленного хранилища -->
+<p>Адрес удаленного хранилища подчиняется общему шаблону.
+В нем можно выделить:</p>
+<ul class="simple">
+<li><p>протокол;</p></li>
+<li><p>имя git-сервера;</p></li>
+<li><p>имя пользователя, управляющего хранилищем;</p></li>
+<li><p>имя хранилища.</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">[протокол]://[имя</span> <span class="pre">git-сервера]/[имя</span> <span class="pre">пользователя]/[имя</span> <span class="pre">хранилища]</span></code></p>
+<!-- Про протокол -->
+<p>Протокол задает способ приема и передачи данных и аутентификацию пользователя.
+Git поддерживает четыре протокола: http, ssh, локальный (file) и git-протокол, из которых популярны первые три.</p>
+<!-- Имя сервера -->
+<p>Примерами имен git-серверов могут быть:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">github.com</span></code>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gitlab.com</span></code>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gitlab.company.ru</span></code>;</p></li>
+</ul>
+<!-- Имя пользователя и хранилища -->
+<p>То, что хранилище размещено в пространстве пользователя, позволяет использовать совпадающие имена проектов для разных пользователей.</p>
+<figure class="align-default">
+<img alt="../_images/repo-address.png" src="../_images/repo-address.png" />
+</figure>
 </section>
 <section id="id4">
-<h2>Об удаленных хранилищах<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
-<!-- О GitHub -->
-<p>Совместная работа над созданием программы требует удаленное хранилище, которое было бы доступно всем членам команды.
-Удаленное хранилище располагается на специальном сервере, называемом <em>Git-сервером</em>.
-Такой сервер требует обслуживания.
-Небольшие компании не могут позволить себе тратить ресурсы на собственные физические сервера.
-Сервис GitHub предлагает бесплатно услугу по размещению хранилищ Git.
-Дополнительно, вокруг этого она создает набор сервисов, которые необходимы при разработке ПО:</p>
-<ul class="simple">
-<li><p>отслеживание ошибок;</p></li>
-<li><p>создание сайта проекта (GitHub Pages);</p></li>
-<li><p>автоматическая сборка программы (GitHub Actions);</p></li>
-<li><p>документирование проекта (GitHub Wiki).</p></li>
-</ul>
-<p>Все эти сервисы GitHub предоставляет бесплатно.
-За небольшую плату можно получить расширенные возможности сервисов.
-Большинство проектов программ с открытым исходным кодом размещаются на серверах <a class="reference external" href="https://github.com">GitHub</a>.
-Вот небольшой список проектов, которые используют сервера GitHub для разработки ПО:</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://github.com/google/googletest">GoogleTest - Google Testing and Mocking Framework</a></p></li>
-<li><p><a class="reference external" href="https://github.com/git/git">Git Source Code Mirror</a></p></li>
-<li><p><a class="reference external" href="https://github.com/pmodels/mpich">Official MPICH Repository</a></p></li>
-</ul>
-<p>GitHub является компанией, предоставляющей облачный сервис для разработки программ.
-Эти сервисы работают только на серверах самой компании.
-Клиенты могут закрыть свои хранилища, т.е. сделать их приватными.
-Тогда к этим хранилищам могут иметь доступ только те участники, у которых есть доступ.
-Не все компании могут позволить себе перенести свои исходные коды на неконтролируемые ими сервера.
-Для таких случаев существует проект <a class="reference external" href="https://gitlab.com">GitLab</a> в рамках которого создается ПО для обслуживания процессов разработки программ.
-GitLab является альтернативой GitHub.
-Ее программу можно запустить на собственном сервере, получая полный контроль над ним.
-Дополнительно этому GitLab предоставляет те же самые услуги, что и GitHub, используя свое ПО.
-Вот небольшой список проектов, которые используют сервера GitLab для разработки ПО:</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://gitlab.com/libeigen/eigen.git">Eigen</a></p></li>
-<li><p><a class="reference external" href="https://gitlab.kitware.com/cmake/cmake">CMake</a></p></li>
-</ul>
-<!-- О форматах путей к удаленным хранилищам -->
-</section>
-<section id="id5">
-<h2>Создание нового хранилища<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
-<p>Любое хранилище в начале было кем-то создано.
-Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code> создает пустое хранилище в текущем каталоге или в каталоге, переданном в виде аргумента.
+<h2>Создание нового хранилища<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<!-- О команде `git init` -->
+<p>Любое хранилище в начале было создано.
+Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code> создает пустое хранилище.
 Пустое хранилище не содержит истории, а его рабочая копия пуста.
 Рабочий каталог может содержать файлы, которые в последствии будут добавлены в хранилище.
 Как это сделать, будет рассмотрено в разделе <a class="reference internal" href="commit.html"><span class="doc std std-doc">“Фиксация изменений”</span></a>.</p>
 <p>Каталог является рабочим для хранилища, если внутри себя содержит каталог <code class="docutils literal notranslate"><span class="pre">.git</span></code>.
-Символ “точка” в начале имени указывает, что системе UNIX  он скрытый и не отобразится стандартными средствами.
-Команда <code class="docutils literal notranslate"><span class="pre">ls</span></code> выведет на терминале вместе с остальными скрытые файлы и каталоги при вызове с опцией <code class="docutils literal notranslate"><span class="pre">--all</span></code>.</p>
+Точка в начале имени показывает, что в системе UNIX он скрытый и не отобразится стандартными средствами.
+Команда <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">--all</span></code> отобразит на экране терминала все файлы из текущего каталога, включая и скрытые.</p>
+<p>Без аргументов команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code> создаст новое хранилище в текущем каталоге.
+Если вам надо создать его в другом, то имя этого каталога следует передать в команду как аргумент: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span> <span class="pre">myproject</span></code>.</p>
+<p>Чтобы создать чистое хранилище, в команду <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code> передают опцию <code class="docutils literal notranslate"><span class="pre">--bare</span></code>.
+И уже получившийся каталог отправляют на git-сервер.</p>
 </section>
-<section id="id6">
-<h2>Контрольные вопросы<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<section id="id5">
+<h2>Контрольные вопросы<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>Воспользуйтесь существующим пустым каталогом в качестве рабочего каталога для клонируемого хранилища.</p></li>
 </ol>
 </section>
-<section id="id7">
-<h2>Упражнения<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
+<section id="id6">
+<h2>Упражнения<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p>Склонируйте хранилище json из сервера <a class="reference external" href="http://github.com">github.com</a> у пользователя nlohmann.</p></li>
+<li><p>Склонируйте хранилище json из сервера <a class="reference external" href="http://github.com">github.com</a> у пользователя nlohmann по протоколу http.</p></li>
+<li><p>Склонируйте локальное хранилище в соседний каталог.
+Адрес локального хранилища совпадает с путевым именем рабочего каталога.</p></li>
 <li><p>Сравните скорость загрузки одного и того же хранилища с полной и неполной историей.
 Для примера воспользуйтесь хранилищем <code class="docutils literal notranslate"><span class="pre">https://github.com/nlohmann/json.git</span></code>.</p></li>
 </ol>
@@ -589,10 +650,9 @@ GitLab является альтернативой GitHub.
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Введение</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Клонирование хранилища</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Об удаленных хранилищах</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Создание нового хранилища</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Контрольные вопросы</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Упражнения</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Создание нового хранилища</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Контрольные вопросы</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Упражнения</a></li>
 </ul>
   </nav></div>
 

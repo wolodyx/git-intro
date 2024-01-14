@@ -175,3 +175,21 @@ file:.git/config        advice.addignoredfile=false
 
 1. Выясните версию установленной Git.
 
+
+<!--
+```
+подсказка: Using 'master' as the name for the initial branch. This default branch name
+подсказка: is subject to change. To configure the initial branch name to use in all
+подсказка: of your new repositories, which will suppress this warning, call:
+подсказка: 
+подсказка: 	git config --global init.defaultBranch <name>
+подсказка: 
+подсказка: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+подсказка: 'development'. The just-created branch can be renamed via this command:
+подсказка: 
+подсказка: 	git branch -m <name>
+```
+
+git config --global init.defaultBranch main
+
+-->
