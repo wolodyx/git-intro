@@ -374,10 +374,10 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Введение</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Отслеживаемые файлы</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Состояние файлов</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Работа с индексом</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Фиксация изменений</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Состояния файлов</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Работа с индексом</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Фиксация изменений</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Использованные источники</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Контрольные вопросы</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Упражнения</a></li>
 </ul>
@@ -395,7 +395,6 @@ document.write(`
 <h1><span class="section-number">5. </span>Фиксация изменений<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <section id="id2">
 <h2>Введение<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
-<p>В этом разделе мы познакомимся с командами <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code>.</p>
 <p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code> фиксирует изменения в хранилище, добавляя во внутреннюю базу данных запись, называемую <em>коммитом</em>.
 С коммитом связан следующий набор данных:</p>
 <ul class="simple">
@@ -407,37 +406,68 @@ document.write(`
 <p>Дату и время фиксации Git берет из системного времени в момент выполнения команды.
 Локальное системное время должно быть синхронизировано с мировым, чтобы не возникло противоречий в данных при обмене изменениями с другим хранилищем.
 Имя и электронная почта автора Git берет из настроек.
-Там они были заданы при <a class="reference internal" href="config.html"><span class="doc std std-doc">настройке Git</span></a>.
-Если настройка не была проведена, то выполнить фиксацию не получится.</p>
+Там они были заданы при <a class="reference internal" href="config.html"><span class="doc std std-doc">настройке Git</span></a>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Фиксация завершится с ошибкой, если ранее при настройке Git не указали имя и электронную почту пользователя.</p>
+</div>
 <p>Прежде чем начать фиксировать изменения в файлах, необходимо познакомиться с состояниями файлов, наблюдения и управления ими.
 Это осуществляется командами <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> и <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code>.</p>
 </section>
 <section id="id3">
-<h2>Отслеживаемые файлы<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
-<p>Для Git все файлы можно поделить на две части: те, что представляют интерес и те, что не представляют.
-Первые файлы называют <em>отслеживаемыми</em> (tracked), а вторые – <em>неотслеживаемыми</em> (untracked).
-Отслеживаемые файлы считаются те, которые до этого присутствовали в ревизии, из которой извлечена рабочая копия.
-Если файл еще неизвестен Git, то она будет указывать на это, предлагая добавить его хранилище.</p>
-<!-- Неотслеживаемые файлы -->
-<p>В процессе работы в рабочем каталоге появляются новые файлы, например, сгенерированные системой сборки, компилятором, тестовой системой, архиватором.
+<h2>Состояния файлов<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<p>Познакомимся с состояниями файлов, в которых они могут быть для Git.
+Научимся видеть эти состояния командой <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code>.</p>
+<!-- Отслеживаемые и неотслеживаемые файлы -->
+<p>Git интересуют файлы в рабочем каталоге, но не за его пределами.
+Интерес выражается в том, что в последующем пользователю будет предложено добавить изменения в них в историю хранилища.
+Все файлы в рабочем каталоге делятся на <em>отслеживаемые</em> (tracked) и <em>неотслеживаемые</em> (untracked).
+К отслеживаемым файлам относятся те, которые до этого присутствовали в ревизии, из которой извлечена рабочая копия.
+Недавно созданные файлы, еще не попавшие в историю или индекс (который мы рассмотрим ниже), будут относится к категории неотслеживаемых.</p>
+<figure class="align-default">
+<img alt="../_images/file-states.png" src="../_images/file-states.png" />
+</figure>
+<!-- Неотслеживаемые файлы и артефакты сборки -->
+<p>В процессе работы над проектом в рабочем каталоге появляются новые файлы, например, сгенерированные системой сборки, компилятором, тестовой системой, архиватором.
 Сюда входят объектные, исполняемые, временные и архивные файлы.
-Эти файлы производны от исходных кодов, сценариев сборки и не представляют интерес.
+Эти файлы производны от исходных кодов, сценариев сборки и представляют краткосрочный интерес.
 Их еще называют <em>артефактами сборки</em>.
-Даже если их удалить из файловой системы, они будут повторно получены пересборкой программы.
-Хорошей практикой является держать артефакты сборки в отдельном каталоге сборки, как например в <code class="docutils literal notranslate"><span class="pre">CMake</span></code>.
-Но система сборки <code class="docutils literal notranslate"><span class="pre">Make</span></code> создает артефакты сборки рядом с файлами исходным кодом, что засоряет рабочий каталог.</p>
+Даже если их удалить из файловой системы, они могут быть повторно получены пересборкой программы.
+Считается хорошей практикой держать артефакты сборки в отдельном каталоге, как например в <code class="docutils literal notranslate"><span class="pre">CMake</span></code>.
+Но система сборки <code class="docutils literal notranslate"><span class="pre">Make</span></code> создает артефакты рядом с файлами исходным кодом, что засоряет рабочий каталог.</p>
 <!-- Файл `.gitignore` -->
-<p>Таким образом, все неотслеживаемые файлы можно поделить на две части:</p>
+<p>Таким образом, все неотслеживаемые файлы можно разделить на две категории:</p>
 <ul class="simple">
-<li><p>те, что никогда не попадут в хранилище;</p></li>
-<li><p>и те, что попадут через время.</p></li>
+<li><p>новые файлы, добавляемые в скором времени в следующую ревизию;</p></li>
+<li><p>игнорируемые, путь в хранилище которым закрыт навсегда.</p></li>
 </ul>
-<p>Файл <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> перечисляет неотслеживаемые файлы и каталоги в формате регулярных выражений.</p>
-</section>
-<section id="id4">
-<h2>Состояние файлов<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
-<!-- `git status` или информация о состоянии файлов -->
-<p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> показывает состояния отслеживаемых и список неотслеживаемых файлов.
+<p>Чтобы файлы из первой категории не потерялись среди многочисленных файлов второй, в Git добавлены списки игнорируемых файлов и каталогов.
+Они перечисляются в файле <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> в формате регулярных выражений.
+Сам файл располагается в корне рабочего каталога.
+Содержимое этого файла зависит от используемого языка программирования, библиотек и инструментов.
+Разработчики GitHub в открытом проекте <a class="reference external" href="https://github.com/github/gitignore">gitignore</a> собрали примеры этих файлов с привязкой к используемым программным технологиям.</p>
+<!-- Отслеживаемые файлы -->
+<p>Отслеживаемые файлы составляют проект программы и основую для следующей его ревизии.
+Все файлы делятся на три части:</p>
+<ul class="simple">
+<li><p>зафиксированные;</p></li>
+<li><p>измененные;</p></li>
+<li><p>проиндексированные.</p></li>
+</ul>
+<!-- Зафиксированный и измененный файлы -->
+<p>После извлечения рабочей копии всей файлы относятся к зафиксированным.
+Если внести изменения в зафиксированный файл, то он перейдет в измененное состояние.
+Если откатить изменения у измененного файла, то он перейдет обратно в зафиксированное состояние.</p>
+<!-- Проиндексированный файл -->
+<p>Индексированные файлы предназначены для включения изменений в историю.
+По-другому, индексированный файл рассматривается как измененный файл, помещенный в специальную область, называемую <em>индексом</em>.
+Индекс – это область, дополнительная к рабочей копии и хранилищу.
+Физически она расположена внутри хранилища, не передается и не клонируется.</p>
+<figure class="align-default">
+<img alt="../_images/git-index.png" src="../_images/git-index.png" />
+</figure>
+<!-- `git status` и состояние файлов -->
+<p>Состояние файлов в рабочем каталоге показывает команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code>.
 В примере ниже она показывает, что файл <code class="docutils literal notranslate"><span class="pre">LampServer.cpp</span></code> изменен и неотслеживаются файлы из каталога <code class="docutils literal notranslate"><span class="pre">build/</span></code>.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">skt@home:~/MyProjects/RemoteLamps$ </span>git<span class="w"> </span>status
 <span class="go">На ветке main</span>
@@ -457,16 +487,11 @@ document.write(`
 </pre></div>
 </div>
 </section>
-<section id="id5">
-<h2>Работа с индексом<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
-<!-- Измененный, индексированный и зафиксированный файлы -->
-<p>Отслеживаемые файлы могут быть в трех состояниях: <em>неизменными</em>, <em>измененными</em> и <em>подготовленными к фиксации</em>.
-После извлечения рабочей копии всей файлы относятся к неизменным.
-Если отслеживаемый файл был отредактирован, то он рассматривается измененным.
-Перед фиксацией измененный файл должен быть выбран – помещен в <em>область индексирования</em> или, коротко, <em>индекс</em>.
-Индекс является третьей областью, где хранятся файлы, дополнительно к рабочей копии и хранилищу.</p>
+<section id="id4">
+<h2>Работа с индексом<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
 <!-- Работа с индексом -->
-<p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code> помещает фиксируемые файлы в индекс, еще говорят – индексирует файлы.
+<p>Для изменения текстового файла достаточно редактора.
+Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code> помещает фиксируемые файлы в индекс, еще говорят – индексирует файлы.
 Эта же команда применима и к неотслеживаемым файлам, чтобы превратить их в историю.</p>
 <!-- `git add` и шаблоны в аргументах -->
 <p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">*.c</span></code>.
@@ -495,15 +520,29 @@ document.write(`
 </div>
 <!-- Просмотр изменений -->
 </section>
-<section id="id6">
-<h2>Фиксация изменений<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<section id="id5">
+<h2>Фиксация изменений<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
 <p>Подготовив индекс, мы можем зафиксировать изменения командой <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code>.
 Команда откроет текстовый файл.</p>
-<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-v</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code></p>
 <p>Если описание коммита однострочное, то его можно передать команде через аргумент опции <code class="docutils literal notranslate"><span class="pre">-m</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;Описание изменений&quot;</span>
 </pre></div>
 </div>
+<!-- Фиксация изменений без добавления в индекс -->
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">a</span>
+</pre></div>
+</div>
+<!-- Отображение изменений в редакторе -->
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">v</span>
+</pre></div>
+</div>
+</section>
+<section id="id6">
+<h2>Использованные источники<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/github/gitignore">A collection of .gitignore templates</a></p></li>
+</ul>
 </section>
 <section id="id7">
 <h2>Контрольные вопросы<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
@@ -514,7 +553,7 @@ document.write(`
 <section id="id8">
 <h2>Упражнения<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
-<li></li>
+<li><p>Покажите пример файла <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> для языка программирования C++ от разработчиков GitHub.</p></li>
 </ol>
 </section>
 </section>
@@ -583,10 +622,10 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Введение</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Отслеживаемые файлы</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Состояние файлов</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Работа с индексом</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Фиксация изменений</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Состояния файлов</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Работа с индексом</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Фиксация изменений</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Использованные источники</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Контрольные вопросы</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Упражнения</a></li>
 </ul>
