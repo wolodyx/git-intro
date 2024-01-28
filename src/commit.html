@@ -375,7 +375,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Введение</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Состояния файлов</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Работа с индексом</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Управление состоянием файлов</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Фиксация изменений</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Использованные источники</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Контрольные вопросы</a></li>
@@ -395,22 +395,6 @@ document.write(`
 <h1><span class="section-number">5. </span>Фиксация изменений<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <section id="id2">
 <h2>Введение<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
-<p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code> фиксирует изменения в хранилище, добавляя во внутреннюю базу данных запись, называемую <em>коммитом</em>.
-С коммитом связан следующий набор данных:</p>
-<ul class="simple">
-<li><p>изменения в файлах;</p></li>
-<li><p>сообщение, описывающее изменения;</p></li>
-<li><p>дата и время фиксации;</p></li>
-<li><p>имя и электронная почта автора изменений.</p></li>
-</ul>
-<p>Дату и время фиксации Git берет из системного времени в момент выполнения команды.
-Локальное системное время должно быть синхронизировано с мировым, чтобы не возникло противоречий в данных при обмене изменениями с другим хранилищем.
-Имя и электронная почта автора Git берет из настроек.
-Там они были заданы при <a class="reference internal" href="config.html"><span class="doc std std-doc">настройке Git</span></a>.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Фиксация завершится с ошибкой, если ранее при настройке Git не указали имя и электронную почту пользователя.</p>
-</div>
 <p>Прежде чем начать фиксировать изменения в файлах, необходимо познакомиться с состояниями файлов, наблюдения и управления ими.
 Это осуществляется командами <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> и <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code>.</p>
 </section>
@@ -447,16 +431,19 @@ document.write(`
 Содержимое этого файла зависит от используемого языка программирования, библиотек и инструментов.
 Разработчики GitHub в открытом проекте <a class="reference external" href="https://github.com/github/gitignore">gitignore</a> собрали примеры этих файлов с привязкой к используемым программным технологиям.</p>
 <!-- Отслеживаемые файлы -->
-<p>Отслеживаемые файлы составляют проект программы и основую для следующей его ревизии.
-Все файлы делятся на три части:</p>
+<p>Отслеживаемые файлы составляют проект программы и основу для следующей ревизии.
+Они в свою очередь делятся на три части:</p>
 <ul class="simple">
 <li><p>зафиксированные;</p></li>
 <li><p>измененные;</p></li>
 <li><p>проиндексированные.</p></li>
 </ul>
+<figure class="align-default">
+<img alt="../_images/file-states-flow.png" src="../_images/file-states-flow.png" />
+</figure>
 <!-- Зафиксированный и измененный файлы -->
-<p>После извлечения рабочей копии всей файлы относятся к зафиксированным.
-Если внести изменения в зафиксированный файл, то он перейдет в измененное состояние.
+<p>После клонирования и последующего извлечения рабочей копии все файлы в рабочем каталоге относятся к зафиксированным.
+Если отредактировать зафиксированный файл, то он перейдет в измененное состояние.
 Если откатить изменения у измененного файла, то он перейдет обратно в зафиксированное состояние.</p>
 <!-- Проиндексированный файл -->
 <p>Индексированные файлы предназначены для включения изменений в историю.
@@ -466,6 +453,11 @@ document.write(`
 <figure class="align-default">
 <img alt="../_images/git-index.png" src="../_images/git-index.png" />
 </figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Файл, помещенный в индекс, уже не является измененным.
+Но если после индексации файл изменить еще раз, то он одновременно будет измененным и проиндексированным.</p>
+</div>
 <!-- `git status` и состояние файлов -->
 <p>Состояние файлов в рабочем каталоге показывает команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code>.
 В примере ниже она показывает, что файл <code class="docutils literal notranslate"><span class="pre">LampServer.cpp</span></code> изменен и неотслеживаются файлы из каталога <code class="docutils literal notranslate"><span class="pre">build/</span></code>.</p>
@@ -486,57 +478,112 @@ document.write(`
 <span class="gp gp-VirtualEnv">(используйте «git add» и/или «git commit -a»)</span>
 </pre></div>
 </div>
-</section>
-<section id="id4">
-<h2>Работа с индексом<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
-<!-- Работа с индексом -->
-<p>Для изменения текстового файла достаточно редактора.
-Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code> помещает фиксируемые файлы в индекс, еще говорят – индексирует файлы.
-Эта же команда применима и к неотслеживаемым файлам, чтобы превратить их в историю.</p>
-<!-- `git add` и шаблоны в аргументах -->
-<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">*.c</span></code>.
-<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">test*.cpp</span></code></p>
-<p>Проиндексируем измененный файл командой <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">LampServer.cpp</span></code> и еще раз посмотрим на вывод команды <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code>:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">skt@home:~/MyProjects/RemoteLamps$ </span>git<span class="w"> </span>status
-<span class="go">На ветке main</span>
-<span class="go">Ваша ветка обновлена в соответствии с «origin/main».</span>
-
-<span class="go">Изменения, которые будут включены в коммит:</span>
-<span class="go">  (используйте «git restore --staged &lt;файл&gt;…», чтобы убрать из индекса)</span>
-<span class="go">	изменено:      LampServer.cpp</span>
-
-<span class="go">Неотслеживаемые файлы:</span>
-<span class="go">  (используйте «git add &lt;файл&gt;…», чтобы добавить в то, что будет включено в коммит)</span>
-<span class="go">	build/</span>
-</pre></div>
-</div>
-<p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> имеет подробный вывод и полезна в начале.
-Но с опытом эта многословность начинает мешать.
-Опция <code class="docutils literal notranslate"><span class="pre">-s</span></code> делает вывод более компактным:</p>
+<!-- Компактный вывод команды `git status` -->
+<p>Кроме состояний файлов, команда также подсказывает как изменить эти состояния.
+На первых порах эти подсказки помогают, но в будущем многословность только мешают.
+Компактный вывод делает опция <code class="docutils literal notranslate"><span class="pre">-s</span></code> (<code class="docutils literal notranslate"><span class="pre">--short</span></code>) (“short” переводится с английского как “короткий”).</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">skt@home:~/MyProjects/RemoteLamps$ </span>git<span class="w"> </span>status<span class="w"> </span>-s
 <span class="go">M  LampServer.cpp</span>
 <span class="go">?? build/</span>
 </pre></div>
 </div>
-<!-- Просмотр изменений -->
+<!-- Переход в следующий раздел -->
+<p>Как переводить файл из одного состояния в другой узнаем ниже.</p>
+</section>
+<section id="id4">
+<h2>Управление состоянием файлов<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<!-- Откат изменений в файле -->
+<p>Для изменения текстового файла достаточно воспользоваться редактором.
+Откатить изменения и вернуть содержимое файла в начальное состояние позволяет команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">restore</span></code>.</p>
+<!-- Помещение измененного файла в индекс -->
+<p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code> помещает фиксируемые файлы в индекс, еще говорят – индексирует файлы.
+Эта же команда применима и к неотслеживаемым файлам, чтобы превратить их в историю.</p>
+<!-- Исключение файла из индекса -->
+<p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">restore</span></code> с опцией <code class="docutils literal notranslate"><span class="pre">--staged</span></code> исключает файл из индекса.</p>
+<!-- Удаление фиксированных файлов -->
+<p>На практике возникает ситуация, когда нужно удалить зафиксированный файл.
+Например, если файл с исходным кодом больше не используется или по ошибке был зафиксирован ненужный файл.
+Системная утилита <code class="docutils literal notranslate"><span class="pre">rm</span></code> удаляет файл из файловой системы.
+После такого удаления файл отметится как измененный с пометкой “удалено” в выводе команды <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code>.
+Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code> проиндексирует измененный (удаленный) файл, чтобы в последующем зафиксировать его в истории.
+Последовательность эффектов от <code class="docutils literal notranslate"><span class="pre">rm</span></code> и <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code> повторяет команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rm</span></code>, которая удалит файл и сразу поместит его в индекс.
+Git защищает данные от потери и ограничивает случайное удаление измененных файлов.
+Удаляемый файл должен быть фиксированным.
+Если это не так, то придется отменить изменения или передать команде удаления опцию <code class="docutils literal notranslate"><span class="pre">--force</span></code> или <code class="docutils literal notranslate"><span class="pre">--cached</span></code>.</p>
+<!-- Шаблоны в аргументах -->
+<p>Команды <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">restore</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rm</span></code> выше мы использовали только одним аргументом-файлом.
+На практике приходится оперировать несколькими файлами.
+Вызывать команду для каждого файла по отдельности утомительно и не эффективно.
+Есть два способа, чтобы обойти эту ситуацию:</p>
+<ol class="arabic simple">
+<li><p>передать несколько аргументов;</p></li>
+<li><p>использовать регулярные выражения в аргументах.</p></li>
+</ol>
+<p>Так, команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">*.c</span></code> добавляет в индекс все файлы в текущем каталоге с расширением <code class="docutils literal notranslate"><span class="pre">.c</span></code>, а команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rm</span> <span class="pre">**/*.log</span></code> удалит во всех вложенных каталогах зафиксированные файлы с расширением <code class="docutils literal notranslate"><span class="pre">.log</span></code>.</p>
+<!-- Перемещение фиксированных файлов -->
+<p>Следующая операция, кроме удаления – это перемещение файлов, которая также реализует переименование.
+Перемещение файлов и каталогов выполняет системная утилита <code class="docutils literal notranslate"><span class="pre">mv</span></code>.
+Состояние перемещенного файла команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> показывается как изменение файла с пометкой “удалено” и появление неотслеживаемого файла.
+После индексации обоих файлов, Git обнаружит и покажет перемещение.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">bob@pc:~/projects/repo$ </span>mv<span class="w"> </span>main.c<span class="w"> </span>main.cpp
+<span class="gp">bob@pc:~/projects/repo$ </span>git<span class="w"> </span>status<span class="w"> </span>-s
+<span class="go"> D main.c</span>
+<span class="go">?? main.cpp</span>
+<span class="gp">bob@pc:~/projects/repo$ </span>git<span class="w"> </span>add<span class="w"> </span>main.c
+<span class="go">main.cpp</span>
+<span class="gp">bob@pc:~/projects/repo$ </span>git<span class="w"> </span>status<span class="w"> </span>-s
+<span class="go">R  main.c -&gt; main.cpp</span>
+</pre></div>
+</div>
+<p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">mv</span></code> объединяет в себе функции утилиты <code class="docutils literal notranslate"><span class="pre">mv</span></code> и команды <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code>.
+Она перемещает файлы и сразу добавляет информацию об этом в индекс.
+Тот же самый эффект выше можно было бы достигнуть командой <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">mv</span> <span class="pre">main.c</span> <span class="pre">main.cpp</span></code>.</p>
+<!-- Переход в следующий раздел -->
+<p>Цель этого раздела – подготовить индекс для последующей фиксации.
+Следующий раздел покажет нам как выполнить фиксацию.</p>
 </section>
 <section id="id5">
 <h2>Фиксация изменений<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
-<p>Подготовив индекс, мы можем зафиксировать изменения командой <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code>.
-Команда откроет текстовый файл.</p>
-<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code></p>
-<p>Если описание коммита однострочное, то его можно передать команде через аргумент опции <code class="docutils literal notranslate"><span class="pre">-m</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;Описание изменений&quot;</span>
+<p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code> фиксирует изменения в хранилище, добавляя во внутреннюю базу данных запись, называемую <em>коммитом</em>.
+С коммитом связан следующий набор данных:</p>
+<ul class="simple">
+<li><p>изменения в файлах (будут взяты из индекса);</p></li>
+<li><p>сообщение, описывающее изменения (будет установлено при фиксации);</p></li>
+<li><p>дата и время фиксации (будут взяты из системы);</p></li>
+<li><p>имя и электронная почта автора изменений (были указаны при настройке Git).</p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Локальное системное время должно быть синхронизировано с мировым, чтобы не возникло противоречий в данных при обмене изменениями с другим хранилищем.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Фиксация завершится с ошибкой, если ранее при настройке Git не указали имя и электронную почту пользователя.
+Они были заданы при <a class="reference internal" href="config.html"><span class="doc std std-doc">настройке Git</span></a>.</p>
+</div>
+<p>Будем считать, что индекс не пуст.
+Зафиксируем изменения, вызвав команду <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code>.
+Команда откроет текстовый файл примерно со следующим содержимым:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># Пожалуйста, введите сообщение коммита для ваших изменений. Строки,
+# начинающиеся с «#» будут проигнорированы, а пустое сообщение
+# отменяет процесс коммита.
+#
+# Текущая ветка: main
+# Изменения, которые будут включены в коммит:
+#       переименовано: main.c -&gt; main.cpp
+#
+# Неотслеживаемые файлы:
+#       text.cpy
+#
 </pre></div>
 </div>
+<!-- Опция `-m` -->
+<p>Если описание коммита однострочное, то его можно передать команде через аргумент опции <code class="docutils literal notranslate"><span class="pre">-m</span></code>:
+<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-m</span> <span class="pre">&quot;Описание</span> <span class="pre">изменений&quot;</span></code></p>
 <!-- Фиксация изменений без добавления в индекс -->
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">a</span>
-</pre></div>
-</div>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-a</span></code></p>
 <!-- Отображение изменений в редакторе -->
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">v</span>
-</pre></div>
-</div>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-v</span></code></p>
 </section>
 <section id="id6">
 <h2>Использованные источники<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
@@ -623,7 +670,7 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Введение</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Состояния файлов</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Работа с индексом</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Управление состоянием файлов</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Фиксация изменений</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Использованные источники</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Контрольные вопросы</a></li>
