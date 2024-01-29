@@ -552,6 +552,9 @@ Git защищает данные от потери и ограничивает 
 <li><p>дата и время фиксации (будут взяты из системы);</p></li>
 <li><p>имя и электронная почта автора изменений (были указаны при настройке Git).</p></li>
 </ul>
+<figure class="align-default">
+<img alt="../_images/commit-structure.png" src="../_images/commit-structure.png" />
+</figure>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Локальное системное время должно быть синхронизировано с мировым, чтобы не возникло противоречий в данных при обмене изменениями с другим хранилищем.</p>
@@ -578,17 +581,71 @@ Git защищает данные от потери и ограничивает 
 </pre></div>
 </div>
 <!-- Опция `-m` -->
-<p>Если описание коммита однострочное, то его можно передать команде через аргумент опции <code class="docutils literal notranslate"><span class="pre">-m</span></code>:
-<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-m</span> <span class="pre">&quot;Описание</span> <span class="pre">изменений&quot;</span></code></p>
+<p>Если описание коммита однострочное, то его быстрее передать команде через опцию <code class="docutils literal notranslate"><span class="pre">-m</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;Описание изменений&quot;</span>
+</pre></div>
+</div>
 <!-- Фиксация изменений без добавления в индекс -->
-<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-a</span></code></p>
-<!-- Отображение изменений в редакторе -->
-<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-v</span></code></p>
+<p>Фиксации предваряет подготовка индекса.
+Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code> проиндексирует все измененные файлы автоматически, если ей передать опцию <code class="docutils literal notranslate"><span class="pre">-a</span></code> (<code class="docutils literal notranslate"><span class="pre">--all</span></code>).</p>
+<!-- Просмотр изменений перед коммитом -->
+<p>В больших и организованных проектах обращают особое внимание на сообщение и содержание коммитов.
+Для этого вводят соглашения об оформлении коммитов, которым должны следовать все участники проекта.
+Одно из важных требований гласит, что коммит должен содержать конкретное завершенное изменение, касающееся одной задачи.
+Из него само собой вытекает четкое сообщение коммита, которое упрощает участникам изучение проекта.
+Из того факта, что работа над задачей завершилась, еще не следует, что все измененные файлы пригодны для фиксации.
+Если исходить из описания задачи, например “Исправление ошибки …”, то изменения в виде добавления новой строки и переименования переменных входят в задачу “Рефакторинг …”.
+Изменения распределяются по нескольким коммитам.
+И вот здесь особую роль играет просмотр содержания фиксируемых файлов.
+Это возможно опцией <code class="docutils literal notranslate"><span class="pre">-v</span></code> (<code class="docutils literal notranslate"><span class="pre">--verbose</span></code>), когда сообщение набирается в редакторе (без опции <code class="docutils literal notranslate"><span class="pre">-m</span></code>): <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-v</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+<span class="c1"># Пожалуйста, введите сообщение коммита для ваших изменений. Строки,</span>
+<span class="c1"># начинающиеся с «#» будут проигнорированы, а пустое сообщение</span>
+<span class="c1"># отменяет процесс коммита.</span>
+<span class="c1">#</span>
+<span class="c1"># Текущая ветка: main</span>
+<span class="c1"># Изменения, которые будут включены в коммит:</span>
+<span class="c1">#       изменено:      main.cpp</span>
+<span class="c1">#</span>
+<span class="c1"># Неотслеживаемые файлы:</span>
+<span class="c1">#       text.cpy</span>
+<span class="c1">#</span>
+<span class="c1"># ------------------------ &gt;8 ------------------------</span>
+<span class="c1"># Не изменяйте или удаляйте строку выше этой.</span>
+<span class="c1"># Всё, что ниже — будет проигнорировано.</span>
+<span class="n">diff</span> <span class="o">--</span><span class="n">git</span> <span class="n">a</span><span class="o">/</span><span class="n">main</span><span class="o">.</span><span class="n">cpp</span> <span class="n">b</span><span class="o">/</span><span class="n">main</span><span class="o">.</span><span class="n">cpp</span>
+<span class="n">index</span> <span class="n">ad5fe9b</span><span class="o">..</span><span class="n">ff4f753</span> <span class="mi">100644</span>
+<span class="o">---</span> <span class="n">a</span><span class="o">/</span><span class="n">main</span><span class="o">.</span><span class="n">cpp</span>
+<span class="o">+++</span> <span class="n">b</span><span class="o">/</span><span class="n">main</span><span class="o">.</span><span class="n">cpp</span>
+<span class="o">@@</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span> <span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">20</span> <span class="o">@@</span>
+ <span class="c1">#include &lt;iostream&gt;</span>
+
+<span class="o">+</span><span class="n">void</span> <span class="n">usage</span><span class="p">()</span>
+<span class="o">+</span><span class="p">{</span>
+<span class="o">+</span>       <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;usage hello [--name UserName]</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
+<span class="o">+</span><span class="p">}</span>
+<span class="o">+</span>
+ <span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="nb">int</span> <span class="n">argc</span><span class="p">,</span> <span class="n">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span>
+ <span class="p">{</span>
+<span class="o">+</span>       <span class="k">for</span><span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">argc</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="o">+</span>       <span class="p">{</span>
+<span class="o">+</span>               <span class="k">if</span><span class="p">(</span><span class="n">strcmpn</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="s2">&quot;--help&quot;</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+<span class="o">+</span>               <span class="p">{</span>
+<span class="o">+</span>                       <span class="n">usage</span><span class="p">();</span>
+<span class="o">+</span>                       <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="o">+</span>               <span class="p">}</span>
+<span class="o">+</span>       <span class="p">}</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+ <span class="p">}</span>
+</pre></div>
+</div>
 </section>
 <section id="id6">
 <h2>Использованные источники<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/github/gitignore">A collection of .gitignore templates</a></p></li>
+<li><p><a class="reference external" href="https://www.conventionalcommits.org/ru/v1.0.0/">Соглашение о коммитах</a></p></li>
+<li><p><a class="reference external" href="https://cbea.ms/git-commit/">How to Write a Git Commit Message</a></p></li>
 </ul>
 </section>
 <section id="id7">
