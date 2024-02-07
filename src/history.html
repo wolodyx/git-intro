@@ -374,11 +374,13 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Введение</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#git-log">Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Формат вывода команды</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Фильтрация коммитов</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Комбинация опций</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Контрольные вопросы</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Упражнения</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Использованные источники</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Контрольные вопросы</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Упражнения</a></li>
 </ul>
             </nav>
         </div>
@@ -394,6 +396,11 @@ document.write(`
 <h1><span class="section-number">6. </span>Изучение истории<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <section id="id2">
 <h2>Введение<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<!--
+История -- это быстрый источник знаний о проекте.
+Быть в курсе дела.
+Поиск программных ошибок без отладки.
+-->
 <!-- Количество коммитов в истории -->
 <p>В хранилищах малых проектов в среднем около нескольких сотен и тысяч коммитов, средних проектов – десятки тысяч, а крупных – сотни тысяч и миллионы.
 Эти числа получаются из 4 коммита в день на разработчика и 250 рабочих дней в году.</p>
@@ -413,6 +420,14 @@ document.write(`
 </ul>
 <!-- Про команду `git log` -->
 <p>Ответы на эти вопросы можно получить только если вы владеете инструментом по анализу коммитов – командой <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code>.</p>
+<p>Также доступ к коммитам позволяет автоматизировать часть рабочих процессов в проекте:</p>
+<ul class="simple">
+<li><p>принимать решение о повышении версии проекта;</p></li>
+<li><p>формировать список изменений в релизе, так называемый changelog-файл.</p></li>
+</ul>
+</section>
+<section id="git-log">
+<h2>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code><a class="headerlink" href="#git-log" title="Permalink to this heading">#</a></h2>
 <p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> без аргументов покажет всю историю коммитов проекта в порядке обратном их созданию.
 Последний коммит в проекте будет самым первым в списке, а первый коммит – самым последним.
 Если вывод команды не помещается на экран, то он перенаправится в пейджер <code class="docutils literal notranslate"><span class="pre">less</span></code>.
@@ -434,56 +449,24 @@ Author: wolodyx &lt;wolodyx@yandex.ru&gt;
 Date:   Sat Mar 4 10:56:31 2023 +0300
 
     Автоматическое закрытие клиента при потере связи с сервером
-
-commit cef81ca4ebe0494e20e7cd42a13621a06ec1c96b
-Author: wolodyx &lt;wolodyx@yandex.ru&gt;
-Date:   Sat Mar 4 10:41:23 2023 +0300
-
-    Код для управления лампой и работы с командами собрали в классах
-
-commit 7f65d0568d2bcda05cfcf76011e80c9596d07abc
-Author: wolodyx &lt;wolodyx@yandex.ru&gt;
-Date:   Sat Mar 4 09:42:05 2023 +0300
-
-    LampClient -&gt; Lamp
-
-commit bff68c5a8e25d6d3be5f4e2ec819ba87a908aed4
-Author: wolodyx &lt;wolodyx@yandex.ru&gt;
-Date:   Sat Mar 4 09:13:29 2023 +0300
-
-    Документирование кода
-
-commit 0be6caaf1a6d3c1744b307ab863a6693f81f09e9
-Author: wolodyx &lt;wolodyx@yandex.ru&gt;
-Date:   Sat Mar 4 08:52:58 2023 +0300
-
-    Инструкции по сборке и использованию программы
-
-commit 459d140a7e7962bbcae47555c570033eea0d6bf6
-Author: wolodyx &lt;wolodyx@yandex.ru&gt;
-Date:   Sat Mar 4 08:38:18 2023 +0300
-
-    Функционирующий код программы
-
-commit 49b5bac3ae3de3f26606c6ba7b8f7eb85bb558d8
-Author: Владимир &lt;wolodyx@yandex.ru&gt;
-Date:   Sat Mar 4 08:18:44 2023 +0300
-
-    Initial commit
 </pre></div>
 </div>
+<!-- Формат вывода по умолчанию -->
+<p>Изучим вывод команды.</p>
+<!-- Хеш-сумма коммита -->
+<p>С каждым коммитом связано 40-разрядное уникальное шестнадцатеричное число, полученное хеш-функцией SHA-1 по содержимому коммита.
+В конечном счете мы получаем уникальное число для всех коммитов в пределах хранилища.
+Это число позволяет сослаться на коммит.</p>
+<!-- Остальные поля коммита -->
+<p>Поле <code class="docutils literal notranslate"><span class="pre">commit</span></code> содержит хеш-сумму в выводе.
+Поле <code class="docutils literal notranslate"><span class="pre">Author</span></code> отображает данные автора коммита – его имя и адрес электронной почты.
+В поле <code class="docutils literal notranslate"><span class="pre">Date</span></code> указаны дата и время коммита в формате дня недели, названия месяца, числа, времени, года и часового пояса.</p>
+<!--
+Сообщение к коммиту.
+-->
 </section>
 <section id="id3">
 <h2>Формат вывода команды<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
-<!-- Формат вывода по умолчанию -->
-<p>Изучим вывод команды.
-С каждым коммитом связано 40-разрядное шестнадцатеричное число, называемое <em>хеш-суммой</em> или кратко <em>хешем</em>.
-Хеш-сумма уникальна для коммитов в пределах хранилища, т.е. в одном хранилище нет двух коммитов с совпадающей хеш-суммой.
-Это число позволяет сослаться на коммит.
-Поле <code class="docutils literal notranslate"><span class="pre">commit</span></code> содержит хеш-сумму в выводе.
-Поле <code class="docutils literal notranslate"><span class="pre">Author</span></code> отображает данные автора коммита – его имя и адрес электронной почты.
-В поле <code class="docutils literal notranslate"><span class="pre">Date</span></code> указаны дата и время коммита в формате дня недели, названия месяца, числа, времени, года и часового пояса.
-Сообщение к коммиту.</p>
 <!-- Изменение формата вывода -->
 <p>Формат вывода настраивается опциями команды <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code>:</p>
 <ul class="simple">
@@ -495,7 +478,7 @@ Date:   Sat Mar 4 08:18:44 2023 +0300
 <p>Опция <code class="docutils literal notranslate"><span class="pre">--pretty</span></code>:
 предопределенные форматы <code class="docutils literal notranslate"><span class="pre">oneline</span></code>, <code class="docutils literal notranslate"><span class="pre">short</span></code>, <code class="docutils literal notranslate"><span class="pre">full</span></code> и <code class="docutils literal notranslate"><span class="pre">fuller</span></code>:</p>
 <p>Формат <code class="docutils literal notranslate"><span class="pre">--pretty=oneline</span></code>, как вытекает из названия, выводит информацию о коммите компактно одной строкой, содержащей только хеш-сумму и сообщение коммита.
-Однострочный вывод также доступен опцией <code class="docutils literal notranslate"><span class="pre">--oneline</span></code>, но только в этом случае хеш коммита дана в сокращенном виде.</p>
+Однострочный вывод также доступен опцией <code class="docutils literal notranslate"><span class="pre">--oneline</span></code>, но только в этом случае хеш коммита дан в сокращенном виде.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>skt@home:~/MyProjects/RemoteLamps$<span class="w"> </span>git<span class="w"> </span>log<span class="w"> </span>--pretty<span class="o">=</span>oneline
 317d080fd9d7d66955e4bc2055a08b4edb044cf1<span class="w"> </span><span class="o">(</span>HEAD<span class="w"> </span>-&gt;<span class="w"> </span>main,<span class="w"> </span>origin/main,<span class="w"> </span>origin/HEAD<span class="o">)</span><span class="w"> </span>Исправлена<span class="w"> </span>утечка<span class="w"> </span>серверного<span class="w"> </span>сокета
 8e36f074fb3374c6d0007c934765d3f6a17d955e<span class="w"> </span>Закрытие<span class="w"> </span>клиентских<span class="w"> </span>сокетов<span class="w"> </span>на<span class="w"> </span>стороне<span class="w"> </span>сервера
@@ -675,16 +658,23 @@ Niels<span class="w"> </span><span class="nv">Lohmann</span><span class="w"> </s
 -->
 </section>
 <section id="id6">
-<h2>Контрольные вопросы<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<h2>Использованные источники<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://keepachangelog.com/ru/1.1.0/">Ведите changelog</a></p></li>
+<li><p><a class="reference external" href="https://habr.com/ru/docs/changelog/2023/">Список изменений на Хабр за 2023 год</a></p></li>
+</ul>
+</section>
+<section id="id7">
+<h2>Контрольные вопросы<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li></li>
+</ol>
+</section>
+<section id="id8">
+<h2>Упражнения<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>Повторите вывод <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">--oneline</span></code>, опцией <code class="docutils literal notranslate"><span class="pre">--pretty</span></code> с собственным форматом.
 Опции для управления цветом символов описаны в справочной странице к <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> в разделе <code class="docutils literal notranslate"><span class="pre">PRETTY</span> <span class="pre">FORMATS</span></code>.</p></li>
-</ol>
-</section>
-<section id="id7">
-<h2>Упражнения<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
-<ol class="arabic simple">
-<li></li>
 </ol>
 </section>
 </section>
@@ -753,11 +743,13 @@ Niels<span class="w"> </span><span class="nv">Lohmann</span><span class="w"> </s
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Введение</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#git-log">Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Формат вывода команды</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Фильтрация коммитов</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Комбинация опций</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Контрольные вопросы</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Упражнения</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Использованные источники</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Контрольные вопросы</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Упражнения</a></li>
 </ul>
   </nav></div>
 
