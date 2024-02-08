@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Системы контроля версий &#8212; My sample book</title>
+    <title>Управление версиями &#8212; My sample book</title>
   
   
   
@@ -65,8 +65,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'src/cvs';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Настройка рабочего окружения" href="setup.html" />
-    <link rel="prev" title="Что такое Git" href="whatisgit.html" />
+    <link rel="next" title="История развития СКВ" href="cvs-history.html" />
+    <link rel="prev" title="Совместная работа над документом" href="collaborative-edit.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -171,7 +171,9 @@ const thebe_selector_output = ".output, .cell_output"
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Введение в основы</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="whatisgit.html">Что такое Git</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Системы контроля версий</a></li>
+<li class="toctree-l1"><a class="reference internal" href="collaborative-edit.html">Совместная работа над документом</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Управление версиями</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cvs-history.html">История развития СКВ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="setup.html">Настройка рабочего окружения</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Работа с проектом</span></p>
@@ -374,7 +376,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Системы контроля версий</h1>
+    <h1>Управление версиями</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -384,13 +386,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Введение</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Совместная работа над документом</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Концепция СКВ</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">История развития СКВ</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Список источников</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Контрольные вопросы</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Упражнения</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Контрольные вопросы</a></li>
 </ul>
             </nav>
         </div>
@@ -403,97 +399,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>Системы контроля версий<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
-<section id="id2">
-<h2>Введение<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
-<p>Git – это наиболее популярная система контроля версий (далее СКВ), используемая разработчиками и не только.
-Она также является ключевым элементом сервиса GitHub.
-Вокруг нее строится экосистема разработки открытого ПО.
-Рассмотрим подробнее каждое слово в названии “система контроля версий”.</p>
-<!-- О слове "система" в названии -->
-<p>Слово “система” в названии говорит, что понимание Git шире, чем просто набор программных инструментов.
-Она представляет технологию, включающая в себя разные способы использования этих инструментов.
-С ее помощью на практике можно организовать эффективный рабочий процесс в не зависимости от размера команды, удаленности участников, активности работы.</p>
-<!-- О слове "версия" в названии -->
-<p>Слово “версия” указывает на состояние проекта в конкретный момент времени.
-Современный сложный проект может быть выполнен только совместной работой в команде.
-Пословица “один в поле не воин” актуальна как никогда.
-Проект может быть представлен в виде набора электронных документов – исходных кодов, инструкций, документаций, чертежей, описании моделей и что-то другое.
-Работа над проектом означает последовательное наполнение этих документов полезным и согласованным содержимым.
-В каждой итерации исполнитель вносит в документы изменения, создавая их обновленный вариант, называемого также <em>версией</em>.</p>
-<!-- О слове "контроль" в названии -->
-<p>Для слова “контроль” более актуальным был бы синоним “управление”.
-Оно обозначает набор действий, применяемых к прошлым и текущим версиям документов.
-По ходу работы над проектом электронные документы развиваются, образуя упорядоченное множество своих версий.
-Это множество версий называют <em>историей изменений</em>.
-Несомненно, наибольшую ценность представляет последняя версия документа.
-Но не стоит забывать и об истории, в которой запечатлено прошлое.
-Прошлое в динамике может дать больше, чем застывшее текущее, если уметь видеть и анализировать.
-Применительно к настоящим версиям документов, под контролем понимают действия по их обновлению.
-Эти обновления могут быть нетривиальными, если над документом одновременно работают несколько человек.
-Основная польза контроля в том, что:</p>
-<ul class="simple">
-<li><p>каждому участнику команды доступна полная информация о проекте с точки зрения истории изменения;</p></li>
-<li><p>снижает барьеры в передаче результатов труда другим участникам команды.</p></li>
-</ul>
-<p>Чтобы увидеть пользу от использования СКВ посмотрим на жизненную ситуацию, в которой она не используется и к каким сложностям это приводит.</p>
-</section>
-<section id="id3">
-<h2>Совместная работа над документом<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
-<!-- Работа с постоянно изменяющимися электронным документом -->
-<p>Классический пример совместной работы над документом – это подготовка отчета, диплома, статьи, учебного пособия.
-Начальную версию документа автор пишет самостоятельно или компонует из частей, написанных им и соавторами.
-Затем он получает обратную связь у заинтересованных сторон: соавторов, коллег, руководителей, рецензентов и редакторов.
-Автор обновляет свою версию документа, объединяя в нем полученные замечания и правки.
-Это повторяется до тех пор, пока все участники не достигнут компромисса.
-Основная тяжесть по сопровождению документа ложится на автора.
-Он должен сохранить логическую целостность документа и не потерять удачные куски текста.</p>
-<p>Выделим следующие недостатки совместной работы над документом:</p>
-<ul class="simple">
-<li><p>не видны правки;</p></li>
-<li><p>теряются предыдущие версии документа;</p></li>
-<li><p>теряется информация о том, кто, когда, что и зачем изменил;</p></li>
-<li><p>затягивается работа из-за последовательного процесса редактирования.</p></li>
-</ul>
-<p>Приведем способы борьбы с этими недостатками, который может предпринять автор документа.</p>
-<!-- Недостаток: не видны правки -->
-<p>В двух версиях одного документа сложно, если вообще можно увидеть различия.
-Их можно найти, сравнивая в двух документах предложение за предложением.
-Это очень утомительно.
-Для решения этой проблемы, редактор “Microsoft Word” предлагает режим правок, при включении которого последующие редактирование текста выделяются визуально, одновременно сохраняя исходное состояния.
-Уже автор работает с правками, применяя или отказываясь от них.</p>
-<p>Часто бывает, что рецензенты не редактируют присланный им документ, а делают замечания, привязывая их к номеру страницы и абзаца.
-Таким образом, автор сам редактирует текст по замечаниям.</p>
-<!-- Недостаток: теряются предыдущие версии документа -->
-<p>После внесения правок предыдущая версия текста замещается новой.
-Редакторы поддерживают команду отката изменений (Ctrl-Z, Ctrl-Y), которая позволяет вернуть назад старую версию.
-Она применима только к тем правкам, которые были сделаны с момента последнего запуска программы.</p>
-<!-- Резервное копирование файлов -->
-<p>Чтобы сохранить старую версию документа, делают ее резервную копию.
-В случае потери данных, например, из-за поломки диска, удаления или случайной перезаписи данных, данные восстанавливаются по последней копии.
-При этом потеряются изменения, которые были произведены с момента последней резервной копии, что лучше, чем потерять все.
-Резервное копирование часто применяют при подготовке офисных документов, когда следующая версия документа именуется в стиле “ОтчетНИР_15_Иванов.docx”, где в названии прописаны версия документа и автор правки.
-Такой подход хоть и страхует от потери документа, но требует соблюдения правил.</p>
-<!-- Недостаток: кто, когда, что и зачем предложил изменения -->
-<p>Следующий недостаток при совместной работе над документом состоит в том, что автору не доступна информация о том, кто, когда, что и зачем предложил изменения.
-Для небольших по объему и времени работы документов с единственным владельцем, это не так актуально.
-Информация содержится в электронной переписке, в резервных копиях файлов или в голове автора.</p>
-<!-- Недостаток: последовательная работа -->
-<p>Слабое место при совместной работе над документом – это объединение правок от нескольких участников, которым приходится заниматься автору.
-Этот процесс утомителен и подвержен ошибкам.
-Чтобы обойти это, над документом работают последовательно.
-Каждый следующий участник работает над документом после предыдущего.
-Это растягивает время работы и слабо загружает участников.
-Это одна из причин, почему подготовка научной статьи растягивается на год и более.</p>
-</section>
-<section id="id4">
-<h2>Концепция СКВ<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
-<!-- Некритичность недостатков совместной работы над офисным документом -->
-<p>Недостатки совместной работы над файлом не критичны применительно к офисным документам.
-В их подготовке лежит принцип личной ответственности автора.
-За такое старание он будет вознагражден первым присутствием в списке авторов.
-Замечания вышестоящего по должностной иерархии имеют приоритет над нижестоящим, что не позволяет распараллелить работу над документом.
-Жизненный цикл офисного документа длится до нескольких месяцев, так что недостатки над его работой можно перетерпеть.</p>
+<h1>Управление версиями<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <!-- Критичность недостатков совместной разработки ПО -->
 <p>По другому обстоят дела с разработкой ПО.
 Здесь во главу угла поставлена эффективность.
@@ -524,65 +430,14 @@ Git создана разработчиком (Линусом Торвальдс
 Коммит – это зафиксированный набор изменений.
 Действие по фиксации еще называют <em>сделать коммит</em>, <em>закоммитить</em>, <em>зафиксировать изменения</em> или <em>внести изменения</em>.
 Получившаяся после коммита версия проекта называется <em>ревизией</em>.</p>
-</section>
-<section id="id5">
-<h2>История развития СКВ<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
-<!-- Локальная СКВ -->
-<p>Она из ранних СКВ <a class="reference external" href="https://www.gnu.org/software/rcs/rcs.html">RCS</a>, поддерживаемая до сих пор в рамках проекта GNU, появилась в 1982 году.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>skt@home:~$<span class="w"> </span>rcs<span class="w"> </span>--commands
-<span class="o">(</span><span class="nb">command</span><span class="o">)</span><span class="w">   </span><span class="o">(</span>description<span class="o">)</span>
-<span class="w"> </span>ci<span class="w">          </span>Check<span class="w"> </span><span class="k">in</span><span class="w"> </span>revisions<span class="w"> </span>of<span class="w"> </span>RCS<span class="w"> </span>files<span class="w"> </span>from<span class="w"> </span>working<span class="w"> </span>files.
-<span class="w"> </span>co<span class="w">          </span>Check<span class="w"> </span>out<span class="w"> </span>working<span class="w"> </span>files<span class="w"> </span>from<span class="w"> </span>revisions<span class="w"> </span>of<span class="w"> </span>RCS<span class="w"> </span>files.
-<span class="w"> </span>frob<span class="w">        </span>Change<span class="w"> </span>RCS<span class="w"> </span>file<span class="w"> </span>attributes.
-<span class="w"> </span>clean<span class="w">       </span>Clean<span class="w"> </span>up<span class="w"> </span>working<span class="w"> </span>files.
-<span class="w"> </span>diff<span class="w">        </span>Compare<span class="w"> </span>RCS<span class="w"> </span>revisions.
-<span class="w"> </span>merge<span class="w">       </span>Merge<span class="w"> </span>RCS<span class="w"> </span>revisions.
-<span class="w"> </span>log<span class="w">         </span>Print<span class="w"> </span>log<span class="w"> </span>messages<span class="w"> </span>and<span class="w"> </span>other<span class="w"> </span>information<span class="w"> </span>about<span class="w"> </span>RCS<span class="w"> </span>files.
-</pre></div>
-</div>
-<p>Ее называют <em>локальной</em>, что значит она предназначена для частного применения, так как работает на одной машине и не обладает инструментами командной работы над файлами.</p>
-<!-- Централизованная СКВ -->
-<p>Развитием локальных систем стали <em>централизованные</em>, построенные по клиент-серверной архитектуре.
-Хранилище вместе с историей изменений располагаются на удаленном сервере, а клиенты загружают по сети рабочую копию.
-Такие системы позволили команде совместно работать над проектом.
-Те действия, для которых необходим доступ к истории, выполняются только на стороне сервера.
-Централизованный подход к содержанию хранилища позволяет контролировать доступ клиентов к частям хранилища, временно блокировать изменения файлов пока другой клиент не обновит их.
-Недостатки централизованных систем:</p>
-<ul class="simple">
-<li><p>привязывают рабочее место к серверу;</p></li>
-<li><p>сетевые накладные расходы при выполнении команд;</p></li>
-<li><p>риск потерять хранилище.</p></li>
-</ul>
-<p>Примеры таких систем – это CVS и Subversion.</p>
-<!-- Децентрализованная СКВ -->
-<p>Следующим шагом в развитии СКВ стали <em>децентрализованные</em> системы.
-В них каждый клиент обладает собственной полной копией хранилища.
-Это полностью решает недостатки централизованных систем.
-Теперь разработчик не привязан к серверу и может продолжить свою работу и без доступа к сети.
-Так как хранилище располагается на машине разработчика, то все команды выполняются быстро.</p>
-<!--
-По сравнению с централизованными системами, децентрализованные обладают развитыми инструментами для обмена изменениями и объединения результатов.
--->
-<p>Примеры таких систем – это Git и Mercurial.</p>
-</section>
-<section id="id6">
-<h2>Список источников<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><p><a class="reference external" href="https://www.gnu.org/software/rcs/tichy-paper.pdf">RCS – A System for Version Control</a></p></li>
-<li><p>rcs(1), ci(1), co(1), rcsdiff(1), rcsmerge(1), rcsclean(1), rlog(1), ident(1), rcsfile(5)</p></li>
-</ol>
-</section>
-<section id="id7">
-<h2>Контрольные вопросы<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
+<section id="id2">
+<h2>Контрольные вопросы<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>Для каких целей изменяют программу?</p></li>
 <li><p>Почему не получается воспользоваться СКВ применительно к офисным документам?</p></li>
 <li><p>Что такое коммит?</p></li>
 <li><p>В чем отличие ревизии от коммита?</p></li>
 </ol>
-</section>
-<section id="id8">
-<h2>Упражнения<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
 </section>
 </section>
 
@@ -617,20 +472,20 @@ Git создана разработчиком (Линусом Торвальдс
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="whatisgit.html"
+       href="collaborative-edit.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Что такое Git</p>
+        <p class="prev-next-title">Совместная работа над документом</p>
       </div>
     </a>
     <a class="right-next"
-       href="setup.html"
+       href="cvs-history.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Настройка рабочего окружения</p>
+        <p class="prev-next-title">История развития СКВ</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -649,13 +504,7 @@ Git создана разработчиком (Линусом Торвальдс
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Введение</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Совместная работа над документом</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Концепция СКВ</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">История развития СКВ</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Список источников</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Контрольные вопросы</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Упражнения</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Контрольные вопросы</a></li>
 </ul>
   </nav></div>
 

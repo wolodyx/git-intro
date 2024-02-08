@@ -66,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Подготовка к работе" href="config.html" />
-    <link rel="prev" title="Системы контроля версий" href="cvs.html" />
+    <link rel="prev" title="История развития СКВ" href="cvs-history.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -171,7 +171,9 @@ const thebe_selector_output = ".output, .cell_output"
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Введение в основы</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="whatisgit.html">Что такое Git</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cvs.html">Системы контроля версий</a></li>
+<li class="toctree-l1"><a class="reference internal" href="collaborative-edit.html">Совместная работа над документом</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cvs.html">Управление версиями</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cvs-history.html">История развития СКВ</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Настройка рабочего окружения</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Работа с проектом</span></p>
@@ -388,6 +390,17 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>Настройка рабочего окружения<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<!-- Рабочее окружение Ubuntu -->
+<p>Для выполнения упражнений нам понадобится настроенное рабочее окружение Ubuntu.
+В учебных классах оно доступно в виде виртуальной машины VirtualBox с названием “ubuntu-22.04”.
+Дома вы можете настроить ее самостоятельно, установив Ubuntu последней версии и поставив пакеты следующими командами:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span>vim<span class="w"> </span>tmux<span class="w"> </span>rcs<span class="w"> </span>git-gui
+<span class="nv">LAZYGIT_VERSION</span><span class="o">=</span><span class="k">$(</span>curl<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;https://api.github.com/repos/jesseduffield/lazygit/releases/latest&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-Po<span class="w"> </span><span class="s1">&#39;&quot;tag_name&quot;: &quot;v\K[^&quot;]*&#39;</span><span class="k">)</span>
+curl<span class="w"> </span>-Lo<span class="w"> </span>lazygit.tar.gz<span class="w"> </span><span class="s2">&quot;https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_</span><span class="si">${</span><span class="nv">LAZYGIT_VERSION</span><span class="si">}</span><span class="s2">_Linux_x86_64.tar.gz&quot;</span>
+tar<span class="w"> </span>xf<span class="w"> </span>lazygit.tar.gz<span class="w"> </span>lazygit
+sudo<span class="w"> </span>install<span class="w"> </span>lazygit<span class="w"> </span>/usr/local/bin
+</pre></div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -421,12 +434,12 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="cvs.html"
+       href="cvs-history.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Системы контроля версий</p>
+        <p class="prev-next-title">История развития СКВ</p>
       </div>
     </a>
     <a class="right-next"

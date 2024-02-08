@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Проверочная работа &#8212; My sample book</title>
+    <title>Совместная работа над документом &#8212; My sample book</title>
   
   
   
@@ -62,11 +62,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'src/test1';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'src/collaborative-edit';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Работа с ветками" href="branch.html" />
-    <link rel="prev" title="Изучение истории" href="history.html" />
+    <link rel="next" title="Управление версиями" href="cvs.html" />
+    <link rel="prev" title="Что такое Git" href="whatisgit.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -169,21 +169,21 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Введение в основы</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="whatisgit.html">Что такое Git</a></li>
-<li class="toctree-l1"><a class="reference internal" href="collaborative-edit.html">Совместная работа над документом</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Совместная работа над документом</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cvs.html">Управление версиями</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cvs-history.html">История развития СКВ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="setup.html">Настройка рабочего окружения</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Работа с проектом</span></p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="config.html">Подготовка к работе</a></li>
 <li class="toctree-l1"><a class="reference internal" href="get.html">Получение хранилища</a></li>
 <li class="toctree-l1"><a class="reference internal" href="edit.html">Изменение рабочей копии</a></li>
 <li class="toctree-l1"><a class="reference internal" href="commit.html">Фиксация изменений</a></li>
 <li class="toctree-l1"><a class="reference internal" href="history.html">Изучение истории</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Проверочная работа</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test1.html">Проверочная работа</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Работа в команде</span></p>
 <ul class="nav bd-sidenav">
@@ -262,7 +262,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fsrc/test1.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fsrc/collaborative-edit.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -292,7 +292,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/src/test1.md" target="_blank"
+      <li><a href="../_sources/src/collaborative-edit.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -374,7 +374,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Проверочная работа</h1>
+    <h1>Совместная работа над документом</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -389,7 +389,59 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>Проверочная работа<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<h1>Совместная работа над документом<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<p>Чтобы увидеть пользу от использования СКВ посмотрим на жизненную ситуацию, в которой она не используется и к каким сложностям это приводит.</p>
+<!-- Работа с постоянно изменяющимися электронным документом -->
+<p>Классический пример совместной работы над документом – это подготовка отчета, диплома, статьи, учебного пособия.
+Начальную версию документа автор пишет самостоятельно или компонует из частей, написанных им и соавторами.
+Затем он получает обратную связь у заинтересованных сторон: соавторов, коллег, руководителей, рецензентов и редакторов.
+Автор обновляет свою версию документа, объединяя в нем полученные замечания и правки.
+Это повторяется до тех пор, пока все участники не достигнут компромисса.
+Основная тяжесть по сопровождению документа ложится на автора.
+Он должен сохранить логическую целостность документа и не потерять удачные куски текста.</p>
+<p>Выделим следующие недостатки совместной работы над документом:</p>
+<ul class="simple">
+<li><p>не видны правки;</p></li>
+<li><p>теряются предыдущие версии документа;</p></li>
+<li><p>теряется информация о том, кто, когда, что и зачем изменил;</p></li>
+<li><p>затягивается работа из-за последовательного процесса редактирования.</p></li>
+</ul>
+<p>Приведем способы борьбы с этими недостатками, который может предпринять автор документа.</p>
+<!-- Недостаток: не видны правки -->
+<p>В двух версиях одного документа сложно, если вообще можно увидеть различия.
+Их можно найти, сравнивая в двух документах предложение за предложением.
+Это очень утомительно.
+Для решения этой проблемы, редактор “Microsoft Word” предлагает режим правок, при включении которого последующие редактирование текста выделяются визуально, одновременно сохраняя исходное состояния.
+Уже автор работает с правками, применяя или отказываясь от них.</p>
+<p>Часто бывает, что рецензенты не редактируют присланный им документ, а делают замечания, привязывая их к номеру страницы и абзаца.
+Таким образом, автор сам редактирует текст по замечаниям.</p>
+<!-- Недостаток: теряются предыдущие версии документа -->
+<p>После внесения правок предыдущая версия текста замещается новой.
+Редакторы поддерживают команду отката изменений (Ctrl-Z, Ctrl-Y), которая позволяет вернуть назад старую версию.
+Она применима только к тем правкам, которые были сделаны с момента последнего запуска программы.</p>
+<!-- Резервное копирование файлов -->
+<p>Чтобы сохранить старую версию документа, делают ее резервную копию.
+В случае потери данных, например, из-за поломки диска, удаления или случайной перезаписи данных, данные восстанавливаются по последней копии.
+При этом потеряются изменения, которые были произведены с момента последней резервной копии, что лучше, чем потерять все.
+Резервное копирование часто применяют при подготовке офисных документов, когда следующая версия документа именуется в стиле “ОтчетНИР_15_Иванов.docx”, где в названии прописаны версия документа и автор правки.
+Такой подход хоть и страхует от потери документа, но требует соблюдения правил.</p>
+<!-- Недостаток: кто, когда, что и зачем предложил изменения -->
+<p>Следующий недостаток при совместной работе над документом состоит в том, что автору не доступна информация о том, кто, когда, что и зачем предложил изменения.
+Для небольших по объему и времени работы документов с единственным владельцем, это не так актуально.
+Информация содержится в электронной переписке, в резервных копиях файлов или в голове автора.</p>
+<!-- Недостаток: последовательная работа -->
+<p>Слабое место при совместной работе над документом – это объединение правок от нескольких участников, которым приходится заниматься автору.
+Этот процесс утомителен и подвержен ошибкам.
+Чтобы обойти это, над документом работают последовательно.
+Каждый следующий участник работает над документом после предыдущего.
+Это растягивает время работы и слабо загружает участников.
+Это одна из причин, почему подготовка научной статьи растягивается на год и более.</p>
+<!-- Некритичность недостатков совместной работы над офисным документом -->
+<p>Недостатки совместной работы над файлом не критичны применительно к офисным документам.
+В их подготовке лежит принцип личной ответственности автора.
+За такое старание он будет вознагражден первым присутствием в списке авторов.
+Замечания вышестоящего по должностной иерархии имеют приоритет над нижестоящим, что не позволяет распараллелить работу над документом.
+Жизненный цикл офисного документа длится до нескольких месяцев, так что недостатки над его работой можно перетерпеть.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -423,20 +475,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="history.html"
+       href="whatisgit.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Изучение истории</p>
+        <p class="prev-next-title">Что такое Git</p>
       </div>
     </a>
     <a class="right-next"
-       href="branch.html"
+       href="cvs.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Работа с ветками</p>
+        <p class="prev-next-title">Управление версиями</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
