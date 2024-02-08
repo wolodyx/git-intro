@@ -14,6 +14,8 @@ parts:
       - file: src/setup.md
   - caption: Работа с проектом
     chapters:
+      - file: src/git-clients.md
+      - file: src/help.md
       - file: src/config.md
       - file: src/get.md
       - file: src/edit.md

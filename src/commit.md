@@ -278,12 +278,3 @@ index ad5fe9b..ff4f753 100644
 * [Соглашение о коммитах](https://www.conventionalcommits.org/ru/v1.0.0/)
 * [How to Write a Git Commit Message](https://cbea.ms/git-commit/)
 
-## Контрольные вопросы
-
-1.
-
-
-## Упражнения
-
-1. Покажите пример файла `.gitignore` для языка программирования C++ от разработчиков GitHub.
-
