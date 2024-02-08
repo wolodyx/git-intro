@@ -4,14 +4,24 @@ root: intro
 options:
   numbered: 1
 
-chapters:
-  - file: src/cvs.md
-  - file: src/config.md
-  - file: src/get.md
-  - file: src/edit.md
-  - file: src/commit.md
-  - file: src/history.md
-  - file: src/branch.md
-  - file: src/sync.md
-  - file: src/workflow.md
+parts:
+  - caption: Введение в основы
+    chapters:
+      - file: src/whatisgit.md
+      - file: src/cvs.md
+      - file: src/setup.md
+  - caption: Работа с проектом
+    chapters:
+      - file: src/config.md
+      - file: src/get.md
+      - file: src/edit.md
+      - file: src/commit.md
+      - file: src/history.md
+      - file: src/test1.md
+  - caption: Работа в команде
+    chapters:
+      - file: src/branch.md
+      - file: src/sync.md
+      - file: src/workflow.md
+      - file: src/test2.md
 
