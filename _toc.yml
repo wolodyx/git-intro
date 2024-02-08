@@ -8,7 +8,9 @@ parts:
   - caption: Введение в основы
     chapters:
       - file: src/whatisgit.md
+      - file: src/collaborative-edit.md
       - file: src/cvs.md
+      - file: src/cvs-history.md
       - file: src/setup.md
   - caption: Работа с проектом
     chapters:

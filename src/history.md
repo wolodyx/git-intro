@@ -269,7 +269,7 @@ Niels Lohmann ==> Clang 15 (#3876)
 -->
 
 
-## Использованные источники
+## Дополнительные источники
 
 * [Ведите changelog](https://keepachangelog.com/ru/1.1.0/)
 * [Список изменений на Хабр за 2023 год](https://habr.com/ru/docs/changelog/2023/)

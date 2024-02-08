@@ -272,7 +272,7 @@ index ad5fe9b..ff4f753 100644
 ```
 
 
-## Использованные источники
+## Дополнительные источники
 
 * [A collection of .gitignore templates](https://github.com/github/gitignore)
 * [Соглашение о коммитах](https://www.conventionalcommits.org/ru/v1.0.0/)
