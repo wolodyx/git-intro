@@ -65,7 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'src/setup';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Подготовка к работе" href="config.html" />
+    <link rel="next" title="Клиенты Git" href="git-clients.html" />
     <link rel="prev" title="История развития СКВ" href="cvs-history.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -178,7 +178,9 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Работа с проектом</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="config.html">Подготовка к работе</a></li>
+<li class="toctree-l1"><a class="reference internal" href="git-clients.html">Клиенты Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help.html">Работа со справкой</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">Работа с настройками</a></li>
 <li class="toctree-l1"><a class="reference internal" href="get.html">Получение хранилища</a></li>
 <li class="toctree-l1"><a class="reference internal" href="edit.html">Изменение рабочей копии</a></li>
 <li class="toctree-l1"><a class="reference internal" href="commit.html">Фиксация изменений</a></li>
@@ -343,6 +345,29 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>Настройка рабочего окружения<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<!-- Проверка и установка Git -->
+<p>Для прохождения учебного модуля понадобится рабочая машина с установленной Git.
+Проверим ее присутствие на машине.
+Выполните команду <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">--version</span></code> в терминале.
+Если программа доступна в системе, то на экране терминала отобразится сообщение о версии, иначе об отсутствии команды.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">bob@pc:~$ </span>git<span class="w"> </span>--version
+<span class="go">git version 2.34.1</span>
+</pre></div>
+</div>
+<p>Для прохождения лекции необходима Git версии не ниже <code class="docutils literal notranslate"><span class="pre">2.23</span></code>, начиная с которой доступна команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">restore</span></code>.
+На декабрь 2024 года на <a class="reference external" href="https://git-scm.org">официальном сайте</a> доступна версия 2.43.0.</p>
+<!-- Установка Git в Ubuntu и Windows -->
+<p>В Ubuntu программу установим из менеджера пакетов <code class="docutils literal notranslate"><span class="pre">APT</span></code>.
+Дополнительно к утилитам командной строки, также установим <code class="docutils literal notranslate"><span class="pre">gitk</span></code> – простой графический интерфейс к Git.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span>git<span class="w"> </span>gitk
+</pre></div>
+</div>
+<p>Для Windows доступна специальная сборка <a class="reference external" href="https://gitforwindows.org/">gitforwindows</a>.
+Она содержит в себе портированную в Windows интерпретатор <code class="docutils literal notranslate"><span class="pre">bash</span></code>, интеграцию с рабочим столом и простой графический интерфейс.</p>
+<!-- lazygit -->
+<p>Также установим клиент lazygit, реализующий псевдографический интерфейс.
+Проект с программой доступна по <a class="reference external" href="https://github.com/jesseduffield/lazygit">ссылке</a>.
+Там же содержатся инструкции по ее установке на различные ОС.</p>
 <!-- Рабочее окружение Ubuntu -->
 <p>Для выполнения упражнений нам понадобится настроенное рабочее окружение Ubuntu.
 В учебных классах оно доступно в виде виртуальной машины VirtualBox с названием “ubuntu-22.04”.
@@ -396,11 +421,11 @@ sudo<span class="w"> </span>install<span class="w"> </span>lazygit<span class="w
       </div>
     </a>
     <a class="right-next"
-       href="config.html"
+       href="git-clients.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Подготовка к работе</p>
+        <p class="prev-next-title">Клиенты Git</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
