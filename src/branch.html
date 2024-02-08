@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>7. Работа с ветками &#8212; My sample book</title>
+    <title>Работа с ветками &#8212; My sample book</title>
   
   
   
@@ -65,8 +65,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'src/branch';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="8. Синхронизация с удаленными хранилищами" href="sync.html" />
-    <link rel="prev" title="6. Изучение истории" href="history.html" />
+    <link rel="next" title="Синхронизация с удаленными хранилищами" href="sync.html" />
+    <link rel="prev" title="Проверочная работа" href="test1.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -168,16 +168,27 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="cvs.html">1. Система контроля версий</a></li>
-<li class="toctree-l1"><a class="reference internal" href="config.html">2. Подготовка к работе</a></li>
-<li class="toctree-l1"><a class="reference internal" href="get.html">3. Получение хранилища</a></li>
-<li class="toctree-l1"><a class="reference internal" href="edit.html">4. Изменение рабочей копии</a></li>
-<li class="toctree-l1"><a class="reference internal" href="commit.html">5. Фиксация изменений</a></li>
-<li class="toctree-l1"><a class="reference internal" href="history.html">6. Изучение истории</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">7. Работа с ветками</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sync.html">8. Синхронизация с удаленными хранилищами</a></li>
-<li class="toctree-l1"><a class="reference internal" href="workflow.html">9. Порядок работы с Git</a></li>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Введение в основы</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="whatisgit.html">Что такое Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cvs.html">Системы контроля версий</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Настройка рабочего окружения</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Работа с проектом</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="config.html">Подготовка к работе</a></li>
+<li class="toctree-l1"><a class="reference internal" href="get.html">Получение хранилища</a></li>
+<li class="toctree-l1"><a class="reference internal" href="edit.html">Изменение рабочей копии</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commit.html">Фиксация изменений</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">Изучение истории</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test1.html">Проверочная работа</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Работа в команде</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Работа с ветками</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sync.html">Синхронизация с удаленными хранилищами</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow.html">Порядок работы с Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test2.html">Проверочная работа</a></li>
 </ul>
 
     </div>
@@ -390,19 +401,25 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">7. </span>Работа с ветками<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<h1>Работа с ветками<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <section id="id2">
 <h2>Введение<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
-<p>Про ветку и историю изменений.
-Каждая новое изменение, коммит и ревизия основываются на последнем состоянии проекта.
-В первом приближении мы получаем линейную историю изменений, ревизий и коммитов.
-В командной работе над одним проектом одновременно и независимо трудятся несколько разработчиков.
+<!-- Про ветку и историю изменений -->
+<p>Каждая следующее изменение, оформленное в виде коммита, основывается на последнем состоянии проекта.
+В итоге мы получаем линейную историю изменений.</p>
+<p>Когда возникают ветвления:</p>
+<ul class="simple">
+<li><p>многозадачность разработчика в рамках одного проекта;</p></li>
+<li><p>результат объединения изменений от нескольких разработчиков;</p></li>
+<li><p>поддержка старой версии программы.</p></li>
+</ul>
+<p>В командной работе над одним проектом одновременно и независимо трудятся несколько разработчиков.
 В большинстве случаев их изменения не пересекаются, так как выполняются в различных модулях, файлах и функциях.
 Изменения, которые необходимы для решения задач, могут быть большими, поэтому они состоят из нескольких отдельных коммитов.
 В результате этого в системе возникают два варианта проекта, имеющие общую историю с момента начала работы и отличающиеся после него.
 Эти варианты вместе с собственной историей называют ветками.
 В конце концов разные варианты проекта должны быть объединены в один проект.
-Это действие называется слиянием веток.</p>
+Это действие называется <em>слиянием веток</em>.</p>
 </section>
 <section id="id3">
 <h2>Типы веток<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
@@ -490,12 +507,12 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="history.html"
+       href="test1.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">6. </span>Изучение истории</p>
+        <p class="prev-next-title">Проверочная работа</p>
       </div>
     </a>
     <a class="right-next"
@@ -503,7 +520,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">8. </span>Синхронизация с удаленными хранилищами</p>
+        <p class="prev-next-title">Синхронизация с удаленными хранилищами</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
