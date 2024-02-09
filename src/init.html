@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Работа с настройками &#8212; Git из командной строки</title>
+    <title>Создание хранилища &#8212; Git из командной строки</title>
   
   
   
@@ -62,11 +62,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'src/config';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'src/init';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Клонирование хранилища" href="clone.html" />
-    <link rel="prev" title="Работа со справкой" href="help.html" />
+    <link rel="next" title="Изменение рабочей копии" href="edit.html" />
+    <link rel="prev" title="Клонирование хранилища" href="clone.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -181,9 +181,9 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="cli-client.html">Клиент командной строки</a></li>
 <li class="toctree-l1"><a class="reference internal" href="help.html">Работа со справкой</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Работа с настройками</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">Работа с настройками</a></li>
 <li class="toctree-l1"><a class="reference internal" href="clone.html">Клонирование хранилища</a></li>
-<li class="toctree-l1"><a class="reference internal" href="init.html">Создание хранилища</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Создание хранилища</a></li>
 <li class="toctree-l1"><a class="reference internal" href="edit.html">Изменение рабочей копии</a></li>
 <li class="toctree-l1"><a class="reference internal" href="commit.html">Фиксация изменений</a></li>
 <li class="toctree-l1"><a class="reference internal" href="history.html">Изучение истории</a></li>
@@ -249,7 +249,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/src/config.md" target="_blank"
+      <li><a href="../_sources/src/init.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -331,7 +331,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Работа с настройками</h1>
+    <h1>Создание хранилища</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -346,108 +346,20 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>Работа с настройками<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
-<!-- Знакомим себя с Git -->
-<p>Перед первым использованием Git на любой машине вам необходимо представить ей себя.
-Для этого ей необходимо передать ваше имя и адрес электронной почты, выполнив следующие две команды, предварительно вписав туда свои персональные данные:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.name<span class="w"> </span><span class="s2">&quot;Иванов Иван&quot;</span>
-git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.email<span class="w"> </span><span class="s2">&quot;mail@example.com&quot;</span>
-</pre></div>
-</div>
-<!-- Про команду `git config` -->
-<p>Настройки представляют набор имен переменных с заданным значением, сохраненных в конфигурационных файлах.
-Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span></code> отвечает за работу с настройками: задает переменным значение или выводит их на экран.
-В командах выше переменным с именами <code class="docutils literal notranslate"><span class="pre">user.name</span></code> и <code class="docutils literal notranslate"><span class="pre">user.email</span></code> заданы значения <code class="docutils literal notranslate"><span class="pre">Иванов</span> <span class="pre">Иван</span></code> и <code class="docutils literal notranslate"><span class="pre">mail&#64;example.com</span></code> соответственно.</p>
-<!-- Уровни настроек -->
-<p>Опция <code class="docutils literal notranslate"><span class="pre">--global</span></code> указывает, что настройки глобальные и оказывают влияние на все хранилища конкретного пользователя.
-В противоположность к глобальным существуют локальные (опция <code class="docutils literal notranslate"><span class="pre">--local</span></code>) и системные (опция <code class="docutils literal notranslate"><span class="pre">--system</span></code>) настройки.
-Локальные настройки действуют только на конкретное хранилище, а системные – на всех пользователей в многопользовательской машине.</p>
-<figure class="align-default">
-<img alt="../_images/ConfigLevels.png" src="../_images/ConfigLevels.png" />
-</figure>
-<!-- Переопределение настроек -->
-<p>Одна и та же опция может быть задана на нескольких уровнях.
-В этом случае глобальные настройки переопределяют системные, а локальные переопределяют все остальные.</p>
-<!-- Где хранятся настройки? -->
-<p>Настройки сохраняются в конфигурационных файлах.
-В зависимости от уровня, файлы различаются.
-Так, системные настройки хранятся в файле <code class="docutils literal notranslate"><span class="pre">/etc/gitconfig</span></code>, глобальные в <code class="docutils literal notranslate"><span class="pre">~/.gitconfig</span></code> или <code class="docutils literal notranslate"><span class="pre">~/.config/git/config</span></code>, а локальные в <code class="docutils literal notranslate"><span class="pre">.git/config</span></code> в каталоге хранилища.</p>
-<!-- Установка настройки core.editor в vim на системном уровне -->
-<p>Давайте зададим настройку <code class="docutils literal notranslate"><span class="pre">core.editor</span></code> в значение <code class="docutils literal notranslate"><span class="pre">vim</span></code> на системном уровне.
-Таким нехитрым образом мы навяжем всем пользователям машины редактор Vim для написания многострочных сообщений для команды <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code>.
-На примере ниже можно увидеть, что системную настройку можно изменить только воспользовавшись правами суперпользователя.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">bob@pc:~$ </span>git<span class="w"> </span>config<span class="w"> </span>--system<span class="w"> </span>core.editor<span class="w"> </span>vim
-<span class="go">error: could not lock config file /etc/gitconfig: Отказано в доступе</span>
-<span class="gp">bob@pc:~$ </span>sudo<span class="w"> </span>git<span class="w"> </span>config<span class="w"> </span>--system<span class="w"> </span>core.editor<span class="w"> </span>vim
-<span class="go">[sudo] пароль для bob:</span>
-<span class="gp">bob@pc:~$</span>
-</pre></div>
-</div>
-<!-- Установка настройки на локальном уровне -->
-<p>Давайте установим настройку <code class="docutils literal notranslate"><span class="pre">advice.addIgnoredFile</span></code> в значение <code class="docutils literal notranslate"><span class="pre">false</span></code> на локальном уровне.
-Эта логическая переменная по умолчанию установлена в истину (<code class="docutils literal notranslate"><span class="pre">true</span></code>).
-Из-за нее каждый раз при добавлении всех измененных файлов (командой <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">*</span></code>) в индекс на экране выводится сообщение о том, что при действии игнорируются пути, перечисленные в файле <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code>.
-И там же предлагает отключить эту подсказку, воспользовавшись командой <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">advice.addIgnoredFile</span> <span class="pre">false</span></code>.
-Заметим, что если уровень настройки не задан явно в команде, то подразумевается что она локальная.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">bob@pc:~/projects/git-intro$ </span>git<span class="w"> </span>add<span class="w"> </span>*
-<span class="go">Следующие пути игнорируются одним из ваших файлов .gitignore:</span>
-<span class="go">_build</span>
-<span class="go">подсказка: Use -f if you really want to add them.</span>
-<span class="go">подсказка: Turn this message off by running</span>
-<span class="go">подсказка: &quot;git config advice.addIgnoredFile false&quot;</span>
-</pre></div>
-</div>
-<!-- Просмотр настроек -->
-<p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--list</span></code> выводит на экран список явно установленных пользователем переменных.
-Если указать опцию <code class="docutils literal notranslate"><span class="pre">--show-origin</span></code>, то перед каждой переменную будет указано название конфигурационного файла, в котором оно присутствует.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">bob@pc:~/projects/git-intro$ </span>git<span class="w"> </span>config<span class="w"> </span>--list
-<span class="go">core.editor=vim</span>
-<span class="go">user.email=mail@example.com</span>
-<span class="go">user.name=Иван Иванов</span>
-<span class="go">credential.helper=store</span>
-<span class="go">core.repositoryformatversion=0</span>
-<span class="go">core.filemode=true</span>
-<span class="go">core.bare=false</span>
-<span class="go">core.logallrefupdates=true</span>
-<span class="go">advice.addignoredfile=false</span>
-</pre></div>
-</div>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">bob@pc:~/projects/git-intro$ </span>git<span class="w"> </span>config<span class="w"> </span>--list<span class="w"> </span>--show-origin
-<span class="go">file:/etc/gitconfig     core.editor=vim</span>
-<span class="go">file:/home/bob/.gitconfig       user.email=mail@example.com</span>
-<span class="go">file:/home/bob/.gitconfig       user.name=Иван Иванов</span>
-<span class="go">file:/home/bob/.gitconfig       credential.helper=store</span>
-<span class="go">file:.git/config        core.repositoryformatversion=0</span>
-<span class="go">file:.git/config        core.filemode=true</span>
-<span class="go">file:.git/config        core.bare=false</span>
-<span class="go">file:.git/config        core.logallrefupdates=true</span>
-<span class="go">file:.git/config        advice.addignoredfile=false</span>
-</pre></div>
-</div>
-<p>Если нужно посмотреть определенную переменную, то ее имя указывают в командной строке:
-Чтобы увидеть значение <code class="docutils literal notranslate"><span class="pre">user.name</span></code> выполните команду <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">user.name</span></code>.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Полный список переменных, поддерживаемых Git, можно вывести на экран командой <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">help</span> <span class="pre">--config</span></code>.
-Тот же самый список с подробным описанием доступен в справочной странице <code class="docutils literal notranslate"><span class="pre">git-config(1)</span></code> в подразделе “Variables” раздела “CONFIGURATION FILE”.</p>
-</div>
-<!--
-```
-подсказка: Using 'master' as the name for the initial branch. This default branch name
-подсказка: is subject to change. To configure the initial branch name to use in all
-подсказка: of your new repositories, which will suppress this warning, call:
-подсказка: 
-подсказка: 	git config --global init.defaultBranch <name>
-подсказка: 
-подсказка: Names commonly chosen instead of 'master' are 'main', 'trunk' and
-подсказка: 'development'. The just-created branch can be renamed via this command:
-подсказка: 
-подсказка: 	git branch -m <name>
-```
-
-git config --global init.defaultBranch main
-
--->
+<h1>Создание хранилища<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<!-- О команде `git init` -->
+<p>Любое хранилище в начале было создано.
+Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code> создает пустое хранилище.
+Пустое хранилище не содержит истории, а его рабочая копия пуста.
+Рабочий каталог может содержать файлы, которые в последствии будут добавлены в хранилище.
+Как это сделать, будет рассмотрено в разделе <a class="reference internal" href="commit.html"><span class="doc std std-doc">“Фиксация изменений”</span></a>.</p>
+<p>Каталог является рабочим для хранилища, если внутри себя содержит каталог <code class="docutils literal notranslate"><span class="pre">.git</span></code>.
+Точка в начале имени показывает, что в системе UNIX он скрытый и не отобразится стандартными средствами.
+Команда <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">--all</span></code> отобразит на экране терминала все файлы из текущего каталога, включая и скрытые.</p>
+<p>Без аргументов команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code> создаст новое хранилище в текущем каталоге.
+Если вам надо создать его в другом, то имя этого каталога следует передать в команду как аргумент: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span> <span class="pre">myproject</span></code>.</p>
+<p>Чтобы создать чистое хранилище, в команду <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code> передают опцию <code class="docutils literal notranslate"><span class="pre">--bare</span></code>.
+И уже получившийся каталог отправляют на git-сервер.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -481,20 +393,20 @@ git config --global init.defaultBranch main
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="help.html"
+       href="clone.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Работа со справкой</p>
+        <p class="prev-next-title">Клонирование хранилища</p>
       </div>
     </a>
     <a class="right-next"
-       href="clone.html"
+       href="edit.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Клонирование хранилища</p>
+        <p class="prev-next-title">Изменение рабочей копии</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
