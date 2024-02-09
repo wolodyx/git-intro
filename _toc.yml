@@ -15,6 +15,7 @@ parts:
   - caption: Работа с проектом
     chapters:
       - file: src/git-clients.md
+      - file: src/cli-client.md
       - file: src/help.md
       - file: src/config.md
       - file: src/get.md
