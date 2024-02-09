@@ -18,7 +18,8 @@ parts:
       - file: src/cli-client.md
       - file: src/help.md
       - file: src/config.md
-      - file: src/get.md
+      - file: src/clone.md
+      - file: src/init.md
       - file: src/edit.md
       - file: src/commit.md
       - file: src/history.md
