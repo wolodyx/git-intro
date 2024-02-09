@@ -12,9 +12,9 @@ parts:
       - file: src/cvs.md
       - file: src/cvs-history.md
       - file: src/setup.md
+      - file: src/git-clients.md
   - caption: Работа с проектом
     chapters:
-      - file: src/git-clients.md
       - file: src/cli-client.md
       - file: src/help.md
       - file: src/config.md
