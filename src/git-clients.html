@@ -169,16 +169,16 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Введение в основы</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="whatisgit.html">Что такое Git</a></li>
 <li class="toctree-l1"><a class="reference internal" href="collaborative-edit.html">Совместная работа над документом</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cvs.html">Управление версиями</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cvs-history.html">История развития СКВ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="setup.html">Настройка рабочего окружения</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Клиенты Git</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Работа с проектом</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Клиенты Git</a></li>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="cli-client.html">Клиент командной строки</a></li>
 <li class="toctree-l1"><a class="reference internal" href="help.html">Работа со справкой</a></li>
 <li class="toctree-l1"><a class="reference internal" href="config.html">Работа с настройками</a></li>
@@ -353,7 +353,7 @@ document.write(`
 <ul class="simple">
 <li><p>бесплатные (условно бесплатные) или платные;</p></li>
 <li><p>развиваемые в рамках проекта Git или сторонними разработчиками;</p></li>
-<li><p>автономные или встроенные в IDE.</p></li>
+<li><p>автономные или встроенные в существующие приложения;</p></li>
 <li><p>вид пользовательского интерфейса: командная строка (CLI), псевдографический интерфейс (TUI) или графический интерфейс (GUI).</p></li>
 </ul>
 <figure class="align-default">
@@ -388,7 +388,7 @@ document.write(`
 <figure class="align-default" id="id1">
 <img alt="../_images/gitk.png" src="../_images/gitk.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 1 </span><span class="caption-text">Окно приложения gitk для хранилища CMake</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text">Окно приложения gitk</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Приложение “git gui” позволяет фиксировать изменения.
@@ -397,7 +397,7 @@ document.write(`
 <figure class="align-default" id="id2">
 <img alt="../_images/git-gui.png" src="../_images/git-gui.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 2 </span><span class="caption-text">Окно приложения git-gui для хранилища CMake</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 2 </span><span class="caption-text">Окно приложения git-gui</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <!-- Клиенты с графическим интерфейсом -->
@@ -416,18 +416,31 @@ document.write(`
 Проект <a class="reference external" href="https://github.com/gitextensions/gitextensions">Git Extensions</a> предлагает расширения для “Windows Explorer” и “MS Visual Studio”.
 В первом случае расширения доступны из контекстного меню, а во втором как пункт главного меню.
 Дополнительно, проект предоставляет автономный графический клиент.</p>
-<figure class="align-default">
+<figure class="align-default" id="id3">
 <img alt="../_images/gitext.png" src="../_images/gitext.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 3 </span><span class="caption-text">Встроенное в “MS Visual Studio Community” пункт меню расширения “GitExtensions”</span><a class="headerlink" href="#id3" title="Permalink to this image">#</a></p>
+</figcaption>
 </figure>
-<figure class="align-default">
+<figure class="align-default" id="id4">
 <img alt="../_images/gitext-window.png" src="../_images/gitext-window.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 4 </span><span class="caption-text">Главное окно приложения “Git Extensions”</span><a class="headerlink" href="#id4" title="Permalink to this image">#</a></p>
+</figcaption>
 </figure>
 <p>Популярный “Visual Studio Code” поддерживает Git из-под коробки.
 Интерфейсные элементы для работы с хранилищем расположены во вкладке “Source Control” на панели задач.
 Подробно про работу с Git в VSCode расписано по <a class="reference external" href="https://code.visualstudio.com/docs/sourcecontrol/overview">ссылке</a>.</p>
-<figure class="align-default">
+<figure class="align-default" id="id5">
 <img alt="../_images/vscode-git.png" src="../_images/vscode-git.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 5 </span><span class="caption-text">VSCode с выбранной вкладкой “Source Control” в режиме просмотра изменений</span><a class="headerlink" href="#id5" title="Permalink to this image">#</a></p>
+</figcaption>
 </figure>
+<p>Текстовый терминал кроме командной строки предлагает интерактивный псевдографический интерфейс.
+Наглядный тому пример консольные приложения vim, nano, htop.
+Git-клиент <a class="reference external" href="https://github.com/jesseduffield/lazygit">lazygit</a> исполнен в этом же стиле.
+Он позволяет использовать интерактивность там, где нет поддержки графического режима.</p>
 </section>
 
     <script type="text/x-thebe-config">
