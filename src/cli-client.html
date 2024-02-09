@@ -346,14 +346,32 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>Клиент командной строки<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
-<p>Клиент командной строки реализован утилитой <code class="docutils literal notranslate"><span class="pre">git</span></code>.
-Утилита первым аргументом принимает имя команды и затем следуют опции и аргументы этой команды.</p>
+<p>Git-клиент командной строки представлен консольной утилитой <code class="docutils literal notranslate"><span class="pre">git</span></code>.</p>
+<!-- Формат команд -->
+<p>Утилита первым аргументом принимает имя команды и затем следуют опции и аргументы этой команды.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>&lt;команда&gt;<span class="w"> </span><span class="o">[</span>&lt;аргументы&gt;<span class="w"> </span>...<span class="o">]</span>
 </pre></div>
 </div>
-<p>Наш курс посвящен изучению Git и ее клиента командной строки.
-В будущем будут изучены команды <code class="docutils literal notranslate"><span class="pre">help</span></code>, <code class="docutils literal notranslate"><span class="pre">config</span></code>, <code class="docutils literal notranslate"><span class="pre">clone</span></code>, <code class="docutils literal notranslate"><span class="pre">init</span></code>, <code class="docutils literal notranslate"><span class="pre">commit</span></code>, <code class="docutils literal notranslate"><span class="pre">add</span></code>, <code class="docutils literal notranslate"><span class="pre">status</span></code>, <code class="docutils literal notranslate"><span class="pre">rm</span></code>, <code class="docutils literal notranslate"><span class="pre">mv</span></code>, <code class="docutils literal notranslate"><span class="pre">restore</span></code>, <code class="docutils literal notranslate"><span class="pre">diff</span></code>, <code class="docutils literal notranslate"><span class="pre">log</span></code>, <code class="docutils literal notranslate"><span class="pre">pull</span></code>, <code class="docutils literal notranslate"><span class="pre">push</span></code>.</p>
-<p>Те команды, для выполнения действий которым нужно хранилище, должны быть вызваны внутри рабочего каталога (не обязательно в его корне, можно и внутри вложенных).
+<p>На курсе будут изучены следующие команды:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">help</span></code>, показ справочной информации о Git;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">config</span></code>, настройка Git;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">clone</span></code>, клонирование хранилища;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">init</span></code>, создание нового хранилища;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">commit</span></code>, фиксация изменений в хранилище;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">add</span></code>, добавление измененных файлов в индекс;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">status</span></code>, состояние файлов в рабочем каталоге;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rm</span></code>, удаление файлов из рабочего каталога и индекса;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mv</span></code>, перемещение и переименование файлов и каталогов;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">restore</span></code>, восстановление файлов в рабочем каталоге;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">diff</span></code>, показ различий между файлами;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">log</span></code>, показ истории изменений;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pull</span></code>, извлечение изменений из удаленного хранилища и их интеграция в ветку локального хранилища;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">push</span></code>, отправка изменений из локального хранилища в удаленное;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">merge</span></code>, слияние изменений.</p></li>
+</ul>
+<p>Большую часть команд применяют к хранилищу.
+Текущий каталог должен быть настроен на рабочий каталог или любой вложенный каталог в нем.
 В противном случае на экране терминала отобразится сообщение об ошибке следующего содержания:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>fatal: не найден git репозиторий (или один из родительских каталогов): .git
 </pre></div>
