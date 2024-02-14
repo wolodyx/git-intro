@@ -65,8 +65,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'src/branch';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Синхронизация с удаленными хранилищами" href="sync.html" />
-    <link rel="prev" title="Проверочная работа" href="test1.html" />
+    <link rel="next" title="Слияние изменений" href="merge.html" />
+    <link rel="prev" title="Клонирование хранилища" href="clone.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -182,7 +182,6 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="cli-client.html">Клиент командной строки</a></li>
 <li class="toctree-l1"><a class="reference internal" href="help.html">Работа со справкой</a></li>
 <li class="toctree-l1"><a class="reference internal" href="config.html">Работа с настройками</a></li>
-<li class="toctree-l1"><a class="reference internal" href="clone.html">Клонирование хранилища</a></li>
 <li class="toctree-l1"><a class="reference internal" href="init.html">Создание хранилища</a></li>
 <li class="toctree-l1"><a class="reference internal" href="edit.html">Изменение рабочей копии</a></li>
 <li class="toctree-l1"><a class="reference internal" href="commit.html">Фиксация изменений</a></li>
@@ -191,7 +190,10 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Работа в команде</span></p>
 <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="git-server.html">Git-сервер</a></li>
+<li class="toctree-l1"><a class="reference internal" href="clone.html">Клонирование хранилища</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Работа с ветками</a></li>
+<li class="toctree-l1"><a class="reference internal" href="merge.html">Слияние изменений</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sync.html">Синхронизация с удаленными хранилищами</a></li>
 <li class="toctree-l1"><a class="reference internal" href="workflow.html">Порядок работы с Git</a></li>
 <li class="toctree-l1"><a class="reference internal" href="test2.html">Проверочная работа</a></li>
@@ -345,7 +347,6 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Введение</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Типы веток</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Слияние изменений и разрешение конфликтов</a></li>
 </ul>
             </nav>
         </div>
@@ -362,21 +363,12 @@ document.write(`
 <section id="id2">
 <h2>Введение<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
 <!-- Про ветку и историю изменений -->
-<p>Каждая следующее изменение, оформленное в виде коммита, основывается на последнем состоянии проекта.
-В итоге мы получаем линейную историю изменений.</p>
 <p>Когда возникают ветвления:</p>
 <ul class="simple">
 <li><p>многозадачность разработчика в рамках одного проекта;</p></li>
 <li><p>результат объединения изменений от нескольких разработчиков;</p></li>
 <li><p>поддержка старой версии программы.</p></li>
 </ul>
-<p>В командной работе над одним проектом одновременно и независимо трудятся несколько разработчиков.
-В большинстве случаев их изменения не пересекаются, так как выполняются в различных модулях, файлах и функциях.
-Изменения, которые необходимы для решения задач, могут быть большими, поэтому они состоят из нескольких отдельных коммитов.
-В результате этого в системе возникают два варианта проекта, имеющие общую историю с момента начала работы и отличающиеся после него.
-Эти варианты вместе с собственной историей называют ветками.
-В конце концов разные варианты проекта должны быть объединены в один проект.
-Это действие называется <em>слиянием веток</em>.</p>
 </section>
 <section id="id3">
 <h2>Типы веток<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
@@ -391,7 +383,7 @@ document.write(`
 Если ошибка ранее не было в программе, а появилась позже.
 Методом можно воспользоваться если из ревизии основной ветки собирается и запускается программа.</p>
 <p><em>Функциональная ветка</em>.
-Если задача объемная и не может быть решена одним коммитом ии есть вероятность сломать программу, то под решение задачи создается отдельная ветка, называемая функциональной.
+Если задача объемная и не может быть решена одним коммитом и есть вероятность сломать программу, то под решение задачи создается отдельная ветка, называемая функциональной.
 Требования к ревизиям в ней менее строгие, чем в основной.
 Хороший разработчик будет фиксировать только компилируемые изменения, но от полного тестирования программы обычно временно отказываются, перенеся его на позднее время.
 Ошибки в программе стабилизируются последующими коммитами.
@@ -403,21 +395,6 @@ document.write(`
 Изменения, добавляющие новую функцию или изменяют структуры программы не происходят.
 Для поддержки релиза создают отдельный вариант проекта в виде релизной ветки.
 Из релизной ветки в основную забираются изменения, связанные с исправлением ошибок, но сама ветка остается с системе для поддержки пользователей старой версии программы.</p>
-</section>
-<section id="id4">
-<h2>Слияние изменений и разрешение конфликтов<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
-<p>Бывает необходимым объединить результаты работы двух разработчиков, что называется слиянием изменений.
-Слияние изменений возникает при объединении веток, а также при обновлении рабочего каталога до последней ревизии основной ветки.
-при слиянии файлов не следует терять данные и не нарушить целостность проекта.
-Операция слияния происходит автоматически (без вмешательства человека), если изменения не пересекаются, т.е. выполнены в разных файлах или в разных строках одного файла.
-Конфликтом называют ситуацию, при которой изменения не могут быть слиты.
-Для разрешения конфликта требуется внимание разработчика.
-Когда невозможно автоматически сливать изменения (в двоичных файлах, пересекающихся изменениях, удаление и изменение).
-Алгоритм слияния изменений.
-Слияние выполняется для каждого файла.
-Базовая, локальная и серверная ревизии.
-Специальный инструмент <code class="docutils literal notranslate"><span class="pre">diff3</span></code>, <code class="docutils literal notranslate"><span class="pre">kdiff3</span></code>, <code class="docutils literal notranslate"><span class="pre">WinMerge</span></code>.
-Разметки в объединяемых файлах.</p>
 </section>
 </section>
 
@@ -452,20 +429,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="test1.html"
+       href="clone.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Проверочная работа</p>
+        <p class="prev-next-title">Клонирование хранилища</p>
       </div>
     </a>
     <a class="right-next"
-       href="sync.html"
+       href="merge.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Синхронизация с удаленными хранилищами</p>
+        <p class="prev-next-title">Слияние изменений</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -486,7 +463,6 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Введение</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Типы веток</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Слияние изменений и разрешение конфликтов</a></li>
 </ul>
   </nav></div>
 

@@ -65,8 +65,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'src/clone';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Создание хранилища" href="init.html" />
-    <link rel="prev" title="Работа с настройками" href="config.html" />
+    <link rel="next" title="Работа с ветками" href="branch.html" />
+    <link rel="prev" title="Git-сервер" href="git-server.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -178,11 +178,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="git-clients.html">Клиенты Git</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Работа с проектом</span></p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="cli-client.html">Клиент командной строки</a></li>
 <li class="toctree-l1"><a class="reference internal" href="help.html">Работа со справкой</a></li>
 <li class="toctree-l1"><a class="reference internal" href="config.html">Работа с настройками</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Клонирование хранилища</a></li>
 <li class="toctree-l1"><a class="reference internal" href="init.html">Создание хранилища</a></li>
 <li class="toctree-l1"><a class="reference internal" href="edit.html">Изменение рабочей копии</a></li>
 <li class="toctree-l1"><a class="reference internal" href="commit.html">Фиксация изменений</a></li>
@@ -190,8 +189,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="test1.html">Проверочная работа</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Работа в команде</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="git-server.html">Git-сервер</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Клонирование хранилища</a></li>
 <li class="toctree-l1"><a class="reference internal" href="branch.html">Работа с ветками</a></li>
+<li class="toctree-l1"><a class="reference internal" href="merge.html">Слияние изменений</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sync.html">Синхронизация с удаленными хранилищами</a></li>
 <li class="toctree-l1"><a class="reference internal" href="workflow.html">Порядок работы с Git</a></li>
 <li class="toctree-l1"><a class="reference internal" href="test2.html">Проверочная работа</a></li>
@@ -421,6 +423,12 @@ Git поддерживает четыре протокола: http, ssh, лок�
 <figure class="align-default">
 <img alt="../_images/repo-address.png" src="../_images/repo-address.png" />
 </figure>
+<!--
+% Чистое хранилище
+Удаленному хранилищу не нужна рабочая копия, поэтому оно состоит только из каталога с хранилищем.
+Хранилище, не требующее извлечения рабочей копии, называют также *чистым* (bare).
+Удаленные хранилища являются чистыми.
+-->
 </section>
 
     <script type="text/x-thebe-config">
@@ -454,20 +462,20 @@ Git поддерживает четыре протокола: http, ssh, лок�
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="config.html"
+       href="git-server.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Работа с настройками</p>
+        <p class="prev-next-title">Git-сервер</p>
       </div>
     </a>
     <a class="right-next"
-       href="init.html"
+       href="branch.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Создание хранилища</p>
+        <p class="prev-next-title">Работа с ветками</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
