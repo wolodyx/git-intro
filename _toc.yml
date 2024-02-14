@@ -18,7 +18,6 @@ parts:
       - file: src/cli-client.md
       - file: src/help.md
       - file: src/config.md
-      - file: src/clone.md
       - file: src/init.md
       - file: src/edit.md
       - file: src/commit.md
@@ -26,7 +25,10 @@ parts:
       - file: src/test1.md
   - caption: Работа в команде
     chapters:
+      - file: src/git-server.md
+      - file: src/clone.md
       - file: src/branch.md
+      - file: src/merge.md
       - file: src/sync.md
       - file: src/workflow.md
       - file: src/test2.md
