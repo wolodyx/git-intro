@@ -16,13 +16,10 @@ jobs:
           python-version: 3.8
       - run: npm install -g @tommywalkie/excalidraw-cli
       - run: pip install jupyter-book     
-
-      - name: Build the book
-        run: excalidraw-cli
-        run: jupyter-book build --all --builder html .
-
-      - name: Github Pages action
-        uses: peaceiris/actions-gh-pages@v3.5.9
+      - run: excalidraw-cli
+      - run: jupyter-book build --all --builder html .
+      - uses: peaceiris/actions-gh-pages@v3.5.9
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./_build/html
+
