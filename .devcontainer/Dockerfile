@@ -12,5 +12,8 @@ RUN    groupadd --gid $USER_GID $USERNAME \
 RUN pip install jupyter-book
 RUN apt-get install -y inotify-tools
 
+RUN apt-get install -y nodejs npm
+RUN npm install -g @tommywalkie/excalidraw-cli
+
 USER $USERNAME
 

@@ -5,3 +5,5 @@ title: Git из командной строки
 author: Владимир Лазарев
 logo: logo.png
 
+exclude_patterns: [README.md]
+
