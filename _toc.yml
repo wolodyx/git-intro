@@ -13,6 +13,7 @@ parts:
       - file: src/cvs-history.md
       - file: src/setup.md
       - file: src/git-clients.md
+      - file: src/test0.md
   - caption: Работа с проектом
     chapters:
       - file: src/cli-client.md
