@@ -176,6 +176,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="cvs-history.html">История развития СКВ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="setup.html">Настройка рабочего окружения</a></li>
 <li class="toctree-l1"><a class="reference internal" href="git-clients.html">Клиенты Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test0.html">Проверочная работа</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Работа с проектом</span></p>
 <ul class="current nav bd-sidenav">
@@ -349,12 +350,85 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>Работа со справкой<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
-<!-- Знание технического английского -->
-<p>Подробная и исчерпывающая информация об устройстве и командах Git можно получить из справочных страниц man.
-Ко всему прочему вам понадобится знание английского языка на уровне чтения программной документации.</p>
-<p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">help</span> <span class="pre">&lt;команда&gt;</span></code> отображает на экране подробную справочную информацию о команде, переданной в качестве аргумента.
-Так как текст не помещается полностью на экране, он будет перенаправлен в пейджер <code class="docutils literal notranslate"><span class="pre">less</span></code>.
-Чтобы вернуть доступ к командной строке, следует закрыть пейджер командой <code class="docutils literal notranslate"><span class="pre">q</span></code>.</p>
+<p>В состав пакета с Git входит подробная справочная информация о системе.
+Информация доступна локально и не требует подключения к сети Интернет.
+Важно научиться использовать ее для своей пользы.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Техническая документация Git не переведена на русский язык.
+Дополнительно потребуется знание английского языка для ее понимания.</p>
+</div>
+<p>Git организует документацию, используя три внешних инструмента:</p>
+<ul class="simple">
+<li><p>справочную систему man;</p></li>
+<li><p>веб-браузер;</p></li>
+<li><p>справочную систему info.</p></li>
+</ul>
+<p>Здесь мы рассмотрим первые два из них.
+Справочная система man позволяет работать с документацией в текстовом терминале, а веб-браузер удобен в среде рабочего стола.</p>
+<p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">help</span></code> выводит на экран справочную информацию, ассоциированную с ключевым словом, переданного в качестве аргумента.
+Ключевым словом может быть название любой команды.
+Таким образом, команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">help</span> <span class="pre">clone</span></code> отобразит на экране справочную страницу по команде <code class="docutils literal notranslate"><span class="pre">clone</span></code>.</p>
+<!-- Работа в less -->
+<p>Экран терминала не способен вместить в себя справочную страницу целиком.
+Необходимы инструменты для навигации по тексту и поиска ключевых слов.
+Git для показа текста использует в терминале стандартный пейджер <code class="docutils literal notranslate"><span class="pre">less</span></code>.
+Перечислим команды <code class="docutils literal notranslate"><span class="pre">less</span></code>, которые потребуются для работы с ней:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">q</span></code> завершает просмотр и возвращает командную строку;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/</span></code> активирует ввод фразы для поиска, <code class="docutils literal notranslate"><span class="pre">Enter</span></code> начинает поиск;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">n</span></code> переходит к следующей найденной фразе в тексте;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">N</span></code> переходит к предыдущей найденной фразе в тексте;</p></li>
+<li><p>клавиши управления курсором перемещают экран по тексту.</p></li>
+</ul>
+<p>На справочные страницы команд Git ссылаются по форме <code class="docutils literal notranslate"><span class="pre">git-&lt;команда&gt;(1)</span></code>: <code class="docutils literal notranslate"><span class="pre">git-clone(1)</span></code>, <code class="docutils literal notranslate"><span class="pre">git-branch(1)</span></code> и т.д.
+К тем же самым страницам можно обратиться через утилиту man, выполнив команду <code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">git-clone</span></code> или <code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">1</span> <span class="pre">git-clone</span></code>.
+Число в скобке показывает на раздел документации, в котором расположена справочная страница.</p>
+<p>Дополнительно к описаниям команд, в техническую документацию по Git входят инструкции по ее применению.
+Они также оформлены в виде справочных страниц, список которых отображает команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">help</span> <span class="pre">--guides</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">bob@pc:~$ </span>git<span class="w"> </span><span class="nb">help</span><span class="w"> </span>--guides
+
+<span class="go">The Git concept guides are:</span>
+<span class="go">   attributes          Определение атрибутов для путей файлов или каталогов</span>
+<span class="go">   cli                 Интерфейс коммандной строки Git и соглашения</span>
+<span class="go">   core-tutorial       Учебник по ядру Git для разработчиков</span>
+<span class="go">   credentials         Providing usernames and passwords to Git</span>
+<span class="go">   cvs-migration       Git для пользователей CVS</span>
+<span class="go">   diffcore            Подстройка вывода списка изменений</span>
+<span class="go">   everyday            Полезный минимум команд для каждодневного использования Git</span>
+<span class="go">   faq                 Frequently asked questions about using Git</span>
+<span class="go">   glossary            Глоссарий Git</span>
+<span class="go">   hooks               Перехватчики используемые Git</span>
+<span class="go">   ignore              Указание специально игнорируемых файлов</span>
+<span class="go">   mailmap             Map author/committer names and/or E-Mail addresses</span>
+<span class="go">   modules             Определение свойств подмодулей</span>
+<span class="go">   namespaces          Пространства имён Git</span>
+<span class="go">   remote-helpers      Helper programs to interact with remote repositories</span>
+<span class="go">   repository-layout   Содержимое репозитория Git</span>
+<span class="go">   revisions           Указание редакций и диапазонов для Git</span>
+<span class="go">   submodules          Mounting one repository inside another</span>
+<span class="go">   tutorial            Обучающее введение в Git</span>
+<span class="go">   tutorial-2          Обучающее введение в Git: часть вторая</span>
+<span class="go">   workflows           Обзор рекомендуемых последовательностей выполняемых действий с Git</span>
+
+<span class="go">«git help -a» и «git help -g» выводит список доступных подкоманд</span>
+<span class="go">и небольшую справку по понятиям. Смотрите «git help &lt;понятие&gt;»</span>
+<span class="go">или «git help &lt;термин&gt;» чтобы узнать больше о конкретной подкоманде</span>
+<span class="go">или понятии.</span>
+<span class="go">Смотрите «git help git» для получения общего обзора системы.</span>
+</pre></div>
+</div>
+<p>Среди приведенных выше инструкций новичкам интерес представляет “Обучающее введение в Git”.
+Связанная с ней справочная страница <code class="docutils literal notranslate"><span class="pre">gittutorial(7)</span></code> отобразит на экране команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">help</span> <span class="pre">tutorial</span></code> или <code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">7</span> <span class="pre">gittutorial</span></code>.</p>
+<!-- Просмотр справочных систем в веб-браузере -->
+<p>Более привычно просматривать текст в веб-браузере.
+Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">help</span></code> с опцией <code class="docutils literal notranslate"><span class="pre">--web</span></code> (короткая опция <code class="docutils literal notranslate"><span class="pre">-w</span></code>) открывает справочную страницу в веб-бразуере, выбранном однажды в настройке <code class="docutils literal notranslate"><span class="pre">web.browser</span></code>.
+Ниже представлены две команды, которые в качестве веб-браузера выбирают firefox и открывают справочную страницу <code class="docutils literal notranslate"><span class="pre">git(7)</span></code> в нем.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">web</span><span class="o">.</span><span class="n">browser</span> <span class="n">firefox</span>
+<span class="n">git</span> <span class="n">help</span> <span class="o">--</span><span class="n">web</span> <span class="n">git</span>
+</pre></div>
+</div>
+<p>Страница <code class="docutils literal notranslate"><span class="pre">git(7)</span></code> – это заглавная страница, откуда можно попасть на любую другую по гиперссылкам.</p>
 </section>
 
     <script type="text/x-thebe-config">

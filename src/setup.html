@@ -176,6 +176,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="cvs-history.html">История развития СКВ</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Настройка рабочего окружения</a></li>
 <li class="toctree-l1"><a class="reference internal" href="git-clients.html">Клиенты Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test0.html">Проверочная работа</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Работа с проектом</span></p>
 <ul class="nav bd-sidenav">
@@ -363,7 +364,7 @@ document.write(`
 <!-- Установка Git в Ubuntu и Windows -->
 <p>В Ubuntu программу установим из менеджера пакетов <code class="docutils literal notranslate"><span class="pre">APT</span></code>.
 Дополнительно к утилитам командной строки, также установим <code class="docutils literal notranslate"><span class="pre">gitk</span></code> – простой графический интерфейс к Git.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span>git<span class="w"> </span>gitk
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span>git-all<span class="w"> </span>gitk
 </pre></div>
 </div>
 <p>Для Windows доступна специальная сборка <a class="reference external" href="https://gitforwindows.org/">gitforwindows</a>.
@@ -376,13 +377,18 @@ document.write(`
 <p>Для выполнения упражнений нам понадобится настроенное рабочее окружение Ubuntu.
 В учебных классах оно доступно в виде виртуальной машины VirtualBox с названием “ubuntu-22.04”.
 Дома вы можете настроить ее самостоятельно, установив Ubuntu последней версии и поставив пакеты следующими командами:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span>vim<span class="w"> </span>tmux<span class="w"> </span>rcs<span class="w"> </span>git-gui
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span>vim<span class="w"> </span>tmux<span class="w"> </span>rcs<span class="w"> </span>git-gui<span class="w"> </span>curl<span class="w"> </span>tree
 <span class="nv">LAZYGIT_VERSION</span><span class="o">=</span><span class="k">$(</span>curl<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;https://api.github.com/repos/jesseduffield/lazygit/releases/latest&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-Po<span class="w"> </span><span class="s1">&#39;&quot;tag_name&quot;: &quot;v\K[^&quot;]*&#39;</span><span class="k">)</span>
 curl<span class="w"> </span>-Lo<span class="w"> </span>lazygit.tar.gz<span class="w"> </span><span class="s2">&quot;https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_</span><span class="si">${</span><span class="nv">LAZYGIT_VERSION</span><span class="si">}</span><span class="s2">_Linux_x86_64.tar.gz&quot;</span>
 tar<span class="w"> </span>xf<span class="w"> </span>lazygit.tar.gz<span class="w"> </span>lazygit
 sudo<span class="w"> </span>install<span class="w"> </span>lazygit<span class="w"> </span>/usr/local/bin
 </pre></div>
 </div>
+<!--
+Дополнительно установить:
+* sublime-merge;
+* VSCode.
+-->
 </section>
 
     <script type="text/x-thebe-config">

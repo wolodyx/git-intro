@@ -62,11 +62,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'src/test1';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'src/test0';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Git-сервер" href="git-server.html" />
-    <link rel="prev" title="Изучение истории" href="history.html" />
+    <link rel="next" title="Клиент командной строки" href="cli-client.html" />
+    <link rel="prev" title="Клиенты Git" href="git-clients.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -169,17 +169,17 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Введение в основы</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="whatisgit.html">Что такое Git</a></li>
 <li class="toctree-l1"><a class="reference internal" href="collaborative-edit.html">Совместная работа над документом</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cvs.html">Управление версиями</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cvs-history.html">История развития СКВ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="setup.html">Настройка рабочего окружения</a></li>
 <li class="toctree-l1"><a class="reference internal" href="git-clients.html">Клиенты Git</a></li>
-<li class="toctree-l1"><a class="reference internal" href="test0.html">Проверочная работа</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Проверочная работа</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Работа с проектом</span></p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="cli-client.html">Клиент командной строки</a></li>
 <li class="toctree-l1"><a class="reference internal" href="help.html">Работа со справкой</a></li>
 <li class="toctree-l1"><a class="reference internal" href="config.html">Работа с настройками</a></li>
@@ -187,7 +187,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="edit.html">Изменение рабочей копии</a></li>
 <li class="toctree-l1"><a class="reference internal" href="commit.html">Фиксация изменений</a></li>
 <li class="toctree-l1"><a class="reference internal" href="history.html">Изучение истории</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Проверочная работа</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test1.html">Проверочная работа</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Работа в команде</span></p>
 <ul class="nav bd-sidenav">
@@ -252,7 +252,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/src/test1.md" target="_blank"
+      <li><a href="../_sources/src/test0.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -363,30 +363,9 @@ document.write(`
 <h1>Проверочная работа<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <section id="id2">
 <h2>Контрольные вопросы<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><p>Какие уровни настроек Git вам известны?</p></li>
-<li><p>Для каких целей изменяют программу?</p></li>
-<li><p>Почему не получается воспользоваться СКВ применительно к офисным документам?</p></li>
-<li><p>Что такое коммит?</p></li>
-<li><p>В чем отличие ревизии от коммита?</p></li>
-<li><p>Воспользуйтесь существующим пустым каталогом в качестве рабочего каталога для клонируемого хранилища.</p></li>
-<li><p>Какие команды <code class="docutils literal notranslate"><span class="pre">git</span></code> требуют хранилища, а какие нет?</p></li>
-</ol>
 </section>
 <section id="id3">
 <h2>Упражнения<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><p>Выясните версию установленной Git.</p></li>
-<li><p>Повторите вывод <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">--oneline</span></code>, опцией <code class="docutils literal notranslate"><span class="pre">--pretty</span></code> с собственным форматом.
-Опции для управления цветом символов описаны в справочной странице к <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> в разделе <code class="docutils literal notranslate"><span class="pre">PRETTY</span> <span class="pre">FORMATS</span></code>.</p></li>
-<li><p>Склонируйте хранилище json из сервера <a class="reference external" href="http://github.com">github.com</a> у пользователя nlohmann по протоколу http.</p></li>
-<li><p>Склонируйте локальное хранилище в соседний каталог.
-Адрес локального хранилища совпадает с путевым именем рабочего каталога.</p></li>
-<li><p>Сравните скорость загрузки одного и того же хранилища с полной и неполной историей.
-Для примера воспользуйтесь хранилищем <code class="docutils literal notranslate"><span class="pre">https://github.com/nlohmann/json.git</span></code>.</p></li>
-<li><p>Покажите пример файла <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> для языка программирования C++ от разработчиков GitHub.</p></li>
-<li><p>Отобразите на экране справочную страницу команды <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">help</span></code>.</p></li>
-</ol>
 </section>
 </section>
 
@@ -421,20 +400,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="history.html"
+       href="git-clients.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Изучение истории</p>
+        <p class="prev-next-title">Клиенты Git</p>
       </div>
     </a>
     <a class="right-next"
-       href="git-server.html"
+       href="cli-client.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Git-сервер</p>
+        <p class="prev-next-title">Клиент командной строки</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
