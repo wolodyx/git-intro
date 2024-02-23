@@ -8,19 +8,20 @@ parts:
   - caption: Введение в основы
     chapters:
       - file: src/whatisgit.md
+      - file: src/cvs-history.md
       - file: src/collaborative-edit.md
       - file: src/cvs.md
-      - file: src/cvs-history.md
-      - file: src/setup.md
+      - file: src/changeset.md
       - file: src/git-clients.md
+      - file: src/setup.md
       - file: src/test0.md
   - caption: Работа с проектом
     chapters:
       - file: src/cli-client.md
       - file: src/help.md
       - file: src/config.md
-      - file: src/init.md
       - file: src/edit.md
+      - file: src/init.md
       - file: src/commit.md
       - file: src/history.md
       - file: src/test1.md
