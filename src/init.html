@@ -65,8 +65,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'src/init';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Изменение рабочей копии" href="edit.html" />
-    <link rel="prev" title="Работа с настройками" href="config.html" />
+    <link rel="next" title="Фиксация изменений" href="commit.html" />
+    <link rel="prev" title="Изменение рабочей копии" href="edit.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -171,11 +171,12 @@ const thebe_selector_output = ".output, .cell_output"
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Введение в основы</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="whatisgit.html">Что такое Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cvs-history.html">История развития СКВ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="collaborative-edit.html">Совместная работа над документом</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cvs.html">Управление версиями</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cvs-history.html">История развития СКВ</a></li>
-<li class="toctree-l1"><a class="reference internal" href="setup.html">Настройка рабочего окружения</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changeset.html">Набор изменений</a></li>
 <li class="toctree-l1"><a class="reference internal" href="git-clients.html">Клиенты Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Настройка рабочего окружения</a></li>
 <li class="toctree-l1"><a class="reference internal" href="test0.html">Проверочная работа</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Работа с проектом</span></p>
@@ -183,8 +184,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="cli-client.html">Клиент командной строки</a></li>
 <li class="toctree-l1"><a class="reference internal" href="help.html">Работа со справкой</a></li>
 <li class="toctree-l1"><a class="reference internal" href="config.html">Работа с настройками</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Создание хранилища</a></li>
 <li class="toctree-l1"><a class="reference internal" href="edit.html">Изменение рабочей копии</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Создание хранилища</a></li>
 <li class="toctree-l1"><a class="reference internal" href="commit.html">Фиксация изменений</a></li>
 <li class="toctree-l1"><a class="reference internal" href="history.html">Изучение истории</a></li>
 <li class="toctree-l1"><a class="reference internal" href="test1.html">Проверочная работа</a></li>
@@ -352,8 +353,8 @@ document.write(`
 <h1>Создание хранилища<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <!-- О команде `git init` -->
 <p>Любое хранилище в начале было создано.
-Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code> создает пустое хранилище.
-Пустое хранилище не содержит истории, а его рабочая копия пуста.
+Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code> превращает существующий каталог в хранилище.
+В начлале хранилище пустое: не содержит истории, а его рабочая копия пуста.
 Рабочий каталог может содержать файлы, которые в последствии будут добавлены в хранилище.
 Как это сделать, будет рассмотрено в разделе <a class="reference internal" href="commit.html"><span class="doc std std-doc">“Фиксация изменений”</span></a>.</p>
 <p>Каталог является рабочим для хранилища, если внутри себя содержит каталог <code class="docutils literal notranslate"><span class="pre">.git</span></code>.
@@ -396,20 +397,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="config.html"
+       href="edit.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Работа с настройками</p>
+        <p class="prev-next-title">Изменение рабочей копии</p>
       </div>
     </a>
     <a class="right-next"
-       href="edit.html"
+       href="commit.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Изменение рабочей копии</p>
+        <p class="prev-next-title">Фиксация изменений</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
