@@ -12,6 +12,7 @@ parts:
       - file: src/collaborative-edit.md
       - file: src/cvs.md
       - file: src/changeset.md
+      - file: src/tree.md
       - file: src/git-clients.md
       - file: src/setup.md
       - file: src/test0.md
