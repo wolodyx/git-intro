@@ -25,12 +25,15 @@ parts:
       - file: src/init.md
       - file: src/commit.md
       - file: src/history.md
+      - file: src/git-log-format.md
+      - file: src/git-log-filter.md
       - file: src/test1.md
   - caption: Работа в команде
     chapters:
       - file: src/git-server.md
       - file: src/clone.md
       - file: src/branch.md
+      - file: src/git-log-branch.md
       - file: src/merge.md
       - file: src/sync.md
       - file: src/workflow.md
