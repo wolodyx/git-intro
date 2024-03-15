@@ -188,6 +188,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="edit.html">Изменение рабочей копии</a></li>
 <li class="toctree-l1"><a class="reference internal" href="init.html">Создание хранилища</a></li>
 <li class="toctree-l1"><a class="reference internal" href="commit.html">Фиксация изменений</a></li>
+<li class="toctree-l1"><a class="reference internal" href="file-states.html">Управление состоянием файлов</a></li>
 <li class="toctree-l1"><a class="reference internal" href="history.html">История изменений</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Отображение коммитов</a></li>
 <li class="toctree-l1"><a class="reference internal" href="git-log-filter.html">Фильтрация коммитов</a></li>
@@ -397,48 +398,14 @@ Author: Martin Storsjö &lt;martin@martin.st&gt;
 <figure class="align-default">
 <img alt="../_images/git-log-medium.png" src="../_images/git-log-medium.png" />
 </figure>
-<p>Формат <code class="docutils literal notranslate"><span class="pre">full</span></code> убирает из формата <code class="docutils literal notranslate"><span class="pre">medium</span></code> запись о дате и времени, оставляя остальное неизменным.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>commit 0d933fc0d9bb7bdaed1997c0ae06567115242f74
-Author: Martin Storsjö &lt;martin@martin.st&gt;
-Commit: Brad King &lt;brad.king@kitware.com&gt;
-
-    Ninja: Update showIncludes prefix detection for clang-cl 18
-    
-    Since commit LLVM/Clang commit `5523fefb01c2` ([clang][lex] Use
-    preferred path separator in includer-relative lookup, 2023-09-08), part
-    of the upcoming 18.x release, the output format of the showIncludes flag
-    has changed, where it now prints paths with double backslashes:
-    
-        Note: including file: .\\foo.h
-    
-    Previously, we expected to see the path name in the form &quot;./foo.h&quot;.
-    
-    Extend the regex to match a path name starting with `.\`, in addition to
-    the existing matched patterns.
-</pre></div>
-</div>
-<p>Формат <code class="docutils literal notranslate"><span class="pre">fuller</span></code> добавляет к формату <code class="docutils literal notranslate"><span class="pre">medium</span></code> информацию о коммитере и время принятия коммита в хранилище.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>commit 0d933fc0d9bb7bdaed1997c0ae06567115242f74
-Author:     Martin Storsjö &lt;martin@martin.st&gt;
-AuthorDate: Tue Feb 6 23:58:44 2024 +0200
-Commit:     Brad King &lt;brad.king@kitware.com&gt;
-CommitDate: Wed Feb 7 09:38:14 2024 -0500
-
-    Ninja: Update showIncludes prefix detection for clang-cl 18
-    
-    Since commit LLVM/Clang commit `5523fefb01c2` ([clang][lex] Use
-    preferred path separator in includer-relative lookup, 2023-09-08), part
-    of the upcoming 18.x release, the output format of the showIncludes flag
-    has changed, where it now prints paths with double backslashes:
-    
-        Note: including file: .\\foo.h
-    
-    Previously, we expected to see the path name in the form &quot;./foo.h&quot;.
-    
-    Extend the regex to match a path name starting with `.\`, in addition to
-    the existing matched patterns.
-</pre></div>
-</div>
+<p>Формат <code class="docutils literal notranslate"><span class="pre">full</span></code> убирает из формата <code class="docutils literal notranslate"><span class="pre">medium</span></code> запись о дате и времени и добавляет информацию о коммитере.</p>
+<figure class="align-default">
+<img alt="../_images/git-log-full.png" src="../_images/git-log-full.png" />
+</figure>
+<p>Формат <code class="docutils literal notranslate"><span class="pre">fuller</span></code> к формату <code class="docutils literal notranslate"><span class="pre">full</span></code> добавляет авторскую и коммитерскую дату и время.</p>
+<figure class="align-default">
+<img alt="../_images/git-log-fuller.png" src="../_images/git-log-fuller.png" />
+</figure>
 <p>Формат <code class="docutils literal notranslate"><span class="pre">email</span></code> подготавливает описание коммита к отправке по почте из командной строки.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>From 0d933fc0d9bb7bdaed1997c0ae06567115242f74 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Martin=20Storsj=C3=B6?= &lt;martin@martin.st&gt;
@@ -540,10 +507,32 @@ committer Brad King &lt;brad.king@kitware.com&gt; 1707316694 -0500
 </pre></div>
 </div>
 <!-- STEP: Опция `--stat` -->
-<p>Опция <code class="docutils literal notranslate"><span class="pre">--stat</span></code> выводит статистику коммита.
-В нее входят список затронутых файлов и количества добавленных и удаленных строк.</p>
+<p>Опция <code class="docutils literal notranslate"><span class="pre">--stat</span></code> выводит статистику по коммиту.
+В нее входят список затронутых файлов и количества добавленных и удаленных строк.
+В конце суммарная информация показывает количество затронутых файлов, добавленных и удаленных строк.</p>
+<figure class="align-default">
+<img alt="../_images/git-log-stat.png" src="../_images/git-log-stat.png" />
+</figure>
 <!-- STEP: Опция `--patch` -->
+<p>Опция <code class="docutils literal notranslate"><span class="pre">--patch</span></code> дополнительно к описанию коммита покажет изменения в diff-формате.</p>
 <!-- STEP: Опция `--relative-date` -->
+<p>Опция <code class="docutils literal notranslate"><span class="pre">--relative-date</span></code> отобразит дату и время в относительно текущего момента:</p>
+<ul class="simple">
+<li><p>10 секунд назад;</p></li>
+<li><p>73 секунды назад;</p></li>
+<li><p>2 минуты назад;</p></li>
+<li><p>2 часа назад;</p></li>
+<li><p>24 часа назад;</p></li>
+<li><p>2 дня назад;</p></li>
+<li><p>5 дней назад;</p></li>
+<li><p>9 недель назад</p></li>
+<li><p>2 месяца назад;</p></li>
+<li><p>1 год, 5 месяцев назад;</p></li>
+<li><p>2 года назад;</p></li>
+</ul>
+<figure class="align-default">
+<img alt="../_images/git-log-relative-date.png" src="../_images/git-log-relative-date.png" />
+</figure>
 </section>
 
     <script type="text/x-thebe-config">

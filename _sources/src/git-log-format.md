@@ -46,50 +46,13 @@ Author: Martin Storsjö <martin@martin.st>
 ```{figure} ./images/git-log-medium.png
 ```
 
-Формат `full` убирает из формата `medium` запись о дате и времени, оставляя остальное неизменным.
-% --format=full
-```
-commit 0d933fc0d9bb7bdaed1997c0ae06567115242f74
-Author: Martin Storsjö <martin@martin.st>
-Commit: Brad King <brad.king@kitware.com>
+Формат `full` убирает из формата `medium` запись о дате и времени и добавляет информацию о коммитере.
 
-    Ninja: Update showIncludes prefix detection for clang-cl 18
-    
-    Since commit LLVM/Clang commit `5523fefb01c2` ([clang][lex] Use
-    preferred path separator in includer-relative lookup, 2023-09-08), part
-    of the upcoming 18.x release, the output format of the showIncludes flag
-    has changed, where it now prints paths with double backslashes:
-    
-        Note: including file: .\\foo.h
-    
-    Previously, we expected to see the path name in the form "./foo.h".
-    
-    Extend the regex to match a path name starting with `.\`, in addition to
-    the existing matched patterns.
+```{figure} ./images/git-log-full.png
 ```
 
-Формат `fuller` добавляет к формату `medium` информацию о коммитере и время принятия коммита в хранилище.
-% --format=fuller
-```
-commit 0d933fc0d9bb7bdaed1997c0ae06567115242f74
-Author:     Martin Storsjö <martin@martin.st>
-AuthorDate: Tue Feb 6 23:58:44 2024 +0200
-Commit:     Brad King <brad.king@kitware.com>
-CommitDate: Wed Feb 7 09:38:14 2024 -0500
-
-    Ninja: Update showIncludes prefix detection for clang-cl 18
-    
-    Since commit LLVM/Clang commit `5523fefb01c2` ([clang][lex] Use
-    preferred path separator in includer-relative lookup, 2023-09-08), part
-    of the upcoming 18.x release, the output format of the showIncludes flag
-    has changed, where it now prints paths with double backslashes:
-    
-        Note: including file: .\\foo.h
-    
-    Previously, we expected to see the path name in the form "./foo.h".
-    
-    Extend the regex to match a path name starting with `.\`, in addition to
-    the existing matched patterns.
+Формат `fuller` к формату `full` добавляет авторскую и коммитерскую дату и время.
+```{figure} ./images/git-log-fuller.png
 ```
 
 Формат `email` подготавливает описание коммита к отправке по почте из командной строки.
@@ -180,14 +143,31 @@ Niels Lohmann ==> Try old MinGW script (#3892)
 
 
 <!-- STEP: Опция `--stat` -->
-Опция `--stat` выводит статистику коммита.
+Опция `--stat` выводит статистику по коммиту.
 В нее входят список затронутых файлов и количества добавленных и удаленных строк.
-
+В конце суммарная информация показывает количество затронутых файлов, добавленных и удаленных строк.
+```{figure} ./images/git-log-stat.png
+```
 
 
 <!-- STEP: Опция `--patch` -->
-
+Опция `--patch` дополнительно к описанию коммита покажет изменения в diff-формате.
 
 
 <!-- STEP: Опция `--relative-date` -->
+Опция `--relative-date` отобразит дату и время в относительно текущего момента:
+* 10 секунд назад;
+* 73 секунды назад;
+* 2 минуты назад;
+* 2 часа назад;
+* 24 часа назад;
+* 2 дня назад;
+* 5 дней назад;
+* 9 недель назад
+* 2 месяца назад;
+* 1 год, 5 месяцев назад;
+* 2 года назад;
+
+```{figure} ./images/git-log-relative-date.png
+```
 
