@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Формат вывода коммитов &#8212; Git из командной строки</title>
+    <title>Отображение коммитов &#8212; Git из командной строки</title>
   
   
   
@@ -189,7 +189,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="init.html">Создание хранилища</a></li>
 <li class="toctree-l1"><a class="reference internal" href="commit.html">Фиксация изменений</a></li>
 <li class="toctree-l1"><a class="reference internal" href="history.html">История изменений</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Формат вывода коммитов</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Отображение коммитов</a></li>
 <li class="toctree-l1"><a class="reference internal" href="git-log-filter.html">Фильтрация коммитов</a></li>
 <li class="toctree-l1"><a class="reference internal" href="test1.html">Проверочная работа</a></li>
 </ul>
@@ -339,7 +339,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Формат вывода коммитов</h1>
+    <h1>Отображение коммитов</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -354,77 +354,177 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>Формат вывода коммитов<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<h1>Отображение коммитов<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <!-- STEP: Введение -->
-<p>В этом разделе рассмотрим опции команды <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code>, которые настраивают отображаемый текст на экране.</p>
+<p>В этом разделе рассмотрим опции команды <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code>, которые настраивают содержимое коммитов на экране.
+Мы научимся:</p>
 <ul class="simple">
-<li><p>выбор одного из вариантов стандартного отображения (опции <code class="docutils literal notranslate"><span class="pre">--oneline</span></code>, <code class="docutils literal notranslate"><span class="pre">--format</span></code> со значениями <code class="docutils literal notranslate"><span class="pre">short</span></code>, <code class="docutils literal notranslate"><span class="pre">full</span></code>, <code class="docutils literal notranslate"><span class="pre">oneline</span></code>, …);</p></li>
-<li><p>настройка собственного формата отображения (опция <code class="docutils literal notranslate"><span class="pre">--format=&quot;...&quot;</span></code>);</p></li>
-<li><p>включение дополнительной информации (опции <code class="docutils literal notranslate"><span class="pre">--patch</span></code> и <code class="docutils literal notranslate"><span class="pre">--stat</span></code>);</p></li>
-<li><p>вывод относительной даты (опция <code class="docutils literal notranslate"><span class="pre">--relative-date</span></code>).</p></li>
+<li><p>выбирать один из вариантов отображения (опции <code class="docutils literal notranslate"><span class="pre">--oneline</span></code>, <code class="docutils literal notranslate"><span class="pre">--format</span></code> со значениями <code class="docutils literal notranslate"><span class="pre">short</span></code>, <code class="docutils literal notranslate"><span class="pre">full</span></code>, <code class="docutils literal notranslate"><span class="pre">oneline</span></code>, …);</p></li>
+<li><p>настраивать собственный формат отображения (опция <code class="docutils literal notranslate"><span class="pre">--format=&quot;форматная</span> <span class="pre">строка&quot;</span></code>);</p></li>
+<li><p>включать дополнительную информацию о коммите (опции <code class="docutils literal notranslate"><span class="pre">--patch</span></code> и <code class="docutils literal notranslate"><span class="pre">--stat</span></code>);</p></li>
+<li><p>выводить относительные даты (опция <code class="docutils literal notranslate"><span class="pre">--relative-date</span></code>).</p></li>
 </ul>
 <!-- STEP: Опция `--format=<type>` -->
-<p>Существуют различные варианты отображения информации о коммите на экране, которые могуг быть выбраны опцией <code class="docutils literal notranslate"><span class="pre">--format=type</span></code>, где <code class="docutils literal notranslate"><span class="pre">type</span></code> имеет одно из следующих значений:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">oneline</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">short</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">full</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">fuller</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">reference</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">email</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">raw</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">medium</span></code></p></li>
-</ul>
-<p>Формат <code class="docutils literal notranslate"><span class="pre">--format=oneline</span></code>, как вытекает из названия, выводит информацию о коммите компактно одной строкой, содержащей только хеш-сумму и сообщение коммита.
-Однострочный вывод также доступен опцией <code class="docutils literal notranslate"><span class="pre">--oneline</span></code>, но только в этом случае хеш коммита дан в сокращенном виде.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>317d080fd9d7d66955e4bc2055a08b4edb044cf1 (HEAD -&gt; main, origin/main, origin/HEAD) Исправлена утечка серверного сокета
-8e36f074fb3374c6d0007c934765d3f6a17d955e Закрытие клиентских сокетов на стороне сервера
-ea3a417d17049d6b450a0076d82898f964213b6c Автоматическое закрытие клиента при потере связи с сервером
+<p>Существуют различные варианты отображения коммита на экране.
+Вариант указывает опция <code class="docutils literal notranslate"><span class="pre">--format=type</span></code>, где <code class="docutils literal notranslate"><span class="pre">type</span></code> имеет одно из следующих значений: <code class="docutils literal notranslate"><span class="pre">oneline</span></code>, <code class="docutils literal notranslate"><span class="pre">short</span></code>, <code class="docutils literal notranslate"><span class="pre">full</span></code>, <code class="docutils literal notranslate"><span class="pre">fuller</span></code>, <code class="docutils literal notranslate"><span class="pre">reference</span></code>, <code class="docutils literal notranslate"><span class="pre">email</span></code>, <code class="docutils literal notranslate"><span class="pre">raw</span></code>, <code class="docutils literal notranslate"><span class="pre">medium</span></code>.
+По умолчанию, Git использует <code class="docutils literal notranslate"><span class="pre">medium</span></code>.</p>
+<p>Формат, заданный опцией<code class="docutils literal notranslate"><span class="pre">--format=oneline</span></code>, как вытекает из названия, выводит сообщение о коммите одной строкой.
+Строка состоит из идентификатора и заголовка описания:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span><span class="n">d933fc0d9bb7bdaed1997c0ae06567115242f74</span> <span class="n">Ninja</span><span class="p">:</span> <span class="n">Update</span> <span class="n">showIncludes</span> <span class="n">prefix</span> <span class="n">detection</span> <span class="k">for</span> <span class="n">clang</span><span class="o">-</span><span class="n">cl</span> <span class="mi">18</span>
 </pre></div>
 </div>
-<p>Формат <code class="docutils literal notranslate"><span class="pre">--format=short</span></code> расширяет предыдущий вывод информацией об авторе коммита.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>commit 317d080fd9d7d66955e4bc2055a08b4edb044cf1 (HEAD -&gt; main, origin/main, origin/HEAD)
-Author: wolodyx &lt;wolodyx@yandex.ru&gt;
+<p>Компактный однострочный вывод за счет усечения до 10 цифр идентификатора дает опция <code class="docutils literal notranslate"><span class="pre">--oneline</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span><span class="n">d933fc0d9</span> <span class="n">Ninja</span><span class="p">:</span> <span class="n">Update</span> <span class="n">showIncludes</span> <span class="n">prefix</span> <span class="n">detection</span> <span class="k">for</span> <span class="n">clang</span><span class="o">-</span><span class="n">cl</span> <span class="mi">18</span>
+</pre></div>
+</div>
+<p>Похожее однострочное представление выводит формат <code class="docutils literal notranslate"><span class="pre">--format=reference</span></code>.
+Оно используется для человекочитаемой ссылки к описаниям других коммитов.
+Ссылка состоит из укороченного до 10 цифр идентификатора и заключенных в круглые скобки заголовка сообщения и даты.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span><span class="n">d933fc0d9</span> <span class="p">(</span><span class="n">Ninja</span><span class="p">:</span> <span class="n">Update</span> <span class="n">showIncludes</span> <span class="n">prefix</span> <span class="n">detection</span> <span class="k">for</span> <span class="n">clang</span><span class="o">-</span><span class="n">cl</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">2024</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">06</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Остальные предопределенные форматы (<code class="docutils literal notranslate"><span class="pre">short</span></code>, <code class="docutils literal notranslate"><span class="pre">full</span></code>, <code class="docutils literal notranslate"><span class="pre">fuller</span></code>, <code class="docutils literal notranslate"><span class="pre">email</span></code>, <code class="docutils literal notranslate"><span class="pre">raw</span></code>, <code class="docutils literal notranslate"><span class="pre">medium</span></code>) многострочные.</p>
+<p>Формат <code class="docutils literal notranslate"><span class="pre">--format=short</span></code> расширяет предыдущий вывод информацией об авторе коммита: его имени и электронной почте.
+Уже информация не помещается в одну строчку и каждое поле помещается в отдельную строку.</p>
+<div class="highlight-% notranslate"><div class="highlight"><pre><span></span>commit 0d933fc0d9bb7bdaed1997c0ae06567115242f74
+Author: Martin Storsjö &lt;martin@martin.st&gt;
 
-    Исправлена утечка серверного сокета
+    Ninja: Update showIncludes prefix detection for clang-cl 18
 </pre></div>
 </div>
-<p>Опции <code class="docutils literal notranslate"><span class="pre">--format=full</span></code> и <code class="docutils literal notranslate"><span class="pre">--format=fuller</span></code> добавляют поля об авторе и коммитере соответственно.</p>
-<!-- STEP: Опция `--format` с собственным форматом -->
-<p>Опция <code class="docutils literal notranslate"><span class="pre">--format</span></code> дополнительно предлагает возможность задания собственного формата:
+<p>Формат <code class="docutils literal notranslate"><span class="pre">medium</span></code> добавляет к формату <code class="docutils literal notranslate"><span class="pre">short</span></code> дату и время создания коммита, а описание коммита содержит уже дополнительно к заголовку тело.
+Данный формат <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> выбирает по умолчанию.</p>
+<figure class="align-default">
+<img alt="../_images/git-log-medium.png" src="../_images/git-log-medium.png" />
+</figure>
+<p>Формат <code class="docutils literal notranslate"><span class="pre">full</span></code> убирает из формата <code class="docutils literal notranslate"><span class="pre">medium</span></code> запись о дате и времени, оставляя остальное неизменным.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>commit 0d933fc0d9bb7bdaed1997c0ae06567115242f74
+Author: Martin Storsjö &lt;martin@martin.st&gt;
+Commit: Brad King &lt;brad.king@kitware.com&gt;
+
+    Ninja: Update showIncludes prefix detection for clang-cl 18
+    
+    Since commit LLVM/Clang commit `5523fefb01c2` ([clang][lex] Use
+    preferred path separator in includer-relative lookup, 2023-09-08), part
+    of the upcoming 18.x release, the output format of the showIncludes flag
+    has changed, where it now prints paths with double backslashes:
+    
+        Note: including file: .\\foo.h
+    
+    Previously, we expected to see the path name in the form &quot;./foo.h&quot;.
+    
+    Extend the regex to match a path name starting with `.\`, in addition to
+    the existing matched patterns.
+</pre></div>
+</div>
+<p>Формат <code class="docutils literal notranslate"><span class="pre">fuller</span></code> добавляет к формату <code class="docutils literal notranslate"><span class="pre">medium</span></code> информацию о коммитере и время принятия коммита в хранилище.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>commit 0d933fc0d9bb7bdaed1997c0ae06567115242f74
+Author:     Martin Storsjö &lt;martin@martin.st&gt;
+AuthorDate: Tue Feb 6 23:58:44 2024 +0200
+Commit:     Brad King &lt;brad.king@kitware.com&gt;
+CommitDate: Wed Feb 7 09:38:14 2024 -0500
+
+    Ninja: Update showIncludes prefix detection for clang-cl 18
+    
+    Since commit LLVM/Clang commit `5523fefb01c2` ([clang][lex] Use
+    preferred path separator in includer-relative lookup, 2023-09-08), part
+    of the upcoming 18.x release, the output format of the showIncludes flag
+    has changed, where it now prints paths with double backslashes:
+    
+        Note: including file: .\\foo.h
+    
+    Previously, we expected to see the path name in the form &quot;./foo.h&quot;.
+    
+    Extend the regex to match a path name starting with `.\`, in addition to
+    the existing matched patterns.
+</pre></div>
+</div>
+<p>Формат <code class="docutils literal notranslate"><span class="pre">email</span></code> подготавливает описание коммита к отправке по почте из командной строки.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>From 0d933fc0d9bb7bdaed1997c0ae06567115242f74 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Martin=20Storsj=C3=B6?= &lt;martin@martin.st&gt;
+Date: Tue, 6 Feb 2024 23:58:44 +0200
+Subject: [PATCH] Ninja: Update showIncludes prefix detection for clang-cl 18
+
+Since commit LLVM/Clang commit `5523fefb01c2` ([clang][lex] Use
+preferred path separator in includer-relative lookup, 2023-09-08), part
+of the upcoming 18.x release, the output format of the showIncludes flag
+has changed, where it now prints paths with double backslashes:
+
+    Note: including file: .\\foo.h
+
+Previously, we expected to see the path name in the form &quot;./foo.h&quot;.
+
+Extend the regex to match a path name starting with `.\`, in addition to
+the existing matched patterns.
+</pre></div>
+</div>
+<p>Формат <code class="docutils literal notranslate"><span class="pre">raw</span></code> выводит описание коммита во внутреннем представлении.
+Здесь видим, что появился поле <code class="docutils literal notranslate"><span class="pre">parent</span></code> – указатель на родительский коммит.
+Поле <code class="docutils literal notranslate"><span class="pre">tree</span></code> – это внутренний объект Git, который содержит изменения.</p>
+<div class="highlight-% notranslate"><div class="highlight"><pre><span></span>commit 0d933fc0d9bb7bdaed1997c0ae06567115242f74
+tree a35cd4850c3d520af1a3b21d626a1a576a640327
+parent a88acb0a419d184102c65ee9456950f2cea1cc71
+author Martin Storsjö &lt;martin@martin.st&gt; 1707256724 +0200
+committer Brad King &lt;brad.king@kitware.com&gt; 1707316694 -0500
+
+    Ninja: Update showIncludes prefix detection for clang-cl 18
+    
+    Since commit LLVM/Clang commit `5523fefb01c2` ([clang][lex] Use
+    preferred path separator in includer-relative lookup, 2023-09-08), part
+    of the upcoming 18.x release, the output format of the showIncludes flag
+    has changed, where it now prints paths with double backslashes:
+    
+        Note: including file: .\\foo.h
+    
+    Previously, we expected to see the path name in the form &quot;./foo.h&quot;.
+    
+    Extend the regex to match a path name starting with `.\`, in addition to
+    the existing matched patterns.
+</pre></div>
+</div>
+<!-- STEP: Опция `--format="форматная строка"` -->
+<p>Опция <code class="docutils literal notranslate"><span class="pre">--format</span></code> дополнительно предлагает возможность задания собственного формата вывода:
 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">--format=format:&quot;строка</span> <span class="pre">формата&quot;</span></code>
-В строке формата указывают опции, которые при выводе заменяются полями коммита.
-Вот некоторые из них:</p>
+Строка формата содержит символы:</p>
+<ul class="simple">
+<li><p>заменителя, замещаемых полями коммита при выводе;</p></li>
+<li><p>управления цветом;</p></li>
+<li><p>управления положением курсора;</p></li>
+</ul>
+<p>Вот некоторые из заменителей:</p>
 <table class="table">
 <thead>
-<tr class="row-odd"><th class="head"><p>Опция</p></th>
+<tr class="row-odd"><th class="head"><p>Заменители</p></th>
 <th class="head"><p>Описание</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>%H</p></td>
-<td><p>Хеш коммита</p></td>
+<td><p>хеш коммита</p></td>
 </tr>
 <tr class="row-odd"><td><p>%h</p></td>
-<td><p>Сокращенный хеш коммита</p></td>
+<td><p>сокращенный хеш коммита</p></td>
 </tr>
 <tr class="row-even"><td><p>%an</p></td>
-<td><p>Имя автора</p></td>
+<td><p>имя автора</p></td>
 </tr>
 <tr class="row-odd"><td><p>%ae</p></td>
-<td><p>Электронная почта автора</p></td>
+<td><p>электронная почта автора</p></td>
 </tr>
 <tr class="row-even"><td><p>%ad</p></td>
-<td><p>Дата автора</p></td>
+<td><p>дата создания коммита автором</p></td>
 </tr>
 <tr class="row-odd"><td><p>%s</p></td>
-<td><p>Содержание</p></td>
+<td><p>заголовок описания</p></td>
+</tr>
+<tr class="row-even"><td><p>%b</p></td>
+<td><p>тело описания</p></td>
 </tr>
 </tbody>
 </table>
 <p>Введем собственный компактный формат отображения, где в одной строке указаны имя автора и сообщение, разделенные символами <code class="docutils literal notranslate"><span class="pre">==&gt;</span></code>.
 Применим команду к хранилищу проекта <a class="reference external" href="https://github.com/nlohmann/json.git">json</a> от пользователя <a class="reference external" href="https://github.com/nlohmann">nlohmann</a>.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">skt@home:~/MyProjects/json$ </span>git<span class="w"> </span>log<span class="w"> </span>--format<span class="o">=</span>format:<span class="s2">&quot;%an ==&gt; %s&quot;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">skt@home:~/projects/json$ </span>git<span class="w"> </span>log<span class="w"> </span>--format<span class="o">=</span>format:<span class="s2">&quot;%an ==&gt; %s&quot;</span>
 <span class="go">Raphael Grimm ==&gt; Prevent memory leak when exception is thrown in adl_serializer::to_json (#3901)</span>
 <span class="go">dependabot[bot] ==&gt; ⬆️ Bump future from 0.18.2 to 0.18.3 in /docs/mkdocs (#3934)</span>
 <span class="go">Joyce ==&gt; Refactor amalgamation workflow to avoid dangerous use of pull_request_target (#3969)</span>
@@ -436,14 +536,14 @@ Author: wolodyx &lt;wolodyx@yandex.ru&gt;
 <span class="go">Raphael Grimm ==&gt; Fix CI issues (#3906)</span>
 <span class="go">Finkman ==&gt; PrettyPrinter: Check if match is valid before accessing group (#3920)</span>
 <span class="go">Niels Lohmann ==&gt; Try old MinGW script (#3892)</span>
-<span class="go">Niels Lohmann ==&gt; Upgrade Python packages (#3891)</span>
-<span class="go">Niels Lohmann ==&gt; Fix warning about moved from object (#3889)</span>
-<span class="go">Niels Lohmann ==&gt; Remove a magic number (#3888)</span>
-<span class="go">Niels Lohmann ==&gt; Add migration guide (#3887)</span>
-<span class="go">Niels Lohmann ==&gt; Clang 15 (#3876)</span>
 <span class="go">:</span>
 </pre></div>
 </div>
+<!-- STEP: Опция `--stat` -->
+<p>Опция <code class="docutils literal notranslate"><span class="pre">--stat</span></code> выводит статистику коммита.
+В нее входят список затронутых файлов и количества добавленных и удаленных строк.</p>
+<!-- STEP: Опция `--patch` -->
+<!-- STEP: Опция `--relative-date` -->
 </section>
 
     <script type="text/x-thebe-config">

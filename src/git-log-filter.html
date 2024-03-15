@@ -66,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Проверочная работа" href="test1.html" />
-    <link rel="prev" title="Формат вывода коммитов" href="git-log-format.html" />
+    <link rel="prev" title="Отображение коммитов" href="git-log-format.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -189,7 +189,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="init.html">Создание хранилища</a></li>
 <li class="toctree-l1"><a class="reference internal" href="commit.html">Фиксация изменений</a></li>
 <li class="toctree-l1"><a class="reference internal" href="history.html">История изменений</a></li>
-<li class="toctree-l1"><a class="reference internal" href="git-log-format.html">Формат вывода коммитов</a></li>
+<li class="toctree-l1"><a class="reference internal" href="git-log-format.html">Отображение коммитов</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Фильтрация коммитов</a></li>
 <li class="toctree-l1"><a class="reference internal" href="test1.html">Проверочная работа</a></li>
 </ul>
@@ -373,6 +373,9 @@ document.write(`
 <!-- Фильтрация по измененным файлам -->
 <p>Поиск в выбранном файле:
 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">--</span> <span class="pre">путь/к/файлу</span></code></p>
+<!-- Комбинация опций -->
+<p>Фильтрация коммитов и отображение форматом вывода команды <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> часто применяют совместно.
+Если мы ищем коммиты по автору, нас не интересует вывод поля о нем.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -411,7 +414,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Формат вывода коммитов</p>
+        <p class="prev-next-title">Отображение коммитов</p>
       </div>
     </a>
     <a class="right-next"
