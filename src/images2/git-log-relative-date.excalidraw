@@ -1,0 +1,90 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "https://marketplace.visualstudio.com/items?itemName=pomdtr.excalidraw-editor",
+  "elements": [
+    {
+      "id": "dl-kcIwnXugV27hR0ZG_e",
+      "type": "text",
+      "x": 624,
+      "y": 507,
+      "width": 820.3125,
+      "height": 192,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 572127163,
+      "version": 25,
+      "versionNonce": 105746389,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1710509866419,
+      "link": null,
+      "locked": false,
+      "text": "commit 1fafe35e81518f2d6bbd45fa8a7aa50a3681551c\nAuthor: Rafael Sadowski <rafael@sizeofvoid.org>\nDate:   3 месяца назад\n\n    Source: Restore compilation on OpenBSD\n    \n    We cannot use `OpenBSD` as a name, it is defined in `sys/param.h`.\n",
+      "fontSize": 20,
+      "fontFamily": 3,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "baseline": 187,
+      "containerId": null,
+      "originalText": "commit 1fafe35e81518f2d6bbd45fa8a7aa50a3681551c\nAuthor: Rafael Sadowski <rafael@sizeofvoid.org>\nDate:   3 месяца назад\n\n    Source: Restore compilation on OpenBSD\n    \n    We cannot use `OpenBSD` as a name, it is defined in `sys/param.h`.\n",
+      "lineHeight": 1.2
+    },
+    {
+      "id": "BEgQ34gShmVyVtBSqnVQC",
+      "type": "line",
+      "x": 622,
+      "y": 581,
+      "width": 264,
+      "height": 1,
+      "angle": 0,
+      "strokeColor": "#e03131",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1942373557,
+      "version": 114,
+      "versionNonce": 1048001019,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1710509911721,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          264,
+          1
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": null
+    }
+  ],
+  "appState": {
+    "gridSize": null,
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}

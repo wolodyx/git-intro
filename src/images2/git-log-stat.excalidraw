@@ -1,0 +1,48 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "https://marketplace.visualstudio.com/items?itemName=pomdtr.excalidraw-editor",
+  "elements": [
+    {
+      "id": "TgirDHkbyFoZWJt9mx6IQ",
+      "type": "text",
+      "x": 520,
+      "y": 378,
+      "width": 574.21875,
+      "height": 144,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 150063333,
+      "version": 26,
+      "versionNonce": 2009330917,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1710509223224,
+      "link": null,
+      "locked": false,
+      "text": "1fafe35e81 Source: Restore compilation on OpenBSD\n Source/cmComputeLinkInformation.cxx | 4 ++--\n Source/cmComputeLinkInformation.h   | 2 +-\n Source/cmFindLibraryCommand.cxx     | 8 ++++----\n 3 files changed, 7 insertions(+), 7 deletions(-)\n",
+      "fontSize": 20,
+      "fontFamily": 3,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "baseline": 139,
+      "containerId": null,
+      "originalText": "1fafe35e81 Source: Restore compilation on OpenBSD\n Source/cmComputeLinkInformation.cxx | 4 ++--\n Source/cmComputeLinkInformation.h   | 2 +-\n Source/cmFindLibraryCommand.cxx     | 8 ++++----\n 3 files changed, 7 insertions(+), 7 deletions(-)\n",
+      "lineHeight": 1.2
+    }
+  ],
+  "appState": {
+    "gridSize": null,
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}

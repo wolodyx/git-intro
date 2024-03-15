@@ -24,6 +24,7 @@ parts:
       - file: src/edit.md
       - file: src/init.md
       - file: src/commit.md
+      - file: src/file-states.md
       - file: src/history.md
       - file: src/git-log-format.md
       - file: src/git-log-filter.md
