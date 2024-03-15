@@ -1,66 +1,169 @@
-# Формат вывода коммитов
+# Отображение коммитов
 
 <!-- STEP: Введение -->
-В этом разделе рассмотрим опции команды `git log`, которые настраивают отображаемый текст на экране.
-
-* выбор одного из вариантов стандартного отображения (опции `--oneline`, `--format` со значениями `short`, `full`, `oneline`, ...);
-* настройка собственного формата отображения (опция `--format="..."`);
-* включение дополнительной информации (опции `--patch` и `--stat`);
-* вывод относительной даты (опция `--relative-date`).
+В этом разделе рассмотрим опции команды `git log`, которые настраивают содержимое коммитов на экране.
+Мы научимся:
+* выбирать один из вариантов отображения (опции `--oneline`, `--format` со значениями `short`, `full`, `oneline`, ...);
+* настраивать собственный формат отображения (опция `--format="форматная строка"`);
+* включать дополнительную информацию о коммите (опции `--patch` и `--stat`);
+* выводить относительные даты (опция `--relative-date`).
 
 
 <!-- STEP: Опция `--format=<type>` -->
-Существуют различные варианты отображения информации о коммите на экране, которые могуг быть выбраны опцией `--format=type`, где `type` имеет одно из следующих значений:
-* `oneline`
-* `short`
-* `full`
-* `fuller`
-* `reference`
-* `email`
-* `raw`
-* `medium`
+Существуют различные варианты отображения коммита на экране.
+Вариант указывает опция `--format=type`, где `type` имеет одно из следующих значений: `oneline`, `short`, `full`, `fuller`, `reference`, `email`, `raw`, `medium`.
+По умолчанию, Git использует `medium`.
 
-Формат `--format=oneline`, как вытекает из названия, выводит информацию о коммите компактно одной строкой, содержащей только хеш-сумму и сообщение коммита.
-Однострочный вывод также доступен опцией `--oneline`, но только в этом случае хеш коммита дан в сокращенном виде.
+Формат, заданный опцией`--format=oneline`, как вытекает из названия, выводит сообщение о коммите одной строкой.
+Строка состоит из идентификатора и заголовка описания:
+```
+0d933fc0d9bb7bdaed1997c0ae06567115242f74 Ninja: Update showIncludes prefix detection for clang-cl 18
+```
+Компактный однострочный вывод за счет усечения до 10 цифр идентификатора дает опция `--oneline`:
+```
+0d933fc0d9 Ninja: Update showIncludes prefix detection for clang-cl 18
+```
+Похожее однострочное представление выводит формат `--format=reference`.
+Оно используется для человекочитаемой ссылки к описаниям других коммитов.
+Ссылка состоит из укороченного до 10 цифр идентификатора и заключенных в круглые скобки заголовка сообщения и даты.
+```
+0d933fc0d9 (Ninja: Update showIncludes prefix detection for clang-cl 18, 2024-02-06)
+```
+Остальные предопределенные форматы (`short`, `full`, `fuller`, `email`, `raw`, `medium`) многострочные.
 
-``` text
-317d080fd9d7d66955e4bc2055a08b4edb044cf1 (HEAD -> main, origin/main, origin/HEAD) Исправлена утечка серверного сокета
-8e36f074fb3374c6d0007c934765d3f6a17d955e Закрытие клиентских сокетов на стороне сервера
-ea3a417d17049d6b450a0076d82898f964213b6c Автоматическое закрытие клиента при потере связи с сервером
+Формат `--format=short` расширяет предыдущий вывод информацией об авторе коммита: его имени и электронной почте.
+Уже информация не помещается в одну строчку и каждое поле помещается в отдельную строку.
+``` % --format=short
+commit 0d933fc0d9bb7bdaed1997c0ae06567115242f74
+Author: Martin Storsjö <martin@martin.st>
+
+    Ninja: Update showIncludes prefix detection for clang-cl 18
 ```
 
-Формат `--format=short` расширяет предыдущий вывод информацией об авторе коммита.
+Формат `medium` добавляет к формату `short` дату и время создания коммита, а описание коммита содержит уже дополнительно к заголовку тело.
+Данный формат `git log` выбирает по умолчанию.
 
-``` text
-commit 317d080fd9d7d66955e4bc2055a08b4edb044cf1 (HEAD -> main, origin/main, origin/HEAD)
-Author: wolodyx <wolodyx@yandex.ru>
-
-    Исправлена утечка серверного сокета
+```{figure} ./images/git-log-medium.png
 ```
 
-Опции `--format=full` и `--format=fuller` добавляют поля об авторе и коммитере соответственно.
+Формат `full` убирает из формата `medium` запись о дате и времени, оставляя остальное неизменным.
+% --format=full
+```
+commit 0d933fc0d9bb7bdaed1997c0ae06567115242f74
+Author: Martin Storsjö <martin@martin.st>
+Commit: Brad King <brad.king@kitware.com>
+
+    Ninja: Update showIncludes prefix detection for clang-cl 18
+    
+    Since commit LLVM/Clang commit `5523fefb01c2` ([clang][lex] Use
+    preferred path separator in includer-relative lookup, 2023-09-08), part
+    of the upcoming 18.x release, the output format of the showIncludes flag
+    has changed, where it now prints paths with double backslashes:
+    
+        Note: including file: .\\foo.h
+    
+    Previously, we expected to see the path name in the form "./foo.h".
+    
+    Extend the regex to match a path name starting with `.\`, in addition to
+    the existing matched patterns.
+```
+
+Формат `fuller` добавляет к формату `medium` информацию о коммитере и время принятия коммита в хранилище.
+% --format=fuller
+```
+commit 0d933fc0d9bb7bdaed1997c0ae06567115242f74
+Author:     Martin Storsjö <martin@martin.st>
+AuthorDate: Tue Feb 6 23:58:44 2024 +0200
+Commit:     Brad King <brad.king@kitware.com>
+CommitDate: Wed Feb 7 09:38:14 2024 -0500
+
+    Ninja: Update showIncludes prefix detection for clang-cl 18
+    
+    Since commit LLVM/Clang commit `5523fefb01c2` ([clang][lex] Use
+    preferred path separator in includer-relative lookup, 2023-09-08), part
+    of the upcoming 18.x release, the output format of the showIncludes flag
+    has changed, where it now prints paths with double backslashes:
+    
+        Note: including file: .\\foo.h
+    
+    Previously, we expected to see the path name in the form "./foo.h".
+    
+    Extend the regex to match a path name starting with `.\`, in addition to
+    the existing matched patterns.
+```
+
+Формат `email` подготавливает описание коммита к отправке по почте из командной строки.
+% --format=email
+```
+From 0d933fc0d9bb7bdaed1997c0ae06567115242f74 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Martin=20Storsj=C3=B6?= <martin@martin.st>
+Date: Tue, 6 Feb 2024 23:58:44 +0200
+Subject: [PATCH] Ninja: Update showIncludes prefix detection for clang-cl 18
+
+Since commit LLVM/Clang commit `5523fefb01c2` ([clang][lex] Use
+preferred path separator in includer-relative lookup, 2023-09-08), part
+of the upcoming 18.x release, the output format of the showIncludes flag
+has changed, where it now prints paths with double backslashes:
+
+    Note: including file: .\\foo.h
+
+Previously, we expected to see the path name in the form "./foo.h".
+
+Extend the regex to match a path name starting with `.\`, in addition to
+the existing matched patterns.
+```
+
+Формат `raw` выводит описание коммита во внутреннем представлении.
+Здесь видим, что появился поле `parent` -- указатель на родительский коммит.
+Поле `tree` -- это внутренний объект Git, который содержит изменения.
+``` % --format=raw
+commit 0d933fc0d9bb7bdaed1997c0ae06567115242f74
+tree a35cd4850c3d520af1a3b21d626a1a576a640327
+parent a88acb0a419d184102c65ee9456950f2cea1cc71
+author Martin Storsjö <martin@martin.st> 1707256724 +0200
+committer Brad King <brad.king@kitware.com> 1707316694 -0500
+
+    Ninja: Update showIncludes prefix detection for clang-cl 18
+    
+    Since commit LLVM/Clang commit `5523fefb01c2` ([clang][lex] Use
+    preferred path separator in includer-relative lookup, 2023-09-08), part
+    of the upcoming 18.x release, the output format of the showIncludes flag
+    has changed, where it now prints paths with double backslashes:
+    
+        Note: including file: .\\foo.h
+    
+    Previously, we expected to see the path name in the form "./foo.h".
+    
+    Extend the regex to match a path name starting with `.\`, in addition to
+    the existing matched patterns.
+```
 
 
-<!-- STEP: Опция `--format` с собственным форматом -->
-Опция `--format` дополнительно предлагает возможность задания собственного формата:
+<!-- STEP: Опция `--format="форматная строка"` -->
+Опция `--format` дополнительно предлагает возможность задания собственного формата вывода:
 `git log --format=format:"строка формата"`
-В строке формата указывают опции, которые при выводе заменяются полями коммита.
-Вот некоторые из них:
+Строка формата содержит символы:
+* заменителя, замещаемых полями коммита при выводе;
+* управления цветом;
+* управления положением курсора;
 
-| Опция |         Описание         |
+Вот некоторые из заменителей:
+
+| Заменители |     Описание        |
 |-------|--------------------------|
-|  %H   | Хеш коммита              | 
-|  %h   | Сокращенный хеш коммита  | 
-|  %an  | Имя автора               | 
-|  %ae  | Электронная почта автора | 
-|  %ad  | Дата автора              | 
-|  %s   | Содержание               | 
+|  %H   | хеш коммита              | 
+|  %h   | сокращенный хеш коммита  | 
+|  %an  | имя автора               | 
+|  %ae  | электронная почта автора | 
+|  %ad  | дата создания коммита автором | 
+|  %s   | заголовок описания       | 
+|  %b   | тело описания            | 
 
 Введем собственный компактный формат отображения, где в одной строке указаны имя автора и сообщение, разделенные символами `==>`.
 Применим команду к хранилищу проекта [json](https://github.com/nlohmann/json.git) от пользователя [nlohmann](https://github.com/nlohmann).
 
 ``` console
-skt@home:~/MyProjects/json$ git log --format=format:"%an ==> %s"
+skt@home:~/projects/json$ git log --format=format:"%an ==> %s"
 Raphael Grimm ==> Prevent memory leak when exception is thrown in adl_serializer::to_json (#3901)
 dependabot[bot] ==> ⬆️ Bump future from 0.18.2 to 0.18.3 in /docs/mkdocs (#3934)
 Joyce ==> Refactor amalgamation workflow to avoid dangerous use of pull_request_target (#3969)
@@ -72,11 +175,19 @@ Florian Segginger ==> Change 2022 to 2023 (#3932)
 Raphael Grimm ==> Fix CI issues (#3906)
 Finkman ==> PrettyPrinter: Check if match is valid before accessing group (#3920)
 Niels Lohmann ==> Try old MinGW script (#3892)
-Niels Lohmann ==> Upgrade Python packages (#3891)
-Niels Lohmann ==> Fix warning about moved from object (#3889)
-Niels Lohmann ==> Remove a magic number (#3888)
-Niels Lohmann ==> Add migration guide (#3887)
-Niels Lohmann ==> Clang 15 (#3876)
 :
 ```
+
+
+<!-- STEP: Опция `--stat` -->
+Опция `--stat` выводит статистику коммита.
+В нее входят список затронутых файлов и количества добавленных и удаленных строк.
+
+
+
+<!-- STEP: Опция `--patch` -->
+
+
+
+<!-- STEP: Опция `--relative-date` -->
 
