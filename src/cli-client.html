@@ -356,7 +356,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>Клиент командной строки<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
-<p>Git-клиент командной строки представлен консольной утилитой <code class="docutils literal notranslate"><span class="pre">git</span></code>.
+<p>Git-клиент командной строки воплощен в образе консольной утилиты <code class="docutils literal notranslate"><span class="pre">git</span></code>.
 Утилита выполняет команды, переданные ей в виде аргументов.
 Первым аргументом идет название команды, за которым идут аргументы этой команды, если они есть.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>&lt;команда&gt;<span class="w"> </span><span class="o">[</span>&lt;аргументы&gt;<span class="w"> </span>...<span class="o">]</span>
@@ -364,15 +364,15 @@ document.write(`
 </div>
 <p>Так, командная строка:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span> <span class="pre">--short</span></code> покажет состояние файлов в краткой форме;</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">restore</span> <span class="pre">src/modules/CMakeLists.txt</span></code> откатит изменения в файле <code class="docutils literal notranslate"><span class="pre">src/modules/CMakeLists.txt</span></code> до последнего фиксированного состояния;</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-m&quot;Fix</span> <span class="pre">bug</span> <span class="pre">#3296&quot;</span></code> зафиксирует изменения по исправлению ошибки под номером 3296.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span> <span class="pre">--short</span></code> отобразит на экране состояние файлов в краткой форме;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">restore</span> <span class="pre">src/modules/CMakeLists.txt</span></code> откатит изменения в файле <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> из подкаталога <code class="docutils literal notranslate"><span class="pre">src/modules</span></code> до последнего фиксированного состояния;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-m&quot;Fix</span> <span class="pre">bug</span> <span class="pre">#3296&quot;</span></code> зафиксирует изменения, связав с ним сообщение “Fix bug #3296” (исправление ошибки под номером 3296).</p></li>
 </ul>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Аргументы в командной строке разделены пробельными символами.</p>
 </div>
-<p>На курсе будут изучены следующие команды:</p>
+<p>На курсе мы познакомимся со следующими командами Git:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">add</span></code>, добавляет измененные файлы в индекс;</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">branch</span></code>, управляет ветками;</p></li>
@@ -404,7 +404,7 @@ document.write(`
 <li><p><code class="docutils literal notranslate"><span class="pre">less</span></code> для просмотра текстовых данных, не помещающихся на экране;</p></li>
 <li><p>ввода с клавиатуры для интерактивной выборки.</p></li>
 </ul>
-<p>Бо´льшая часть команд для своего исполнения требует хранилище.
+<p>Бо´льшая часть команд для своего исполнения потребуют хранилище – каталог с именем <code class="docutils literal notranslate"><span class="pre">.git</span></code>.
 Они будут искать его в текущем каталоге.
 Если его там нет, то поднимутся выше по файловой системе, пока не найдут или не упрутся в корневой каталог.
 Если хранилище не будет найдено, то на экране терминала отобразится сообщение об ошибке следующего содержания:</p>
@@ -416,7 +416,7 @@ document.write(`
 <p>Текущий каталог должен указывать на рабочий каталог или любой вложенный каталог в нем.</p>
 </div>
 <!-- Про синхронизацию нескольких клиентов -->
-<p>Git позволяет нескольким клиентам одновременно работать с одним репозиторием.
+<p>Git позволяет нескольким клиентам одновременно работать с одним хранилищем.
 Состояние хранилища или самого Git фиксируется в:</p>
 <ul class="simple">
 <li><p>каталоге хранилища;</p></li>

@@ -356,11 +356,6 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>Изменение рабочей копии<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
-<!--
-Изменение рабочей копии происходит в текстовом редакторе, файловом менеджере или терминале.
-В первом файлы редактируются, а во втором и третьем создаются, перемещаются, удаляются.
-Все действия могут происходить и в интегрированной среде разработки как VSCode.
--->
 <p>Проект исходного кода (или рабочая копия программы) состоит из сгруппированных по каталогам файлов.
 В файлах размещены исходные коды программы, инструкции по сборке, документация, настройки, тестовые данные и другая информация.
 Программа непрерывно улучшается за счет изменения исходных кодов.
@@ -376,15 +371,26 @@ document.write(`
 Также полезно увидеть, что именно изменилось в сравнении с исходным состоянием файлов.
 Эти вопросы будут рассмотрены ниже.</p>
 <!-- Работа с файловой системой -->
-<p><code class="docutils literal notranslate"><span class="pre">mkdir</span></code>, <code class="docutils literal notranslate"><span class="pre">touch</span></code>, <code class="docutils literal notranslate"><span class="pre">rm</span></code>, <code class="docutils literal notranslate"><span class="pre">mv</span></code>.</p>
-<p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code> сравнивает измененные файлы в рабочей копии с зафиксированными и отображает патч на экране терминала.</p>
-<!-- Просмотр изменений в текстовом терминале -->
-<p>git diff
-git diff –staged</p>
+<p>Редактирование файла происходит в любом текстовом редакторе.
+Для работы с файловой системой мы можем воспользоваться следующими командами из терминала:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">mkdir</span></code> создает новый каталог;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">touch</span></code> создаст новый пустой файл;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rm</span></code> удалит файл и каталог, но с опцией <code class="docutils literal notranslate"><span class="pre">-r</span></code>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cp</span> <span class="pre">&lt;from&gt;</span> <span class="pre">&lt;to&gt;</span></code> скопирует файл или каталог, но с опцией <code class="docutils literal notranslate"><span class="pre">-r</span></code>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mv</span> <span class="pre">&lt;from&gt;</span> <span class="pre">&lt;to&gt;</span></code> переименует или переместит файл.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">chmod</span> <span class="pre">+x</span> <span class="pre">&lt;file&gt;</span></code> установит атрибут “исполнимый файл” и сбросит атрибут, но с опцией <code class="docutils literal notranslate"><span class="pre">-x</span></code>.</p></li>
+</ul>
+<p>Те же самые действия можно выполнить в IDE, как например VSCode.</p>
 <!-- Просмотр изменений в графической утилите -->
-<p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">difftool</span> <span class="pre">--tool-help</span></code> покажет список доступных интерактивных инструментов для просмотра изменений.</p>
-<p>git difftool –tool=kdiff3
-git difftool –tool=vimdiff</p>
+<p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code> сравнивает измененные файлы в рабочей копии с зафиксированными и отображает патч на экране терминала.
+Тот же самый патч можно просмотреть в другой интерактивной программе.
+Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">difftool</span> <span class="pre">--tool-help</span></code> покажет список доступных инструментов для просмотра изменений.
+Вы может выбрать любой из них опцией <code class="docutils literal notranslate"><span class="pre">--tool</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>difftool<span class="w"> </span>--tool<span class="o">=</span>kdiff3
+git<span class="w"> </span>difftool<span class="w"> </span>--tool<span class="o">=</span>vimdiff
+</pre></div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
