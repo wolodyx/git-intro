@@ -356,24 +356,42 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>Фильтрация коммитов<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<p>В предыдущем разделе мы увидели, как можно управлять форматом вывода <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code>.
+Теперь же посмотрим, как фильтровать коммиты, оставляя только те из них, что нам представляют интерес.</p>
+<!-- `git log --all` -->
+<p>Несмотря на то, что вывод <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> протяженный, она не показывает все коммиты, а только те, что достижимы из текущей ветки.
+Чтобы команда отобразила все коммиты, ей передают опцию <code class="docutils literal notranslate"><span class="pre">--all</span></code>.
+Чтобы показать только коммиты конкретной ветки, ее имя передают в виде аргумента.
+Вместо имени ветки может быть любое обозначение, которое указывает на коммит: имя тега и идентификатор коммита.
+И при этом их может быть несколько.
+Соответственно, будут показаны те коммиты, которые достижимы из переданных.</p>
+<!-- `git log ^<commit>` -->
+<p>С другой стороны, подставляя символ <code class="docutils literal notranslate"><span class="pre">^</span></code> перед ссылкой на коммит, мы, наоборот, отбрасываем достижимые коммиты из вывода.
+Где мы можем воспользоваться этим?
+Например, посмотрим только те коммиты, которые еще не отправлены в публичное хранилище.
+Они размещаются между указателем на вершину ветки <code class="docutils literal notranslate"><span class="pre">HEAD</span></code> и удаленной веткой <code class="docutils literal notranslate"><span class="pre">origin/master</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">log</span> <span class="n">HEAD</span> <span class="o">^</span><span class="n">origin</span><span class="o">/</span><span class="n">master</span>
+</pre></div>
+</div>
+<p>Тот же самый вариант команды можно достичь, используя синтаксис с двумя точками, который проще для понимания: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">origin/master..HEAD</span></code>.
+Если предполагается, что верхний диапазон совпадет с началом ветки, то его можно и не указывать: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">origin/master..</span></code>.</p>
+<p>Давайте посмотрим, что нас ожидает в следующей версии CMake.
+Просмотрим все теги и увидим, что тег с последней версией – это v3.28.3.
+Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">--oneline</span> <span class="pre">v3.28.3..</span></code> покажет внесенные правки в следующую версию CMake, пока не доступные в официальном хранилище.</p>
+<p>Показ последних нескольких коммитов (напримре, трех):
+<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">-3</span></code></p>
 <!-- Фильтрация по автору -->
 <p>Поиск по автору:
 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">--author=&quot;имя</span> <span class="pre">автора&quot;</span></code>
 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">--committer=&quot;имя</span> <span class="pre">коммитера&quot;</span></code></p>
-<p>Показ последних нескольких коммитов (напримре, трех):
-<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">-3</span></code></p>
 <!-- Фильтрация по времени фиксации -->
-<p>Поиск по времени опциями <code class="docutils literal notranslate"><span class="pre">--after</span></code> и <code class="docutils literal notranslate"><span class="pre">--before</span></code>.
-Первая из них показывает</p>
+<p>Поиск по времени опциями <code class="docutils literal notranslate"><span class="pre">--after</span></code> и <code class="docutils literal notranslate"><span class="pre">--before</span></code>.</p>
 <!-- Фильтрация по ключевому слову в сообщении -->
-<p>Поиск по ключевому слову в сообщении коммита:
-<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">--grep=&quot;ключевое</span> <span class="pre">слово&quot;</span></code></p>
+<p>Поиск по ключевому слову в сообщении коммита: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">--grep=&quot;ключевое</span> <span class="pre">слово&quot;</span></code></p>
 <!-- Фильтрация по ключевому слову в изменениях -->
-<p>Поиск по ключевому слову в тексте изменений:
-<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">-S=&quot;ключевое</span> <span class="pre">слово&quot;</span></code></p>
+<p>Поиск по ключевому слову в изменениях: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">-S=&quot;ключевое</span> <span class="pre">слово&quot;</span></code>.</p>
 <!-- Фильтрация по измененным файлам -->
-<p>Поиск в выбранном файле:
-<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">--</span> <span class="pre">путь/к/файлу</span></code></p>
+<p>Вывод коммитов, затронувших заданный файл: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">--</span> <span class="pre">путь/к/файлу</span></code>.</p>
 <!-- Комбинация опций -->
 <p>Фильтрация коммитов и отображение форматом вывода команды <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> часто применяют совместно.
 Если мы ищем коммиты по автору, нас не интересует вывод поля о нем.</p>

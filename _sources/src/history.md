@@ -107,6 +107,8 @@ CommitDate: Sat Mar 4 08:18:44 2023 +0300
     Initial commit
 ```
 
+<!-- `git log --reverse` -->
+
 
 ## Дополнительные источники
 
