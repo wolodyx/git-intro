@@ -356,6 +356,146 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>Управление состоянием файлов<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<p>В этом разделе:</p>
+<ul class="simple">
+<li><p>узнаем о состояниях файлов, в которых они могут находиться: отслеживаемый и неотслеживаемый, игнорируемый, зафиксированный, измененный, индексированный;</p></li>
+<li><p>познакомимся с командами:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> выводит состояние файлов на экран;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code> добавляет измененные и неотслеживаемые файлы в индекс;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">restore</span></code> убирает файл из индекса или отбрасывает изменения, возвращая файл в начальное состояние;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rm</span></code> выводит файл из-под контроля;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">mv</span></code> переименовывает или перемещает файл;</p></li>
+</ul>
+</li>
+<li><p>научимся оперировать несколькими файлами, используя шаблоны в аргументах команд.</p></li>
+</ul>
+<!-- Отслеживаемые и неотслеживаемые файлы -->
+<p>Git интересуют файлы в рабочем каталоге, но не за его пределами.
+Интерес выражается в том, что в последующем пользователю будет предложено добавить изменения в них в историю хранилища.
+Все файлы в рабочем каталоге делятся на <em>отслеживаемые</em> (tracked) и <em>неотслеживаемые</em> (untracked).
+К отслеживаемым файлам относятся те, которые до этого присутствовали в ревизии, из которой извлечена рабочая копия.
+Недавно созданные файлы, еще не попавшие в историю или индекс (который мы рассмотрим ниже), будут относится к категории неотслеживаемых.</p>
+<figure class="align-default">
+<img alt="../_images/file-states.png" src="../_images/file-states.png" />
+</figure>
+<!-- Неотслеживаемые файлы и артефакты сборки -->
+<p>В процессе работы над проектом в рабочем каталоге появляются новые файлы, например, сгенерированные системой сборки, компилятором, тестовой системой, архиватором.
+Сюда входят объектные, исполняемые, временные и архивные файлы.
+Эти файлы производны от исходных кодов, сценариев сборки и представляют краткосрочный интерес.
+Их еще называют <em>артефактами сборки</em>.
+Даже если их удалить из файловой системы, они могут быть повторно получены пересборкой программы.
+Считается хорошей практикой держать артефакты сборки в отдельном каталоге, как например в <code class="docutils literal notranslate"><span class="pre">CMake</span></code>.
+Но система сборки <code class="docutils literal notranslate"><span class="pre">Make</span></code> создает артефакты рядом с файлами исходным кодом, что засоряет рабочий каталог.</p>
+<!-- Файл `.gitignore` -->
+<p>Таким образом, все неотслеживаемые файлы можно разделить на две категории:</p>
+<ul class="simple">
+<li><p>новые файлы, добавляемые в скором времени в следующую ревизию;</p></li>
+<li><p>игнорируемые, путь в хранилище которым закрыт навсегда.</p></li>
+</ul>
+<p>Чтобы файлы из первой категории не потерялись среди многочисленных файлов второй, в Git добавлены списки игнорируемых файлов и каталогов.
+Они перечисляются в файле <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> в формате регулярных выражений.
+Сам файл располагается в корне рабочего каталога.
+Содержимое этого файла зависит от используемого языка программирования, библиотек и инструментов.
+Разработчики GitHub в открытом проекте <a class="reference external" href="https://github.com/github/gitignore">gitignore</a> собрали примеры этих файлов с привязкой к используемым программным технологиям.</p>
+<!-- Отслеживаемые файлы -->
+<p>Отслеживаемые файлы составляют проект программы и основу для следующей ревизии.
+Они в свою очередь делятся на три части:</p>
+<ul class="simple">
+<li><p>зафиксированные;</p></li>
+<li><p>измененные;</p></li>
+<li><p>проиндексированные.</p></li>
+</ul>
+<figure class="align-default">
+<img alt="../_images/file-states-flow.png" src="../_images/file-states-flow.png" />
+</figure>
+<!-- Зафиксированный и измененный файлы -->
+<p>После клонирования и последующего извлечения рабочей копии все файлы в рабочем каталоге относятся к зафиксированным.
+Если отредактировать зафиксированный файл, то он перейдет в измененное состояние.
+Если откатить изменения у измененного файла, то он перейдет обратно в зафиксированное состояние.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Файл, помещенный в индекс, уже не является измененным.
+Но если после индексации файл изменить еще раз, то он одновременно будет измененным и проиндексированным.</p>
+</div>
+<!-- `git status` и состояние файлов -->
+<p>Состояние файлов в рабочем каталоге показывает команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code>.
+В примере ниже она показывает, что файл <code class="docutils literal notranslate"><span class="pre">LampServer.cpp</span></code> изменен и неотслеживаются файлы из каталога <code class="docutils literal notranslate"><span class="pre">build/</span></code>.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">skt@home:~/MyProjects/RemoteLamps$ </span>git<span class="w"> </span>status
+<span class="go">На ветке main</span>
+<span class="go">Ваша ветка обновлена в соответствии с «origin/main».</span>
+
+<span class="go">Изменения, которые не в индексе для коммита:</span>
+<span class="go">  (используйте «git add &lt;файл&gt;…», чтобы добавить файл в индекс)</span>
+<span class="go">  (используйте «git restore &lt;файл&gt;…», чтобы отменить изменения в рабочем каталоге)</span>
+<span class="go">	изменено:      LampServer.cpp</span>
+
+<span class="go">Неотслеживаемые файлы:</span>
+<span class="go">  (используйте «git add &lt;файл&gt;…», чтобы добавить в то, что будет включено в коммит)</span>
+<span class="go">	build/</span>
+
+<span class="go">нет изменений добавленных для коммита</span>
+<span class="gp gp-VirtualEnv">(используйте «git add» и/или «git commit -a»)</span>
+</pre></div>
+</div>
+<!-- Компактный вывод команды `git status` -->
+<p>Кроме состояний файлов, команда также подсказывает как изменить эти состояния.
+На первых порах эти подсказки помогают, но в будущем многословность только мешают.
+Компактный вывод делает опция <code class="docutils literal notranslate"><span class="pre">-s</span></code> (<code class="docutils literal notranslate"><span class="pre">--short</span></code>) (“short” переводится с английского как “короткий”).</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">skt@home:~/MyProjects/RemoteLamps$ </span>git<span class="w"> </span>status<span class="w"> </span>-s
+<span class="go">M  LampServer.cpp</span>
+<span class="go">?? build/</span>
+</pre></div>
+</div>
+<!-- Откат изменений в файле -->
+<p>Для изменения текстового файла достаточно воспользоваться редактором.
+Откатить изменения и вернуть содержимое файла в начальное состояние позволяет команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">restore</span></code>.</p>
+<!-- Помещение измененного файла в индекс -->
+<p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code> помещает фиксируемые файлы в индекс, еще говорят – индексирует файлы.
+Эта же команда применима и к неотслеживаемым файлам, чтобы превратить их в историю.</p>
+<!-- Исключение файла из индекса -->
+<p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">restore</span></code> с опцией <code class="docutils literal notranslate"><span class="pre">--staged</span></code> исключает файл из индекса.</p>
+<!-- Удаление фиксированных файлов -->
+<p>На практике возникает ситуация, когда нужно удалить зафиксированный файл.
+Например, если файл с исходным кодом больше не используется или по ошибке был зафиксирован ненужный файл.
+Системная утилита <code class="docutils literal notranslate"><span class="pre">rm</span></code> удаляет файл из файловой системы.
+После такого удаления файл отметится как измененный с пометкой “удалено” в выводе команды <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code>.
+Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code> проиндексирует измененный (удаленный) файл, чтобы в последующем зафиксировать его в истории.
+Последовательность эффектов от <code class="docutils literal notranslate"><span class="pre">rm</span></code> и <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code> повторяет команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rm</span></code>, которая удалит файл и сразу поместит его в индекс.
+Git защищает данные от потери и ограничивает случайное удаление измененных файлов.
+Удаляемый файл должен быть фиксированным.
+Если это не так, то придется отменить изменения или передать команде удаления опцию <code class="docutils literal notranslate"><span class="pre">--force</span></code> или <code class="docutils literal notranslate"><span class="pre">--cached</span></code>.</p>
+<!-- Шаблоны в аргументах -->
+<p>Команды <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">restore</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rm</span></code> выше мы использовали только одним аргументом-файлом.
+На практике приходится оперировать несколькими файлами.
+Вызывать команду для каждого файла по отдельности утомительно и не эффективно.
+Есть два способа, чтобы обойти эту ситуацию:</p>
+<ol class="arabic simple">
+<li><p>передать несколько аргументов;</p></li>
+<li><p>использовать регулярные выражения в аргументах.</p></li>
+</ol>
+<p>Так, команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">*.c</span></code> добавляет в индекс все файлы в текущем каталоге с расширением <code class="docutils literal notranslate"><span class="pre">.c</span></code>, а команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rm</span> <span class="pre">**/*.log</span></code> удалит во всех вложенных каталогах зафиксированные файлы с расширением <code class="docutils literal notranslate"><span class="pre">.log</span></code>.</p>
+<!-- Перемещение фиксированных файлов -->
+<p>Следующая операция, кроме удаления – это перемещение файлов, которая также реализует переименование.
+Перемещение файлов и каталогов выполняет системная утилита <code class="docutils literal notranslate"><span class="pre">mv</span></code>.
+Состояние перемещенного файла команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> показывается как изменение файла с пометкой “удалено” и появление неотслеживаемого файла.
+После индексации обоих файлов, Git обнаружит и покажет перемещение.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">bob@pc:~/projects/repo$ </span>mv<span class="w"> </span>main.c<span class="w"> </span>main.cpp
+<span class="gp">bob@pc:~/projects/repo$ </span>git<span class="w"> </span>status<span class="w"> </span>-s
+<span class="go"> D main.c</span>
+<span class="go">?? main.cpp</span>
+<span class="gp">bob@pc:~/projects/repo$ </span>git<span class="w"> </span>add<span class="w"> </span>main.c
+<span class="go">main.cpp</span>
+<span class="gp">bob@pc:~/projects/repo$ </span>git<span class="w"> </span>status<span class="w"> </span>-s
+<span class="go">R  main.c -&gt; main.cpp</span>
+</pre></div>
+</div>
+<p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">mv</span></code> объединяет в себе функции утилиты <code class="docutils literal notranslate"><span class="pre">mv</span></code> и команды <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code>.
+Она перемещает файлы и сразу добавляет информацию об этом в индекс.
+Тот же самый эффект выше можно было бы достигнуть командой <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">mv</span> <span class="pre">main.c</span> <span class="pre">main.cpp</span></code>.</p>
+<!-- Переход в следующий раздел -->
+<p>Цель этого раздела – подготовить индекс для последующей фиксации.
+Следующий раздел покажет нам как выполнить фиксацию.</p>
 </section>
 
     <script type="text/x-thebe-config">

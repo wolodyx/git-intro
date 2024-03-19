@@ -329,9 +329,7 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</label>
+
 </div></div>
       
     </div>
@@ -347,18 +345,6 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Введение</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Состояния файлов</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Управление состоянием файлов</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Фиксация изменений</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Дополнительные источники</a></li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -370,211 +356,72 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>Фиксация изменений<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
-<section id="id2">
-<h2>Введение<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
-<p>Прежде чем начать фиксировать изменения в файлах, необходимо познакомиться с состояниями файлов, наблюдения и управления ими.
-Это осуществляется командами <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> и <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code>.</p>
-</section>
-<section id="id3">
-<h2>Состояния файлов<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
-<p>Познакомимся с состояниями файлов, в которых они могут быть для Git.
-Научимся видеть эти состояния командой <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code>.</p>
-<!-- Отслеживаемые и неотслеживаемые файлы -->
-<p>Git интересуют файлы в рабочем каталоге, но не за его пределами.
-Интерес выражается в том, что в последующем пользователю будет предложено добавить изменения в них в историю хранилища.
-Все файлы в рабочем каталоге делятся на <em>отслеживаемые</em> (tracked) и <em>неотслеживаемые</em> (untracked).
-К отслеживаемым файлам относятся те, которые до этого присутствовали в ревизии, из которой извлечена рабочая копия.
-Недавно созданные файлы, еще не попавшие в историю или индекс (который мы рассмотрим ниже), будут относится к категории неотслеживаемых.</p>
-<figure class="align-default">
-<img alt="../_images/file-states.png" src="../_images/file-states.png" />
-</figure>
-<!-- Неотслеживаемые файлы и артефакты сборки -->
-<p>В процессе работы над проектом в рабочем каталоге появляются новые файлы, например, сгенерированные системой сборки, компилятором, тестовой системой, архиватором.
-Сюда входят объектные, исполняемые, временные и архивные файлы.
-Эти файлы производны от исходных кодов, сценариев сборки и представляют краткосрочный интерес.
-Их еще называют <em>артефактами сборки</em>.
-Даже если их удалить из файловой системы, они могут быть повторно получены пересборкой программы.
-Считается хорошей практикой держать артефакты сборки в отдельном каталоге, как например в <code class="docutils literal notranslate"><span class="pre">CMake</span></code>.
-Но система сборки <code class="docutils literal notranslate"><span class="pre">Make</span></code> создает артефакты рядом с файлами исходным кодом, что засоряет рабочий каталог.</p>
-<!-- Файл `.gitignore` -->
-<p>Таким образом, все неотслеживаемые файлы можно разделить на две категории:</p>
+<p>В этом разделе:</p>
 <ul class="simple">
-<li><p>новые файлы, добавляемые в скором времени в следующую ревизию;</p></li>
-<li><p>игнорируемые, путь в хранилище которым закрыт навсегда.</p></li>
+<li><p>узнаем, что нужно сделать, чтобы начать фиксировать изменения;</p></li>
+<li><p>познакомимся с индексом и научимся добавлять в него файлы командой <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code>;</p></li>
+<li><p>следить за состоянием файлов рабочей копии командой <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code>;</p></li>
+<li><p>познакомимся с командой <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code> и научимся фиксировать изменения в хранилище;</p></li>
+<li><p>узнаем про опции <code class="docutils literal notranslate"><span class="pre">-a</span></code>, <code class="docutils literal notranslate"><span class="pre">-m</span></code>, <code class="docutils literal notranslate"><span class="pre">-v</span></code> команды <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code>;</p></li>
+<li><p>узнаем, как оформляют сообщение коммита.</p></li>
 </ul>
-<p>Чтобы файлы из первой категории не потерялись среди многочисленных файлов второй, в Git добавлены списки игнорируемых файлов и каталогов.
-Они перечисляются в файле <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> в формате регулярных выражений.
-Сам файл располагается в корне рабочего каталога.
-Содержимое этого файла зависит от используемого языка программирования, библиотек и инструментов.
-Разработчики GitHub в открытом проекте <a class="reference external" href="https://github.com/github/gitignore">gitignore</a> собрали примеры этих файлов с привязкой к используемым программным технологиям.</p>
-<!-- Отслеживаемые файлы -->
-<p>Отслеживаемые файлы составляют проект программы и основу для следующей ревизии.
-Они в свою очередь делятся на три части:</p>
-<ul class="simple">
-<li><p>зафиксированные;</p></li>
-<li><p>измененные;</p></li>
-<li><p>проиндексированные.</p></li>
-</ul>
+<p>Фиксацию изменений в хранилище выполняет команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code>.
+Она добавляет в хранилище запись, называемую <em>коммитом</em>.
+Получившийся коммит далее можно опубликовать в удаленном хранилище.</p>
+<p>Для начального понимания нужно помнить, что коммит – это объект, содержимое которого можно поделить на две групппы: описание и содержание.
+Содержание включает изменения в файлах, а описание – информационное сообщение, дату и время фиксации, имя и электронную почта автора.</p>
 <figure class="align-default">
-<img alt="../_images/file-states-flow.png" src="../_images/file-states-flow.png" />
+<img alt="../_images/commit-structure.png" src="../_images/commit-structure.png" />
 </figure>
-<!-- Зафиксированный и измененный файлы -->
-<p>После клонирования и последующего извлечения рабочей копии все файлы в рабочем каталоге относятся к зафиксированным.
-Если отредактировать зафиксированный файл, то он перейдет в измененное состояние.
-Если откатить изменения у измененного файла, то он перейдет обратно в зафиксированное состояние.</p>
-<!-- Проиндексированный файл -->
-<p>Индексированные файлы предназначены для включения изменений в историю.
-По-другому, индексированный файл рассматривается как измененный файл, помещенный в специальную область, называемую <em>индексом</em>.
+<p>Команде <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code> должна быть доступна вся эта информация для создания коммита.
+Начнем от простого к сложному.</p>
+<p>Информацией о дате и времени фиксации Git снабжает ОС.
+Локальное системное время должно быть синхронизировано с мировым, чтобы не возникло противоречий в данных при обмене коммитами с другими хранилищами.</p>
+<p>Имя и электронную почту автора указывают Git перед началом работы.
+Нами они были заданы при <a class="reference internal" href="config.html"><span class="doc std std-doc">настройке Git</span></a>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Фиксация не произойдет, если не были указаны имя и электронная почта автора.</p>
+</div>
+<!-- Индексированный файл -->
+<p>В содержание коммита входят изменения в файлах.
+Их следует предварительно подготовить.
+Какие файлы в рабочей копии были изменены покажет команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code>, а что было изменено – команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code>.
+Те файлы и изменения, которые предполагают включить в содержание коммита, помещают в специальную область хранилища, называемую <em>индексом</em>.
+Сам процесс помещения файла в индекс называют индексацией файла, помещенные туда файлы – индексированными.
 Индекс – это область, дополнительная к рабочей копии и хранилищу.
 Физически она расположена внутри хранилища, не передается и не клонируется.</p>
 <figure class="align-default">
 <img alt="../_images/git-index.png" src="../_images/git-index.png" />
 </figure>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Файл, помещенный в индекс, уже не является измененным.
-Но если после индексации файл изменить еще раз, то он одновременно будет измененным и проиндексированным.</p>
-</div>
-<!-- `git status` и состояние файлов -->
-<p>Состояние файлов в рабочем каталоге показывает команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code>.
-В примере ниже она показывает, что файл <code class="docutils literal notranslate"><span class="pre">LampServer.cpp</span></code> изменен и неотслеживаются файлы из каталога <code class="docutils literal notranslate"><span class="pre">build/</span></code>.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">skt@home:~/MyProjects/RemoteLamps$ </span>git<span class="w"> </span>status
-<span class="go">На ветке main</span>
-<span class="go">Ваша ветка обновлена в соответствии с «origin/main».</span>
-
-<span class="go">Изменения, которые не в индексе для коммита:</span>
-<span class="go">  (используйте «git add &lt;файл&gt;…», чтобы добавить файл в индекс)</span>
-<span class="go">  (используйте «git restore &lt;файл&gt;…», чтобы отменить изменения в рабочем каталоге)</span>
-<span class="go">	изменено:      LampServer.cpp</span>
-
-<span class="go">Неотслеживаемые файлы:</span>
-<span class="go">  (используйте «git add &lt;файл&gt;…», чтобы добавить в то, что будет включено в коммит)</span>
-<span class="go">	build/</span>
-
-<span class="go">нет изменений добавленных для коммита</span>
-<span class="gp gp-VirtualEnv">(используйте «git add» и/или «git commit -a»)</span>
-</pre></div>
-</div>
-<!-- Компактный вывод команды `git status` -->
-<p>Кроме состояний файлов, команда также подсказывает как изменить эти состояния.
-На первых порах эти подсказки помогают, но в будущем многословность только мешают.
-Компактный вывод делает опция <code class="docutils literal notranslate"><span class="pre">-s</span></code> (<code class="docutils literal notranslate"><span class="pre">--short</span></code>) (“short” переводится с английского как “короткий”).</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">skt@home:~/MyProjects/RemoteLamps$ </span>git<span class="w"> </span>status<span class="w"> </span>-s
-<span class="go">M  LampServer.cpp</span>
-<span class="go">?? build/</span>
-</pre></div>
-</div>
-<!-- Переход в следующий раздел -->
-<p>Как переводить файл из одного состояния в другой узнаем ниже.</p>
-</section>
-<section id="id4">
-<h2>Управление состоянием файлов<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
-<!-- Откат изменений в файле -->
-<p>Для изменения текстового файла достаточно воспользоваться редактором.
-Откатить изменения и вернуть содержимое файла в начальное состояние позволяет команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">restore</span></code>.</p>
-<!-- Помещение измененного файла в индекс -->
-<p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code> помещает фиксируемые файлы в индекс, еще говорят – индексирует файлы.
-Эта же команда применима и к неотслеживаемым файлам, чтобы превратить их в историю.</p>
-<!-- Исключение файла из индекса -->
-<p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">restore</span></code> с опцией <code class="docutils literal notranslate"><span class="pre">--staged</span></code> исключает файл из индекса.</p>
-<!-- Удаление фиксированных файлов -->
-<p>На практике возникает ситуация, когда нужно удалить зафиксированный файл.
-Например, если файл с исходным кодом больше не используется или по ошибке был зафиксирован ненужный файл.
-Системная утилита <code class="docutils literal notranslate"><span class="pre">rm</span></code> удаляет файл из файловой системы.
-После такого удаления файл отметится как измененный с пометкой “удалено” в выводе команды <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code>.
-Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code> проиндексирует измененный (удаленный) файл, чтобы в последующем зафиксировать его в истории.
-Последовательность эффектов от <code class="docutils literal notranslate"><span class="pre">rm</span></code> и <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code> повторяет команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rm</span></code>, которая удалит файл и сразу поместит его в индекс.
-Git защищает данные от потери и ограничивает случайное удаление измененных файлов.
-Удаляемый файл должен быть фиксированным.
-Если это не так, то придется отменить изменения или передать команде удаления опцию <code class="docutils literal notranslate"><span class="pre">--force</span></code> или <code class="docutils literal notranslate"><span class="pre">--cached</span></code>.</p>
-<!-- Шаблоны в аргументах -->
-<p>Команды <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">restore</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rm</span></code> выше мы использовали только одним аргументом-файлом.
-На практике приходится оперировать несколькими файлами.
-Вызывать команду для каждого файла по отдельности утомительно и не эффективно.
-Есть два способа, чтобы обойти эту ситуацию:</p>
-<ol class="arabic simple">
-<li><p>передать несколько аргументов;</p></li>
-<li><p>использовать регулярные выражения в аргументах.</p></li>
-</ol>
-<p>Так, команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">*.c</span></code> добавляет в индекс все файлы в текущем каталоге с расширением <code class="docutils literal notranslate"><span class="pre">.c</span></code>, а команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rm</span> <span class="pre">**/*.log</span></code> удалит во всех вложенных каталогах зафиксированные файлы с расширением <code class="docutils literal notranslate"><span class="pre">.log</span></code>.</p>
-<!-- Перемещение фиксированных файлов -->
-<p>Следующая операция, кроме удаления – это перемещение файлов, которая также реализует переименование.
-Перемещение файлов и каталогов выполняет системная утилита <code class="docutils literal notranslate"><span class="pre">mv</span></code>.
-Состояние перемещенного файла команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> показывается как изменение файла с пометкой “удалено” и появление неотслеживаемого файла.
-После индексации обоих файлов, Git обнаружит и покажет перемещение.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">bob@pc:~/projects/repo$ </span>mv<span class="w"> </span>main.c<span class="w"> </span>main.cpp
-<span class="gp">bob@pc:~/projects/repo$ </span>git<span class="w"> </span>status<span class="w"> </span>-s
-<span class="go"> D main.c</span>
-<span class="go">?? main.cpp</span>
-<span class="gp">bob@pc:~/projects/repo$ </span>git<span class="w"> </span>add<span class="w"> </span>main.c
-<span class="go">main.cpp</span>
-<span class="gp">bob@pc:~/projects/repo$ </span>git<span class="w"> </span>status<span class="w"> </span>-s
-<span class="go">R  main.c -&gt; main.cpp</span>
-</pre></div>
-</div>
-<p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">mv</span></code> объединяет в себе функции утилиты <code class="docutils literal notranslate"><span class="pre">mv</span></code> и команды <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code>.
-Она перемещает файлы и сразу добавляет информацию об этом в индекс.
-Тот же самый эффект выше можно было бы достигнуть командой <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">mv</span> <span class="pre">main.c</span> <span class="pre">main.cpp</span></code>.</p>
-<!-- Переход в следующий раздел -->
-<p>Цель этого раздела – подготовить индекс для последующей фиксации.
-Следующий раздел покажет нам как выполнить фиксацию.</p>
-</section>
-<section id="id5">
-<h2>Фиксация изменений<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
-<p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code> фиксирует изменения в хранилище, добавляя во внутреннюю базу данных запись, называемую <em>коммитом</em>.
-С коммитом связан следующий набор данных:</p>
+<p>В начале индекс пустой.
+Измененный файл в рабочей копии помещает в индекс команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code>.
+Та же самая команда помещает в индекс также неотслеживаемые файлы: те файлы, которые Git еще не известны.
+Изменения в файлах, помещенных в индекс, показывает команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code> с опцией <code class="docutils literal notranslate"><span class="pre">--cached</span></code>.</p>
+<!-- Сообщение коммита -->
+<p>Остается последнее поле – сообщение коммита.
+Сообщение задается перед фиксацией двумя способами:</p>
 <ul class="simple">
-<li><p>изменения в файлах (будут взяты из индекса);</p></li>
-<li><p>сообщение, описывающее изменения (будет установлено при фиксации);</p></li>
-<li><p>дата и время фиксации (будут взяты из системы);</p></li>
-<li><p>имя и электронная почта автора изменений (были указаны при настройке Git).</p></li>
+<li><p>из командной строки опцией <code class="docutils literal notranslate"><span class="pre">-m</span> <span class="pre">&quot;сообщение&quot;</span></code>;</p></li>
+<li><p>в текстовом редакторе, если не сообщение не указано в командной строке.</p></li>
 </ul>
-<figure class="align-default">
-<img alt="../_images/commit-structure.png" src="../_images/commit-structure.png" />
-</figure>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Локальное системное время должно быть синхронизировано с мировым, чтобы не возникло противоречий в данных при обмене изменениями с другим хранилищем.</p>
-</div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Фиксация завершится с ошибкой, если ранее при настройке Git не указали имя и электронную почту пользователя.
-Они были заданы при <a class="reference internal" href="config.html"><span class="doc std std-doc">настройке Git</span></a>.</p>
-</div>
-<p>Будем считать, что индекс не пуст.
-Зафиксируем изменения, вызвав команду <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code>.
-Команда откроет текстовый файл примерно со следующим содержимым:</p>
+<p>Зафиксируем изменения, вызвав команду <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code>.
+Команда откроет текстовый файл с информационным содержимым команды <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code>:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span># Пожалуйста, введите сообщение коммита для ваших изменений. Строки,
 # начинающиеся с «#» будут проигнорированы, а пустое сообщение
 # отменяет процесс коммита.
 #
 # Текущая ветка: main
 # Изменения, которые будут включены в коммит:
-#       переименовано: main.c -&gt; main.cpp
-#
-# Неотслеживаемые файлы:
-#       text.cpy
+#   изменено:      main.cpp
 #
 </pre></div>
 </div>
-<!-- Опция `-m` -->
-<p>Если описание коммита однострочное, то его быстрее передать команде через опцию <code class="docutils literal notranslate"><span class="pre">-m</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;Описание изменений&quot;</span>
-</pre></div>
-</div>
-<!-- Фиксация изменений без добавления в индекс -->
-<p>Фиксации предваряет подготовка индекса.
-Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code> проиндексирует все измененные файлы автоматически, если ей передать опцию <code class="docutils literal notranslate"><span class="pre">-a</span></code> (<code class="docutils literal notranslate"><span class="pre">--all</span></code>).</p>
-<!-- Просмотр изменений перед коммитом -->
-<p>В больших и организованных проектах обращают особое внимание на сообщение и содержание коммитов.
-Для этого вводят соглашения об оформлении коммитов, которым должны следовать все участники проекта.
-Одно из важных требований гласит, что коммит должен содержать конкретное завершенное изменение, касающееся одной задачи.
-Из него само собой вытекает четкое сообщение коммита, которое упрощает участникам изучение проекта.
-Из того факта, что работа над задачей завершилась, еще не следует, что все измененные файлы пригодны для фиксации.
-Если исходить из описания задачи, например “Исправление ошибки …”, то изменения в виде добавления новой строки и переименования переменных входят в задачу “Рефакторинг …”.
-Изменения распределяются по нескольким коммитам.
-И вот здесь особую роль играет просмотр содержания фиксируемых файлов.
-Это возможно опцией <code class="docutils literal notranslate"><span class="pre">-v</span></code> (<code class="docutils literal notranslate"><span class="pre">--verbose</span></code>), когда сообщение набирается в редакторе (без опции <code class="docutils literal notranslate"><span class="pre">-m</span></code>): <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-v</span></code>.</p>
+<p>Как подсказывает содержимое файла, начинающие с символа <code class="docutils literal notranslate"><span class="pre">#</span></code> строки отбрасываются.
+Они показывают содержимое коммита.
+Полезно просмотреть содержимое коммита перед его созданием.
+Но вывод выше показывает только состояния файлов.
+Если передать команде <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code> опцию <code class="docutils literal notranslate"><span class="pre">-v</span></code>, то в комментарий включаются также патч коммита.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
 <span class="c1"># Пожалуйста, введите сообщение коммита для ваших изменений. Строки,</span>
 <span class="c1"># начинающиеся с «#» будут проигнорированы, а пустое сообщение</span>
@@ -582,49 +429,52 @@ Git защищает данные от потери и ограничивает 
 <span class="c1">#</span>
 <span class="c1"># Текущая ветка: main</span>
 <span class="c1"># Изменения, которые будут включены в коммит:</span>
-<span class="c1">#       изменено:      main.cpp</span>
-<span class="c1">#</span>
-<span class="c1"># Неотслеживаемые файлы:</span>
-<span class="c1">#       text.cpy</span>
+<span class="c1">#   изменено:      main.cpp</span>
 <span class="c1">#</span>
 <span class="c1"># ------------------------ &gt;8 ------------------------</span>
 <span class="c1"># Не изменяйте или удаляйте строку выше этой.</span>
 <span class="c1"># Всё, что ниже — будет проигнорировано.</span>
 <span class="n">diff</span> <span class="o">--</span><span class="n">git</span> <span class="n">a</span><span class="o">/</span><span class="n">main</span><span class="o">.</span><span class="n">cpp</span> <span class="n">b</span><span class="o">/</span><span class="n">main</span><span class="o">.</span><span class="n">cpp</span>
-<span class="n">index</span> <span class="n">ad5fe9b</span><span class="o">..</span><span class="n">ff4f753</span> <span class="mi">100644</span>
+<span class="n">index</span> <span class="n">ad5fe9b</span><span class="o">.</span><span class="mf">.1703</span><span class="n">fca</span> <span class="mi">100644</span>
 <span class="o">---</span> <span class="n">a</span><span class="o">/</span><span class="n">main</span><span class="o">.</span><span class="n">cpp</span>
 <span class="o">+++</span> <span class="n">b</span><span class="o">/</span><span class="n">main</span><span class="o">.</span><span class="n">cpp</span>
-<span class="o">@@</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span> <span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">20</span> <span class="o">@@</span>
- <span class="c1">#include &lt;iostream&gt;</span>
+<span class="o">@@</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span> <span class="o">+</span><span class="mi">2</span><span class="p">,</span><span class="mi">7</span> <span class="o">@@</span>
 
-<span class="o">+</span><span class="n">void</span> <span class="n">usage</span><span class="p">()</span>
-<span class="o">+</span><span class="p">{</span>
-<span class="o">+</span>       <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;usage hello [--name UserName]</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
-<span class="o">+</span><span class="p">}</span>
-<span class="o">+</span>
  <span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="nb">int</span> <span class="n">argc</span><span class="p">,</span> <span class="n">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span>
  <span class="p">{</span>
-<span class="o">+</span>       <span class="k">for</span><span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">argc</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
-<span class="o">+</span>       <span class="p">{</span>
-<span class="o">+</span>               <span class="k">if</span><span class="p">(</span><span class="n">strcmpn</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="s2">&quot;--help&quot;</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
-<span class="o">+</span>               <span class="p">{</span>
-<span class="o">+</span>                       <span class="n">usage</span><span class="p">();</span>
-<span class="o">+</span>                       <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="o">+</span>               <span class="p">}</span>
-<span class="o">+</span>       <span class="p">}</span>
-        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="o">+</span>    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;Hello, World!</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
  <span class="p">}</span>
 </pre></div>
 </div>
-</section>
-<section id="id6">
-<h2>Дополнительные источники<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<p>В первую пустую строку файла помещают сообщение коммита.
+Текстовый редактор удобен тем, что позволяет оформить многострочное сообщение.
+Если же сообщение коммита однострочное, то его быстрее передать команде опцией <code class="docutils literal notranslate"><span class="pre">-m</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;сообщение к коммиту&quot;</span>
+</pre></div>
+</div>
+<!-- Фиксация изменений без добавления в индекс -->
+<p>Перед фиксацией измененные и неотслеживаемые файлы помещаются в индекс.
+Но можно поступить по-другому, попросив команду <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code> добавить изменные файлы в индекс опцией <code class="docutils literal notranslate"><span class="pre">-a</span></code> (<code class="docutils literal notranslate"><span class="pre">--all</span></code>).</p>
+<!-- Просмотр изменений перед коммитом -->
+<p>В больших и организованных проектах обращают особое внимание на сообщение и содержание коммитов.
+Сообщение должно как можно яснее и подробнее описывать проделанную работу.
+Поэтому сообщение разделяют на две части: заголовок и тело.
+Заголовок состоит из одной строки и доносит общую суть изменений.
+Подробности изменений помещают в тело сообщения.
+Тело может состоять из нескольких строк.
+Тело от заголовка разделяют одной пустой строкой.</p>
+<p>Требования к коммитам прописывают в специальном документе, называемом <a class="reference external" href="https://www.conventionalcommits.org/ru/v1.0.0/">“соглашением о коммитах”</a>.
+Рекомендации об оформлении коммитов на английском языке можно найти <a class="reference external" href="https://cbea.ms/git-commit/">тут</a>.
+Этому документы должны следовать все участники проекта.
+Одно из требований гласит, что коммит должен содержать конкретное завершенное изменение, касающееся одной задачи.
+Это упрощает участникам изучение проекта.
+Из того факта, что работа над задачей завершилась, еще не следует, что все измененные файлы пригодны для фиксации.
+Изменения:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://github.com/github/gitignore">A collection of .gitignore templates</a></p></li>
-<li><p><a class="reference external" href="https://www.conventionalcommits.org/ru/v1.0.0/">Соглашение о коммитах</a></p></li>
-<li><p><a class="reference external" href="https://cbea.ms/git-commit/">How to Write a Git Commit Message</a></p></li>
+<li><p>распределяют по нескольким коммитам;</p></li>
+<li><p>исключают те изменения, которые попали случайно или не относятся к решенной задаче.</p></li>
 </ul>
-</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -681,24 +531,6 @@ Git защищает данные от потери и ограничивает 
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Введение</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Состояния файлов</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Управление состоянием файлов</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Фиксация изменений</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Дополнительные источники</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>

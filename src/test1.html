@@ -397,6 +397,8 @@ document.write(`
 <li><p>Отобразите всех авторов, работавших с файлами из выбранного подкаталога за последние 3 месяца.</p></li>
 <li><p>Определите первый рабочий день в новом году.</p></li>
 <li><p>Выведите самый первый коммит.</p></li>
+<li><p>Посчитайте количество удаленных и добавленных строк автором.
+<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">--oneline</span> <span class="pre">--shortstat</span> <span class="pre">--no-merges</span> <span class="pre">--author=&quot;David</span> <span class="pre">Cole&quot;</span> <span class="pre">|</span> <span class="pre">awk</span> <span class="pre">'getline'</span> <span class="pre">|</span> <span class="pre">awk</span> <span class="pre">'{</span> <span class="pre">print</span> <span class="pre">$4</span> <span class="pre">}'</span> <span class="pre">|</span> <span class="pre">paste</span> <span class="pre">-sd+</span> <span class="pre">|</span> <span class="pre">bc</span></code></p></li>
 </ol>
 </section>
 </section>
