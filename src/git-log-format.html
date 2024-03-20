@@ -357,8 +357,8 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>Отображение коммитов<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <!-- STEP: Введение -->
-<p>В этом разделе рассмотрим опции команды <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code>, которые настраивают содержимое коммитов на экране.
-Мы научимся:</p>
+<p>В этом разделе мы научимся оформлять вывод команды <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> в удобном для нас восприятия формате.
+А именно:</p>
 <ul class="simple">
 <li><p>выбирать один из вариантов отображения (опции <code class="docutils literal notranslate"><span class="pre">--oneline</span></code>, <code class="docutils literal notranslate"><span class="pre">--format</span></code> со значениями <code class="docutils literal notranslate"><span class="pre">short</span></code>, <code class="docutils literal notranslate"><span class="pre">full</span></code>, <code class="docutils literal notranslate"><span class="pre">oneline</span></code>, …);</p></li>
 <li><p>настраивать собственный формат отображения (опция <code class="docutils literal notranslate"><span class="pre">--format=&quot;форматная</span> <span class="pre">строка&quot;</span></code>);</p></li>
@@ -366,8 +366,9 @@ document.write(`
 <li><p>выводить относительные даты (опция <code class="docutils literal notranslate"><span class="pre">--relative-date</span></code>).</p></li>
 </ul>
 <!-- STEP: Опция `--format=<type>` -->
-<p>Существуют различные варианты отображения коммита на экране.
-Вариант указывает опция <code class="docutils literal notranslate"><span class="pre">--format=type</span></code>, где <code class="docutils literal notranslate"><span class="pre">type</span></code> имеет одно из следующих значений: <code class="docutils literal notranslate"><span class="pre">oneline</span></code>, <code class="docutils literal notranslate"><span class="pre">short</span></code>, <code class="docutils literal notranslate"><span class="pre">full</span></code>, <code class="docutils literal notranslate"><span class="pre">fuller</span></code>, <code class="docutils literal notranslate"><span class="pre">reference</span></code>, <code class="docutils literal notranslate"><span class="pre">email</span></code>, <code class="docutils literal notranslate"><span class="pre">raw</span></code>, <code class="docutils literal notranslate"><span class="pre">medium</span></code>.
+<p>Существуют различные стандартные варианты отображения коммита на экране.
+Опция <code class="docutils literal notranslate"><span class="pre">--format=type</span></code> выбирает один из таких вариантов.
+Здесь <code class="docutils literal notranslate"><span class="pre">type</span></code> имеет одно из следующих значений: <code class="docutils literal notranslate"><span class="pre">oneline</span></code>, <code class="docutils literal notranslate"><span class="pre">short</span></code>, <code class="docutils literal notranslate"><span class="pre">full</span></code>, <code class="docutils literal notranslate"><span class="pre">fuller</span></code>, <code class="docutils literal notranslate"><span class="pre">reference</span></code>, <code class="docutils literal notranslate"><span class="pre">email</span></code>, <code class="docutils literal notranslate"><span class="pre">raw</span></code>, <code class="docutils literal notranslate"><span class="pre">medium</span></code>.
 По умолчанию, Git использует <code class="docutils literal notranslate"><span class="pre">medium</span></code>.</p>
 <p>Формат, заданный опцией<code class="docutils literal notranslate"><span class="pre">--format=oneline</span></code>, как вытекает из названия, выводит сообщение о коммите одной строкой.
 Строка состоит из идентификатора и заголовка описания:</p>

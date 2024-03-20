@@ -424,13 +424,33 @@ document.write(`
 <li><p>Какая команда позволяет откатить изменения в файле?</p></li>
 <li><p>Что делает команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rm</span></code>?</p></li>
 <li><p>Что делает команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">mv</span></code>?</p></li>
+<li><p>Ответы на какие вопросы хранит история изменений проекта?</p></li>
+<li><p>Какая команда позволяет просмотреть список коммитов хранилища?</p></li>
+<li><p>Перечислите поля коммита?</p></li>
+<li><p>Чем отличается автор от коммитера? В каких случая они совпадают, а в каких нет?</p></li>
+<li><p>Что из себя представляет индетификатор коммита?</p></li>
+<li><p>Какие предопределенные форматы отображения коммитов для команды <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> вам известны?</p></li>
+<li><p>Какие из форматов отображения помещают информацию о коммите в одну строку?</p></li>
+<li><p>Чем отличается вывод <code class="docutils literal notranslate"><span class="pre">short</span></code> от <code class="docutils literal notranslate"><span class="pre">medium</span></code> (<code class="docutils literal notranslate"><span class="pre">medium</span></code> от <code class="docutils literal notranslate"><span class="pre">full</span></code>, <code class="docutils literal notranslate"><span class="pre">full</span></code> от <code class="docutils literal notranslate"><span class="pre">fuller</span></code>, <code class="docutils literal notranslate"><span class="pre">от</span></code>)?</p></li>
+<li><p>Где можно применить вывод <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> в формате отображения <code class="docutils literal notranslate"><span class="pre">email</span></code> и <code class="docutils literal notranslate"><span class="pre">reference</span></code>?</p></li>
+<li><p>Что содержит вывод <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">--format=raw</span></code>?</p></li>
+<li><p>Чем отличается вывод <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">--format=oneline</span></code> от <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">--oneline</span></code>?</p></li>
+<li><p>Как настроить собственный формат отображения в <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code>?</p></li>
+<li><p>Что делает опция <code class="docutils literal notranslate"><span class="pre">--patch</span></code> команды <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code>?</p></li>
+<li><p>Что делает опция <code class="docutils literal notranslate"><span class="pre">--stat</span></code> команды <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code>?</p></li>
+<li><p>Что делает опция <code class="docutils literal notranslate"><span class="pre">--relative-date</span></code> команды <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code>?</p></li>
+<li><p>Какие коммиты показывает команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> без аргументов?</p></li>
+<li><p>Как можно отобразить все коммиты из истории изменений?</p></li>
+<li><p>Что означает слово “достижимые коммиты”?</p></li>
+<li><p>Как исключить из вывода <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> коммиты, следующие после заданного?</p></li>
+<li><p>Как отобразить только диапазон коммитов?</p></li>
+<li><p>Как отобразить только последние 5 коммитов из ветки <code class="docutils literal notranslate"><span class="pre">main</span></code>?</p></li>
+<li><p>Как фильтровать коммиты по времени их создания?</p></li>
+<li><p>Как фильтровать коммиты по имени автора?</p></li>
+<li><p>Как отобразить коммиты, которые затрагивают только выбранный файл?</p></li>
+<li><p>Как вывести те коммиты, которые в сообщении содержат заданную ключевую фразу?</p></li>
+<li><p>Как вывести те коммиты, которые в изменениях содержат заданную ключевую фразу?</p></li>
 </ol>
-<!--
-1. Почему не получается воспользоваться СКВ применительно к офисным документам?
-1. Что такое коммит?
-1. В чем отличие ревизии от коммита?
-1. Воспользуйтесь существующим пустым каталогом в качестве рабочего каталога для клонируемого хранилища.
--->
 </section>
 <section id="id3">
 <h2>Упражнения<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
@@ -444,6 +464,7 @@ document.write(`
 <li><p>Покажите пример файла <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> для языка программирования C++ от разработчиков GitHub.</p></li>
 <li><p>Отобразите на экране справочную страницу команды <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">help</span></code>.</p></li>
 <li><p>Продемонстрируйте работу команды <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rm</span></code> на зафиксированном, индексированном и измененном файлах.</p></li>
+<li><p>Найдите наименьшее количество цифр в идентификаторе коммита, которые позволяет однозначно сослаться на коммит.</p></li>
 <li><p>Отобразите только один коммит с заданным идентификатором.</p></li>
 <li><p>Повторите вывод <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">--oneline</span></code>, опцией <code class="docutils literal notranslate"><span class="pre">--pretty</span></code> с собственным форматом.
 Опции для управления цветом символов описаны в справочной странице к <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> в разделе <code class="docutils literal notranslate"><span class="pre">PRETTY</span> <span class="pre">FORMATS</span></code>.</p></li>
@@ -451,6 +472,7 @@ document.write(`
 <li><p>Отобразите всех авторов, работавших с файлами из выбранного подкаталога за последние 3 месяца.</p></li>
 <li><p>Определите первый рабочий день в новом году.</p></li>
 <li><p>Выведите самый первый коммит.</p></li>
+<li><p>Посчитай количество коммитов в хранилище.</p></li>
 <li><p>Посчитайте количество удаленных и добавленных строк автором.
 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">--oneline</span> <span class="pre">--shortstat</span> <span class="pre">--no-merges</span> <span class="pre">--author=&quot;David</span> <span class="pre">Cole&quot;</span> <span class="pre">|</span> <span class="pre">awk</span> <span class="pre">'getline'</span> <span class="pre">|</span> <span class="pre">awk</span> <span class="pre">'{</span> <span class="pre">print</span> <span class="pre">$4</span> <span class="pre">}'</span> <span class="pre">|</span> <span class="pre">paste</span> <span class="pre">-sd+</span> <span class="pre">|</span> <span class="pre">bc</span></code></p></li>
 </ol>

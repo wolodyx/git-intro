@@ -329,9 +329,7 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</label>
+
 </div></div>
       
     </div>
@@ -347,14 +345,6 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Дополнительные источники</a></li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -367,6 +357,12 @@ document.write(`
   <!-- # Изучение истории -->
 <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>История изменений<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<p>В этом разделе мы:</p>
+<ul class="simple">
+<li><p>узнаем, что дает нам история изменений проекта;</p></li>
+<li><p>познакомимся с командой <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> и ее опцией <code class="docutils literal notranslate"><span class="pre">--reverse</span></code>;</p></li>
+<li><p>перечислим все поля коммита.</p></li>
+</ul>
 <!--
 История -- это быстрый источник знаний о проекте.
 Быть в курсе дела.
@@ -389,28 +385,15 @@ document.write(`
 <li><p>зачем был добавлен этот код?</p></li>
 <li><p>и некоторые другие специфические вопросы.</p></li>
 </ul>
-<!-- Про команду `git log` -->
-<p>Ответы на эти вопросы можно получить только если вы владеете инструментом по анализу коммитов – командой <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code>.</p>
 <p>Также доступ к коммитам позволяет автоматизировать часть рабочих процессов в проекте:</p>
 <ul class="simple">
 <li><p>принимать решение о повышении версии проекта;</p></li>
-<li><p>формировать список изменений в релизе, так называемый changelog-файл.</p></li>
+<li><p>формировать список изменений в релизе, так называемый <a class="reference external" href="https://keepachangelog.com/ru/1.1.0/">changelog-файл</a>.</p></li>
 </ul>
-<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> делает два крупных действия: настраивает вывод и фильтрует вывод.</p>
-<p>Коммит – это объект, который несет следующую информацию:
-Коммит содержит следующие поля, на которые можно наложить условия для фильтрации:</p>
-<ul class="simple">
-<li><p>информация об авторе (имя и электронная почта);</p></li>
-<li><p>дата и время подготовки изменений;</p></li>
-<li><p>информация о коммитере (имя и электронная почта);</p></li>
-<li><p>дата и время фиксации изменений в хранилище.</p></li>
-<li><p>изменения в файлах;</p></li>
-<li><p>сообщение, описывающее изменения;</p></li>
-</ul>
-<figure class="align-default">
-<img alt="../_images/commit-desc.png" src="../_images/commit-desc.png" />
-</figure>
-<p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> без аргументов покажет всю историю коммитов проекта в порядке обратном их созданию.
+<!-- Про команду `git log` -->
+<p>Ответы на эти вопросы можно получить только если вы владеете инструментом по анализу коммитов – командой <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code>.
+<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> делает два крупных действия: настраивает вывод и фильтрует вывод.
+Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> без аргументов покажет всю историю коммитов проекта в порядке обратном их созданию.
 Последний коммит в проекте будет самым первым в списке, а первый коммит – самым последним.
 Если вывод команды не помещается на экран, то он перенаправится в пейджер <code class="docutils literal notranslate"><span class="pre">less</span></code>.
 Выход из пейджера происходит по команде <code class="docutils literal notranslate"><span class="pre">q</span></code>.</p>
@@ -433,23 +416,37 @@ Date:   Sat Mar 4 10:56:31 2023 +0300
     Автоматическое закрытие клиента при потере связи с сервером
 </pre></div>
 </div>
-<!-- Формат вывода по умолчанию -->
-<p>Изучим вывод команды.</p>
+<!-- `git log --reverse` -->
+<p>Перевернуть историю изменений, когда первый коммит отобразится в начале, позволяет опция <code class="docutils literal notranslate"><span class="pre">--reverse</span></code> команды <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code>.</p>
+<p>Коммит – это объект, который несет следующую информацию:
+Коммит содержит следующие поля, на которые можно наложить условия для фильтрации:</p>
+<ul class="simple">
+<li><p>информация об авторе (имя и электронная почта);</p></li>
+<li><p>дата и время подготовки изменений;</p></li>
+<li><p>информация о коммитере (имя и электронная почта);</p></li>
+<li><p>дата и время фиксации изменений в хранилище.</p></li>
+<li><p>изменения в файлах;</p></li>
+<li><p>сообщение, описывающее изменения;</p></li>
+</ul>
+<figure class="align-default">
+<img alt="../_images/commit-desc.png" src="../_images/commit-desc.png" />
+</figure>
 <!-- Хеш-сумма коммита -->
 <p>С каждым коммитом связано 40-разрядное уникальное шестнадцатеричное число, полученное хеш-функцией SHA-1 по содержимому коммита.
 В конечном счете мы получаем уникальное число для всех коммитов в пределах хранилища.
-Это число позволяет сослаться на коммит.</p>
+Это число позволяет сослаться на коммит.
+Не обязательно вводить все его цифры, достаточно первых 3-7 цифр.
+Если возникнет неоднозначность из-за короткого индетификатора, то Git укажет на это.</p>
 <!-- Остальные поля коммита -->
 <p>Поле <code class="docutils literal notranslate"><span class="pre">commit</span></code> содержит хеш-сумму в выводе.
 Поле <code class="docutils literal notranslate"><span class="pre">Author</span></code> отображает данные автора коммита – его имя и адрес электронной почты.
-В поле <code class="docutils literal notranslate"><span class="pre">Date</span></code> указаны дата и время коммита в формате дня недели, названия месяца, числа, времени, года и часового пояса.</p>
-<!--
-Сообщение к коммиту.
--->
+В поле <code class="docutils literal notranslate"><span class="pre">Date</span></code> указаны дата и время коммита в формате дня недели, названия месяца, числа, времени, года и часового пояса.
+Сообщение к коммиту может быть как однострочной, так и многострочной.
+Если строк несколько, то первую строку выделяют заголовком, а последующие строки, формирующие тело сообщения, отделяют от первого пустой строкой.</p>
 <!-- STEP: Отличие автора от коммитера -->
 <p>Автор коммита – это участник разработки, оформивший изменения, а коммитер – внесший их в хранилище.
 Обычно роли автора и коммитера играет один человек, который оформляет и фиксирует изменения.
-Но процесс разработки открытого ПО отличается от коммерческого, где не все авторы имеют доступ к официальному хранилищу.
+Но процесс разработки открытого ПО вносит свои особенности: не все авторы имеют доступ к официальному хранилищу.
 Тогда они предлагают свои изменения через патчи.
 Коммитер оценивает изменения, и если они устраивают его, вносит их в хранилище от своего имени.
 При этом имя автора сохраняется.
@@ -464,14 +461,6 @@ CommitDate: Sat Mar 4 08:18:44 2023 +0300
     Initial commit
 </pre></div>
 </div>
-<!-- `git log --reverse` -->
-<section id="id2">
-<h2>Дополнительные источники<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p><a class="reference external" href="https://keepachangelog.com/ru/1.1.0/">Ведите changelog</a></p></li>
-<li><p><a class="reference external" href="https://habr.com/ru/docs/changelog/2023/">Список изменений на Хабр за 2023 год</a></p></li>
-</ul>
-</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -528,20 +517,6 @@ CommitDate: Sat Mar 4 08:18:44 2023 +0300
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Дополнительные источники</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>

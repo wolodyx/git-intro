@@ -356,8 +356,16 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>Фильтрация коммитов<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
-<p>В предыдущем разделе мы увидели, как можно управлять форматом вывода <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code>.
-Теперь же посмотрим, как фильтровать коммиты, оставляя только те из них, что нам представляют интерес.</p>
+<p>В предыдущем разделе мы научились управлять форматом вывода <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code>.
+Теперь же посмотрим, как фильтровать коммиты, оставляя только те из них, что нам представляют интерес.
+Для этого мы научимся:</p>
+<ul class="simple">
+<li><p>расширять количество выводимых коммитов опцией <code class="docutils literal notranslate"><span class="pre">--all</span></code> команды <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code>;</p></li>
+<li><p>исключить из вывода коммиты, достижимые из заданного;</p></li>
+<li><p>задавать диапазон коммитов для вывода;</p></li>
+<li><p>отображать только первые несколько коммитов;</p></li>
+<li><p>фильтровать коммиты по автору, коммитеру, дате, ключевому слову в сообщении и изменения, затронутому файлу.</p></li>
+</ul>
 <!-- `git log --all` -->
 <p>Несмотря на то, что вывод <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> протяженный, она не показывает все коммиты, а только те, что достижимы из текущей ветки.
 Чтобы команда отобразила все коммиты, ей передают опцию <code class="docutils literal notranslate"><span class="pre">--all</span></code>.
