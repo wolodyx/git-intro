@@ -359,6 +359,7 @@ document.write(`
 <p>В этом разделе:</p>
 <ul class="simple">
 <li><p>узнаем о состояниях файлов, в которых они могут находиться: отслеживаемый и неотслеживаемый, игнорируемый, зафиксированный, измененный, индексированный;</p></li>
+<li><p>разберемся, почему файл может быть одновременно индексированным и измененным;</p></li>
 <li><p>познакомимся с командами:</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> выводит состояние файлов на экран;</p></li>
@@ -370,6 +371,13 @@ document.write(`
 </li>
 <li><p>научимся оперировать несколькими файлами, используя шаблоны в аргументах команд.</p></li>
 </ul>
+<p>При работе с файлами рабочей копии возникает множество вопросов:</p>
+<ul class="simple">
+<li><p>как убрать файл из индекса;</p></li>
+<li><p>как быстро откатить изменения в файлах;</p></li>
+<li><p>как убрать из вывода <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> “мусорные” файлы.</p></li>
+</ul>
+<p>Перед тем как ответить на эти вопросы, узнаем, в каких состояниях могут быть файлы для Git.</p>
 <!-- Отслеживаемые и неотслеживаемые файлы -->
 <p>Git интересуют файлы в рабочем каталоге, но не за его пределами.
 Интерес выражается в том, что в последующем пользователю будет предложено добавить изменения в них в историю хранилища.
@@ -413,14 +421,15 @@ document.write(`
 <p>После клонирования и последующего извлечения рабочей копии все файлы в рабочем каталоге относятся к зафиксированным.
 Если отредактировать зафиксированный файл, то он перейдет в измененное состояние.
 Если откатить изменения у измененного файла, то он перейдет обратно в зафиксированное состояние.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
 <p>Файл, помещенный в индекс, уже не является измененным.
-Но если после индексации файл изменить еще раз, то он одновременно будет измененным и проиндексированным.</p>
-</div>
+Но если после индексации файл изменить еще раз, то он одновременно будет измененным и проиндексированным.
+Изменение в файле оценивается относительно индексированного файла, а если такого файла нет, то относительно зафиксированного.
+Получается, что один и тот же файл может быть измененным и индексированным.
+Это позволяет фиксировать только часть изменений в файле.
+Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">--patch</span> <span class="pre">&lt;имя_файла&gt;</span></code> в интерактивном режиме добавляет только те измененные фрагменты, которые вы выберете.</p>
 <!-- `git status` и состояние файлов -->
 <p>Состояние файлов в рабочем каталоге показывает команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code>.
-В примере ниже она показывает, что файл <code class="docutils literal notranslate"><span class="pre">LampServer.cpp</span></code> изменен и неотслеживаются файлы из каталога <code class="docutils literal notranslate"><span class="pre">build/</span></code>.</p>
+В примере ниже она показывает, что файл <code class="docutils literal notranslate"><span class="pre">LampServer.cpp</span></code> изменен и не отслеживаются файлы из каталога <code class="docutils literal notranslate"><span class="pre">build/</span></code>.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">skt@home:~/MyProjects/RemoteLamps$ </span>git<span class="w"> </span>status
 <span class="go">На ветке main</span>
 <span class="go">Ваша ветка обновлена в соответствии с «origin/main».</span>
@@ -447,14 +456,15 @@ document.write(`
 <span class="go">?? build/</span>
 </pre></div>
 </div>
-<!-- Откат изменений в файле -->
-<p>Для изменения текстового файла достаточно воспользоваться редактором.
-Откатить изменения и вернуть содержимое файла в начальное состояние позволяет команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">restore</span></code>.</p>
-<!-- Помещение измененного файла в индекс -->
-<p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code> помещает фиксируемые файлы в индекс, еще говорят – индексирует файлы.
-Эта же команда применима и к неотслеживаемым файлам, чтобы превратить их в историю.</p>
-<!-- Исключение файла из индекса -->
-<p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">restore</span></code> с опцией <code class="docutils literal notranslate"><span class="pre">--staged</span></code> исключает файл из индекса.</p>
+<!-- Граф состояний файлов в Git -->
+<p>Вернемся к рисунку с графом состояний файлов в Git и приведем команды, которые переводят файл из одного состояния в другое.
+Для изменения текстового файла достаточно воспользоваться редактором.
+Откатить изменения и вернуть содержимое файла в начальное состояние позволяет команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">restore</span></code>.
+Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code> помещает измененные и неотслеживаемые файлы в индекс.
+Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">restore</span></code> с опцией <code class="docutils literal notranslate"><span class="pre">--staged</span></code> исключает файл из индекса.</p>
+<figure class="align-default">
+<img alt="../_images/file-states-flow2.png" src="../_images/file-states-flow2.png" />
+</figure>
 <!-- Удаление фиксированных файлов -->
 <p>На практике возникает ситуация, когда нужно удалить зафиксированный файл.
 Например, если файл с исходным кодом больше не используется или по ошибке был зафиксирован ненужный файл.
@@ -493,9 +503,6 @@ Git защищает данные от потери и ограничивает 
 <p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">mv</span></code> объединяет в себе функции утилиты <code class="docutils literal notranslate"><span class="pre">mv</span></code> и команды <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code>.
 Она перемещает файлы и сразу добавляет информацию об этом в индекс.
 Тот же самый эффект выше можно было бы достигнуть командой <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">mv</span> <span class="pre">main.c</span> <span class="pre">main.cpp</span></code>.</p>
-<!-- Переход в следующий раздел -->
-<p>Цель этого раздела – подготовить индекс для последующей фиксации.
-Следующий раздел покажет нам как выполнить фиксацию.</p>
 </section>
 
     <script type="text/x-thebe-config">
