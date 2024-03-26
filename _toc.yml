@@ -34,7 +34,6 @@ parts:
       - file: src/git-server.md
       - file: src/clone.md
       - file: src/branch.md
-      - file: src/git-log-branch.md
       - file: src/merge.md
       - file: src/sync.md
       - file: src/workflow.md
