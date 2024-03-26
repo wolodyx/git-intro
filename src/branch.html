@@ -65,7 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'src/branch';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Изучение веток" href="git-log-branch.html" />
+    <link rel="next" title="Слияние изменений" href="merge.html" />
     <link rel="prev" title="Клонирование хранилища" href="clone.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -199,7 +199,6 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="git-server.html">Git-сервер</a></li>
 <li class="toctree-l1"><a class="reference internal" href="clone.html">Клонирование хранилища</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Работа с ветками</a></li>
-<li class="toctree-l1"><a class="reference internal" href="git-log-branch.html">Изучение веток</a></li>
 <li class="toctree-l1"><a class="reference internal" href="merge.html">Слияние изменений</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sync.html">Синхронизация с удаленными хранилищами</a></li>
 <li class="toctree-l1"><a class="reference internal" href="workflow.html">Порядок работы с Git</a></li>
@@ -329,9 +328,7 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</label>
+
 </div></div>
       
     </div>
@@ -347,15 +344,6 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Введение</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Типы веток</a></li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -367,42 +355,139 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>Работа с ветками<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
-<section id="id2">
-<h2>Введение<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
-<!-- Про ветку и историю изменений -->
-<p>Когда возникают ветвления:</p>
+<p>В этом разделе мы:</p>
 <ul class="simple">
-<li><p>многозадачность разработчика в рамках одного проекта;</p></li>
-<li><p>результат объединения изменений от нескольких разработчиков;</p></li>
+<li><p>узнаем, что такое ветка;</p></li>
+<li><p>разберемся, когда возникает необходимость работать с ветками;</p></li>
+<li><p>познакомимся с командой <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span></code> для манипулирования с ветками в хранилище;</p></li>
+<li><p>познакомимся с опциями <code class="docutils literal notranslate"><span class="pre">--graph</span></code>, <code class="docutils literal notranslate"><span class="pre">--decorate</span></code>, <code class="docutils literal notranslate"><span class="pre">--no-decorate</span></code> команды <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code>;</p></li>
+<li><p>научимся создавать ветки и перемещаться между ними.</p></li>
+</ul>
+<p>В этом разделе мы познакомимся с ветками в контексте локальной работы над проектом.
+Все ветки будут созданы одним лицом для сопровождения нескольких направлений работ в рамках одного проекта.
+Алгоритм слияния веток рассмотрим в следующем разделе.</p>
+<!-- Что такое ветка? -->
+<p>У ветки есть различные определения:</p>
+<ul class="simple">
+<li><p>другая версия проекта;</p></li>
+<li><p>перемещаемый указатель на коммит;</p></li>
+<li><p>киллер-фича Git;</p></li>
+<li><p>набор коммитов, расположенных в хронологическом порядке.</p></li>
+</ul>
+<!-- Про ветку и историю изменений -->
+<p>Необходимость в ветках появляется в следующих ситуациях:</p>
+<ul class="simple">
+<li><p>работа над одним проектом параллельно нескольких разработчиков;</p></li>
+<li><p>работа разработчика над несколькими задачами в рамках одного проекта;</p></li>
 <li><p>поддержка старой версии программы.</p></li>
 </ul>
-</section>
-<section id="id3">
-<h2>Типы веток<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
-<p><em>Основная ветка</em>.
-Ветка, последнее состояние которой используется для новых изменений, и та, в которой собираются изменения от других участников проекта, называется основной (стволовой, главной).
+<p>Ветки бывают разных типов.
+Рассмотрим три из них:</p>
+<ul class="simple">
+<li><p>основная;</p></li>
+<li><p>функциональная;</p></li>
+<li><p>релизная.</p></li>
+</ul>
+<!-- Основная ветка -->
+<p>Сколько бы ни было версий проекта в перспективе останется только одна, называемая <em>основной</em> веткой.
+Основную ветку еще называют стволовой или главной.
+Остальные версии (ветки) либо станут частью основной ветки, влившись в нее, либо остановят свое развитие и станут тупиковыми.
+Ситуация, когда в команде возникает разногласие по дальнейшему пути развитию проекта, приводят к выделению проекта и основной ветки в отдельное хранилище.
+Такой процесс называется <em>форком хранилища</em>.</p>
+<!-- Требования к основной ветке -->
+<p>Основная ветка будет стартовой для работы над проектом для любого участника команды.
 От ревизий основной ветки требуется быть компилируемыми и успешно протестированными.
 На это есть как минимум две причины.
 Если разработчику попадается ревизия с нерабочей программой, то его работа встанет до момента исправления ошибки другим участником.
-Если ошибку в основной ветке не исправить сразу, то это повлияет на работу всей команды.</p>
-<p>Вторая причина, которая требует быть всем ревизиям основной ветки рабочей, это возможность применить метод “половинного деления” для поиска причины ошибки.
+Если ошибку в основной ветке не исправить сразу, то это повлияет на работу всей команды.
+Вторая причина, которая требует быть всем ревизиям основной ветки рабочей, это возможность применить метод “половинного деления” для поиска причины ошибки.
 Чем больше объем кода, тем сложнее бывает найти причину ошибки.
 Если ошибка ранее не было в программе, а появилась позже.
 Методом можно воспользоваться если из ревизии основной ветки собирается и запускается программа.</p>
-<p><em>Функциональная ветка</em>.
-Если задача объемная и не может быть решена одним коммитом и есть вероятность сломать программу, то под решение задачи создается отдельная ветка, называемая функциональной.
+<!-- Функциональная ветка -->
+<p>Если задача объемная и не может быть решена одним коммитом и есть вероятность сломать программу, то под решение задачи создается отдельная ветка, называемая <em>функциональной</em>.
 Требования к ревизиям в ней менее строгие, чем в основной.
 Хороший разработчик будет фиксировать только компилируемые изменения, но от полного тестирования программы обычно временно отказываются, перенеся его на позднее время.
 Ошибки в программе стабилизируются последующими коммитами.
-После того, как задача решается в функциональной ветке и изменения будут протестированы, их перенесут в основну ветку одним коммитом.</p>
-<p><em>Релизная ветка</em>.
-Слово “release” переводится с английского как “выпускать на волю”.
+После того, как задача решается в функциональной ветке и изменения будут протестированы, их перенесут в основну ветку.</p>
+<!-- Релизная ветка -->
+<p>Слово “release” переводится с английского как “выпускать на волю”.
 Релиз – это финальная ревизия программы, которая подготавливается или готова для передачи пользователю.
 В отличие от основной версии программы в релизной только исправляются ошибки.
 Изменения, добавляющие новую функцию или изменяют структуры программы не происходят.
-Для поддержки релиза создают отдельный вариант проекта в виде релизной ветки.
+Для поддержки релиза создают отдельный вариант проекта в виде <em>релизной</em> ветки.
 Из релизной ветки в основную забираются изменения, связанные с исправлением ошибок, но сама ветка остается с системе для поддержки пользователей старой версии программы.</p>
-</section>
+<!-- Ветки и указатель HEAD -->
+<p>Технически, ветка – это перемещаемый указатель на коммит.
+Указатель перемещается после создания коммита.
+В любой момент времени только одна ветка может быть текущей.
+Текущая – это та ветка, для которой была извлечена рабочая копия.
+На текущую ветку показывает указатель <code class="docutils literal notranslate"><span class="pre">HEAD</span></code>.
+В хранилище всегда присутствует как минимум одна ветка, название которой по умолчанию задавалось <code class="docutils literal notranslate"><span class="pre">master</span></code>, а сейчас – <code class="docutils literal notranslate"><span class="pre">main</span></code>.</p>
+<!-- Отображение веток командой `git log` -->
+<p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> отрисовывает ветки в псевдографическом режиме, если ей передать опцию <code class="docutils literal notranslate"><span class="pre">--graph</span></code>.
+Отметки веток отображаются в истории коммитов, если передать опцию <code class="docutils literal notranslate"><span class="pre">--decorate</span></code> и скрываются по опции <code class="docutils literal notranslate"><span class="pre">--no-decorate</span></code>.
+По умолчанию опция <code class="docutils literal notranslate"><span class="pre">--decorate</span></code> считается заданной, поэтому отметки отображаются, если явно не попросить их скрыть опцией <code class="docutils literal notranslate"><span class="pre">--no-decorate</span></code>.</p>
+<p>Чтобы увидеть содержимое всех веток, следует передать опцию <code class="docutils literal notranslate"><span class="pre">--all</span></code> команде <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code>.
+Сожмем описания коммитов до одной строки опцией <code class="docutils literal notranslate"><span class="pre">--oneline</span></code>, чтобы на экране вмещалось как можно больше коммитов.
+В итоге получим команду</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>log<span class="w"> </span>--all<span class="w"> </span>--graph<span class="w"> </span>--oneline
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span> <span class="mi">57</span><span class="n">f50abdc4</span> <span class="p">(</span><span class="n">HEAD</span> <span class="o">-&gt;</span> <span class="n">master</span><span class="p">,</span> <span class="n">origin</span><span class="o">/</span><span class="n">master</span><span class="p">,</span> <span class="n">origin</span><span class="o">/</span><span class="n">HEAD</span><span class="p">)</span> <span class="n">CMake</span> <span class="n">Nightly</span> <span class="n">Date</span> <span class="n">Stamp</span>
+<span class="o">*</span>   <span class="mi">729</span><span class="n">d904050</span> <span class="n">Merge</span> <span class="n">topic</span> <span class="s1">&#39;cpack-wix&#39;</span>
+<span class="o">|</span>\  
+<span class="o">|</span> <span class="o">*</span> <span class="n">d15c910a45</span> <span class="n">CPack</span><span class="o">/</span><span class="n">WIX</span><span class="p">:</span> <span class="n">Remove</span> <span class="s2">&quot;candle&quot;</span> <span class="kn">from</span> <span class="nn">tool</span><span class="o">-</span><span class="n">agnostic</span> <span class="n">error</span> <span class="n">message</span>
+<span class="o">|</span> <span class="o">*</span> <span class="n">ac25c645a7</span> <span class="n">CPack</span><span class="o">/</span><span class="n">WIX</span><span class="p">:</span> <span class="n">Improve</span> <span class="n">formatting</span> <span class="n">of</span> <span class="n">CPACK_WIX_CUSTOM_XMLNS</span> <span class="n">expansion</span>
+<span class="o">|</span> <span class="o">*</span> <span class="mi">54</span><span class="n">d09a2b3f</span> <span class="n">CPack</span><span class="o">/</span><span class="n">WIX</span><span class="p">:</span> <span class="n">Document</span> <span class="n">WiX</span> <span class="n">Toolset</span> <span class="n">v3</span> <span class="n">tools</span>
+<span class="o">|</span> <span class="o">*</span> <span class="n">d2f4836f8e</span> <span class="n">CPack</span><span class="o">/</span><span class="n">WIX</span><span class="p">:</span> <span class="n">Prepare</span> <span class="n">to</span> <span class="n">provide</span> <span class="n">version</span><span class="o">-</span><span class="n">specific</span> <span class="n">WiX</span> <span class="n">templates</span>
+<span class="o">|</span> <span class="o">*</span> <span class="mi">438809</span><span class="n">d3ba</span> <span class="n">cmCPackGenerator</span><span class="p">:</span> <span class="n">Add</span> <span class="n">option</span> <span class="n">to</span> <span class="n">FindTemplate</span> <span class="n">to</span> <span class="n">use</span> <span class="n">alternate</span> <span class="n">builtin</span> <span class="n">path</span>
+<span class="o">|</span> <span class="o">*</span> <span class="mi">4</span><span class="n">d661e3a92</span> <span class="n">cmMakefile</span><span class="p">:</span> <span class="n">Reduce</span> <span class="n">GetModulesFile</span> <span class="n">caller</span> <span class="n">allocations</span>
+<span class="o">*</span> <span class="o">|</span>   <span class="mi">7</span><span class="n">c326643ad</span> <span class="n">Merge</span> <span class="n">topic</span> <span class="s1">&#39;file-RPATH-large-ELF&#39;</span>
+<span class="o">|</span>\ \  
+<span class="o">|</span> <span class="o">*</span> <span class="o">|</span> <span class="mi">615</span><span class="n">a1c6691</span> <span class="n">cmELF</span><span class="p">:</span> <span class="n">Get</span> <span class="n">correct</span> <span class="n">section</span> <span class="n">count</span> <span class="k">for</span> <span class="n">large</span> <span class="n">ELF</span> <span class="n">binaries</span>
+<span class="o">*</span> <span class="o">|</span> <span class="o">|</span>   <span class="mi">7</span><span class="n">f7105aa2c</span> <span class="n">Merge</span> <span class="n">branch</span> <span class="s1">&#39;release-3.29&#39;</span>
+<span class="o">|</span>\ \ \  
+<span class="o">|</span> <span class="o">*</span> \ \   <span class="mf">78e89</span><span class="n">edab4</span> <span class="p">(</span><span class="n">origin</span><span class="o">/</span><span class="n">release</span><span class="p">,</span> <span class="n">release</span><span class="p">)</span> <span class="n">Merge</span> <span class="n">topic</span> <span class="s1">&#39;linker-vars-propagate-try_compile&#39;</span> <span class="n">into</span> <span class="n">release</span><span class="o">-</span><span class="mf">3.29</span>
+<span class="o">|</span> <span class="o">|</span>\ \ \  
+<span class="o">*</span> <span class="o">|</span> \ \ \   <span class="mi">899</span><span class="n">af83755</span> <span class="n">Merge</span> <span class="n">topic</span> <span class="s1">&#39;linker-vars-propagate-try_compile&#39;</span>
+<span class="o">|</span>\ \ \ \ \  
+<span class="o">|</span> <span class="o">|</span> <span class="o">|/</span> <span class="o">/</span> <span class="o">/</span>  
+<span class="o">|</span> <span class="o">|/|</span> <span class="o">|</span> <span class="o">|</span>   
+<span class="o">|</span> <span class="o">*</span> <span class="o">|</span> <span class="o">|</span> <span class="o">|</span> <span class="mi">98</span><span class="n">cc86e265</span> <span class="n">try_compile</span><span class="p">():</span> <span class="n">Include</span> <span class="n">languages</span> <span class="k">with</span> <span class="n">_</span> <span class="ow">or</span> <span class="o">-</span> <span class="n">when</span> <span class="n">passing</span> <span class="n">linker</span> <span class="nb">vars</span>
+<span class="o">*</span> <span class="o">|</span> <span class="o">|</span> <span class="o">|</span> <span class="o">|</span>   <span class="n">dbe05e4d7c</span> <span class="n">Merge</span> <span class="n">topic</span> <span class="s1">&#39;doc-tool&#39;</span>
+<span class="o">|</span>\ \ \ \ \  
+<span class="o">|</span> <span class="o">*</span> <span class="o">|</span> <span class="o">|</span> <span class="o">|</span> <span class="o">|</span> <span class="n">be6763f34b</span> <span class="n">Help</span><span class="p">:</span> <span class="n">cmake</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">--</span><span class="n">toolchain</span> <span class="n">path</span> <span class="n">relative</span>
+<span class="o">*</span> <span class="o">|</span> <span class="o">|</span> <span class="o">|</span> <span class="o">|</span> <span class="o">|</span> <span class="mi">6</span><span class="n">cddfdf974</span> <span class="n">CMake</span> <span class="n">Nightly</span> <span class="n">Date</span> <span class="n">Stamp</span>
+<span class="o">*</span> <span class="o">|</span> <span class="o">|</span> <span class="o">|</span> <span class="o">|</span> <span class="o">|</span> <span class="mi">86</span><span class="n">b55fd236</span> <span class="n">CMake</span> <span class="n">Nightly</span> <span class="n">Date</span> <span class="n">Stamp</span>
+<span class="o">|/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span>  
+<span class="o">*</span> <span class="o">|</span> <span class="o">|</span> <span class="o">|</span> <span class="o">|</span>   <span class="n">cff8aefc6a</span> <span class="n">Merge</span> <span class="n">topic</span> <span class="s1">&#39;doc-CMP0118&#39;</span>
+<span class="o">|</span>\ \ \ \ \  
+</pre></div>
+</div>
+<!-- Список веток -->
+<p>Работа с ветками осуществляет команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span></code>.
+Без аргументов она выводит список локальных веток в хранилище и отмечает зеленым цветом и звездочкой текущую:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>bob@pc:~/projects/cmake$ git branch
+* master
+  release
+</pre></div>
+</div>
+<p>Та же самая команда с опцией <code class="docutils literal notranslate"><span class="pre">-v</span></code> покажет рядом с каждой локальной веткой краткое описание последнего коммита.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">bob@pc:~/projects/cmake$ </span>git<span class="w"> </span>branch<span class="w"> </span>-v
+<span class="go">* master  57f50abdc4 CMake Nightly Date Stamp</span>
+<span class="go">  release 78e89edab4 Merge topic &#39;linker-vars-propagate-try_compile&#39; into release-3.29</span>
+</pre></div>
+</div>
+<p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">&lt;branch-name&gt;</span></code> создает новую ветку именем <code class="docutils literal notranslate"><span class="pre">&lt;branch-name&gt;</span></code>, указывающую на текущий коммит.</p>
+<p>Чаще всего, новую ветку создают на месте текущей ветки и для этого достаточно.
+Вновь созданная ветка – это как почка, из которого скоро вырастит отдельный ряд коммитов.
+Создание новой ветки еще не означает переключение на нее.
+Для переключения необходимо воспользоваться командой <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">&lt;branch-name&gt;</span></code>.
+Последовательность команд создания новой ветки и переключение на нее можно заменить одной командой:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">checkout</span> <span class="o">-</span><span class="n">b</span> <span class="o">&lt;</span><span class="n">branch</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span>
+</pre></div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -445,11 +530,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="git-log-branch.html"
+       href="merge.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Изучение веток</p>
+        <p class="prev-next-title">Слияние изменений</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -459,21 +544,6 @@ document.write(`
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Введение</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Типы веток</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>

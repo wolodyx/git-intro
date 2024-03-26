@@ -198,7 +198,6 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="git-server.html">Git-сервер</a></li>
 <li class="toctree-l1"><a class="reference internal" href="clone.html">Клонирование хранилища</a></li>
 <li class="toctree-l1"><a class="reference internal" href="branch.html">Работа с ветками</a></li>
-<li class="toctree-l1"><a class="reference internal" href="git-log-branch.html">Изучение веток</a></li>
 <li class="toctree-l1"><a class="reference internal" href="merge.html">Слияние изменений</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sync.html">Синхронизация с удаленными хранилищами</a></li>
 <li class="toctree-l1"><a class="reference internal" href="workflow.html">Порядок работы с Git</a></li>
@@ -328,7 +327,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -344,6 +345,15 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Контрольные вопросы</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Упражнения</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -355,6 +365,40 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>Проверочная работа<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<section id="id2">
+<h2>Контрольные вопросы<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Что такое Git-сервер? Какие задачи он выполняет?</p></li>
+<li><p>Кто предоставляет услуги Git-сервера?
+Какие еще услуги они предоставляют дополнительно?</p></li>
+<li><p>Какие публичные проекты открытого ПО вам известны?</p></li>
+<li><p>Какой командой копируется удаленное хранилище из Git-сервера?</p></li>
+<li><p>Склонируйте хранилище по адресу <code class="docutils literal notranslate"><span class="pre">https://github.com/pmodels/mpich.git</span></code>.</p></li>
+<li><p>Как можно ускорить загрузку хранилища по сети?</p></li>
+<li><p>Чем отличаются публичное хранилище от приватного?</p></li>
+<li><p>Какие элементы можно выделить из адреса удаленного хранилища?</p></li>
+<li><p>Какую возможность дает привязка хранилища к имени пользователя?</p></li>
+<li><p>Что такое ветка?</p></li>
+<li><p>Когда появляется необходимость в ветках?</p></li>
+<li><p>Какие бывают ветки? Для чего они предназначены?</p></li>
+<li><p>Что означает “текущая ветка”?</p></li>
+<li><p>Как узнать, которая из веток текущая?</p></li>
+<li><p>Как лучше всего отобразить дерево коммитов в графовом представлении?</p></li>
+<li><p>Как посмотреть список веток с последними коммитами для каждой?</p></li>
+<li><p>Как создать новую ветку?</p></li>
+<li><p>Как переключиться на другую ветку?</p></li>
+<li><p>Как одной командой создать новую ветку и переключиться на нее?</p></li>
+</ol>
+</section>
+<section id="id3">
+<h2>Упражнения<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Повторите структуру дерева коммитов, показанных на рисунке ниже.</p></li>
+</ol>
+<figure class="align-default">
+<img alt="../_images/branch-3.png" src="../_images/branch-3.png" />
+</figure>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -402,6 +446,21 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Контрольные вопросы</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Упражнения</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

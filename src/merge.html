@@ -66,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Синхронизация с удаленными хранилищами" href="sync.html" />
-    <link rel="prev" title="Изучение веток" href="git-log-branch.html" />
+    <link rel="prev" title="Работа с ветками" href="branch.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -199,7 +199,6 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="git-server.html">Git-сервер</a></li>
 <li class="toctree-l1"><a class="reference internal" href="clone.html">Клонирование хранилища</a></li>
 <li class="toctree-l1"><a class="reference internal" href="branch.html">Работа с ветками</a></li>
-<li class="toctree-l1"><a class="reference internal" href="git-log-branch.html">Изучение веток</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Слияние изменений</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sync.html">Синхронизация с удаленными хранилищами</a></li>
 <li class="toctree-l1"><a class="reference internal" href="workflow.html">Порядок работы с Git</a></li>
@@ -368,6 +367,13 @@ document.write(`
 Базовая, локальная и серверная ревизии.
 Специальный инструмент <code class="docutils literal notranslate"><span class="pre">diff3</span></code>, <code class="docutils literal notranslate"><span class="pre">kdiff3</span></code>, <code class="docutils literal notranslate"><span class="pre">WinMerge</span></code>.
 Разметки в объединяемых файлах.</p>
+<!--
+* `git branch --merged` покажет ветки, которые вы слили с текущей. Их можно удалить.
+* `git branch --no-merged`. Нельзя удалять неслитые ветки. Опция `-D` заставит это сделать. При этом удаляться коммиты.
+* `git branch --no-merged main` покажет ветки, неслитые с `main`.
+* `git log --no-merges`
+* `git branch -d <branch>` удаляет указатель на ветку.
+-->
 </section>
 
     <script type="text/x-thebe-config">
@@ -401,12 +407,12 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="git-log-branch.html"
+       href="branch.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Изучение веток</p>
+        <p class="prev-next-title">Работа с ветками</p>
       </div>
     </a>
     <a class="right-next"
