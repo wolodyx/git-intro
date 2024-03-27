@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Слияние изменений &#8212; Git из командной строки</title>
+    <title>Объединение изменений &#8212; Git из командной строки</title>
   
   
   
@@ -199,7 +199,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="git-server.html">Git-сервер</a></li>
 <li class="toctree-l1"><a class="reference internal" href="clone.html">Клонирование хранилища</a></li>
 <li class="toctree-l1"><a class="reference internal" href="branch.html">Работа с ветками</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Слияние изменений</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Объединение изменений</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sync.html">Синхронизация с удаленными хранилищами</a></li>
 <li class="toctree-l1"><a class="reference internal" href="workflow.html">Порядок работы с Git</a></li>
 <li class="toctree-l1"><a class="reference internal" href="test2.html">Проверочная работа</a></li>
@@ -328,7 +328,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -339,11 +341,23 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Слияние изменений</h1>
+    <h1>Объединение изменений</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Перенос изменений коммитом слияния</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Перемотка вперед</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Перебазирование</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Разрешение конфликтов слияния</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Обслуживание веток</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -354,26 +368,126 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>Слияние изменений<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
-<p>Бывает необходимым объединить результаты работы двух разработчиков, что называется слиянием изменений.
+<h1>Объединение изменений<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<!--
+Тема со слиянием изменением обширна за счет
+-->
+<p>В этом разделе мы:</p>
+<ul class="simple">
+<li><p>узнаем о трех способах объединения изменений: слиянии, перемотке и перебазировании;</p></li>
+<li><p>познакомимся с командой <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code>;</p></li>
+<li><p>научимся разрешать конфликты слияния.</p></li>
+</ul>
+<p>Бывает необходимым объединить результаты работы двух разработчиков.
 Слияние изменений возникает при объединении веток, а также при обновлении рабочего каталога до последней ревизии основной ветки.
 при слиянии файлов не следует терять данные и не нарушить целостность проекта.
-Операция слияния происходит автоматически (без вмешательства человека), если изменения не пересекаются, т.е. выполнены в разных файлах или в разных строках одного файла.
-Конфликтом называют ситуацию, при которой изменения не могут быть слиты.
-Для разрешения конфликта требуется внимание разработчика.
-Когда невозможно автоматически сливать изменения (в двоичных файлах, пересекающихся изменениях, удаление и изменение).
-Алгоритм слияния изменений.
-Слияние выполняется для каждого файла.
+Операция слияния происходит автоматически (без вмешательства человека), если изменения не пересекаются, т.е. выполнены в разных файлах или в разных строках одного файла.</p>
+<section id="id2">
+<h2>Перенос изменений коммитом слияния<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<!-- Команда `git merge` и слияние с коммитом -->
+<p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code> переносит изменения из одной ветки в другую.
+Представим ситуацию, когда есть дерево коммитов с основной веткой <code class="docutils literal notranslate"><span class="pre">master</span></code> и тематической <code class="docutils literal notranslate"><span class="pre">bugfix</span></code>.
+В <code class="docutils literal notranslate"><span class="pre">bugfix</span></code> двумя коммитами исправлена ошибка.
+За время работы над <code class="docutils literal notranslate"><span class="pre">bugfix</span></code> в основной ветке появился один коммит.
+Указатель на текущую ветку <code class="docutils literal notranslate"><span class="pre">HEAD</span></code> показывает на <code class="docutils literal notranslate"><span class="pre">master</span></code>.
+В этом состоянии команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span> <span class="pre">bugfix</span></code> переносит изменения из ветки <code class="docutils literal notranslate"><span class="pre">bugfix</span></code> в текущую ветку <code class="docutils literal notranslate"><span class="pre">master</span></code> через <em>коммит слияния</em> с идентификатором <code class="docutils literal notranslate"><span class="pre">2a5</span></code>.
+Текущая ветка <code class="docutils literal notranslate"><span class="pre">master</span></code> перемещается на этот новый коммит.</p>
+<figure class="align-default">
+<img alt="../_images/branch-6.png" src="../_images/branch-6.png" />
+</figure>
+<!-- Удаление ветки `git branch -d <branch>` -->
+<p>Указатель функциональной ветки <code class="docutils literal notranslate"><span class="pre">bugfix</span></code> после объединения не переместился.
+Этой веткой еще можно воспользоваться и развивать ее, но смысла в этом нет, так как она выполнила свою роль.
+Она может быть удалена.
+При удалении мы не потеряем ее коммиты, так как они теперь стали достижимыми из основной ветки.
+Удаление ветки приведет только к удалению указателя на коммит.
+Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">-d</span> <span class="pre">bugfix</span></code> успешно удалит ветку <code class="docutils literal notranslate"><span class="pre">bugfix</span></code>.
+Возникает вопрос, а не хранил ли именованный указатель ветки информацию об исправленной ошибке?
+Может ли пользователь Git по отдельным описаниям коммитов функциональной ветки сделать вывод, что здесь происходило исправление конкретной ошибки?
+Так вот, информация об исправлении ошибки должна быть ясно прописана в описании коммита слияния <code class="docutils literal notranslate"><span class="pre">2a5</span></code>.
+Коммит слияния как бы вносит изменения в ветку скопом.</p>
+</section>
+<section id="id3">
+<h2>Перемотка вперед<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<p>Объединение веток упростится, если в ветке, куда переносятся изменения, отсутствуют коммиты.
+Пример такой ситуации показан на рисунке ниже.
+Здесь достаточно переместить указатель ветки <code class="docutils literal notranslate"><span class="pre">master</span></code> к последнему коммиту <code class="docutils literal notranslate"><span class="pre">bugfix</span></code>.
+Этот прием называется <em>перемоткой вперед</em>, от английского <code class="docutils literal notranslate"><span class="pre">fast</span> <span class="pre">forward</span></code>.</p>
+<figure class="align-default">
+<img alt="../_images/branch-4.png" src="../_images/branch-4.png" />
+</figure>
+<p>Но и в этой ситуации можно создать коммит слияния, если явно отказаться от перемотки опцией <code class="docutils literal notranslate"><span class="pre">--no-ff</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">merge</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">ff</span> <span class="n">bugfix</span>
+</pre></div>
+</div>
+<p>Такой выбор объясняется тем, что автор не хочет, чтобы коммиты его ветки не стали коммитами основной ветки, так как каждая из них не удовлетворяет условию завершенности.
+А таким условием обладает только коммит слияния.</p>
+<figure class="align-default">
+<img alt="../_images/branch-4.1.png" src="../_images/branch-4.1.png" />
+</figure>
+</section>
+<section id="id4">
+<h2>Перебазирование<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<p>Перебазирование – это перенос последовательности коммитов на другой коммит.
+Графически это выглядит как отрезание части ветки с места ветвления и перенос ее в другое место.
+Те коммиты, от которых ветка была отсоединена и к которым закреплена, называют базовыми.
+Отметим, что при у переносимых коммитов меняются идентификаторы, так как меняются родители.</p>
+<p>Представим знакомую ситуацию на рисунке ниже с двумя ветками <code class="docutils literal notranslate"><span class="pre">master</span></code> и <code class="docutils literal notranslate"><span class="pre">bugfix</span></code>.
+Она отличается от вышеприведенного тем, что текущая ветка здесь <code class="docutils literal notranslate"><span class="pre">bugfix</span></code>.
+Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span> <span class="pre">master</span></code> перенесет текущую ветку <code class="docutils literal notranslate"><span class="pre">bugfix</span></code> на ветку <code class="docutils literal notranslate"><span class="pre">master</span></code>.
+Чтобы закончить объединение следует или перемотать ветку <code class="docutils literal notranslate"><span class="pre">master</span></code> до <code class="docutils literal notranslate"><span class="pre">bugfix</span></code> или создать коммит слияния.</p>
+<figure class="align-default">
+<img alt="../_images/branch-5.png" src="../_images/branch-5.png" />
+</figure>
+<!-- Когда не следует использовать перебазирование -->
+<p>Перебазирование, в отличие от перемотки и слияния, изменяет историю, удаляя существующие коммиты и связи между ними.
+Это может усложнить объединение изменений, если кто-то еще использовал удаляемые коммиты.
+Отсюда вытекает важное правило.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Нельзя перебазировать публичные ветки, (ветки, которые кто-то еще использует).
+В противном случае, во время объединения дерева коммитов двух хранилищ, удаленные коммиты вернутся обратно.
+В результате в истории будут две копии коммитов, вносящих одни и те же изменения.</p>
+</div>
+<!-- Когда следует использовать перебазирование? -->
+<p>Перебазирование подходит, если вы каждым коммитом вносите в проект полностью оформленную работу.
+Примеры изменений, которые не удовлетворяют этому условию:</p>
+<ul class="simple">
+<li><p>не компилируются;</p></li>
+<li><p>не позволяют запустится программе;</p></li>
+<li><p>вносят дополнительные ошибки.</p></li>
+</ul>
+<p>Перебазирование, как и перемотка, сохраняет историю изменений линейной.
+Такая история проще для просматривания и изучения.</p>
+</section>
+<section id="id5">
+<h2>Разрешение конфликтов слияния<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<p>Конфликтом слияния называют ситуацию, при которой изменения не могут быть слиты автоматически.
+Для разрешения конфликта требуется внимание разработчика.</p>
+<p>Когда невозможно автоматически слить изменения?
+Невозможно объединять изменения в двоичных файлах как изображения, аудио и видео.
+Здесь остается только выбрать один из двух вариантов или заново отредактировать файл с учетом предыдущих изменений.
+Конфликты слияния возникают в текстовых файлах, если были по разному изменены одна и та же строка или пересекаются фрагменты патчей.
+Также такое происходит, если один из участников изменил файл, а второй удалил его.</p>
+<p>При конфликте слияния команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code> прерывается с сообщением об ошибке.</p>
+<!-- Алгоритм слияния изменений -->
+<p>Слияние выполняется для каждого файла.
 Базовая, локальная и серверная ревизии.
 Специальный инструмент <code class="docutils literal notranslate"><span class="pre">diff3</span></code>, <code class="docutils literal notranslate"><span class="pre">kdiff3</span></code>, <code class="docutils literal notranslate"><span class="pre">WinMerge</span></code>.
 Разметки в объединяемых файлах.</p>
+<p>Список веток, слитых с текущей, покажет команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">--merged</span></code>.
+Эти ветки можно безопасно удалить.
+Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">--no-merged</span></code> покажет список веток, неслитых с текущей.
+Такие ветки нельзя удалить, не потеряв их коммиты.
+Если все-таки нужно удалить такую ветку, то выполните команду <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">-D</span> <span class="pre">&lt;branch-name&gt;</span></code>.</p>
+</section>
+<section id="id6">
+<h2>Обслуживание веток<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
 <!--
-* `git branch --merged` покажет ветки, которые вы слили с текущей. Их можно удалить.
-* `git branch --no-merged`. Нельзя удалять неслитые ветки. Опция `-D` заставит это сделать. При этом удаляться коммиты.
 * `git branch --no-merged main` покажет ветки, неслитые с `main`.
 * `git log --no-merges`
-* `git branch -d <branch>` удаляет указатель на ветку.
 -->
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -430,6 +544,24 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Перенос изменений коммитом слияния</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Перемотка вперед</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Перебазирование</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Разрешение конфликтов слияния</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Обслуживание веток</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

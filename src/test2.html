@@ -198,7 +198,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="git-server.html">Git-сервер</a></li>
 <li class="toctree-l1"><a class="reference internal" href="clone.html">Клонирование хранилища</a></li>
 <li class="toctree-l1"><a class="reference internal" href="branch.html">Работа с ветками</a></li>
-<li class="toctree-l1"><a class="reference internal" href="merge.html">Слияние изменений</a></li>
+<li class="toctree-l1"><a class="reference internal" href="merge.html">Объединение изменений</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sync.html">Синхронизация с удаленными хранилищами</a></li>
 <li class="toctree-l1"><a class="reference internal" href="workflow.html">Порядок работы с Git</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Проверочная работа</a></li>
@@ -389,11 +389,20 @@ document.write(`
 <li><p>Как переключиться на другую ветку?</p></li>
 <li><p>Как одной командой создать новую ветку и переключиться на нее?</p></li>
 </ol>
+<!--
+Дан исходная история хранилища и результат после объединения.
+Где какие способы объединения были использованы?
+-->
 </section>
 <section id="id3">
 <h2>Упражнения<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>Повторите структуру дерева коммитов, показанных на рисунке ниже.</p></li>
+<li><p>Слияние – это перенос изменений из одной ветки в другую.
+Перенесите изменения в оба направления.</p></li>
+<li><p>Создайте хранилище со структурой из рисунка ниже.
+Перебазируйте ветку <code class="docutils literal notranslate"><span class="pre">refac</span></code> на <code class="docutils literal notranslate"><span class="pre">main</span></code>.
+Проверьте, какие поля изменились у коммитов.</p></li>
 </ol>
 <figure class="align-default">
 <img alt="../_images/branch-3.png" src="../_images/branch-3.png" />
