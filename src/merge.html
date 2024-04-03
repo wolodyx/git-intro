@@ -355,6 +355,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Перемотка вперед</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Перебазирование</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Разрешение конфликтов слияния</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kdiff3">Разрешение конфликта с KDiff3</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Обслуживание веток</a></li>
 </ul>
             </nav>
@@ -463,26 +464,152 @@ document.write(`
 <section id="id5">
 <h2>Разрешение конфликтов слияния<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
 <p>Конфликтом слияния называют ситуацию, при которой изменения не могут быть слиты автоматически.
-Для разрешения конфликта требуется внимание разработчика.</p>
-<p>Когда невозможно автоматически слить изменения?
-Невозможно объединять изменения в двоичных файлах как изображения, аудио и видео.
-Здесь остается только выбрать один из двух вариантов или заново отредактировать файл с учетом предыдущих изменений.
-Конфликты слияния возникают в текстовых файлах, если были по разному изменены одна и та же строка или пересекаются фрагменты патчей.
-Также такое происходит, если один из участников изменил файл, а второй удалил его.</p>
-<p>При конфликте слияния команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code> прерывается с сообщением об ошибке.</p>
-<!-- Алгоритм слияния изменений -->
-<p>Слияние выполняется для каждого файла.
+Для разрешения конфликта требуется внимание разработчика.
+В каких случаях невозможно автоматически слить изменения?</p>
+<ul class="simple">
+<li><p>Если в текстовом файле была по-разному изменена одна и та же строка.</p></li>
+<li><p>Если одновременно изменены двоичные файлы как изображения, аудио и видео.
+Здесь остается только выбрать один из двух вариантов или заново создать файл, который включает оба изменения.</p></li>
+<li><p>Если измененный файл был удален.</p></li>
+</ul>
+<p>Вместе с этим курсом доступны примеры однотипных хранилищ с коллизиями при объединении ветки <code class="docutils literal notranslate"><span class="pre">branching</span></code> с <code class="docutils literal notranslate"><span class="pre">main</span></code>.
+Загрузите одно из них, разархивируйте в домашний каталог и перейдите в рабочий каталог.
+Удостоверьтесь, что вы находитесь на ветке <code class="docutils literal notranslate"><span class="pre">main</span></code> командой <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git branch 
+  branching
+* main
+</pre></div>
+</div>
+<p>Если вы на ветке <code class="docutils literal notranslate"><span class="pre">branching</span></code>, то переключитесь на <code class="docutils literal notranslate"><span class="pre">main</span></code> командой <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">main</span></code>.</p>
+<p>Объединение веток выполняет команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code>.
+Ветка, куда вносятся изменения, является текущей.
+Ветка, откуда берутся изменения, передается в качестве аргумента.
+Мы хотим внести изменения из <code class="docutils literal notranslate"><span class="pre">branching</span></code> в <code class="docutils literal notranslate"><span class="pre">main</span></code>, тогда выполним команду <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">branching</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git merge branching 
+Автослияние RunCMakeTest.cmake
+КОНФЛИКТ (содержимое): Конфликт слияния в RunCMakeTest.cmake
+Сбой автоматического слияния; исправьте конфликты, затем зафиксируйте результат.
+</pre></div>
+</div>
+<p>В нашем случае команда прервалась с сообщением о произошедшем конфликте и указал файл, где это произошло.
+Посмотрим состояние файлов:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git status
+Текущая ветка: main
+У вас есть не слитые пути.
+  (разрешите конфликты, затем запустите «git commit»)
+  (используйте «git merge --abort», чтобы остановить операцию слияния)
+
+Не слитые пути:
+  (используйте «git add &lt;файл&gt;...», чтобы пометить разрешение конфликта)
+	оба изменены:   RunCMakeTest.cmake
+
+индекс пуст (используйте «git add» и/или «git commit -a»)
+</pre></div>
+</div>
+<p>То же состояние, но с опцией <code class="docutils literal notranslate"><span class="pre">-s</span></code> покажет следующее:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git status -s
+UU RunCMakeTest.cmake
+</pre></div>
+</div>
+<p>Обозначенный таким образом файл содержит специальную разметку, указывающую на конфликт слияния.
+Откройте файл и найдите размеченное следующим образом содержимое:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;&lt;&lt;&lt;&lt;&lt;&lt;</span> <span class="n">HEAD</span>
+<span class="o">...</span>
+<span class="o">=======</span>
+<span class="o">...</span>
+<span class="o">&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span> <span class="n">branching</span>
+</pre></div>
+</div>
+<p>Разметка показывает два блока фрагмента, которые не получилось слить: из текущей ветки и сливаемой ветки.
+Ваша задача предложить отредактировать содержимое так, чтобы оно содержало актуальные изменения из обоих веток.
+Также необходимо удалить разметку.
+Пример кода из хранилища:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+
+run_TestRepeat(UntilFail RETURN_VALUE:1 REPEAT UNTIL_FAIL:3)
+run_TestRepeat(UntilPass RETURN_VALUE:0 REPEAT UNTIL_PASS:3)
+run_TestRepeat(AfterTimeout RETURN_VALUE:0 REPEAT AFTER_TIMEOUT:3)
+
+# test repeat and not run tests interact correctly
+set(CASE_CMAKELISTS_SUFFIX_CODE [[
+add_test(NAME testNotRun
+  COMMAND ${CMAKE_COMMAND}/doesnt_exist)
+  set_property(TEST testNotRun PROPERTY TIMEOUT 5)
+  ]])
+run_TestRepeat(NotRun RETURN_VALUE:1 REPEAT UNTIL_PASS:3)
+unset(CASE_CMAKELISTS_SUFFIX_CODE)
+=======
+run_TestRepeat(UntilFail REPEAT UNTIL_FAIL:3)
+run_TestRepeat(UntilPass REPEAT UNTIL_PASS:3)
+run_TestRepeat(AfterTimeout REPEAT AFTER_TIMEOUT:3)
+
+# test --stop-on-failure
+function(run_stop_on_failure)
+  set(CASE_CTEST_TEST_ARGS EXCLUDE RunCMakeVersion)
+  set(CASE_CMAKELISTS_SUFFIX_CODE [[
+add_test(NAME StoppingTest COMMAND ${CMAKE_COMMAND} -E false)
+add_test(NAME NotRunTest COMMAND ${CMAKE_COMMAND} -E true)
+  ]])
+
+  run_ctest_test(stop-on-failure STOP_ON_FAILURE)
+endfunction()
+run_stop_on_failure()
+
+# Make sure environment gets logged
+function(run_environment)
+  set(ENV{BAD_ENVIRONMENT_VARIABLE} &quot;Bad environment variable&quot;)
+  set(CASE_CMAKELISTS_SUFFIX_CODE [[
+set_property(TEST RunCMakeVersion PROPERTY ENVIRONMENT &quot;ENV1=env1;ENV2=env2&quot;)
+  ]])
+
+  run_ctest(TestEnvironment)
+endfunction()
+run_environment()
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; branching
+</pre></div>
+</div>
+<p>После редактирования сохраните файл и добавьте его в индекс командой <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">RunCMakeTest.cmake</span></code>.
+Затем зафиксируйте изменения.
+Можно оставить стандартное сообщение коммита “Merge branch ‘branching’”, которое предложит Git или предоставить свой.</p>
+</section>
+<section id="kdiff3">
+<h2>Разрешение конфликта с KDiff3<a class="headerlink" href="#kdiff3" title="Permalink to this heading">#</a></h2>
+<p>Разрешение конфликтов слияния – задача сложная и ответственная.
+Существуют специализированные инструменты, которые позволят облегчить и частично автоматизировать этот процесс.
+Один из них – это графическая утилита KDiff3, доступная на платформах Linux и Windows.
+Утилита установлена в поставляемой с курсом виртуальной машине.
+Если вы находитесь внутри хранилища с неразрешенным конфликтом, вызовите утилиту командой</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">mergetool</span> <span class="o">--</span><span class="n">tool</span><span class="o">=</span><span class="n">kdiff3</span>
+</pre></div>
+</div>
+<p>Появится диалоговое окно с сообщением о количестве разрешенных и неразрешенных конфликтов.</p>
+<figure class="align-default">
+<img alt="../_images/kdiff3-start-message.png" src="../_images/kdiff3-start-message.png" />
+</figure>
+<p>Область окна утилиты разбита на 4 части – 4 версии файла.
+Нижнюю область занимает результирующий файл, который войдет в коммит слияния.
+Ее и следует редактировать.
+Верхняя область окна поделена на три части, показывающих три состояния одного файла:</p>
+<ul class="simple">
+<li><p>A, Base – файл до разветвления;</p></li>
+<li><p>B, Local – файл из текущей ветки;</p></li>
+<li><p>C, Remote – файл из сливаемой ветки.</p></li>
+</ul>
+<figure class="align-default">
+<img alt="../_images/kdiff3.png" src="../_images/kdiff3.png" />
+</figure>
+<!-- Алгоритм слияния изменений
+Слияние выполняется для каждого файла.
 Базовая, локальная и серверная ревизии.
-Специальный инструмент <code class="docutils literal notranslate"><span class="pre">diff3</span></code>, <code class="docutils literal notranslate"><span class="pre">kdiff3</span></code>, <code class="docutils literal notranslate"><span class="pre">WinMerge</span></code>.
-Разметки в объединяемых файлах.</p>
+ -->
+</section>
+<section id="id6">
+<h2>Обслуживание веток<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
 <p>Список веток, слитых с текущей, покажет команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">--merged</span></code>.
 Эти ветки можно безопасно удалить.
 Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">--no-merged</span></code> покажет список веток, неслитых с текущей.
 Такие ветки нельзя удалить, не потеряв их коммиты.
 Если все-таки нужно удалить такую ветку, то выполните команду <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">-D</span> <span class="pre">&lt;branch-name&gt;</span></code>.</p>
-</section>
-<section id="id6">
-<h2>Обслуживание веток<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
 <!--
 * `git branch --no-merged main` покажет ветки, неслитые с `main`.
 * `git log --no-merges`
@@ -557,6 +684,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Перемотка вперед</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Перебазирование</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Разрешение конфликтов слияния</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kdiff3">Разрешение конфликта с KDiff3</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Обслуживание веток</a></li>
 </ul>
   </nav></div>

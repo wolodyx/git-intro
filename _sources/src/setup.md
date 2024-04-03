@@ -44,6 +44,7 @@ sudo install lazygit /usr/local/bin
 <!--
 Дополнительно установить:
 * sublime-merge;
+* kdiff3;
 * VSCode.
 -->
 
