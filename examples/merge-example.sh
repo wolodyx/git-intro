@@ -1,6 +1,6 @@
 REPO_NAME=repo
 rm -rf ${REPO_NAME}
-git init ${REPO_NAME}
+git init -b main ${REPO_NAME}
 cd ${REPO_NAME}
 
 cat > CMakeLists.txt << EOL
