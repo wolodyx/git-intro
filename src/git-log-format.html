@@ -387,10 +387,10 @@ document.write(`
 <p>Остальные предопределенные форматы (<code class="docutils literal notranslate"><span class="pre">short</span></code>, <code class="docutils literal notranslate"><span class="pre">full</span></code>, <code class="docutils literal notranslate"><span class="pre">fuller</span></code>, <code class="docutils literal notranslate"><span class="pre">email</span></code>, <code class="docutils literal notranslate"><span class="pre">raw</span></code>, <code class="docutils literal notranslate"><span class="pre">medium</span></code>) многострочные.</p>
 <p>Формат <code class="docutils literal notranslate"><span class="pre">--format=short</span></code> расширяет предыдущий вывод информацией об авторе коммита: его имени и электронной почте.
 Уже информация не помещается в одну строчку и каждое поле помещается в отдельную строку.</p>
-<div class="highlight-% notranslate"><div class="highlight"><pre><span></span>commit 0d933fc0d9bb7bdaed1997c0ae06567115242f74
-Author: Martin Storsjö &lt;martin@martin.st&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">commit</span> <span class="mi">0</span><span class="n">d933fc0d9bb7bdaed1997c0ae06567115242f74</span>
+<span class="n">Author</span><span class="p">:</span> <span class="n">Martin</span> <span class="n">Storsjö</span> <span class="o">&lt;</span><span class="n">martin</span><span class="nd">@martin</span><span class="o">.</span><span class="n">st</span><span class="o">&gt;</span>
 
-    Ninja: Update showIncludes prefix detection for clang-cl 18
+    <span class="n">Ninja</span><span class="p">:</span> <span class="n">Update</span> <span class="n">showIncludes</span> <span class="n">prefix</span> <span class="n">detection</span> <span class="k">for</span> <span class="n">clang</span><span class="o">-</span><span class="n">cl</span> <span class="mi">18</span>
 </pre></div>
 </div>
 <p>Формат <code class="docutils literal notranslate"><span class="pre">medium</span></code> добавляет к формату <code class="docutils literal notranslate"><span class="pre">short</span></code> дату и время создания коммита, а описание коммита содержит уже дополнительно к заголовку тело.
@@ -428,7 +428,7 @@ the existing matched patterns.
 <p>Формат <code class="docutils literal notranslate"><span class="pre">raw</span></code> выводит описание коммита во внутреннем представлении.
 Здесь видим, что появился поле <code class="docutils literal notranslate"><span class="pre">parent</span></code> – указатель на родительский коммит.
 Поле <code class="docutils literal notranslate"><span class="pre">tree</span></code> – это внутренний объект Git, который содержит изменения.</p>
-<div class="highlight-% notranslate"><div class="highlight"><pre><span></span>commit 0d933fc0d9bb7bdaed1997c0ae06567115242f74
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>commit 0d933fc0d9bb7bdaed1997c0ae06567115242f74
 tree a35cd4850c3d520af1a3b21d626a1a576a640327
 parent a88acb0a419d184102c65ee9456950f2cea1cc71
 author Martin Storsjö &lt;martin@martin.st&gt; 1707256724 +0200

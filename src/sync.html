@@ -351,7 +351,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Введение</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Работа с одним удаленным хранилищем</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Локальные, удаленные и отслеживаемые ветки</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Работа с несколькими удаленными хранилищами</a></li>
 </ul>
             </nav>
         </div>
@@ -365,15 +367,111 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>Синхронизация с удаленными хранилищами<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<p>В этом разделе мы:</p>
+<ul class="simple">
+<li><p>научимся управлять удаленными хранилищами командой <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span></code>: добавлять, убирать, переименовывать псевдонимы, просматривать дополнительные сведения;</p></li>
+<li><p>научимся работать с отслеживаемыми ветками;</p></li>
+<li><p>отправлять коммиты в удаленное хранилище командой <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code>;</p></li>
+<li><p>принимать коммиты из удаленного хранилища командами <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span></code> и <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code>;</p></li>
+<li><p>сохранить пароль;</p></li>
+</ul>
+<p>Смоделируем групповую работу над проектом.</p>
 <section id="id2">
-<h2>Введение<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
-<p>Особенности работы с распределенными СКВ.
-Обособленная работа.
-Обмен с изменениями с другими хранилищами для синхронизации содержимого.
-Получение (pull) и передача (push) истории от удаленного хранилища.
-Форк и запрос на слияние.</p>
+<h2>Работа с одним удаленным хранилищем<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>Для работы с удаленным хранилищем нам необходимо знать как минимум о трех командах: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code>.</p>
+<!-- `git fetch` и `git push` -->
+<p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span></code> забирает из удаленного хранилища изменения.
+Но чтобы изменения там появились, их необходимо отправить туда.
+Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> отправляет изменения из локального хранилища в удаленное.</p>
+<figure class="align-default">
+<img alt="../_images/fetch-push.png" src="../_images/fetch-push.png" />
+</figure>
+<!-- git pull -->
+<p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> забирает изменения из удаленного хранилища и сливает их с текущими.
+Она представляет последовательность команд <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span></code> и <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code>.</p>
+<p>Зная эти команды, разберем сценарий <a class="reference download internal" download="" href="../_downloads/5229435ecf39122b7ff486fb215e1f2b/one-remote-and-two-locals.sh"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">one-remote-and-two-locals.sh</span></code></span></a>, в котором два локальных хранилища взаимодействуют через удаленное.
+Сценарий разбит на четыре эпизода, поочередно наполняющих файл <code class="docutils literal notranslate"><span class="pre">main.c</span></code> контентом в каждом из локальных хранилищ.
+Сначала первое хранилище отправляет в удаленное пустой файл, а второе хранилище заполняет его содержимым</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Затем первое хранилище добавляет в него тип возвращаемого значения, а второе – список аргументов функции <code class="docutils literal notranslate"><span class="pre">main</span></code>.
+Первое хранилище успевает синхронизироваться с удаленным раньше, чем второе.
+Поэтому второму приходится слиться с изменениями из удаленного, разрешив попутно конфликт слияния:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;&lt;&lt;&lt;&lt;&lt;&lt;</span> <span class="n">HEAD</span>
+<span class="n">main</span><span class="p">(</span><span class="nb">int</span> <span class="n">argc</span><span class="p">,</span> <span class="n">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span>
+<span class="o">=======</span>
+<span class="nb">int</span> <span class="n">main</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span> <span class="n">origin</span><span class="o">/</span><span class="n">main</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<figure class="align-default">
+<img alt="../_images/one-remote-and-two-locals.png" src="../_images/one-remote-and-two-locals.png" />
+</figure>
+</section>
+<section id="id3">
+<h2>Локальные, удаленные и отслеживаемые ветки<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<p>В сценарии выше неопределенность представляет аргумент <code class="docutils literal notranslate"><span class="pre">origin/main</span></code> команды <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code>.
+Чтобы разобраться в нем нам следует понять как обозначают удаленные хранилища в локальном, что такое локальные, удаленные и отслежваемые ветки.</p>
+<!-- Связь между локальным и удаленным хранилищем -->
+<p>Склонированное локальное хранилище сохраняет связь со своим удаленным хранилищем.
+Git удаленному хранилищу по умолчанию задает псевдоним <code class="docutils literal notranslate"><span class="pre">origin</span></code>.
+Псевдоним заменяет более сложный в наборе url-адрес.
+Другие команды, когда им потребуется обратиться к удаленному хранилищу, возьмут адрес связанный с именем <code class="docutils literal notranslate"><span class="pre">origin</span></code>.</p>
+<p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span></code> перечисляет список сохраненных удаленных хранилищ, связанных с локальным.
+<code class="docutils literal notranslate"><span class="pre">origin</span></code> будет показываться всегда.
+Чтобы увидеть адреса хранилищ, выполните команду выше с опцией <code class="docutils literal notranslate"><span class="pre">-v</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>remote<span class="w"> </span>-v
+origin<span class="w">	</span>/home/bob/projects/git-examples/./remote.git<span class="w"> </span><span class="o">(</span>fetch<span class="o">)</span>
+origin<span class="w">	</span>/home/bob/projects/git-examples/./remote.git<span class="w"> </span><span class="o">(</span>push<span class="o">)</span>
+</pre></div>
+</div>
+<p>В подробном выводе с хранилищем связаны два адреса.
+Первый из них для чтения, а второй – для записи.
+Здесь они совпадают, но в общем случае отличаются.</p>
+<p>После клонирования мы получаем идентичную локальную копию удаленного хранилища.
+В обоих хранилищах содержатся ветки, состояние которых в начальный момент совпадают.
+Но со временем ветки разойдутся: локальные будут наращиваться коммитами от автора локального хранилища, а удаленные – коммитами от других участников команды.
+В моменты слияния к веткам приходится обращаться, например, для слияния текущей ветки main с одноименной удаленной.</p>
+<p>Как различить локальную и удаленную ветки, если их имена совпадают?
+Удаленным веткам в локальном хранилище дают имена, составленные от имени удаленного хранилища: ветка <code class="docutils literal notranslate"><span class="pre">main</span></code> удаленного хранилища <code class="docutils literal notranslate"><span class="pre">origin</span></code> будет обозначена как <code class="docutils literal notranslate"><span class="pre">origin/main</span></code>.
+В отличие от локальной ветки, указатель удаленной ветки перемещается только после синхронизации с удаленным хранилищем командами <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span></code> и <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code>.
+Положение удаленной ветки актуально на момент последней синхронизации.
+Локальная ветка перемещается только при создании коммита.</p>
+<p>В удаленные ветки нельзя создавать коммиты.
+Для этого сначала следует создать локальную ветку по удаленной.
+Когда такая локальная ветка создается, в ней сохраняется связь с удаленной и ее называют отслеживающей.
+При клонировании хранилища, автоматически создается локальная ветка <code class="docutils literal notranslate"><span class="pre">main</span></code> (<code class="docutils literal notranslate"><span class="pre">master</span></code>), отслеживающая удаленную ветку <code class="docutils literal notranslate"><span class="pre">origin/main</span></code> (<code class="docutils literal notranslate"><span class="pre">origin/master</span></code>).
+Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> самостоятельно определяет какую локальную ветку с какой удаленной слить.</p>
+</section>
+<section id="id4">
+<h2>Работа с несколькими удаленными хранилищами<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<figure class="align-default">
+<img alt="../_images/two-remotes.png" src="../_images/two-remotes.png" />
+</figure>
 <!--
 Сохранить имя пользователя и пароль: `git config --global credentials.helper store`.
+-->
+<!--
+* git remote add <shortname> <url>
+* git remote rename <repo>
+* git remote rename <oldname> <nowname>
+* git remote remove <name>
+* git remote show <repo>
+* git fetch [<repo>]
+* git pull [<repo>]
+* git push [<repo> [<branch>]]
+
+* удаленные ссылки: ветки, теги;
+* ветка слежения -- это ссылка на определенное состояние удаленных веток; <remote>/<branch>
+* локальная ветка, только они редактируемые;
+* Git при клонировании автоматически создает локальную ветку для основной ветки. Для остальных веток она так не делает.
 -->
 </section>
 </section>
@@ -441,7 +539,9 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Введение</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Работа с одним удаленным хранилищем</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Локальные, удаленные и отслеживаемые ветки</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Работа с несколькими удаленными хранилищами</a></li>
 </ul>
   </nav></div>
 
