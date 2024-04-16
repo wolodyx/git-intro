@@ -352,7 +352,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Работа с одним удаленным хранилищем</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Локальные, удаленные и отслеживаемые ветки</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Локальные, удаленные и отслеживающая ветки</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Работа с несколькими удаленными хранилищами</a></li>
 </ul>
             </nav>
@@ -416,7 +416,7 @@ document.write(`
 </figure>
 </section>
 <section id="id3">
-<h2>Локальные, удаленные и отслеживаемые ветки<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<h2>Локальные, удаленные и отслеживающая ветки<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
 <p>В сценарии выше неопределенность представляет аргумент <code class="docutils literal notranslate"><span class="pre">origin/main</span></code> команды <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code>.
 Чтобы разобраться в нем нам следует понять как обозначают удаленные хранилища в локальном, что такое локальные, удаленные и отслежваемые ветки.</p>
 <!-- Связь между локальным и удаленным хранилищем -->
@@ -452,27 +452,25 @@ origin<span class="w">	</span>/home/bob/projects/git-examples/./remote.git<span 
 </section>
 <section id="id4">
 <h2>Работа с несколькими удаленными хранилищами<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<p>Разберем следующий <a class="reference download internal" download="" href="../_downloads/cbedf3fae1f6a8f14e3a102b6714b717/two-remotes.sh"><span class="xref download myst">сценарий</span></a>, в котором два локальных хранилища взаимодействуют через удаленные хранилища каждого.</p>
 <figure class="align-default">
 <img alt="../_images/two-remotes.png" src="../_images/two-remotes.png" />
 </figure>
-<!--
-Сохранить имя пользователя и пароль: `git config --global credentials.helper store`.
--->
-<!--
-* git remote add <shortname> <url>
-* git remote rename <repo>
-* git remote rename <oldname> <nowname>
-* git remote remove <name>
-* git remote show <repo>
-* git fetch [<repo>]
-* git pull [<repo>]
-* git push [<repo> [<branch>]]
-
-* удаленные ссылки: ветки, теги;
-* ветка слежения -- это ссылка на определенное состояние удаленных веток; <remote>/<branch>
-* локальная ветка, только они редактируемые;
-* Git при клонировании автоматически создает локальную ветку для основной ветки. Для остальных веток она так не делает.
--->
+<p>Хранилище <code class="docutils literal notranslate"><span class="pre">remote-2.git</span></code> – это удаленное хранилище, полученное клонированием другого удаленного хранилища <code class="docutils literal notranslate"><span class="pre">remote-1.git</span></code>.
+Такой процесс в среде открытого ПО называют <em>форком</em> хранилища.</p>
+<p>Локальное хранилище <code class="docutils literal notranslate"><span class="pre">local-1</span></code> вносит в удаленное <code class="docutils literal notranslate"><span class="pre">remote-1.git</span></code> файл <code class="docutils literal notranslate"><span class="pre">main.c</span></code> со знакомым содержимым:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>В процессе форка оно переносится во второе удаленное хранилище <code class="docutils literal notranslate"><span class="pre">remote-2.git</span></code>.
+Затем параллельно через связку <code class="docutils literal notranslate"><span class="pre">remote-1.git</span></code> и <code class="docutils literal notranslate"><span class="pre">local-1</span></code> в файл вносится тип возвращаемого значения, а связку <code class="docutils literal notranslate"><span class="pre">remote-2.git</span></code> и <code class="docutils literal notranslate"><span class="pre">local-2</span></code> – аргументы функции <code class="docutils literal notranslate"><span class="pre">main</span></code>.
+После этого локальное хранилище <code class="docutils literal notranslate"><span class="pre">local-1</span></code> переносит изменения из <code class="docutils literal notranslate"><span class="pre">remote-2.git</span></code> в <code class="docutils literal notranslate"><span class="pre">remote-1.git</span></code>, попутно разрешая конфликт слияния.</p>
+<p>На последнем этапе переноса изменений автор <code class="docutils literal notranslate"><span class="pre">local-1</span></code> добавляет ссылку на второе удаленное хранилище командой <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">add</span> <span class="pre">remote-2</span> <span class="pre">../remote-2.git</span></code>.
+Команда добавляет ссылку на хранилище с псевдонимом <code class="docutils literal notranslate"><span class="pre">remote-2</span></code> и адресом <code class="docutils literal notranslate"><span class="pre">../remote-2.git</span></code>.
+И уже этот псевдоним используется в командах <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span></code> и <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code>.</p>
 </section>
 </section>
 
@@ -540,7 +538,7 @@ origin<span class="w">	</span>/home/bob/projects/git-examples/./remote.git<span 
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Работа с одним удаленным хранилищем</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Локальные, удаленные и отслеживаемые ветки</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Локальные, удаленные и отслеживающая ветки</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Работа с несколькими удаленными хранилищами</a></li>
 </ul>
   </nav></div>
