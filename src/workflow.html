@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Рабочие процессы в Git &#8212; Git из командной строки</title>
+    <title>Организация рабочих процессов &#8212; Git из командной строки</title>
   
   
   
@@ -201,7 +201,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="branch.html">Работа с ветками</a></li>
 <li class="toctree-l1"><a class="reference internal" href="merge.html">Объединение изменений</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sync.html">Синхронизация с удаленными хранилищами</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Рабочие процессы в Git</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Организация рабочих процессов</a></li>
 <li class="toctree-l1"><a class="reference internal" href="test2.html">Проверочная работа</a></li>
 </ul>
 
@@ -328,7 +328,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -339,11 +341,21 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Рабочие процессы в Git</h1>
+    <h1>Организация рабочих процессов</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Централизованная модель</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Модель с интеграционным менеджером</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Модель с диктатором и помощниками</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -353,12 +365,34 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="git">
-<h1>Рабочие процессы в Git<a class="headerlink" href="#git" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>Организация рабочих процессов<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<section id="id2">
+<h2>Централизованная модель<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>Самый очевидный способ – централизованная модель взаимодействия.
+Рабочий процесс организован вокруг одного публичного хранилища.
+Здесь каждый разработчик обладает равными правами доступа.
+Эта модель актуальна для команд с небольшим количеством участников.</p>
+<figure class="align-default">
+<img alt="../_images/workflow-central.png" src="../_images/workflow-central.png" />
+</figure>
+</section>
+<section id="id3">
+<h2>Модель с интеграционным менеджером<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<figure class="align-default">
+<img alt="../_images/workflow-integration-manager.png" src="../_images/workflow-integration-manager.png" />
+</figure>
+</section>
+<section id="id4">
+<h2>Модель с диктатором и помощниками<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<figure class="align-default">
+<img alt="../_images/workflow-dictator.png" src="../_images/workflow-dictator.png" />
+</figure>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.atlassian.com/ru/continuous-delivery/continuous-integration/trunk-based-development">Магистральная разработка</a></p></li>
 <li><p><a class="reference external" href="https://www.atlassian.com/ru/git/tutorials/comparing-workflows/gitflow-workflow">Gitflow</a></p></li>
 </ul>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -415,6 +449,22 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Централизованная модель</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Модель с интеграционным менеджером</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Модель с диктатором и помощниками</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
