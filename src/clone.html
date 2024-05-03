@@ -355,11 +355,25 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>Клонирование хранилища<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<p>В этом разделе мы узнаем:</p>
+<ul class="simple">
+<li><p>о команде <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code> и как им пользоваться;</p></li>
+<li><p>как достать адрес публичного хранилища у проекта на GitHub;</p></li>
+<li><p>об опции <code class="docutils literal notranslate"><span class="pre">--depth</span></code> команды <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code>;</p></li>
+<li><p>о способе формирования адреса хранилища.</p></li>
+</ul>
 <!-- О команде `git clone` -->
 <p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code> клонирует хранилище, адрес которого передано в качестве аргумента команды.
 Вторым, необязательным, аргументом выступает имя рабочего каталога.</p>
+<p>Откуда достать адрес публичного хранилища?
+Многие открытые проекты размещаются на <code class="docutils literal notranslate"><span class="pre">GitHub</span></code>.
+Зайдите на нее, перейдите на главную страничку любого проекта, активируйте выпадающее меню <code class="docutils literal notranslate"><span class="pre">&lt;&gt;</span> <span class="pre">Code</span></code> и нажмите на значок <code class="docutils literal notranslate"><span class="pre">Copy</span> <span class="pre">url</span> <span class="pre">to</span> <span class="pre">clipboard</span></code>.
+Адрес хранилища переместится в буфер обмена, откуда он может быть вставлен в терминал комбинацией клавиш <code class="docutils literal notranslate"><span class="pre">Ctrl+V</span></code> или <code class="docutils literal notranslate"><span class="pre">Ctrl+Shift+V</span></code>.</p>
+<figure class="align-default">
+<img alt="../_images/get-address-from-github.png" src="../_images/get-address-from-github.png" />
+</figure>
 <!-- Пример клонирования удаленного репозитория -->
-<p>Склонируем хранилище проекта MPICH, расположенного по адресу <code class="docutils literal notranslate"><span class="pre">https://github.com/pmodels/mpich.git</span></code>.</p>
+<p>Склонируем хранилище <a class="reference external" href="https://github.com/pmodels/mpich">проекта MPICH</a>, размещенного по адресу <code class="docutils literal notranslate"><span class="pre">https://github.com/pmodels/mpich.git</span></code>.</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">bob@pc:~/projects$ </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/pmodels/mpich.git
 <span class="go">Клонирование в «mpich»...</span>
 <span class="go">remote: Enumerating objects: 250143, done.</span>
@@ -373,14 +387,14 @@ document.write(`
 <span class="go">CHANGES     configure.ac  CONTRIBUTING  doc        maint     modules      README.vin        src</span>
 </pre></div>
 </div>
-<p>Команда создала в текущем каталоге каталог <code class="docutils literal notranslate"><span class="pre">mpich</span></code>, название которого совпало с названием удаленного хранилища в аргументе-адресе (после исключения расширения <code class="docutils literal notranslate"><span class="pre">.git</span></code>).
-Если перед клонированием такой <strong>непустой</strong> каталог существовал, то команда завершилась бы с ошибкой.
-Чтобы склонировать хранилище в другой рабочий каталог, его имя передается в команду аргументом после адреса:</p>
+<p>Команда создаст в текущем каталоге каталог <code class="docutils literal notranslate"><span class="pre">mpich</span></code>, название которого совпадет с названием удаленного хранилища в аргументе-адресе (после исключения расширения <code class="docutils literal notranslate"><span class="pre">.git</span></code>).
+Если перед клонированием такой <strong>непустой</strong> каталог существовал, то команда завершится с ошибкой.
+Чтобы склонировать хранилище в другой рабочий каталог, его имя передают в команду аргументом после адреса:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/pmodels/mpich.git<span class="w"> </span>mpich2
 </pre></div>
 </div>
 <p>Если каталога с таким именем не существует, то он будет создан.
-Если он существует, то он должен быть пустым.
+Если он существует, то должен быть пустым.
 Чтобы склонировать хранилище в текущий пустой каталог, передают аргумент <code class="docutils literal notranslate"><span class="pre">.</span></code>, обозначающий текущий каталог:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>mpich
 <span class="nb">cd</span><span class="w"> </span>mpich
@@ -395,7 +409,7 @@ git<span class="w"> </span>clone<span class="w"> </span>https://github.com/pmode
 <!-- Клонирование только части истории -->
 <p>Большие проекты клонируются долго и нагружают сеть.
 Большую часть передаваемых данных занимает история.
-При медленной скорости загрузки или ограниченного трафика мы готовы пожертвовать частью истории в пользу быстрой загрузки.
+При низкой скорости загрузки или ограниченного трафика мы готовы пожертвовать частью истории в пользу скорой загрузки.
 Опция <code class="docutils literal notranslate"><span class="pre">--depth</span></code> (переводится с английского как “глубина”) принимает целое число – количество последних коммитов, которые будут загружены.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="o">--</span><span class="n">depth</span><span class="o">=</span><span class="mi">1</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">pmodels</span><span class="o">/</span><span class="n">mpich</span><span class="o">.</span><span class="n">git</span>
 </pre></div>
@@ -413,10 +427,10 @@ git<span class="w"> </span>clone<span class="w"> </span>https://github.com/pmode
 <li><p>имя пользователя, управляющего хранилищем;</p></li>
 <li><p>имя хранилища.</p></li>
 </ul>
-<p><code class="docutils literal notranslate"><span class="pre">[протокол]://[имя</span> <span class="pre">git-сервера]/[имя</span> <span class="pre">пользователя]/[имя</span> <span class="pre">хранилища]</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">[протокол]://[имя</span> <span class="pre">git-сервера]/[имя_пользователя]/[имя_хранилища]</span></code></p>
 <!-- Про протокол -->
 <p>Протокол задает способ приема и передачи данных и аутентификацию пользователя.
-Git поддерживает четыре протокола: http, ssh, локальный (file) и git-протокол, из которых популярны первые три.</p>
+Git поддерживает несколько протоколов, из которых популярны http, ssh и локальный (file).</p>
 <!-- Имя сервера -->
 <p>Примерами имен git-серверов могут быть:</p>
 <ul class="simple">
@@ -429,12 +443,6 @@ Git поддерживает четыре протокола: http, ssh, лок�
 <figure class="align-default">
 <img alt="../_images/repo-address.png" src="../_images/repo-address.png" />
 </figure>
-<!--
-% Чистое хранилище
-Удаленному хранилищу не нужна рабочая копия, поэтому оно состоит только из каталога с хранилищем.
-Хранилище, не требующее извлечения рабочей копии, называют также *чистым* (bare).
-Удаленные хранилища являются чистыми.
--->
 </section>
 
     <script type="text/x-thebe-config">
