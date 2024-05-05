@@ -352,6 +352,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Контрольные вопросы</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Упражнения</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Замечания по упражнениям</a></li>
 </ul>
             </nav>
         </div>
@@ -426,20 +427,55 @@ document.write(`
 <section id="id3">
 <h2>Упражнения<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p>Повторите структуру дерева коммитов, показанных на рисунке ниже.</p></li>
-<li><p>Слияние – это перенос изменений из одной ветки в другую.
-Перенесите изменения в оба направления.</p></li>
-<li><p>Создайте хранилище со структурой из рисунка ниже.
-Перебазируйте ветку <code class="docutils literal notranslate"><span class="pre">refac</span></code> на <code class="docutils literal notranslate"><span class="pre">main</span></code>.
-Проверьте, какие поля изменились у коммитов.</p></li>
 <li><p>Создайте удаленное хранилище и склонируйте его в два локальных.</p></li>
+<li><p>Повторите структуру дерева коммитов, показанных на рисунке ниже.</p></li>
+<li><p>Создайте хранилище с ветками <code class="docutils literal notranslate"><span class="pre">main</span></code> и <code class="docutils literal notranslate"><span class="pre">train</span></code>, в каждом из которых по одному коммиту.
+Перенесите изменения из ветки <code class="docutils literal notranslate"><span class="pre">main</span></code> в <code class="docutils literal notranslate"><span class="pre">train</span></code>, создайте дополнительный коммит в <code class="docutils literal notranslate"><span class="pre">train</span></code>, а затем перенесите все изменения обратно в <code class="docutils literal notranslate"><span class="pre">main</span></code>.</p></li>
+<li><p>Создайте хранилище со структурой из рисунка ниже.
+Перебазируйте тематическую ветку в основную.
+Проверьте, какие поля изменились у коммитов.</p></li>
 <li><p>Создайте удаленное и два локальных хранилища.
 Внесите отдельные изменения в локальные хранилища.
 Заберите изменения из одного локального хранилища в другое в отдельную ветку и удалите ненужное хранилище.</p></li>
+<li><p>Перенесите коммит из одного хранилища в другое через патч.</p></li>
 </ol>
 <figure class="align-default">
 <img alt="../_images/branch-3.png" src="../_images/branch-3.png" />
 </figure>
+</section>
+<section id="id4">
+<h2>Замечания по упражнениям<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<p>Для выполнения некоторых упражнений необходимо в командной строке выполнить большое количество команд.
+Исполнение команд можно автоматизировать, если набранные команды оформить в виде сценария.
+При этом возникает сложность при редактировании файлов, которое происходит интерактивно.
+Но и этот процесс можно автоматизировать, если воспользоваться утилитами <code class="docutils literal notranslate"><span class="pre">cat</span></code>, <code class="docutils literal notranslate"><span class="pre">echo</span></code>, <code class="docutils literal notranslate"><span class="pre">sed</span></code> и перенаправлением потоков.</p>
+<p>Конструкция ниже формирует файл <code class="docutils literal notranslate"><span class="pre">main.c</span></code> с главной функцией <code class="docutils literal notranslate"><span class="pre">main</span></code> из четырех строчек кода.
+Маркер <code class="docutils literal notranslate"><span class="pre">EOF</span></code> (может быть произвольным текстом) показывает конец ввода строк.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat<span class="w"> </span>&gt;<span class="w"> </span>main.c<span class="w"> </span><span class="s">&lt;&lt; EOF</span>
+<span class="s">main()</span>
+<span class="s">{</span>
+<span class="s">    return 0;</span>
+<span class="s">}</span>
+<span class="s">EOF</span>
+</pre></div>
+</div>
+<p>Та же самая конструкция, но с перенаправлением в файл <code class="docutils literal notranslate"><span class="pre">main.c</span></code> через <code class="docutils literal notranslate"><span class="pre">&gt;&gt;</span></code> уже добавляет в конец файла последующие строки.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat<span class="w"> </span>&gt;&gt;<span class="w"> </span>main.c<span class="w"> </span><span class="s">&lt;&lt; EOF</span>
+<span class="s">void func()</span>
+<span class="s">{</span>
+<span class="s">}</span>
+<span class="s">EOF</span>
+</pre></div>
+</div>
+<p>Чтобы отредактировать конкретную строку, воспользуйтесь утилитой <code class="docutils literal notranslate"><span class="pre">sed</span></code>.
+Команда ниже отредактирует (опция <code class="docutils literal notranslate"><span class="pre">-i</span></code>) файл <code class="docutils literal notranslate"><span class="pre">main.c</span></code>: заменит в первой строке подстроку <code class="docutils literal notranslate"><span class="pre">main()</span></code> на <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">main()</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sed</span> <span class="o">-</span><span class="n">i</span> <span class="s1">&#39;1s/main()/int main()/&#39;</span> <span class="n">main</span><span class="o">.</span><span class="n">c</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>За примерами обращайтесь в файлы каталога <code class="docutils literal notranslate"><span class="pre">examples/</span></code> данного проекта.</p>
+</div>
 </section>
 </section>
 
@@ -499,6 +535,7 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Контрольные вопросы</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Упражнения</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Замечания по упражнениям</a></li>
 </ul>
   </nav></div>
 
