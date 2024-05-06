@@ -328,9 +328,7 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</label>
+
 </div></div>
       
     </div>
@@ -346,14 +344,6 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Дополнительные источники</a></li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -366,7 +356,10 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>История развития СКВ<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <!-- Локальная СКВ -->
-<p>Она из ранних СКВ <a class="reference external" href="https://www.gnu.org/software/rcs/rcs.html">RCS</a>, поддерживаемая до сих пор в рамках проекта GNU, появилась в 1982 году.</p>
+<p>Одна из ранних СКВ <a class="reference external" href="https://www.gnu.org/software/rcs/rcs.html">RCS</a> появилась в 1982 году.
+Она поддерживаемая до сих пор в рамках проекта GNU.
+RCS доступна на поставляемой с курсом виртуальной машине.
+Наберите команду <code class="docutils literal notranslate"><span class="pre">rcs</span> <span class="pre">--commands</span></code> чтобы получить список поддерживаемых команд с их краткими описаниями.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>skt@home:~$<span class="w"> </span>rcs<span class="w"> </span>--commands
 <span class="o">(</span><span class="nb">command</span><span class="o">)</span><span class="w">   </span><span class="o">(</span>description<span class="o">)</span>
 <span class="w"> </span>ci<span class="w">          </span>Check<span class="w"> </span><span class="k">in</span><span class="w"> </span>revisions<span class="w"> </span>of<span class="w"> </span>RCS<span class="w"> </span>files<span class="w"> </span>from<span class="w"> </span>working<span class="w"> </span>files.
@@ -378,10 +371,10 @@ document.write(`
 <span class="w"> </span>log<span class="w">         </span>Print<span class="w"> </span>log<span class="w"> </span>messages<span class="w"> </span>and<span class="w"> </span>other<span class="w"> </span>information<span class="w"> </span>about<span class="w"> </span>RCS<span class="w"> </span>files.
 </pre></div>
 </div>
-<p>Ее называют <em>локальной</em>, что значит она предназначена для частного применения, так как работает на одной машине и не обладает инструментами командной работы над файлами.</p>
+<p>RCS называют <em>локальной</em>, что значит она предназначена для частного применения, так как работает на одной машине и не обладает инструментами командной работы над файлами.</p>
 <!-- Централизованная СКВ -->
 <p>Развитием локальных систем стали <em>централизованные</em>, построенные по клиент-серверной архитектуре.
-Хранилище вместе с историей изменений располагаются на удаленном сервере, а клиенты загружают по сети рабочую копию.
+Хранилище вместе с историей изменений располагаются на удаленном сервере, а клиенты загружают по сети исходные коды.
 Такие системы позволили команде совместно работать над проектом.
 Те действия, для которых необходим доступ к истории, выполняются только на стороне сервера.
 Централизованный подход к содержанию хранилища позволяет контролировать доступ клиентов к частям хранилища, временно блокировать изменения файлов пока другой клиент не обновит их.
@@ -391,7 +384,10 @@ document.write(`
 <li><p>сетевые накладные расходы при выполнении команд;</p></li>
 <li><p>риск потерять хранилище.</p></li>
 </ul>
-<p>Примеры таких систем – это CVS и Subversion.</p>
+<p>Примеры таких систем – это <a class="reference external" href="https://cvs.nongnu.org/">CVS</a> и <a class="reference external" href="https://subversion.apache.org/">Subversion</a>.</p>
+<figure class="align-default">
+<img alt="../_images/cvs-subversion-logo.png" src="../_images/cvs-subversion-logo.png" />
+</figure>
 <!-- Децентрализованная СКВ -->
 <p>Следующим шагом в развитии СКВ стали <em>децентрализованные</em> системы.
 В них каждый клиент обладает собственной полной копией хранилища.
@@ -402,13 +398,9 @@ document.write(`
 По сравнению с централизованными системами, децентрализованные обладают развитыми инструментами для обмена изменениями и объединения результатов.
 -->
 <p>Примеры таких систем – это Git и Mercurial.</p>
-<section id="id2">
-<h2>Дополнительные источники<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><p><a class="reference external" href="https://www.gnu.org/software/rcs/tichy-paper.pdf">RCS – A System for Version Control</a></p></li>
-<li><p>rcs(1), ci(1), co(1), rcsdiff(1), rcsmerge(1), rcsclean(1), rlog(1), ident(1), rcsfile(5)</p></li>
-</ol>
-</section>
+<figure class="align-default">
+<img alt="../_images/git-mercurial-logo.png" src="../_images/git-mercurial-logo.png" />
+</figure>
 </section>
 
     <script type="text/x-thebe-config">
@@ -465,20 +457,6 @@ document.write(`
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Дополнительные источники</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>

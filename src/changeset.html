@@ -328,7 +328,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -344,6 +346,14 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Работа с патчем</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -418,6 +428,8 @@ document.write(`
 <li><p>позволяет откатить внесенные им изменения;</p></li>
 <li><p>применим до некоторой степени к файлам и после внесения в них других изменений.</p></li>
 </ul>
+<section id="id2">
+<h2>Работа с патчем<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
 <!-- Формирование и применение патчей -->
 <p>В системе UNIX для работы с патчами используют утилиты <code class="docutils literal notranslate"><span class="pre">patch</span></code> и <code class="docutils literal notranslate"><span class="pre">diff</span></code>.
 Утилита <code class="docutils literal notranslate"><span class="pre">diff</span></code> формирует патч на основе двух версий файлов, а <code class="docutils literal notranslate"><span class="pre">patch</span></code> применяет его к файлам.</p>
@@ -506,6 +518,7 @@ patch<span class="w"> </span>-r<span class="w"> </span>&lt;<span class="w"> </sp
 </div>
 <p>В одном выводе или файле могут следовать последовательно несколько патчей, представляя таким образом изменения в более чем в одном файле.</p>
 </section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -561,6 +574,20 @@ patch<span class="w"> </span>-r<span class="w"> </span>&lt;<span class="w"> </sp
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Работа с патчем</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
