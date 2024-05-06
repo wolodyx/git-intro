@@ -43,4 +43,5 @@ Git ассоциируется с управлением исходными ко
 
 * [Достаточно Git-а, чтобы быть (менее) опасным](https://habr.com/ru/articles/268951/)
 * [Русский перевод книги "Pro Git"](https://git-scm.com/book/ru/v2)
+* [RCS -- A System for Version Control](https://www.gnu.org/software/rcs/tichy-paper.pdf)
 
