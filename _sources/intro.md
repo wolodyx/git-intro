@@ -45,3 +45,5 @@ Git ассоциируется с управлением исходными ко
 * [Русский перевод книги "Pro Git"](https://git-scm.com/book/ru/v2)
 * [RCS -- A System for Version Control](https://www.gnu.org/software/rcs/tichy-paper.pdf)
 
+* [Git Branch Naming Conventions](https://www.scaler.com/topics/git/git-branch-naming-conventions/)
+* https://www.atlassian.com/ru/continuous-delivery/continuous-integration/trunk-based-development
