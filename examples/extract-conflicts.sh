@@ -2,9 +2,16 @@
 #set -e
 #set -x
 
-LOCAL_REPO=$HOME/projects/cmake
-COMMITS_DIR=$PWD/commits
+LOCAL_REPO=$1
 TRAINING_REPOS=$PWD/training_repos
+
+if [ ! -d "$LOCAL_REPO/.git" ];
+then
+    echo "Directory $LOCAL_REPO is not Git repository!"
+    return 1
+fi
+
+COMMITS_DIR=$PWD/commits
 
 mkdir $COMMITS_DIR $TRAINING_REPOS
 cd $LOCAL_REPO
@@ -135,4 +142,6 @@ do
     rm -rf $REPO_DIR
 
 done
+
+rm -rf $COMMITS_DIR
 
