@@ -354,7 +354,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Операции над файловой системой</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Редактирование файлов</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Патч</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Работа с патчем</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Структура патча</a></li>
 </ul>
             </nav>
         </div>
@@ -369,7 +369,7 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>Набор изменений<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <!-- Введение в раздел -->
-<p>В предыдущих разделах мы использовали термин “изменения” в контексте работы над файлами проекта.
+<p>В предыдущих уроках мы использовали термин “изменения” в контексте работы над файлами проекта.
 Изменения фиксировали, передавали, забирали.
 Отсюда вытекает, что изменение – это не только результат редактирования файлов и файловой системы, но и некая переносимая сущность.
 В этом разделе мы разберем эту сущность и узнаем, как ее представляют в памяти компьютера.</p>
@@ -378,8 +378,8 @@ document.write(`
 Они претерпевают следующие модификации:</p>
 <ol class="arabic simple">
 <li><p>редактирование содержимого файла;</p></li>
-<li><p>добавление файла (каталога);</p></li>
-<li><p>удаление файла (каталога);</p></li>
+<li><p>добавление нового файла (каталога);</p></li>
+<li><p>удаление существующего файла (каталога);</p></li>
 <li><p>перемещение и переименование файла (каталога).</p></li>
 <li><p>редактирование атрибутов файла;</p></li>
 </ol>
@@ -394,12 +394,13 @@ document.write(`
 <section id="id2">
 <h2>Операции над файловой системой<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
 <!-- Базовые операции над ФС -->
-<p>Модификации каталогов (добавление, удаление, перемещение и переименование) сводятся к манипулированию с именами находящихся в них файлов.
-В хранилище каталога как отдельного объекта не существует.
+<p>В хранилище Git каталога как отдельного объекта не существует.
 Он является производной от имени файла.
 Имя файла указывается относительно рабочего каталога, где символы “/” разделяют имена файловых объектов.
 Каталог появится в рабочей копии, если он указан в имени извлекаемого файла.
-Таким образом:</p>
+Модификации каталогов (добавление, удаление, перемещение и переименование) сводятся к манипулированию с именами находящихся в них файлов.
+Файл с именем <code class="docutils literal notranslate"><span class="pre">/src/changeset.md</span></code> показывает, что файл <code class="docutils literal notranslate"><span class="pre">changeset.md</span></code> расположен внутри каталога <code class="docutils literal notranslate"><span class="pre">src/</span></code> в корневом каталоге проекта <code class="docutils literal notranslate"><span class="pre">/</span></code>.
+Отсюда следует, что:</p>
 <ul class="simple">
 <li><p>добавление каталога есть добавление файла, в имени которого присутствует имя каталога;</p></li>
 <li><p>удаление каталога есть удаление всех файлов этого каталога;</p></li>
@@ -434,8 +435,8 @@ document.write(`
 <p>Отслеживание изменений через строки крайне не удобен, если они слишком длинные.
 Это актуально для плоского текста (plain text), структура которого предполагает существование предложений и абзацев.
 В одну строку помещают заголовки и абзацы, а уже при просмотре размер строк автоматически подгоняется под ширину экрана.
-Исправление ошибки показывает замену всего абзаца.
-Обойти это возможно, если использовать <a class="reference external" href="https://rhodesmill.org/brandon/2012/one-sentence-per-line/">семантический перенос строк</a>, в котором в одной строке размещается одна законченная мысль.</p>
+Исправление даже одного символа покажет замену всего абзаца.
+Обойти это возможно, если использовать идею <a class="reference external" href="https://rhodesmill.org/brandon/2012/one-sentence-per-line/">семантического переноса строк</a>, в которой предложения разбивают на несколько строк, где каждая из строк несет целостную мысль.</p>
 <!-- Изменение двоичных файлов -->
 <p>Строки характерны только для текстовых файлов, но не для двоичных.
 Структура двоичного файла не предполагает существования “двоичных строк” и общепризнанных символов-разделителей.
@@ -464,19 +465,7 @@ document.write(`
 </ul>
 </section>
 <section id="id5">
-<h2>Работа с патчем<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
-<!-- Формирование и применение патчей -->
-<p>В системе UNIX для работы с патчами используют утилиты <code class="docutils literal notranslate"><span class="pre">patch</span></code> и <code class="docutils literal notranslate"><span class="pre">diff</span></code>.
-Утилита <code class="docutils literal notranslate"><span class="pre">diff</span></code> формирует патч на основе двух версий файлов, а <code class="docutils literal notranslate"><span class="pre">patch</span></code> применяет его к файлам.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>diff<span class="w"> </span>-u<span class="w"> </span>oldfile<span class="w"> </span>newfile<span class="w"> </span>&gt;<span class="w"> </span>delta.diff
-patch<span class="w"> </span>&lt;<span class="w"> </span>delta.diff
-patch<span class="w"> </span>-r<span class="w"> </span>&lt;<span class="w"> </span>delta.diff
-</pre></div>
-</div>
-<p>Утилиты поддерживают три формата представления патчей: традиционный, контекстный и универсальный.
-Традиционный формат доступен по умолчанию, контекстный активируется опцией <code class="docutils literal notranslate"><span class="pre">-c</span></code>, а универсальный – опцией <code class="docutils literal notranslate"><span class="pre">-u</span></code>.
-Наибольшее распространение получил универсальный формат.
-Его структуру и разберем далее.</p>
+<h2>Структура патча<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
 <!-- Универсальный формат патча -->
 <p>Структура патча в универсальном формате состоит из заголовка и последовательно идущих за ним измененных фрагментов.
 В заголовке размещается информация о сравниваемых файлах: оригинального и модифицированного.
@@ -499,8 +488,7 @@ patch<span class="w"> </span>-r<span class="w"> </span>&lt;<span class="w"> </sp
 По фрагменту из патча можно восстановить фрагмент как оригинального, так и модифицированного файла.
 Фрагмент оригинального файла составляют удаленные и незатронутые строки, а измененного файла – добавленные и незатронутые.
 Контекстные строки улучшают читаемость патча, а также позволяют применять патч к модифицированному оригинальному файлу, если фрагмент был сдвинут, а контекст при этом сохранился.</p>
-<p>Ниже представлен пример патча, полученного командой <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code>.
-Он незначительно отличается от вывода утилиты <code class="docutils literal notranslate"><span class="pre">diff</span></code> UNIX, но сохраняет основную структуру.</p>
+<p>Ниже представлен пример патча, полученного командой <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code>.</p>
 <div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="gh">diff --git a/Commands.cpp b/Commands.cpp</span>
 <span class="gh">index d1b70b0..69313a5 100644</span>
 <span class="gd">--- a/Commands.cpp</span>
@@ -621,7 +609,7 @@ patch<span class="w"> </span>-r<span class="w"> </span>&lt;<span class="w"> </sp
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Операции над файловой системой</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Редактирование файлов</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Патч</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Работа с патчем</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Структура патча</a></li>
 </ul>
   </nav></div>
 
