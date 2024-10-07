@@ -363,32 +363,40 @@ document.write(`
 <p>Техническая документация Git не переведена на русский язык.
 Дополнительно потребуется знание английского языка для ее понимания.</p>
 </div>
-<p>Git организует документацию, используя три внешних инструмента:</p>
+<p>Git организует документацию, используя следующие внешние инструменты:</p>
 <ul class="simple">
-<li><p>справочную систему man;</p></li>
 <li><p>веб-браузер;</p></li>
+<li><p>справочную систему man;</p></li>
 <li><p>справочную систему info.</p></li>
 </ul>
-<p>Здесь мы рассмотрим первые два из них.
-Справочная система man позволяет работать с документацией в текстовом терминале, а веб-браузер удобен в среде рабочего стола.</p>
-<p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">help</span></code> выводит на экран справочную информацию, ассоциированную с ключевым словом, переданного в качестве аргумента.
+<p>Последние два доступны только в текстовом терминале Linux-систем, но не в Windows.
+В Windows справочные страницы будут открываться в веб-браузере.</p>
+<p>Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">help</span></code> открывает справочную страницу, ассоциированную с ключевым словом, переданного в качестве аргумента.
 Ключевым словом может быть название любой команды.
-Таким образом, команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">help</span> <span class="pre">clone</span></code> отобразит на экране справочную страницу по команде <code class="docutils literal notranslate"><span class="pre">clone</span></code>.</p>
+Таким образом, команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">help</span> <span class="pre">clone</span></code> отобразит справочную страницу по команде <code class="docutils literal notranslate"><span class="pre">clone</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>“Отобразить справочную страницу” – значит открыть html-страницу со справкой в веб-браузере.</p>
+</div>
 <!-- Работа в less -->
-<p>Экран терминала не способен вместить в себя справочную страницу целиком.
+<!--
+Экран терминала не способен вместить в себя справочную страницу целиком.
 Необходимы инструменты для навигации и поиска по тексту.
-Git для показа текста использует в терминале стандартный пейджер <code class="docutils literal notranslate"><span class="pre">less</span></code>.
-Перечислим команды <code class="docutils literal notranslate"><span class="pre">less</span></code>, которые потребуются для работы с ней:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">q</span></code> завершает просмотр и возвращает командную строку;</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">/</span></code> активирует ввод фразы для поиска, <code class="docutils literal notranslate"><span class="pre">Enter</span></code> начинает поиск;</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">n</span></code> переходит к следующей найденной фразе в тексте;</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">N</span></code> переходит к предыдущей найденной фразе в тексте;</p></li>
-<li><p>клавиши управления курсором перемещают экран по тексту.</p></li>
-</ul>
+Git для показа текста использует в терминале стандартный пейджер `less`.
+Перечислим команды `less`, которые потребуются для работы с ней:
+* `q` завершает просмотр и возвращает командную строку;
+* `/` активирует ввод фразы для поиска, `Enter` начинает поиск;
+* `n` переходит к следующей найденной фразе в тексте;
+* `N` переходит к предыдущей найденной фразе в тексте;
+* клавиши управления курсором перемещают экран по тексту.
+-->
 <p>На справочные страницы команд Git ссылаются по форме <code class="docutils literal notranslate"><span class="pre">git-&lt;команда&gt;(1)</span></code>: <code class="docutils literal notranslate"><span class="pre">git-clone(1)</span></code>, <code class="docutils literal notranslate"><span class="pre">git-branch(1)</span></code> и т.д.
-К тем же самым страницам можно обратиться через утилиту man, выполнив команду <code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">git-clone</span></code> или <code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">1</span> <span class="pre">git-clone</span></code>.
-Число в скобке показывает на раздел документации, в котором расположена справочная страница.</p>
+Число в скобке показывает на тематический раздел документации, в который входит справочная страница.
+Раздел актуален для справочной системы man в Linux.
+Число <code class="docutils literal notranslate"><span class="pre">(1)</span></code> указывает на то, что страница описывает команду, а число <code class="docutils literal notranslate"><span class="pre">(7)</span></code> – то, что не классифицируется в остальные разделы.</p>
+<!--
+К тем же самым страницам можно обратиться через утилиту man, выполнив команду `man git-clone` или `man 1 git-clone`.
+-->
 <p>Дополнительно к описаниям команд, в техническую документацию по Git входят инструкции по ее применению.
 Они также оформлены в виде справочных страниц, список которых отображает команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">help</span> <span class="pre">--guides</span></code>:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">bob@pc:~$ </span>git<span class="w"> </span><span class="nb">help</span><span class="w"> </span>--guides
@@ -424,15 +432,17 @@ Git для показа текста использует в терминале 
 </pre></div>
 </div>
 <p>Среди приведенных выше инструкций новичкам интерес представляет “Обучающее введение в Git”.
-Связанная с ней справочная страница <code class="docutils literal notranslate"><span class="pre">gittutorial(7)</span></code> отобразит на экране команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">help</span> <span class="pre">tutorial</span></code> или <code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">7</span> <span class="pre">gittutorial</span></code>.</p>
+Связанная с ней справочная страница <code class="docutils literal notranslate"><span class="pre">gittutorial(7)</span></code> отобразит на экране команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">help</span> <span class="pre">tutorial</span></code> <!-- или `man 7 gittutorial`-->.</p>
 <!-- Просмотр справочных систем в веб-браузере -->
-<p>Более привычно просматривать текст в веб-браузере.
-Команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">help</span></code> с опцией <code class="docutils literal notranslate"><span class="pre">--web</span></code> (короткая опция <code class="docutils literal notranslate"><span class="pre">-w</span></code>) открывает справочную страницу в веб-бразуере, выбранном однажды в настройке <code class="docutils literal notranslate"><span class="pre">web.browser</span></code>.
-Ниже представлены две команды, которые в качестве веб-браузера выбирают firefox и открывают справочную страницу <code class="docutils literal notranslate"><span class="pre">git(7)</span></code> в нем.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">web</span><span class="o">.</span><span class="n">browser</span> <span class="n">firefox</span>
-<span class="n">git</span> <span class="n">help</span> <span class="o">--</span><span class="n">web</span> <span class="n">git</span>
-</pre></div>
-</div>
+<!--
+Более привычно просматривать текст в веб-браузере.
+Команда `git help` с опцией `--web` (короткая опция `-w`) открывает справочную страницу в веб-бразуере, выбранном однажды в настройке `web.browser`.
+Ниже представлены две команды, которые в качестве веб-браузера выбирают firefox и открывают справочную страницу `git(7)` в нем.
+```
+git config --global web.browser firefox
+git help --web git
+```
+-->
 <p>Справочная страница <code class="docutils literal notranslate"><span class="pre">git(7)</span></code> – это заглавная стартовая страница, откуда можно попасть на любую другую по гиперссылкам.</p>
 </section>
 
