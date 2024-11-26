@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Packages for VBox_GAs installing
+sudo apt-get -y install tar bzip2 build-essential
+
 sudo apt-get -y install git-all gitk
 sudo apt -y install vim tmux rcs git-gui curl tree
 sudo apt -y install kdiff3
