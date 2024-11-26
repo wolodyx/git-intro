@@ -378,8 +378,12 @@ git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"
 В этом случае глобальные настройки переопределяют системные, а локальные переопределяют все остальные.</p>
 <!-- Где хранятся настройки? -->
 <p>Настройки сохраняются в конфигурационных файлах.
-В зависимости от уровня, файлы различаются.
-Так, системные настройки хранятся в файле <code class="docutils literal notranslate"><span class="pre">/etc/gitconfig</span></code>, глобальные в <code class="docutils literal notranslate"><span class="pre">~/.gitconfig</span></code> или <code class="docutils literal notranslate"><span class="pre">~/.config/git/config</span></code>, а локальные в <code class="docutils literal notranslate"><span class="pre">.git/config</span></code> в каталоге хранилища.</p>
+Для каждого уровня существует свой файл.
+Так, системные настройки хранятся в файле <code class="docutils literal notranslate"><span class="pre">C:/Program</span> <span class="pre">Files/Git/etc/gitconfig</span></code>, глобальные в <code class="docutils literal notranslate"><span class="pre">~/.gitconfig</span></code> или <code class="docutils literal notranslate"><span class="pre">~/.config/git/config</span></code>, а локальные в <code class="docutils literal notranslate"><span class="pre">.git/config</span></code> в каталоге хранилища.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Узнать точное местоположение каждой настройки позволит команда <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--list</span> <span class="pre">--show-origin</span></code>.</p>
+</div>
 <!-- Установка настройки core.editor в vim на системном уровне -->
 <p>Давайте зададим настройку <code class="docutils literal notranslate"><span class="pre">core.editor</span></code> в значение <code class="docutils literal notranslate"><span class="pre">vim</span></code> на системном уровне.
 Таким нехитрым образом мы навяжем всем пользователям машины редактор Vim для написания многострочных сообщений для команды <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code>.
