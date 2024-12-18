@@ -13,7 +13,7 @@ jobs:
       - uses: actions/setup-node@v4
       - uses: actions/setup-python@v1
         with:
-          python-version: 3.8
+          python-version: 3.12
       - run: npm install -g @tommywalkie/excalidraw-cli
       - run: pip install jupyter-book     
       - run: excalidraw-cli
