@@ -16,33 +16,30 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
-  <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
@@ -67,7 +64,6 @@
     <link rel="prev" title="Настройка рабочего окружения" href="setup.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -83,8 +79,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="../search.html"
       method="get">
@@ -92,6 +99,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -99,8 +107,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -116,8 +124,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -147,17 +154,21 @@
     
     
     <img src="../_static/logo.png" class="logo__image only-light" alt="Git из командной строки - Home"/>
-    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Git из командной строки - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Git из командной строки - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -211,14 +222,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -315,16 +321,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -357,6 +371,7 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Клиенты Git</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Упражнения</a></li>
 </ul>
             </nav>
         </div>
@@ -452,73 +467,11 @@
 <section id="id3">
 <h3>История развития СКВ<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Перечислите этапы развития СКВ в правильном порядке.</p>
-<ol class="arabic simple">
-<li><p>локальные → централизованные → децентрализованные;</p></li>
-<li><p>децентрализованные → централизованные → локальные;</p></li>
-<li><p>локальные → децентрализованные → централизованные;</p></li>
-<li><p>централизованные → локальные → децентрализованные;</p></li>
-</ol>
-</li>
-<li><p>Чем характеризуются локальные СКВ?</p>
-<ol class="arabic simple">
-<li><p>не обладают инструментами командной работы над файлами;</p></li>
-<li><p>запускаются только на ранних операционных системах;</p></li>
-<li><p>не поддерживают версионирование файлов;</p></li>
-<li><p>не позволяют объединять разные версии файлов;</p></li>
-</ol>
-</li>
-<li><p>Какие из СКВ относятся к локальным?</p>
-<ol class="arabic simple">
-<li><p>RCS;</p></li>
-<li><p>Git и Mercurial;</p></li>
-<li><p>CVS и Subversion;</p></li>
-</ol>
-</li>
-<li><p>Чем характеризуются централизованные СКВ?</p>
-<ol class="arabic simple">
-<li><p>построены по клиент-серверной архитектуре;</p></li>
-<li><p>позволяют команде совместно работать над проектом;</p></li>
-<li><p>большинство команд выполняются на стороне сервера;</p></li>
-<li><p>дает клиентам полный доступ к содержимому хранилища;</p></li>
-</ol>
-</li>
-<li><p>Какие из СКВ относятся к централизованным?</p>
-<ol class="arabic simple">
-<li><p>RCS;</p></li>
-<li><p>Git и Mercurial;</p></li>
-<li><p>CVS и Subversion;</p></li>
-</ol>
-</li>
-<li><p>Чем характеризуются децентрализованные СКВ?</p>
-<ol class="arabic simple">
-<li><p>каждый клиент обладает собственной копией хранилища;</p></li>
-<li><p>хранилище располагается на машине клиента;</p></li>
-<li><p>большинство команд не требуют обращения через сеть к удаленному хранилищу;</p></li>
-<li><p>из-за децентрализации команды выполняются медленнее, чем в централизованных СКВ;</p></li>
-</ol>
-</li>
-<li><p>Какие из СКВ относятся к децентрализованным?</p>
-<ol class="arabic simple">
-<li><p>RCS;</p></li>
-<li><p>Git и Mercurial;</p></li>
-<li><p>CVS и Subversion;</p></li>
-</ol>
-</li>
-<li><p>В каких СКВ риск потерять хранилище выше?</p>
-<ol class="arabic simple">
-<li><p>локальных;</p></li>
-<li><p>централизованных;</p></li>
-<li><p>децентрализованных;</p></li>
-</ol>
-</li>
-<li><p>Какие СКВ привязывают своих клиентов к внешним ресурсам?</p>
-<ol class="arabic simple">
-<li><p>локальные;</p></li>
-<li><p>централизованные;</p></li>
-<li><p>децентрализованные;</p></li>
-</ol>
-</li>
+<li><p>Перечислите основные этапы развития СКВ в правильном порядке.</p></li>
+<li><p>Чем характеризуются разные типы СКВ?</p></li>
+<li><p>Какие из СКВ относятся к локальным, централизованным и децентрализованным?</p></li>
+<li><p>В каких СКВ риск потерять хранилище выше?</p></li>
+<li><p>Какие СКВ привязывают своих клиентов к внешним ресурсам?</p></li>
 </ul>
 </section>
 <section id="id4">
@@ -625,191 +578,52 @@
 <section id="id5">
 <h3>Набор изменений<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Какие изменения претерпевает рабочий каталог?</p>
-<ol class="arabic simple">
-<li><p>;</p></li>
-<li><p>;</p></li>
-<li><p>;</p></li>
-<li><p>;</p></li>
-</ol>
-</li>
-<li><p>В чем отличие исходного кода от обычного (повествовательного) текста?</p>
-<ol class="arabic simple">
-<li><p>;</p></li>
-<li><p>;</p></li>
-<li><p>;</p></li>
-<li><p>;</p></li>
-</ol>
-</li>
-<li><p>Какой минимальный элемент с точки зрения изменения содрежимого файла?</p>
-<ol class="arabic simple">
-<li><p>;</p></li>
-<li><p>;</p></li>
-<li><p>;</p></li>
-<li><p>;</p></li>
-</ol>
-</li>
-<li><p>Почему не получится воспользоваться СКВ применительно к офисным документам (<code class="docutils literal notranslate"><span class="pre">*.docx</span></code>, <code class="docutils literal notranslate"><span class="pre">*.xlsx</span></code>, <code class="docutils literal notranslate"><span class="pre">*.pdf</span></code>)?</p>
-<ol class="arabic simple">
-<li><p>;</p></li>
-<li><p>;</p></li>
-<li><p>;</p></li>
-<li><p>;</p></li>
-</ol>
-</li>
-<li><p>Что такое патч?</p>
-<ol class="arabic simple">
-<li><p>;</p></li>
-<li><p>;</p></li>
-<li><p>;</p></li>
-<li><p>;</p></li>
-</ol>
-</li>
-<li><p>Какие преимущества у патча?</p>
-<ol class="arabic simple">
-<li><p>;</p></li>
-<li><p>;</p></li>
-<li><p>;</p></li>
-<li><p>;</p></li>
-</ol>
-</li>
-<li><p>Опишите структуру патча в универсальном формате.</p>
-<ol class="arabic simple">
-<li><p>;</p></li>
-<li><p>;</p></li>
-<li><p>;</p></li>
-<li><p>;</p></li>
-</ol>
-</li>
+<li><p>Какие изменения претерпевает рабочий каталог?</p></li>
+<li><p>В чем отличие исходного кода от обычного (повествовательного) текста?</p></li>
+<li><p>Какой минимальный элемент с точки зрения изменения содрежимого файла?</p></li>
+<li><p>Почему не получится воспользоваться СКВ применительно к офисным документам (<code class="docutils literal notranslate"><span class="pre">*.docx</span></code>, <code class="docutils literal notranslate"><span class="pre">*.xlsx</span></code>, <code class="docutils literal notranslate"><span class="pre">*.pdf</span></code>)?</p></li>
+<li><p>Что такое патч?</p></li>
+<li><p>Какие преимущества у патча?</p></li>
+<li><p>Опишите структуру патча в универсальном формате.</p></li>
 </ul>
 </section>
 <section id="id6">
 <h3>Дерево коммитов<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
-<li><p>Что такое коммит?</p>
-<ol class="arabic simple">
-<li><p>;</p></li>
-<li><p>;</p></li>
-<li><p>;</p></li>
-<li><p>;</p></li>
-</ol>
-</li>
+<li><p>Что такое коммит?</p></li>
 <li><p>Можно ли восстановить состояние рабочей копии по одному коммиту?
-Почему?</p>
-<ol class="arabic simple">
-<li><p>;</p></li>
-<li><p>;</p></li>
-<li><p>;</p></li>
-<li><p>;</p></li>
-</ol>
-</li>
-<li><p>Что из себя представляет дерево коммитов?</p>
-<ol class="arabic simple">
-<li><p>;</p></li>
-<li><p>;</p></li>
-<li><p>;</p></li>
-<li><p>;</p></li>
-</ol>
-</li>
-<li><p>Что такое “достижимый коммит”?</p>
-<ol class="arabic simple">
-<li><p>;</p></li>
-<li><p>;</p></li>
-<li><p>;</p></li>
-<li><p>;</p></li>
-</ol>
-</li>
-<li><p>Что из себя представляет ветка с точки зрения дерева коммитов?</p>
-<ol class="arabic simple">
-<li><p>;</p></li>
-<li><p>;</p></li>
-<li><p>;</p></li>
-<li><p>;</p></li>
-</ol>
-</li>
+Почему?</p></li>
+<li><p>Что из себя представляет дерево коммитов?</p></li>
+<li><p>Что такое “достижимый коммит”?</p></li>
+<li><p>Что из себя представляет ветка с точки зрения дерева коммитов?</p></li>
 <li><p>Чем отличается ветка от тега?</p></li>
 <li><p>Для чего предназначен указатель <code class="docutils literal notranslate"><span class="pre">HEAD</span></code> в дереве коммитов?
-Куда он указывает?</p>
-<ol class="arabic simple">
-<li><p>;</p></li>
-<li><p>;</p></li>
-<li><p>;</p></li>
-<li><p>;</p></li>
-</ol>
-</li>
+Куда он указывает?</p></li>
 </ol>
 </section>
 <section id="id7">
 <h3>Клиенты Git<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Для чего предназначены Git-клиенты?</p>
-<ol class="arabic simple">
-<li><p>;</p></li>
-<li><p>;</p></li>
-<li><p>;</p></li>
-<li><p>;</p></li>
-</ol>
-</li>
-<li><p>По каким признакам можно классифицировать Git-клиенты?</p>
-<ol class="arabic simple">
-<li><p>;</p></li>
-<li><p>;</p></li>
-<li><p>;</p></li>
-<li><p>;</p></li>
-</ol>
-</li>
-<li><p>Какой из клиентов будет изучаться на этом курсе?</p>
-<ol class="arabic simple">
-<li><p>;</p></li>
-<li><p>;</p></li>
-<li><p>;</p></li>
-<li><p>;</p></li>
-</ol>
-</li>
-<li><p>Что дает утилита “gitk”?</p>
-<ol class="arabic simple">
-<li><p>;</p></li>
-<li><p>;</p></li>
-<li><p>;</p></li>
-<li><p>;</p></li>
-</ol>
-</li>
-<li><p>Что дает утилита “git gui”?</p>
-<ol class="arabic simple">
-<li><p>;</p></li>
-<li><p>;</p></li>
-<li><p>;</p></li>
-<li><p>;</p></li>
-</ol>
-</li>
-<li><p>В каких случаях удобно работать с графическими клиентами?</p>
-<ol class="arabic simple">
-<li><p>;</p></li>
-<li><p>;</p></li>
-<li><p>;</p></li>
-<li><p>;</p></li>
-</ol>
-</li>
-<li><p>Как запустить из командной строки графический клиент, поставляемый с Git?</p>
-<ol class="arabic simple">
-<li><p>выполнить командную строку <code class="docutils literal notranslate"><span class="pre">gitk</span></code>;</p></li>
-<li><p>не получится, так как Git не поставляется с графическим клиентом;</p></li>
-<li><p>в меню Пуск выбрать значок с надписью <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">gui</span></code>;</p></li>
-<li><p>попросить Алису запустить доступный в системе графический Git-клиент;</p></li>
-</ol>
-</li>
+<li><p>Для чего предназначены Git-клиенты?</p></li>
+<li><p>По каким признакам можно классифицировать Git-клиенты?</p></li>
+<li><p>Какой из клиентов будет изучаться на этом курсе?</p></li>
+<li><p>Что дает утилита “gitk”?</p></li>
+<li><p>Что дает утилита “git gui”?</p></li>
+<li><p>В каких случаях удобно работать с графическими клиентами?</p></li>
+<li><p>Как запустить из командной строки графический клиент, поставляемый с Git?</p></li>
 </ul>
-<!--
-## Упражнения
-
-1. Верните состояние файла обратно, воспользовавшись текущим состоянием файла и его патчем.
--->
-<!--
-1. Что такое коммит?
-1. В чем отличие ревизии от коммита?
-1. Воспользуйтесь существующим пустым каталогом в качестве рабочего каталога для клонируемого хранилища.
--->
 </section>
+</section>
+<section id="id8">
+<h2>Упражнения<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Проверьте, установлена ли в систему Git?</p></li>
+<li><p>Представьте, что в команде работают три человека.
+Изначально над проектом работал один человек, который подготовил прототип программы.
+К нему присоединился второй, который работал только над новым компонентом программы.
+Затем присоединился третий, который исправлял ошибки во всей программе.
+Нарисуйте возможную версию дерева коммитов и дерево каталогов проекта.</p></li>
+</ol>
 </section>
 </section>
 
@@ -868,8 +682,7 @@
             
             
               
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -887,6 +700,7 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Клиенты Git</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Упражнения</a></li>
 </ul>
   </nav></div>
 
@@ -935,8 +749,8 @@ By Владимир Лазарев
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>
