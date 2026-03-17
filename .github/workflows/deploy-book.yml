@@ -1,25 +1,36 @@
-name: deploy-book
-
+name: Jupyter Book (via myst) GitHub Pages Deploy
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+env:
+  BASE_URL: /${{ github.event.repository.name }}
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: 'pages'
+  cancel-in-progress: false
 jobs:
-  deploy-book:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v3
       - uses: actions/setup-node@v4
-      - uses: actions/setup-python@v1
         with:
-          python-version: 3.12
+          node-version: 18.x
+      - run: npm install -g jupyter-book
       - run: npm install -g @tommywalkie/excalidraw-cli
-      - run: pip install jupyter-book     
       - run: excalidraw-cli
-      - run: jupyter-book build --all --builder html .
-      - uses: peaceiris/actions-gh-pages@v3.5.9
+      - run: jupyter-book build --html
+      - uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./_build/html
-
+          path: './_build/html'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

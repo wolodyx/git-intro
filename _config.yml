@@ -1,9 +1,0 @@
-# Book settings
-# Learn more at https://jupyterbook.org/customize/config.html
-
-title: Git из командной строки
-author: Владимир Лазарев
-logo: logo.png
-
-exclude_patterns: [README.md]
-
