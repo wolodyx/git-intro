@@ -76,6 +76,11 @@ git am 0001-Add-arguments-of-main-function.patch
 ```
 
 
+## Упражнения
+
+1. Перенесите коммит из одного хранилища в другое через патч.
+
+
 <!--
 * [Магистральная разработка](https://www.atlassian.com/ru/continuous-delivery/continuous-integration/trunk-based-development)
 * [Gitflow](https://www.atlassian.com/ru/git/tutorials/comparing-workflows/gitflow-workflow)

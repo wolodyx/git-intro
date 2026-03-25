@@ -19,7 +19,7 @@ project:
         - file: src/tree.md
         - file: src/git-clients.md
         - file: src/setup.md
-        - file: src/test0.md
+        - file: src/linux-bash.md
     - title: Работа с проектом
       children:
         - file: src/cli-client.md
@@ -32,7 +32,6 @@ project:
         - file: src/history.md
         - file: src/git-log-format.md
         - file: src/git-log-filter.md
-        - file: src/test1.md
     - title: Работа в команде
       children:
         - file: src/git-server.md
@@ -41,7 +40,6 @@ project:
         - file: src/merge.md
         - file: src/sync.md
         - file: src/workflow.md
-        - file: src/test2.md
 
 site:
   template: book-theme

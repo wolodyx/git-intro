@@ -48,3 +48,6 @@ sudo install lazygit /usr/local/bin
 * VSCode.
 -->
 
+## Упражнения
+
+1. Проверьте, доступны ли в машине утилиты git, gitk, git-gui, kdiff3.
