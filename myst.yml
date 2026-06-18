@@ -41,6 +41,7 @@ project:
         - file: src/sync.md
         - file: src/workflow.md
     - title: Проверка знаний
+      children:
         - file: src/exam.md
 
 site:
