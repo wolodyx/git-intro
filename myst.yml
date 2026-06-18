@@ -40,6 +40,8 @@ project:
         - file: src/merge.md
         - file: src/sync.md
         - file: src/workflow.md
+    - title: Проверка знаний
+        - file: src/exam.md
 
 site:
   template: book-theme
